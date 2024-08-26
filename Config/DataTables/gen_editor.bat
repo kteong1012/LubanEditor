@@ -10,7 +10,7 @@ dotnet %LUBAN_DLL% ^
     --conf %CONF_ROOT%\luban.conf ^
     -t editor ^
     -c cs-unity-gui-json ^
-    -d json ^
+    -d json3 ^
     -x jsonStrict=false ^
     -x outputCodeDir=%GAME_CLIENT_ROOT%\Assets\GameScript\Editor\ConfigEditor\Models ^
     -x outputDataDir=%CONF_ROOT%\EditorDatas

@@ -247,7 +247,10 @@ namespace editor.cfg
         {
             foreach (var data in _tables)
             {
-                data.Value.Save();
+                if(data.Value.IsLoaded)
+                {
+                    data.Value.Save();
+                }
             }
         }
 
