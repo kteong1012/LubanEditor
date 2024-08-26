@@ -1,0 +1,296 @@
+[
+  {
+    "id": 1001,
+    "name": "力量",
+    "face_count": 6,
+    "buffs": [
+      0
+    ],
+    "type": 1,
+    "DiceTag": [
+      0
+    ],
+    "show_tag": [
+      "property"
+    ],
+    "icon": "Assets/GameRes/Textures/Dice/img_dice_str.png",
+    "model": "",
+    "faces": [
+      {
+        "value": 1,
+        "skill": 100103,
+        "item": 0
+      },
+      {
+        "value": 2,
+        "skill": 100103,
+        "item": 0
+      },
+      {
+        "value": 3,
+        "skill": 100103,
+        "item": 0
+      },
+      {
+        "value": 4,
+        "skill": 100103,
+        "item": 0
+      },
+      {
+        "value": 5,
+        "skill": 100103,
+        "item": 0
+      },
+      {
+        "value": 6,
+        "skill": 100103,
+        "item": 0
+      }
+    ]
+  },
+  {
+    "id": 1002,
+    "name": "体质",
+    "face_count": 6,
+    "buffs": [
+      0
+    ],
+    "type": 2,
+    "DiceTag": [
+      0
+    ],
+    "show_tag": [
+      "property"
+    ],
+    "icon": "Assets/GameRes/Textures/Dice/img_dice_cons.png",
+    "model": "",
+    "faces": [
+      {
+        "value": 1,
+        "skill": 0,
+        "item": 0
+      },
+      {
+        "value": 2,
+        "skill": 0,
+        "item": 0
+      },
+      {
+        "value": 3,
+        "skill": 0,
+        "item": 0
+      },
+      {
+        "value": 4,
+        "skill": 0,
+        "item": 0
+      },
+      {
+        "value": 5,
+        "skill": 0,
+        "item": 0
+      },
+      {
+        "value": 6,
+        "skill": 0,
+        "item": 0
+      }
+    ]
+  },
+  {
+    "id": 1003,
+    "name": "敏捷",
+    "face_count": 6,
+    "buffs": [
+      0
+    ],
+    "type": 3,
+    "DiceTag": [
+      0
+    ],
+    "show_tag": [
+      "property"
+    ],
+    "icon": "Assets/GameRes/Textures/Dice/img_dice_dex.png",
+    "model": "",
+    "faces": [
+      {
+        "value": 1,
+        "skill": 0,
+        "item": 0
+      },
+      {
+        "value": 2,
+        "skill": 0,
+        "item": 0
+      },
+      {
+        "value": 3,
+        "skill": 0,
+        "item": 0
+      },
+      {
+        "value": 4,
+        "skill": 0,
+        "item": 0
+      },
+      {
+        "value": 5,
+        "skill": 0,
+        "item": 0
+      },
+      {
+        "value": 6,
+        "skill": 0,
+        "item": 0
+      }
+    ]
+  },
+  {
+    "id": 1004,
+    "name": "智力",
+    "face_count": 6,
+    "buffs": [
+      0
+    ],
+    "type": 4,
+    "DiceTag": [
+      0
+    ],
+    "show_tag": [
+      "property"
+    ],
+    "icon": "Assets/GameRes/Textures/Dice/img_dice_intel.png",
+    "model": "",
+    "faces": [
+      {
+        "value": 1,
+        "skill": 0,
+        "item": 0
+      },
+      {
+        "value": 2,
+        "skill": 0,
+        "item": 0
+      },
+      {
+        "value": 3,
+        "skill": 0,
+        "item": 0
+      },
+      {
+        "value": 4,
+        "skill": 0,
+        "item": 0
+      },
+      {
+        "value": 5,
+        "skill": 0,
+        "item": 0
+      },
+      {
+        "value": 6,
+        "skill": 0,
+        "item": 0
+      }
+    ]
+  },
+  {
+    "id": 1005,
+    "name": "感知",
+    "face_count": 6,
+    "buffs": [
+      0
+    ],
+    "type": 5,
+    "DiceTag": [
+      0
+    ],
+    "show_tag": [
+      "property"
+    ],
+    "icon": "Assets/GameRes/Textures/Dice/img_dice_wis.png",
+    "model": "",
+    "faces": [
+      {
+        "value": 1,
+        "skill": 0,
+        "item": 0
+      },
+      {
+        "value": 2,
+        "skill": 0,
+        "item": 0
+      },
+      {
+        "value": 3,
+        "skill": 0,
+        "item": 0
+      },
+      {
+        "value": 4,
+        "skill": 0,
+        "item": 0
+      },
+      {
+        "value": 5,
+        "skill": 0,
+        "item": 0
+      },
+      {
+        "value": 6,
+        "skill": 0,
+        "item": 0
+      }
+    ]
+  },
+  {
+    "id": 1006,
+    "name": "魅力",
+    "face_count": 6,
+    "buffs": [
+      0
+    ],
+    "type": 6,
+    "DiceTag": [
+      0
+    ],
+    "show_tag": [
+      "property"
+    ],
+    "icon": "Assets/GameRes/Textures/Dice/img_dice_cha.png",
+    "model": "",
+    "faces": [
+      {
+        "value": 1,
+        "skill": 0,
+        "item": 0
+      },
+      {
+        "value": 2,
+        "skill": 0,
+        "item": 0
+      },
+      {
+        "value": 3,
+        "skill": 0,
+        "item": 0
+      },
+      {
+        "value": 4,
+        "skill": 0,
+        "item": 0
+      },
+      {
+        "value": 5,
+        "skill": 0,
+        "item": 0
+      },
+      {
+        "value": 6,
+        "skill": 0,
+        "item": 0
+      }
+    ]
+  }
+]

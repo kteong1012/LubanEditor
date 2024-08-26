@@ -1,0 +1,42 @@
+[
+  {
+    "id": 100,
+    "name": "反伤",
+    "content": "Buff拥有者受到伤害时，对所有敌方造成5点伤害",
+    "tag": [
+      0
+    ],
+    "show_tag": [
+      "反伤"
+    ],
+    "show": true,
+    "target": 5,
+    "handlers": [
+      {
+        "trigger": 0,
+        "condition": {
+          "$type": "Always"
+        },
+        "results": [
+          {
+            "$type": "FixedDmg",
+            "target_type": 0,
+            "dmg_value": 2
+          }
+        ]
+      }
+    ],
+    "life": 3,
+    "dice_window": [
+      0
+    ],
+    "buff_window": [
+      0
+    ],
+    "cause_battle": true,
+    "trigged": true,
+    "icon": "Assets/GameRes/Textures/Skill/IconSkill502005.png",
+    "projectile_path": "213123",
+    "projectile_duration": 0
+  }
+]

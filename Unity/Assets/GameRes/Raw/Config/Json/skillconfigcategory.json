@@ -1,0 +1,131 @@
+[
+  {
+    "id": 100101,
+    "name": "差值打击",
+    "content": "[力量]VS[力量]",
+    "tag": [
+      0
+    ],
+    "show_tag": [],
+    "show": true,
+    "cost": 1,
+    "use_counter": 3,
+    "counter": [],
+    "aoe": 0,
+    "conditions": [],
+    "target_type": [],
+    "target_count": 1,
+    "action_type": 0,
+    "atk_pools": [
+      1
+    ],
+    "def_pools": [
+      1
+    ],
+    "add_dices": [],
+    "win_results": [
+      {
+        "$type": "DifferDmg",
+        "target_type": 1,
+        "differ_type": 2,
+        "dmg_mul": 2
+      }
+    ],
+    "lose_results": [],
+    "dice_window": [],
+    "buff_window": [],
+    "cause_battle": true,
+    "trigged": true,
+    "icon": "Assets/GameRes/Textures/Skill/IconSkill500703.png",
+    "projectile_path": "FireBall",
+    "projectile_duration": 0.5
+  },
+  {
+    "id": 100102,
+    "name": "定值打击（5伤害）",
+    "content": "[力量]VS[力量]",
+    "tag": [
+      0
+    ],
+    "show_tag": [],
+    "show": true,
+    "cost": 1,
+    "use_counter": 3,
+    "counter": [],
+    "aoe": 0,
+    "conditions": [],
+    "target_type": [],
+    "target_count": 1,
+    "action_type": 0,
+    "atk_pools": [
+      1
+    ],
+    "def_pools": [
+      1
+    ],
+    "add_dices": [],
+    "win_results": [
+      {
+        "$type": "FixedDmg",
+        "target_type": 1,
+        "dmg_value": 5
+      }
+    ],
+    "lose_results": [],
+    "dice_window": [],
+    "buff_window": [],
+    "cause_battle": true,
+    "trigged": true,
+    "icon": "Assets/GameRes/Textures/Skill/IconSkill500702.png",
+    "projectile_path": "FireBall",
+    "projectile_duration": 0.5
+  },
+  {
+    "id": 100103,
+    "name": "智力打击",
+    "content": "[智力]VS[智力]",
+    "tag": [
+      0
+    ],
+    "show_tag": [],
+    "show": true,
+    "cost": 2,
+    "use_counter": 3,
+    "counter": [],
+    "aoe": 0,
+    "conditions": [],
+    "target_type": [],
+    "target_count": 1,
+    "action_type": 0,
+    "atk_pools": [
+      4
+    ],
+    "def_pools": [
+      4
+    ],
+    "add_dices": [],
+    "win_results": [
+      {
+        "$type": "DifferDmg",
+        "target_type": 1,
+        "differ_type": 2,
+        "dmg_mul": 3
+      }
+    ],
+    "lose_results": [
+      {
+        "$type": "DifferDmg",
+        "target_type": 1,
+        "differ_type": 2,
+        "dmg_mul": 1
+      }
+    ],
+    "dice_window": [],
+    "buff_window": [],
+    "cause_battle": false,
+    "trigged": false,
+    "icon": "Assets/GameRes/Textures/Dice/img_dice_intel.png",
+    "projectile_path": "",
+    "projectile_duration": 0
+  }
+]

@@ -1,0 +1,39 @@
+[
+  {
+    "id": 100103,
+    "name": "刺伤（骰面技能）",
+    "content": "对对方造成5点伤害",
+    "type": 1,
+    "tag": [
+      0
+    ],
+    "show_tag": [
+      "abc"
+    ],
+    "show": true,
+    "conditions": [
+      0
+    ],
+    "target_type": [
+      0
+    ],
+    "results": [
+      {
+        "$type": "FixedDmg",
+        "target_type": 1,
+        "dmg_value": 5
+      }
+    ],
+    "dice_window": [
+      0
+    ],
+    "buff_window": [
+      0
+    ],
+    "cause_battle": true,
+    "trigged": true,
+    "icon": "IconSkill500703",
+    "projectile_path": "FireBall",
+    "projectile_duration": 0.5
+  }
+]

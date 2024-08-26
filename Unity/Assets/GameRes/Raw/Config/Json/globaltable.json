@@ -1,0 +1,11 @@
+[
+  {
+    "round_time_limit": 120000,
+    "dice_pool_icon": [
+      [
+        1,
+        "Assets/GameRes/Textures/Dice/img_dice_str.png"
+      ]
+    ]
+  }
+]

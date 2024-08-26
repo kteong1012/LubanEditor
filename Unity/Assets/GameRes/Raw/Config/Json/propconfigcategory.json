@@ -1,0 +1,124 @@
+[
+  {
+    "Id": 1001,
+    "Name": "货币",
+    "Describe": "金币",
+    "PropType": 1,
+    "IconPath": "Assets/UI/item1.jpg",
+    "PropReferenceVaule": [],
+    "ReferenceActionName": "Idle",
+    "SpecialEffect": "Nothing"
+  },
+  {
+    "Id": 1002,
+    "Name": "健康值",
+    "Describe": "健康值",
+    "PropType": 1,
+    "IconPath": "Assets/UI/item1.jpg",
+    "PropReferenceVaule": [],
+    "ReferenceActionName": "Idle",
+    "SpecialEffect": "Nothing"
+  },
+  {
+    "Id": 1003,
+    "Name": "饱腹度",
+    "Describe": "饱腹度",
+    "PropType": 1,
+    "IconPath": "Assets/UI/item1.jpg",
+    "PropReferenceVaule": [],
+    "ReferenceActionName": "Idle",
+    "SpecialEffect": "Nothing"
+  },
+  {
+    "Id": 1004,
+    "Name": "体力值",
+    "Describe": "体力值",
+    "PropType": 1,
+    "IconPath": "Assets/UI/item1.jpg",
+    "PropReferenceVaule": [],
+    "ReferenceActionName": "Idle",
+    "SpecialEffect": "Nothing"
+  },
+  {
+    "Id": 1005,
+    "Name": "精神度",
+    "Describe": "精神度",
+    "PropType": 1,
+    "IconPath": "Assets/UI/item1.jpg",
+    "PropReferenceVaule": [],
+    "ReferenceActionName": "Idle",
+    "SpecialEffect": "Nothing"
+  },
+  {
+    "Id": 1006,
+    "Name": "主食",
+    "Describe": "主食",
+    "PropType": 2,
+    "IconPath": "Assets/UI/item1.jpg",
+    "PropReferenceVaule": [
+      {
+        "PropId": 1002,
+        "ChangeNum": 5
+      },
+      {
+        "PropId": 1003,
+        "ChangeNum": 5
+      }
+    ],
+    "ReferenceActionName": "Idle",
+    "SpecialEffect": "Nothing"
+  },
+  {
+    "Id": 1007,
+    "Name": "零食",
+    "Describe": "零食",
+    "PropType": 2,
+    "IconPath": "Assets/UI/item1.jpg",
+    "PropReferenceVaule": [
+      {
+        "PropId": 1002,
+        "ChangeNum": 5
+      },
+      {
+        "PropId": 1004,
+        "ChangeNum": 5
+      }
+    ],
+    "ReferenceActionName": "Idle",
+    "SpecialEffect": "Nothing"
+  },
+  {
+    "Id": 1008,
+    "Name": "药品",
+    "Describe": "药品",
+    "PropType": 2,
+    "IconPath": "Assets/UI/item1.jpg",
+    "PropReferenceVaule": [
+      {
+        "PropId": 1002,
+        "ChangeNum": 5
+      },
+      {
+        "PropId": 1001,
+        "ChangeNum": 5
+      }
+    ],
+    "ReferenceActionName": "Idle",
+    "SpecialEffect": "Nothing"
+  },
+  {
+    "Id": 1009,
+    "Name": "特色美食",
+    "Describe": "特色美食",
+    "PropType": 2,
+    "IconPath": "Assets/UI/item1.jpg",
+    "PropReferenceVaule": [
+      {
+        "PropId": 1002,
+        "ChangeNum": 5
+      }
+    ],
+    "ReferenceActionName": "Idle",
+    "SpecialEffect": "Nothing"
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1001,
+    "name": "剑",
+    "content": "一把剑",
+    "icon": "Assets/GameRes/Textures/Item/img_1001.png",
+    "dice_window_id": [
+      101
+    ],
+    "buff_window_id": [
+      101
+    ],
+    "item_tag": [
+      0
+    ],
+    "skills": [
+      100103
+    ],
+    "install_results": [
+      {
+        "$type": "AddBuff",
+        "buff_id": 100
+      }
+    ],
+    "uninstall_results": [
+      {
+        "$type": "RemoveBuff",
+        "buff_id": 100
+      }
+    ],
+    "item_type": 1,
+    "rarity": 0,
+    "item_fit_rule": {
+      "Position": 1,
+      "Require": 0,
+      "Value": 1
+    },
+    "equip_count": {
+      "Head": 0,
+      "Hand": 1,
+      "Body": 0,
+      "Legs": 0,
+      "Followers": 0
+    },
+    "prize": 100
+  }
+]

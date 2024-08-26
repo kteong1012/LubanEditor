@@ -1,0 +1,144 @@
+[
+  {
+    "id": 1001,
+    "name": "法术师",
+    "CharaTag": [
+      0
+    ],
+    "show_tag": [
+      "人类"
+    ],
+    "skill": [
+      100101,
+      100102
+    ],
+    "life": 6,
+    "content": "哈哈哈",
+    "dice_pools": [
+      [
+        1,
+        [
+          1001
+        ]
+      ],
+      [
+        2,
+        [
+          1002
+        ]
+      ],
+      [
+        3,
+        [
+          1003
+        ]
+      ],
+      [
+        4,
+        [
+          1004
+        ]
+      ],
+      [
+        5,
+        [
+          1005
+        ]
+      ],
+      [
+        6,
+        [
+          1006
+        ]
+      ]
+    ],
+    "ai": 123,
+    "god_point": 123,
+    "avg": 101,
+    "is_hero": true,
+    "equip_limit": {
+      "Head": 1,
+      "Hand": 2,
+      "Body": 1,
+      "Legs": 1,
+      "Followers": 1
+    },
+    "editable": true,
+    "unlock_counter": 123,
+    "unlock_buff": 123,
+    "pic": "123",
+    "hero_pic": "123",
+    "model": "XiaoMing"
+  },
+  {
+    "id": 1002,
+    "name": "试做敌人",
+    "CharaTag": [
+      2
+    ],
+    "show_tag": [
+      "恶魔"
+    ],
+    "skill": [
+      100101,
+      100102
+    ],
+    "life": 10,
+    "content": "呵呵呵",
+    "dice_pools": [
+      [
+        1,
+        [
+          1001
+        ]
+      ],
+      [
+        2,
+        [
+          1002
+        ]
+      ],
+      [
+        3,
+        [
+          1003
+        ]
+      ],
+      [
+        4,
+        [
+          1004
+        ]
+      ],
+      [
+        5,
+        [
+          1005
+        ]
+      ],
+      [
+        6,
+        [
+          1006
+        ]
+      ]
+    ],
+    "ai": 321,
+    "god_point": 321,
+    "avg": 102,
+    "is_hero": false,
+    "equip_limit": {
+      "Head": 1,
+      "Hand": 2,
+      "Body": 1,
+      "Legs": 1,
+      "Followers": 1
+    },
+    "editable": false,
+    "unlock_counter": 321,
+    "unlock_buff": 321,
+    "pic": "321",
+    "hero_pic": "321",
+    "model": "XiaoMing"
+  }
+]
