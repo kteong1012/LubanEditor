@@ -69,12 +69,14 @@ public sealed class ChooseTarget :  ai.Service
         {
             _json["id"] = new JSONNumber(id);
         }
+
+        if (nodeName != null)
         {
-            if (nodeName == null) { throw new System.ArgumentNullException(); }
             _json["node_name"] = new JSONString(nodeName);
         }
+
+        if (resultTargetKey != null)
         {
-            if (resultTargetKey == null) { throw new System.ArgumentNullException(); }
             _json["result_target_key"] = new JSONString(resultTargetKey);
         }
     }

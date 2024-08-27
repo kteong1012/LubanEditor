@@ -43,8 +43,9 @@ public sealed class BlackboardKeyData :  ai.KeyData
 
     public override void SaveJson(SimpleJSON.JSONObject _json)
     {
+
+        if (value != null)
         {
-            if (value == null) { throw new System.ArgumentNullException(); }
             _json["value"] = new JSONString(value);
         }
     }

@@ -25,7 +25,7 @@ namespace editor.cfg.test
 {
     public partial class TbCompositeJsonTable2 : IConfigEditorTable
     {
-        private List<test.CompositeJsonTable2> _datas = new List<test.CompositeJsonTable2>();
+        private List<editor.cfg.test.CompositeJsonTable2> _datas = new List<editor.cfg.test.CompositeJsonTable2>();
         private readonly string _dataFilePath;
         private readonly Dictionary<string, string> _originalDataJsons = new Dictionary<string, string>();
         private string _originalTableJson;
@@ -52,7 +52,7 @@ namespace editor.cfg.test
                 {
                     foreach (var node in json.AsArray)
                     {
-                        var data = new test.CompositeJsonTable2();
+                        var data = new editor.cfg.test.CompositeJsonTable2();
                         var dataNode = (JSONObject)node;
                         data.LoadJson(dataNode);
                         _datas.Add(data);
@@ -61,7 +61,7 @@ namespace editor.cfg.test
                 }
                 else
                 {
-                    var data = new test.CompositeJsonTable2();
+                    var data = new editor.cfg.test.CompositeJsonTable2();
                     data.LoadJson((JSONObject)json);
                     _datas.Add(data);
                     _originalDataJsons.Add(GetId(data), json.ToString(4));
@@ -126,7 +126,7 @@ namespace editor.cfg.test
             return jsonArray.ToString(4);
         }
 
-        private string GetDataJson(test.CompositeJsonTable2 data)
+        private string GetDataJson(editor.cfg.test.CompositeJsonTable2 data)
         {
             var json = new JSONObject();
             data?.SaveJson(json);
@@ -166,7 +166,7 @@ namespace editor.cfg.test
             GUILayout.FlexibleSpace();
             if (GUILayout.Button("+", GUILayout.Width(20)))
             {
-                _datas.Add(new test.CompositeJsonTable2());
+                _datas.Add(new editor.cfg.test.CompositeJsonTable2());
             }
             if (GUILayout.Button("-", GUILayout.Width(20)))
             {
@@ -223,7 +223,7 @@ namespace editor.cfg.test
             GUILayout.EndHorizontal();
         }
 
-        private string GetId(test.CompositeJsonTable2 data)
+        private string GetId(editor.cfg.test.CompositeJsonTable2 data)
         {
             if (data == null)
             {
@@ -246,7 +246,7 @@ namespace editor.cfg.test
         {
         }
 
-        private test.CompositeJsonTable2 SelectData
+        private editor.cfg.test.CompositeJsonTable2 SelectData
         {
             get
             {

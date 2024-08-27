@@ -20,7 +20,7 @@ public sealed class ExcelFromJsonMultiRow :  Luban.EditorBeanBase
 {
     public ExcelFromJsonMultiRow()
     {
-            items = new System.Collections.Generic.List<test.TestRow>();
+            items = new System.Collections.Generic.List<editor.cfg.test.TestRow>();
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -51,11 +51,11 @@ public sealed class ExcelFromJsonMultiRow :  Luban.EditorBeanBase
             var _fieldJson = _json["items"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsArray) { throw new SerializationException(); } items = new System.Collections.Generic.List<test.TestRow>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { test.TestRow __v0;  if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = editor.cfg.test.TestRow.LoadJsonTestRow(__e0);  items.Add(__v0); }  
+                if(!_fieldJson.IsArray) { throw new SerializationException(); } items = new System.Collections.Generic.List<editor.cfg.test.TestRow>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { editor.cfg.test.TestRow __v0;  if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = editor.cfg.test.TestRow.LoadJsonTestRow(__e0);  items.Add(__v0); }  
             }
             else
             {
-                items = new System.Collections.Generic.List<test.TestRow>();
+                items = new System.Collections.Generic.List<editor.cfg.test.TestRow>();
             }
         }
         
@@ -69,8 +69,9 @@ public sealed class ExcelFromJsonMultiRow :  Luban.EditorBeanBase
         {
             _json["x"] = new JSONNumber(x);
         }
+
+        if (items != null)
         {
-            if (items == null) { throw new System.ArgumentNullException(); }
             { var __cjson0 = new JSONArray(); foreach(var __e0 in items) { { var __bjson = new JSONObject();  editor.cfg.test.TestRow.SaveJsonTestRow(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["items"] = __cjson0; }
         }
     }
@@ -122,7 +123,7 @@ else
             break;
         }
         UnityEditor.EditorGUILayout.LabelField(__i1.ToString(), GUILayout.Width(20));
-        test.TestRow __e1 = this.items[__i1];
+        editor.cfg.test.TestRow __e1 = this.items[__i1];
         {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
@@ -239,14 +240,14 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.items.Add(new test.TestRow());
+        this.items.Add(new editor.cfg.test.TestRow());
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {
         ConfigEditorImportWindow.Open((__importJsonText1) => 
         {
             var __importJson1 = SimpleJSON.JSON.Parse(__importJsonText1);
-            test.TestRow __importElement1;
+            editor.cfg.test.TestRow __importElement1;
             if(!__importJson1.IsObject) { throw new SerializationException(); }  __importElement1 = editor.cfg.test.TestRow.LoadJsonTestRow(__importJson1);
             this.items.Add(__importElement1);
         });
@@ -271,7 +272,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
 
     public int id;
     public int x;
-    public System.Collections.Generic.List<test.TestRow> items;
+    public System.Collections.Generic.List<editor.cfg.test.TestRow> items;
 
     public override string ToString()
     {

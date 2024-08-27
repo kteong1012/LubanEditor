@@ -25,7 +25,7 @@ namespace editor.cfg.test
 {
     public partial class TbTestRef : IConfigEditorTable
     {
-        private List<test.TestRef> _datas = new List<test.TestRef>();
+        private List<editor.cfg.test.TestRef> _datas = new List<editor.cfg.test.TestRef>();
         private readonly string _dataFilePath;
         private readonly Dictionary<string, string> _originalDataJsons = new Dictionary<string, string>();
         private string _originalTableJson;
@@ -52,7 +52,7 @@ namespace editor.cfg.test
                 {
                     foreach (var node in json.AsArray)
                     {
-                        var data = new test.TestRef();
+                        var data = new editor.cfg.test.TestRef();
                         var dataNode = (JSONObject)node;
                         data.LoadJson(dataNode);
                         _datas.Add(data);
@@ -61,7 +61,7 @@ namespace editor.cfg.test
                 }
                 else
                 {
-                    var data = new test.TestRef();
+                    var data = new editor.cfg.test.TestRef();
                     data.LoadJson((JSONObject)json);
                     _datas.Add(data);
                     _originalDataJsons.Add(GetId(data), json.ToString(4));
@@ -126,7 +126,7 @@ namespace editor.cfg.test
             return jsonArray.ToString(4);
         }
 
-        private string GetDataJson(test.TestRef data)
+        private string GetDataJson(editor.cfg.test.TestRef data)
         {
             var json = new JSONObject();
             data?.SaveJson(json);
@@ -166,7 +166,7 @@ namespace editor.cfg.test
             GUILayout.FlexibleSpace();
             if (GUILayout.Button("+", GUILayout.Width(20)))
             {
-                _datas.Add(new test.TestRef());
+                _datas.Add(new editor.cfg.test.TestRef());
             }
             if (GUILayout.Button("-", GUILayout.Width(20)))
             {
@@ -223,7 +223,7 @@ namespace editor.cfg.test
             GUILayout.EndHorizontal();
         }
 
-        private string GetId(test.TestRef data)
+        private string GetId(editor.cfg.test.TestRef data)
         {
             if (data == null)
             {
@@ -246,7 +246,7 @@ namespace editor.cfg.test
         {
         }
 
-        private test.TestRef SelectData
+        private editor.cfg.test.TestRef SelectData
         {
             get
             {

@@ -67,7 +67,7 @@ public sealed class BlackboardKey :  Luban.EditorBeanBase
             var _fieldJson = _json["key_type"];
             if (_fieldJson != null)
             {
-                if(_fieldJson.IsString) { keyType = (ai.EKeyType)System.Enum.Parse(typeof(ai.EKeyType), _fieldJson); } else if(_fieldJson.IsNumber) { keyType = (ai.EKeyType)(int)_fieldJson; } else { throw new SerializationException(); }  
+                if(_fieldJson.IsString) { keyType = (editor.cfg.ai.EKeyType)System.Enum.Parse(typeof(editor.cfg.ai.EKeyType), _fieldJson); } else if(_fieldJson.IsNumber) { keyType = (editor.cfg.ai.EKeyType)(int)_fieldJson; } else { throw new SerializationException(); }  
             }
             else
             {
@@ -91,12 +91,14 @@ public sealed class BlackboardKey :  Luban.EditorBeanBase
 
     public override void SaveJson(SimpleJSON.JSONObject _json)
     {
+
+        if (name != null)
         {
-            if (name == null) { throw new System.ArgumentNullException(); }
             _json["name"] = new JSONString(name);
         }
+
+        if (desc != null)
         {
-            if (desc == null) { throw new System.ArgumentNullException(); }
             _json["desc"] = new JSONString(desc);
         }
         {
@@ -105,8 +107,9 @@ public sealed class BlackboardKey :  Luban.EditorBeanBase
         {
             _json["key_type"] = new JSONNumber((int)keyType);
         }
+
+        if (typeClassName != null)
         {
-            if (typeClassName == null) { throw new System.ArgumentNullException(); }
             _json["type_class_name"] = new JSONString(typeClassName);
         }
     }
@@ -156,7 +159,7 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("key_type", ""), GUILayout.Width(100));
 }
 
-this.keyType = (ai.EKeyType)UnityEditor.EditorGUILayout.EnumPopup(this.keyType, GUILayout.Width(150));
+this.keyType = (editor.cfg.ai.EKeyType)UnityEditor.EditorGUILayout.EnumPopup(this.keyType, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -185,7 +188,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     public string name;
     public string desc;
     public bool isStatic;
-    public ai.EKeyType keyType;
+    public editor.cfg.ai.EKeyType keyType;
     public string typeClassName;
 
     public override string ToString()

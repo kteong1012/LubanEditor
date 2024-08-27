@@ -55,7 +55,7 @@ public sealed class UeBlackboard :  ai.Decorator
             var _fieldJson = _json["flow_abort_mode"];
             if (_fieldJson != null)
             {
-                if(_fieldJson.IsString) { flowAbortMode = (ai.EFlowAbortMode)System.Enum.Parse(typeof(ai.EFlowAbortMode), _fieldJson); } else if(_fieldJson.IsNumber) { flowAbortMode = (ai.EFlowAbortMode)(int)_fieldJson; } else { throw new SerializationException(); }  
+                if(_fieldJson.IsString) { flowAbortMode = (editor.cfg.ai.EFlowAbortMode)System.Enum.Parse(typeof(editor.cfg.ai.EFlowAbortMode), _fieldJson); } else if(_fieldJson.IsNumber) { flowAbortMode = (editor.cfg.ai.EFlowAbortMode)(int)_fieldJson; } else { throw new SerializationException(); }  
             }
             else
             {
@@ -67,7 +67,7 @@ public sealed class UeBlackboard :  ai.Decorator
             var _fieldJson = _json["notify_observer"];
             if (_fieldJson != null)
             {
-                if(_fieldJson.IsString) { notifyObserver = (ai.ENotifyObserverMode)System.Enum.Parse(typeof(ai.ENotifyObserverMode), _fieldJson); } else if(_fieldJson.IsNumber) { notifyObserver = (ai.ENotifyObserverMode)(int)_fieldJson; } else { throw new SerializationException(); }  
+                if(_fieldJson.IsString) { notifyObserver = (editor.cfg.ai.ENotifyObserverMode)System.Enum.Parse(typeof(editor.cfg.ai.ENotifyObserverMode), _fieldJson); } else if(_fieldJson.IsNumber) { notifyObserver = (editor.cfg.ai.ENotifyObserverMode)(int)_fieldJson; } else { throw new SerializationException(); }  
             }
             else
             {
@@ -117,8 +117,9 @@ public sealed class UeBlackboard :  ai.Decorator
         {
             _json["id"] = new JSONNumber(id);
         }
+
+        if (nodeName != null)
         {
-            if (nodeName == null) { throw new System.ArgumentNullException(); }
             _json["node_name"] = new JSONString(nodeName);
         }
         {
@@ -127,12 +128,14 @@ public sealed class UeBlackboard :  ai.Decorator
         {
             _json["notify_observer"] = new JSONNumber((int)notifyObserver);
         }
+
+        if (blackboardKey != null)
         {
-            if (blackboardKey == null) { throw new System.ArgumentNullException(); }
             _json["blackboard_key"] = new JSONString(blackboardKey);
         }
+
+        if (keyQuery != null)
         {
-            if (keyQuery == null) { throw new System.ArgumentNullException(); }
             { var __bjson = new JSONObject();  editor.cfg.ai.KeyQueryOperator.SaveJsonKeyQueryOperator(keyQuery, __bjson); _json["key_query"] = __bjson; }
         }
     }
@@ -172,7 +175,7 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("flow_abort_mode", ""), GUILayout.Width(100));
 }
 
-this.flowAbortMode = (ai.EFlowAbortMode)UnityEditor.EditorGUILayout.EnumPopup(this.flowAbortMode, GUILayout.Width(150));
+this.flowAbortMode = (editor.cfg.ai.EFlowAbortMode)UnityEditor.EditorGUILayout.EnumPopup(this.flowAbortMode, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -183,7 +186,7 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("notify_observer", ""), GUILayout.Width(100));
 }
 
-this.notifyObserver = (ai.ENotifyObserverMode)UnityEditor.EditorGUILayout.EnumPopup(this.notifyObserver, GUILayout.Width(150));
+this.notifyObserver = (editor.cfg.ai.ENotifyObserverMode)UnityEditor.EditorGUILayout.EnumPopup(this.notifyObserver, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -233,9 +236,9 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
         _obj.SaveJson((SimpleJSON.JSONObject)_json);
     }
 
-    public ai.ENotifyObserverMode notifyObserver;
+    public editor.cfg.ai.ENotifyObserverMode notifyObserver;
     public string blackboardKey;
-    public ai.KeyQueryOperator keyQuery;
+    public editor.cfg.ai.KeyQueryOperator keyQuery;
 
     public override string ToString()
     {

@@ -25,7 +25,7 @@ namespace editor.cfg.l10n
 {
     public partial class TbPatchDemo : IConfigEditorTable
     {
-        private List<l10n.PatchDemo> _datas = new List<l10n.PatchDemo>();
+        private List<editor.cfg.l10n.PatchDemo> _datas = new List<editor.cfg.l10n.PatchDemo>();
         private readonly string _dataFilePath;
         private readonly Dictionary<string, string> _originalDataJsons = new Dictionary<string, string>();
         private string _originalTableJson;
@@ -52,7 +52,7 @@ namespace editor.cfg.l10n
                 {
                     foreach (var node in json.AsArray)
                     {
-                        var data = new l10n.PatchDemo();
+                        var data = new editor.cfg.l10n.PatchDemo();
                         var dataNode = (JSONObject)node;
                         data.LoadJson(dataNode);
                         _datas.Add(data);
@@ -61,7 +61,7 @@ namespace editor.cfg.l10n
                 }
                 else
                 {
-                    var data = new l10n.PatchDemo();
+                    var data = new editor.cfg.l10n.PatchDemo();
                     data.LoadJson((JSONObject)json);
                     _datas.Add(data);
                     _originalDataJsons.Add(GetId(data), json.ToString(4));
@@ -126,7 +126,7 @@ namespace editor.cfg.l10n
             return jsonArray.ToString(4);
         }
 
-        private string GetDataJson(l10n.PatchDemo data)
+        private string GetDataJson(editor.cfg.l10n.PatchDemo data)
         {
             var json = new JSONObject();
             data?.SaveJson(json);
@@ -166,7 +166,7 @@ namespace editor.cfg.l10n
             GUILayout.FlexibleSpace();
             if (GUILayout.Button("+", GUILayout.Width(20)))
             {
-                _datas.Add(new l10n.PatchDemo());
+                _datas.Add(new editor.cfg.l10n.PatchDemo());
             }
             if (GUILayout.Button("-", GUILayout.Width(20)))
             {
@@ -223,7 +223,7 @@ namespace editor.cfg.l10n
             GUILayout.EndHorizontal();
         }
 
-        private string GetId(l10n.PatchDemo data)
+        private string GetId(editor.cfg.l10n.PatchDemo data)
         {
             if (data == null)
             {
@@ -246,7 +246,7 @@ namespace editor.cfg.l10n
         {
         }
 
-        private l10n.PatchDemo SelectData
+        private editor.cfg.l10n.PatchDemo SelectData
         {
             get
             {

@@ -51,10 +51,8 @@ public sealed class DemoE2 :  Luban.EditorBeanBase
 
     public override void SaveJson(SimpleJSON.JSONObject _json)
     {
-
-        if (y1 != null)
         {
-            _json["y1"] = new JSONNumber(y1.Value);
+            _json["y1"] = new JSONNumber(y1);
         }
         {
             _json["y2"] = new JSONBool(y2);
@@ -75,7 +73,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("y1", ""), GUILayout.Width(100));
 }
-this.y1 = UnityEditor.EditorGUILayout.IntField(this.y1.Value, GUILayout.Width(150));
+this.y1 = UnityEditor.EditorGUILayout.IntField(this.y1, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -101,7 +99,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
         _obj.SaveJson((SimpleJSON.JSONObject)_json);
     }
 
-    public int? y1;
+    public int y1;
     public bool y2;
 
     public override string ToString()

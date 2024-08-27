@@ -57,8 +57,9 @@ public sealed class RefBean :  test.RefDynamicBase
         {
             _json["x"] = new JSONNumber(x);
         }
+
+        if (arr != null)
         {
-            if (arr == null) { throw new System.ArgumentNullException(); }
             { var __cjson0 = new JSONArray(); foreach(var __e0 in arr) { __cjson0["null"] = new JSONNumber(__e0); } _json["arr"] = __cjson0; }
         }
     }

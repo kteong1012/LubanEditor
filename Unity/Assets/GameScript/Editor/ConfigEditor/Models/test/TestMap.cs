@@ -79,7 +79,7 @@ public sealed class TestMap :  Luban.EditorBeanBase
             var _fieldJson = _json["x4"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsArray) { throw new SerializationException(); } x4 = new System.Collections.Generic.List<object[]>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { test.DemoEnum __k0;  if(__e0[0].IsString) { __k0 = (test.DemoEnum)System.Enum.Parse(typeof(test.DemoEnum), __e0[0]); } else if(__e0[0].IsNumber) { __k0 = (test.DemoEnum)(int)__e0[0]; } else { throw new SerializationException(); }   int __v0;  if(!__e0[1].IsNumber) { throw new SerializationException(); }  __v0 = __e0[1];  x4.Add(new object[] { __k0, __v0 }); }  
+                if(!_fieldJson.IsArray) { throw new SerializationException(); } x4 = new System.Collections.Generic.List<object[]>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { editor.cfg.test.DemoEnum __k0;  if(__e0[0].IsString) { __k0 = (editor.cfg.test.DemoEnum)System.Enum.Parse(typeof(editor.cfg.test.DemoEnum), __e0[0]); } else if(__e0[0].IsNumber) { __k0 = (editor.cfg.test.DemoEnum)(int)__e0[0]; } else { throw new SerializationException(); }   int __v0;  if(!__e0[1].IsNumber) { throw new SerializationException(); }  __v0 = __e0[1];  x4.Add(new object[] { __k0, __v0 }); }  
             }
             else
             {
@@ -94,8 +94,9 @@ public sealed class TestMap :  Luban.EditorBeanBase
         {
             _json["id"] = new JSONNumber(id);
         }
+
+        if (x1 != null)
         {
-            if (x1 == null) { throw new System.ArgumentNullException(); }
             {
                 var __cjson0 = new JSONArray();
                 foreach(var __e0 in x1)
@@ -108,8 +109,9 @@ public sealed class TestMap :  Luban.EditorBeanBase
                 _json["x1"] = __cjson0;
             }
         }
+
+        if (x2 != null)
         {
-            if (x2 == null) { throw new System.ArgumentNullException(); }
             {
                 var __cjson0 = new JSONArray();
                 foreach(var __e0 in x2)
@@ -122,8 +124,9 @@ public sealed class TestMap :  Luban.EditorBeanBase
                 _json["x2"] = __cjson0;
             }
         }
+
+        if (x3 != null)
         {
-            if (x3 == null) { throw new System.ArgumentNullException(); }
             {
                 var __cjson0 = new JSONArray();
                 foreach(var __e0 in x3)
@@ -136,15 +139,16 @@ public sealed class TestMap :  Luban.EditorBeanBase
                 _json["x3"] = __cjson0;
             }
         }
+
+        if (x4 != null)
         {
-            if (x4 == null) { throw new System.ArgumentNullException(); }
             {
                 var __cjson0 = new JSONArray();
                 foreach(var __e0 in x4)
                 {
                     var __entry0 = new JSONArray();
                     __cjson0[null] = __entry0;
-                    __entry0["null"] = new JSONNumber((int)(test.DemoEnum)__e0[0]);
+                    __entry0["null"] = new JSONNumber((int)(editor.cfg.test.DemoEnum)__e0[0]);
                     __entry0["null"] = new JSONNumber((int)__e0[1]);
                 }
                 _json["x4"] = __cjson0;
@@ -331,7 +335,7 @@ else
         }
         UnityEditor.EditorGUILayout.LabelField(__i1.ToString(), GUILayout.Width(20));
         var __e1 = this.x4[__i1];
-        test.DemoEnum __key1 = editor.cfg.test.DemoEnum.NONE;
+        editor.cfg.test.DemoEnum __key1 = editor.cfg.test.DemoEnum.NONE;
         int __value1 = 0;
         if (__e1 == null)
         {
@@ -340,11 +344,11 @@ else
         }
         else
         {
-            __key1 = (test.DemoEnum)__e1[0];
+            __key1 = (editor.cfg.test.DemoEnum)__e1[0];
             __value1 = (int)__e1[1];
         }
         
-__key1 = (test.DemoEnum)UnityEditor.EditorGUILayout.EnumPopup(__key1, GUILayout.Width(150));;
+__key1 = (editor.cfg.test.DemoEnum)UnityEditor.EditorGUILayout.EnumPopup(__key1, GUILayout.Width(150));;
         __value1 = UnityEditor.EditorGUILayout.IntField(__value1, GUILayout.Width(150));;
         __e1[0] = __key1;
         __e1[1] = __value1;

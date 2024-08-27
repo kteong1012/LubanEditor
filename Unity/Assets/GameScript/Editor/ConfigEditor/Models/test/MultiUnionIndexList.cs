@@ -93,15 +93,17 @@ public sealed class MultiUnionIndexList :  Luban.EditorBeanBase
         {
             _json["id2"] = new JSONNumber(id2);
         }
+
+        if (id3 != null)
         {
-            if (id3 == null) { throw new System.ArgumentNullException(); }
             _json["id3"] = new JSONString(id3);
         }
         {
             _json["num"] = new JSONNumber(num);
         }
+
+        if (desc != null)
         {
-            if (desc == null) { throw new System.ArgumentNullException(); }
             _json["desc"] = new JSONString(desc);
         }
     }

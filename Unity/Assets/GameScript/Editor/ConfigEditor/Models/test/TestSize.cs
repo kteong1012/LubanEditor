@@ -94,20 +94,24 @@ public sealed class TestSize :  Luban.EditorBeanBase
         {
             _json["id"] = new JSONNumber(id);
         }
+
+        if (x1 != null)
         {
-            if (x1 == null) { throw new System.ArgumentNullException(); }
             { var __cjson0 = new JSONArray(); foreach(var __e0 in x1) { __cjson0["null"] = new JSONNumber(__e0); } _json["x1"] = __cjson0; }
         }
+
+        if (x2 != null)
         {
-            if (x2 == null) { throw new System.ArgumentNullException(); }
             { var __cjson0 = new JSONArray(); foreach(var __e0 in x2) { __cjson0["null"] = new JSONNumber(__e0); } _json["x2"] = __cjson0; }
         }
+
+        if (x3 != null)
         {
-            if (x3 == null) { throw new System.ArgumentNullException(); }
             { var __cjson0 = new JSONArray(); foreach(var __e0 in x3) { __cjson0["null"] = new JSONNumber(__e0); } _json["x3"] = __cjson0; }
         }
+
+        if (x4 != null)
         {
-            if (x4 == null) { throw new System.ArgumentNullException(); }
             {
                 var __cjson0 = new JSONArray();
                 foreach(var __e0 in x4)

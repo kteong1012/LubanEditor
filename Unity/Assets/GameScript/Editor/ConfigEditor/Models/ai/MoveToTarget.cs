@@ -54,7 +54,7 @@ public sealed class MoveToTarget :  ai.Task
             var _fieldJson = _json["decorators"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsArray) { throw new SerializationException(); } decorators = new System.Collections.Generic.List<ai.Decorator>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { ai.Decorator __v0;  
+                if(!_fieldJson.IsArray) { throw new SerializationException(); } decorators = new System.Collections.Generic.List<editor.cfg.ai.Decorator>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { editor.cfg.ai.Decorator __v0;  
                 if (!__e0.IsObject)
                 {
                     throw new SerializationException();
@@ -70,7 +70,7 @@ public sealed class MoveToTarget :  ai.Task
             }
             else
             {
-                decorators = new System.Collections.Generic.List<ai.Decorator>();
+                decorators = new System.Collections.Generic.List<editor.cfg.ai.Decorator>();
             }
         }
         
@@ -78,7 +78,7 @@ public sealed class MoveToTarget :  ai.Task
             var _fieldJson = _json["services"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsArray) { throw new SerializationException(); } services = new System.Collections.Generic.List<ai.Service>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { ai.Service __v0;  
+                if(!_fieldJson.IsArray) { throw new SerializationException(); } services = new System.Collections.Generic.List<editor.cfg.ai.Service>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { editor.cfg.ai.Service __v0;  
                 if (!__e0.IsObject)
                 {
                     throw new SerializationException();
@@ -94,7 +94,7 @@ public sealed class MoveToTarget :  ai.Task
             }
             else
             {
-                services = new System.Collections.Generic.List<ai.Service>();
+                services = new System.Collections.Generic.List<editor.cfg.ai.Service>();
             }
         }
         
@@ -139,23 +139,27 @@ public sealed class MoveToTarget :  ai.Task
         {
             _json["id"] = new JSONNumber(id);
         }
+
+        if (nodeName != null)
         {
-            if (nodeName == null) { throw new System.ArgumentNullException(); }
             _json["node_name"] = new JSONString(nodeName);
         }
+
+        if (decorators != null)
         {
-            if (decorators == null) { throw new System.ArgumentNullException(); }
             { var __cjson0 = new JSONArray(); foreach(var __e0 in decorators) { { var __bjson = new JSONObject();  editor.cfg.ai.Decorator.SaveJsonDecorator(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["decorators"] = __cjson0; }
         }
+
+        if (services != null)
         {
-            if (services == null) { throw new System.ArgumentNullException(); }
             { var __cjson0 = new JSONArray(); foreach(var __e0 in services) { { var __bjson = new JSONObject();  editor.cfg.ai.Service.SaveJsonService(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["services"] = __cjson0; }
         }
         {
             _json["ignore_restart_self"] = new JSONBool(ignoreRestartSelf);
         }
+
+        if (targetActorKey != null)
         {
-            if (targetActorKey == null) { throw new System.ArgumentNullException(); }
             _json["target_actor_key"] = new JSONString(targetActorKey);
         }
         {
@@ -210,7 +214,7 @@ else
             break;
         }
         UnityEditor.EditorGUILayout.LabelField(__i1.ToString(), GUILayout.Width(20));
-        ai.Decorator __e1 = this.decorators[__i1];
+        editor.cfg.ai.Decorator __e1 = this.decorators[__i1];
         {
     var __list2 = ai.Decorator.Types.Select(t => new GUIContent(t)).ToArray();
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
@@ -239,7 +243,7 @@ else
         ConfigEditorImportWindow.Open((__importJsonText1) => 
         {
             var __importJson1 = SimpleJSON.JSON.Parse(__importJsonText1);
-            ai.Decorator __importElement1;
+            editor.cfg.ai.Decorator __importElement1;
             
 if (!__importJson1.IsObject)
 {
@@ -281,7 +285,7 @@ else
             break;
         }
         UnityEditor.EditorGUILayout.LabelField(__i1.ToString(), GUILayout.Width(20));
-        ai.Service __e1 = this.services[__i1];
+        editor.cfg.ai.Service __e1 = this.services[__i1];
         {
     var __list2 = ai.Service.Types.Select(t => new GUIContent(t)).ToArray();
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
@@ -310,7 +314,7 @@ else
         ConfigEditorImportWindow.Open((__importJsonText1) => 
         {
             var __importJson1 = SimpleJSON.JSON.Parse(__importJsonText1);
-            ai.Service __importElement1;
+            editor.cfg.ai.Service __importElement1;
             
 if (!__importJson1.IsObject)
 {

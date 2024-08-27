@@ -21,10 +21,10 @@ public sealed class MultiRowTitle :  Luban.EditorBeanBase
     public MultiRowTitle()
     {
             name = "";
-            x1 = new test.H1();
-            x2 = new System.Collections.Generic.List<test.H2>();
-            x3 = System.Array.Empty<test.H2>();
-            x4 = System.Array.Empty<test.H2>();
+            x1 = new editor.cfg.test.H1();
+            x2 = new System.Collections.Generic.List<editor.cfg.test.H2>();
+            x3 = System.Array.Empty<editor.cfg.test.H2>();
+            x4 = System.Array.Empty<editor.cfg.test.H2>();
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -60,7 +60,7 @@ public sealed class MultiRowTitle :  Luban.EditorBeanBase
             }
             else
             {
-                x1 = new test.H1();
+                x1 = new editor.cfg.test.H1();
             }
         }
         
@@ -72,7 +72,7 @@ public sealed class MultiRowTitle :  Luban.EditorBeanBase
             }
             else
             {
-                x20 = new test.H2();
+                x20 = new editor.cfg.test.H2();
             }
         }
         
@@ -80,11 +80,11 @@ public sealed class MultiRowTitle :  Luban.EditorBeanBase
             var _fieldJson = _json["x2"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsArray) { throw new SerializationException(); } x2 = new System.Collections.Generic.List<test.H2>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { test.H2 __v0;  if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = editor.cfg.test.H2.LoadJsonH2(__e0);  x2.Add(__v0); }  
+                if(!_fieldJson.IsArray) { throw new SerializationException(); } x2 = new System.Collections.Generic.List<editor.cfg.test.H2>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { editor.cfg.test.H2 __v0;  if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = editor.cfg.test.H2.LoadJsonH2(__e0);  x2.Add(__v0); }  
             }
             else
             {
-                x2 = new System.Collections.Generic.List<test.H2>();
+                x2 = new System.Collections.Generic.List<editor.cfg.test.H2>();
             }
         }
         
@@ -92,11 +92,11 @@ public sealed class MultiRowTitle :  Luban.EditorBeanBase
             var _fieldJson = _json["x3"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsArray) { throw new SerializationException(); } int __n0 = _fieldJson.Count; x3 = new test.H2[__n0]; int __i0=0; foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { test.H2 __v0;  if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = editor.cfg.test.H2.LoadJsonH2(__e0);  x3[__i0++] = __v0; }  
+                if(!_fieldJson.IsArray) { throw new SerializationException(); } int __n0 = _fieldJson.Count; x3 = new editor.cfg.test.H2[__n0]; int __i0=0; foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { editor.cfg.test.H2 __v0;  if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = editor.cfg.test.H2.LoadJsonH2(__e0);  x3[__i0++] = __v0; }  
             }
             else
             {
-                x3 = System.Array.Empty<test.H2>();
+                x3 = System.Array.Empty<editor.cfg.test.H2>();
             }
         }
         
@@ -104,11 +104,11 @@ public sealed class MultiRowTitle :  Luban.EditorBeanBase
             var _fieldJson = _json["x4"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsArray) { throw new SerializationException(); } int __n0 = _fieldJson.Count; x4 = new test.H2[__n0]; int __i0=0; foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { test.H2 __v0;  if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = editor.cfg.test.H2.LoadJsonH2(__e0);  x4[__i0++] = __v0; }  
+                if(!_fieldJson.IsArray) { throw new SerializationException(); } int __n0 = _fieldJson.Count; x4 = new editor.cfg.test.H2[__n0]; int __i0=0; foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { editor.cfg.test.H2 __v0;  if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = editor.cfg.test.H2.LoadJsonH2(__e0);  x4[__i0++] = __v0; }  
             }
             else
             {
-                x4 = System.Array.Empty<test.H2>();
+                x4 = System.Array.Empty<editor.cfg.test.H2>();
             }
         }
         
@@ -119,12 +119,14 @@ public sealed class MultiRowTitle :  Luban.EditorBeanBase
         {
             _json["id"] = new JSONNumber(id);
         }
+
+        if (name != null)
         {
-            if (name == null) { throw new System.ArgumentNullException(); }
             _json["name"] = new JSONString(name);
         }
+
+        if (x1 != null)
         {
-            if (x1 == null) { throw new System.ArgumentNullException(); }
             { var __bjson = new JSONObject();  editor.cfg.test.H1.SaveJsonH1(x1, __bjson); _json["x1"] = __bjson; }
         }
 
@@ -132,16 +134,19 @@ public sealed class MultiRowTitle :  Luban.EditorBeanBase
         {
             { var __bjson = new JSONObject();  editor.cfg.test.H2.SaveJsonH2(x20, __bjson); _json["x2_0"] = __bjson; }
         }
+
+        if (x2 != null)
         {
-            if (x2 == null) { throw new System.ArgumentNullException(); }
             { var __cjson0 = new JSONArray(); foreach(var __e0 in x2) { { var __bjson = new JSONObject();  editor.cfg.test.H2.SaveJsonH2(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["x2"] = __cjson0; }
         }
+
+        if (x3 != null)
         {
-            if (x3 == null) { throw new System.ArgumentNullException(); }
             { var __cjson0 = new JSONArray(); foreach(var __e0 in x3) { { var __bjson = new JSONObject();  editor.cfg.test.H2.SaveJsonH2(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["x3"] = __cjson0; }
         }
+
+        if (x4 != null)
         {
-            if (x4 == null) { throw new System.ArgumentNullException(); }
             { var __cjson0 = new JSONArray(); foreach(var __e0 in x4) { { var __bjson = new JSONObject();  editor.cfg.test.H2.SaveJsonH2(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["x4"] = __cjson0; }
         }
     }
@@ -279,7 +284,7 @@ else
             break;
         }
         UnityEditor.EditorGUILayout.LabelField(__i1.ToString(), GUILayout.Width(20));
-        test.H2 __e1 = this.x2[__i1];
+        editor.cfg.test.H2 __e1 = this.x2[__i1];
         {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
@@ -309,14 +314,14 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.x2.Add(new test.H2());
+        this.x2.Add(new editor.cfg.test.H2());
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {
         ConfigEditorImportWindow.Open((__importJsonText1) => 
         {
             var __importJson1 = SimpleJSON.JSON.Parse(__importJsonText1);
-            test.H2 __importElement1;
+            editor.cfg.test.H2 __importElement1;
             if(!__importJson1.IsObject) { throw new SerializationException(); }  __importElement1 = editor.cfg.test.H2.LoadJsonH2(__importJson1);
             this.x2.Add(__importElement1);
         });
@@ -341,14 +346,14 @@ else
         UnityEditor.EditorGUILayout.BeginHorizontal();
         if (GUILayout.Button("-", GUILayout.Width(20)))
         {
-            var __list1 = new System.Collections.Generic.List<test.H2>(this.x3);
+            var __list1 = new System.Collections.Generic.List<editor.cfg.test.H2>(this.x3);
             __list1.RemoveAt(__i1);
             this.x3 = __list1.ToArray();
             UnityEditor.EditorGUILayout.EndHorizontal();
             break;
         }
         UnityEditor.EditorGUILayout.LabelField(__i1.ToString(), GUILayout.Width(20));
-        test.H2 __e1 = this.x3[__i1];
+        editor.cfg.test.H2 __e1 = this.x3[__i1];
         {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
@@ -378,8 +383,8 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        var __list1 = new System.Collections.Generic.List<test.H2>(this.x3);
-        __list1.Add(new test.H2());
+        var __list1 = new System.Collections.Generic.List<editor.cfg.test.H2>(this.x3);
+        __list1.Add(new editor.cfg.test.H2());
         this.x3 = __list1.ToArray();
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
@@ -387,9 +392,9 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
         ConfigEditorImportWindow.Open((__importJsonText1) => 
         {
             var __importJson1 = SimpleJSON.JSON.Parse(__importJsonText1);
-            test.H2 __importElement1;
+            editor.cfg.test.H2 __importElement1;
             if(!__importJson1.IsObject) { throw new SerializationException(); }  __importElement1 = editor.cfg.test.H2.LoadJsonH2(__importJson1);
-            var __list1 = new System.Collections.Generic.List<test.H2>(this.x3);
+            var __list1 = new System.Collections.Generic.List<editor.cfg.test.H2>(this.x3);
             __list1.Add(__importElement1);
             this.x3 = __list1.ToArray();
         });
@@ -414,14 +419,14 @@ else
         UnityEditor.EditorGUILayout.BeginHorizontal();
         if (GUILayout.Button("-", GUILayout.Width(20)))
         {
-            var __list1 = new System.Collections.Generic.List<test.H2>(this.x4);
+            var __list1 = new System.Collections.Generic.List<editor.cfg.test.H2>(this.x4);
             __list1.RemoveAt(__i1);
             this.x4 = __list1.ToArray();
             UnityEditor.EditorGUILayout.EndHorizontal();
             break;
         }
         UnityEditor.EditorGUILayout.LabelField(__i1.ToString(), GUILayout.Width(20));
-        test.H2 __e1 = this.x4[__i1];
+        editor.cfg.test.H2 __e1 = this.x4[__i1];
         {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
@@ -451,8 +456,8 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        var __list1 = new System.Collections.Generic.List<test.H2>(this.x4);
-        __list1.Add(new test.H2());
+        var __list1 = new System.Collections.Generic.List<editor.cfg.test.H2>(this.x4);
+        __list1.Add(new editor.cfg.test.H2());
         this.x4 = __list1.ToArray();
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
@@ -460,9 +465,9 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
         ConfigEditorImportWindow.Open((__importJsonText1) => 
         {
             var __importJson1 = SimpleJSON.JSON.Parse(__importJsonText1);
-            test.H2 __importElement1;
+            editor.cfg.test.H2 __importElement1;
             if(!__importJson1.IsObject) { throw new SerializationException(); }  __importElement1 = editor.cfg.test.H2.LoadJsonH2(__importJson1);
-            var __list1 = new System.Collections.Generic.List<test.H2>(this.x4);
+            var __list1 = new System.Collections.Generic.List<editor.cfg.test.H2>(this.x4);
             __list1.Add(__importElement1);
             this.x4 = __list1.ToArray();
         });
@@ -487,11 +492,11 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
 
     public int id;
     public string name;
-    public test.H1 x1;
-    public test.H2 x20;
-    public System.Collections.Generic.List<test.H2> x2;
-    public test.H2[] x3;
-    public test.H2[] x4;
+    public editor.cfg.test.H1 x1;
+    public editor.cfg.test.H2 x20;
+    public System.Collections.Generic.List<editor.cfg.test.H2> x2;
+    public editor.cfg.test.H2[] x3;
+    public editor.cfg.test.H2[] x4;
 
     public override string ToString()
     {

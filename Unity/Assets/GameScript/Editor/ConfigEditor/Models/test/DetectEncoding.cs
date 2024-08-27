@@ -55,8 +55,9 @@ public sealed class DetectEncoding :  Luban.EditorBeanBase
         {
             _json["id"] = new JSONNumber(id);
         }
+
+        if (name != null)
         {
-            if (name == null) { throw new System.ArgumentNullException(); }
             _json["name"] = new JSONString(name);
         }
     }

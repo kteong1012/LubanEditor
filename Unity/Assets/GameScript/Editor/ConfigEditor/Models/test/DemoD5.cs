@@ -20,7 +20,7 @@ public sealed class DemoD5 :  test.DemoDynamic
 {
     public DemoD5()
     {
-            time = new test.DateTimeRange();
+            time = new editor.cfg.test.DateTimeRange();
     }
     public override string GetTypeStr() => TYPE_STR;
     private const string TYPE_STR = "test.DemoD5";
@@ -46,7 +46,7 @@ public sealed class DemoD5 :  test.DemoDynamic
             }
             else
             {
-                time = new test.DateTimeRange();
+                time = new editor.cfg.test.DateTimeRange();
             }
         }
         
@@ -57,8 +57,9 @@ public sealed class DemoD5 :  test.DemoDynamic
         {
             _json["x1"] = new JSONNumber(x1);
         }
+
+        if (time != null)
         {
-            if (time == null) { throw new System.ArgumentNullException(); }
             { var __bjson = new JSONObject();  editor.cfg.test.DateTimeRange.SaveJsonDateTimeRange(time, __bjson); _json["time"] = __bjson; }
         }
     }
@@ -125,7 +126,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
         _obj.SaveJson((SimpleJSON.JSONObject)_json);
     }
 
-    public test.DateTimeRange time;
+    public editor.cfg.test.DateTimeRange time;
 
     public override string ToString()
     {

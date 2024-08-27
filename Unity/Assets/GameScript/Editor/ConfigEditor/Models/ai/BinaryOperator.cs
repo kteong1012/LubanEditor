@@ -31,7 +31,7 @@ public sealed class BinaryOperator :  ai.KeyQueryOperator
             var _fieldJson = _json["oper"];
             if (_fieldJson != null)
             {
-                if(_fieldJson.IsString) { oper = (ai.EOperator)System.Enum.Parse(typeof(ai.EOperator), _fieldJson); } else if(_fieldJson.IsNumber) { oper = (ai.EOperator)(int)_fieldJson; } else { throw new SerializationException(); }  
+                if(_fieldJson.IsString) { oper = (editor.cfg.ai.EOperator)System.Enum.Parse(typeof(editor.cfg.ai.EOperator), _fieldJson); } else if(_fieldJson.IsNumber) { oper = (editor.cfg.ai.EOperator)(int)_fieldJson; } else { throw new SerializationException(); }  
             }
             else
             {
@@ -69,8 +69,9 @@ public sealed class BinaryOperator :  ai.KeyQueryOperator
         {
             _json["oper"] = new JSONNumber((int)oper);
         }
+
+        if (data != null)
         {
-            if (data == null) { throw new System.ArgumentNullException(); }
             { var __bjson = new JSONObject();  editor.cfg.ai.KeyData.SaveJsonKeyData(data, __bjson); _json["data"] = __bjson; }
         }
     }
@@ -90,7 +91,7 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("oper", ""), GUILayout.Width(100));
 }
 
-this.oper = (ai.EOperator)UnityEditor.EditorGUILayout.EnumPopup(this.oper, GUILayout.Width(150));
+this.oper = (editor.cfg.ai.EOperator)UnityEditor.EditorGUILayout.EnumPopup(this.oper, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -130,8 +131,8 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
         _obj.SaveJson((SimpleJSON.JSONObject)_json);
     }
 
-    public ai.EOperator oper;
-    public ai.KeyData data;
+    public editor.cfg.ai.EOperator oper;
+    public editor.cfg.ai.KeyData data;
 
     public override string ToString()
     {

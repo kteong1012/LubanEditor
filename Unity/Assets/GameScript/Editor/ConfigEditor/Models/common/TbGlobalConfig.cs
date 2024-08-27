@@ -25,7 +25,7 @@ namespace editor.cfg.common
 {
     public partial class TbGlobalConfig : IConfigEditorTable
     {
-        private List<common.GlobalConfig> _datas = new List<common.GlobalConfig>();
+        private List<editor.cfg.common.GlobalConfig> _datas = new List<editor.cfg.common.GlobalConfig>();
         private readonly string _dataFilePath;
         private readonly Dictionary<string, string> _originalDataJsons = new Dictionary<string, string>();
         private string _originalTableJson;
@@ -52,7 +52,7 @@ namespace editor.cfg.common
                 {
                     foreach (var node in json.AsArray)
                     {
-                        var data = new common.GlobalConfig();
+                        var data = new editor.cfg.common.GlobalConfig();
                         var dataNode = (JSONObject)node;
                         data.LoadJson(dataNode);
                         _datas.Add(data);
@@ -61,7 +61,7 @@ namespace editor.cfg.common
                 }
                 else
                 {
-                    var data = new common.GlobalConfig();
+                    var data = new editor.cfg.common.GlobalConfig();
                     data.LoadJson((JSONObject)json);
                     _datas.Add(data);
                     _originalDataJsons.Add(GetId(data), json.ToString(4));
@@ -105,7 +105,7 @@ namespace editor.cfg.common
             return jsonArray.ToString(4);
         }
 
-        private string GetDataJson(common.GlobalConfig data)
+        private string GetDataJson(editor.cfg.common.GlobalConfig data)
         {
             var json = new JSONObject();
             data?.SaveJson(json);
@@ -145,7 +145,7 @@ namespace editor.cfg.common
             GUILayout.FlexibleSpace();
             if (GUILayout.Button("+", GUILayout.Width(20)))
             {
-                _datas.Add(new common.GlobalConfig());
+                _datas.Add(new editor.cfg.common.GlobalConfig());
             }
             if (GUILayout.Button("-", GUILayout.Width(20)))
             {
@@ -202,7 +202,7 @@ namespace editor.cfg.common
             GUILayout.EndHorizontal();
         }
 
-        private string GetId(common.GlobalConfig data)
+        private string GetId(editor.cfg.common.GlobalConfig data)
         {
             if (data == null)
             {
@@ -225,7 +225,7 @@ namespace editor.cfg.common
         {
         }
 
-        private common.GlobalConfig SelectData
+        private editor.cfg.common.GlobalConfig SelectData
         {
             get
             {

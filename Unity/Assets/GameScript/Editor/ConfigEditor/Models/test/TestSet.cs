@@ -24,7 +24,7 @@ public sealed class TestSet :  Luban.EditorBeanBase
             x1 = new System.Collections.Generic.List<int>();
             x2 = new System.Collections.Generic.List<long>();
             x3 = new System.Collections.Generic.List<string>();
-            x4 = new System.Collections.Generic.List<test.DemoEnum>();
+            x4 = new System.Collections.Generic.List<editor.cfg.test.DemoEnum>();
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -92,11 +92,11 @@ public sealed class TestSet :  Luban.EditorBeanBase
             var _fieldJson = _json["x4"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsArray) { throw new SerializationException(); } x4 = new System.Collections.Generic.List<test.DemoEnum>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { test.DemoEnum __v0;  if(__e0.IsString) { __v0 = (test.DemoEnum)System.Enum.Parse(typeof(test.DemoEnum), __e0); } else if(__e0.IsNumber) { __v0 = (test.DemoEnum)(int)__e0; } else { throw new SerializationException(); }    x4.Add(__v0); }  
+                if(!_fieldJson.IsArray) { throw new SerializationException(); } x4 = new System.Collections.Generic.List<editor.cfg.test.DemoEnum>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { editor.cfg.test.DemoEnum __v0;  if(__e0.IsString) { __v0 = (editor.cfg.test.DemoEnum)System.Enum.Parse(typeof(editor.cfg.test.DemoEnum), __e0); } else if(__e0.IsNumber) { __v0 = (editor.cfg.test.DemoEnum)(int)__e0; } else { throw new SerializationException(); }    x4.Add(__v0); }  
             }
             else
             {
-                x4 = new System.Collections.Generic.List<test.DemoEnum>();
+                x4 = new System.Collections.Generic.List<editor.cfg.test.DemoEnum>();
             }
         }
         
@@ -107,24 +107,29 @@ public sealed class TestSet :  Luban.EditorBeanBase
         {
             _json["id"] = new JSONNumber(id);
         }
+
+        if (x0 != null)
         {
-            if (x0 == null) { throw new System.ArgumentNullException(); }
             _json["x0"] = new JSONString(x0);
         }
+
+        if (x1 != null)
         {
-            if (x1 == null) { throw new System.ArgumentNullException(); }
             { var __cjson0 = new JSONArray(); foreach(var __e0 in x1) { __cjson0["null"] = new JSONNumber(__e0); } _json["x1"] = __cjson0; }
         }
+
+        if (x2 != null)
         {
-            if (x2 == null) { throw new System.ArgumentNullException(); }
             { var __cjson0 = new JSONArray(); foreach(var __e0 in x2) { __cjson0["null"] = new JSONNumber(__e0); } _json["x2"] = __cjson0; }
         }
+
+        if (x3 != null)
         {
-            if (x3 == null) { throw new System.ArgumentNullException(); }
             { var __cjson0 = new JSONArray(); foreach(var __e0 in x3) { __cjson0["null"] = new JSONString(__e0); } _json["x3"] = __cjson0; }
         }
+
+        if (x4 != null)
         {
-            if (x4 == null) { throw new System.ArgumentNullException(); }
             { var __cjson0 = new JSONArray(); foreach(var __e0 in x4) { __cjson0["null"] = new JSONNumber((int)__e0); } _json["x4"] = __cjson0; }
         }
     }
@@ -311,9 +316,9 @@ else
             break;
         }
         UnityEditor.EditorGUILayout.LabelField(__i1.ToString(), GUILayout.Width(20));
-        test.DemoEnum __e1 = this.x4[__i1];
+        editor.cfg.test.DemoEnum __e1 = this.x4[__i1];
         
-__e1 = (test.DemoEnum)UnityEditor.EditorGUILayout.EnumPopup(__e1, GUILayout.Width(150));;
+__e1 = (editor.cfg.test.DemoEnum)UnityEditor.EditorGUILayout.EnumPopup(__e1, GUILayout.Width(150));;
         this.x4[__i1] = __e1;
         UnityEditor.EditorGUILayout.EndHorizontal();
     }
@@ -327,8 +332,8 @@ __e1 = (test.DemoEnum)UnityEditor.EditorGUILayout.EnumPopup(__e1, GUILayout.Widt
         ConfigEditorImportWindow.Open((__importJsonText1) => 
         {
             var __importJson1 = SimpleJSON.JSON.Parse(__importJsonText1);
-            test.DemoEnum __importElement1;
-            if(__importJson1.IsString) { __importElement1 = (test.DemoEnum)System.Enum.Parse(typeof(test.DemoEnum), __importJson1); } else if(__importJson1.IsNumber) { __importElement1 = (test.DemoEnum)(int)__importJson1; } else { throw new SerializationException(); }  
+            editor.cfg.test.DemoEnum __importElement1;
+            if(__importJson1.IsString) { __importElement1 = (editor.cfg.test.DemoEnum)System.Enum.Parse(typeof(editor.cfg.test.DemoEnum), __importJson1); } else if(__importJson1.IsNumber) { __importElement1 = (editor.cfg.test.DemoEnum)(int)__importJson1; } else { throw new SerializationException(); }  
             this.x4.Add(__importElement1);
         });
     }
@@ -355,7 +360,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     public System.Collections.Generic.List<int> x1;
     public System.Collections.Generic.List<long> x2;
     public System.Collections.Generic.List<string> x3;
-    public System.Collections.Generic.List<test.DemoEnum> x4;
+    public System.Collections.Generic.List<editor.cfg.test.DemoEnum> x4;
 
     public override string ToString()
     {

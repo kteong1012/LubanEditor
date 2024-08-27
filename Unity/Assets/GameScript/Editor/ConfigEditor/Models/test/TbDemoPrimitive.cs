@@ -25,7 +25,7 @@ namespace editor.cfg.test
 {
     public partial class TbDemoPrimitive : IConfigEditorTable
     {
-        private List<test.DemoPrimitiveTypesTable> _datas = new List<test.DemoPrimitiveTypesTable>();
+        private List<editor.cfg.test.DemoPrimitiveTypesTable> _datas = new List<editor.cfg.test.DemoPrimitiveTypesTable>();
         private readonly string _dataFilePath;
         private readonly Dictionary<string, string> _originalDataJsons = new Dictionary<string, string>();
         private string _originalTableJson;
@@ -52,7 +52,7 @@ namespace editor.cfg.test
                 {
                     foreach (var node in json.AsArray)
                     {
-                        var data = new test.DemoPrimitiveTypesTable();
+                        var data = new editor.cfg.test.DemoPrimitiveTypesTable();
                         var dataNode = (JSONObject)node;
                         data.LoadJson(dataNode);
                         _datas.Add(data);
@@ -61,7 +61,7 @@ namespace editor.cfg.test
                 }
                 else
                 {
-                    var data = new test.DemoPrimitiveTypesTable();
+                    var data = new editor.cfg.test.DemoPrimitiveTypesTable();
                     data.LoadJson((JSONObject)json);
                     _datas.Add(data);
                     _originalDataJsons.Add(GetId(data), json.ToString(4));
@@ -126,7 +126,7 @@ namespace editor.cfg.test
             return jsonArray.ToString(4);
         }
 
-        private string GetDataJson(test.DemoPrimitiveTypesTable data)
+        private string GetDataJson(editor.cfg.test.DemoPrimitiveTypesTable data)
         {
             var json = new JSONObject();
             data?.SaveJson(json);
@@ -166,7 +166,7 @@ namespace editor.cfg.test
             GUILayout.FlexibleSpace();
             if (GUILayout.Button("+", GUILayout.Width(20)))
             {
-                _datas.Add(new test.DemoPrimitiveTypesTable());
+                _datas.Add(new editor.cfg.test.DemoPrimitiveTypesTable());
             }
             if (GUILayout.Button("-", GUILayout.Width(20)))
             {
@@ -223,7 +223,7 @@ namespace editor.cfg.test
             GUILayout.EndHorizontal();
         }
 
-        private string GetId(test.DemoPrimitiveTypesTable data)
+        private string GetId(editor.cfg.test.DemoPrimitiveTypesTable data)
         {
             if (data == null)
             {
@@ -246,7 +246,7 @@ namespace editor.cfg.test
         {
         }
 
-        private test.DemoPrimitiveTypesTable SelectData
+        private editor.cfg.test.DemoPrimitiveTypesTable SelectData
         {
             get
             {

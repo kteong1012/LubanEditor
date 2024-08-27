@@ -25,7 +25,7 @@ namespace editor.cfg.test
 {
     public partial class TbNotIndexList : IConfigEditorTable
     {
-        private List<test.NotIndexList> _datas = new List<test.NotIndexList>();
+        private List<editor.cfg.test.NotIndexList> _datas = new List<editor.cfg.test.NotIndexList>();
         private readonly string _dataFilePath;
         private readonly Dictionary<string, string> _originalDataJsons = new Dictionary<string, string>();
         private string _originalTableJson;
@@ -52,7 +52,7 @@ namespace editor.cfg.test
                 {
                     foreach (var node in json.AsArray)
                     {
-                        var data = new test.NotIndexList();
+                        var data = new editor.cfg.test.NotIndexList();
                         var dataNode = (JSONObject)node;
                         data.LoadJson(dataNode);
                         _datas.Add(data);
@@ -61,7 +61,7 @@ namespace editor.cfg.test
                 }
                 else
                 {
-                    var data = new test.NotIndexList();
+                    var data = new editor.cfg.test.NotIndexList();
                     data.LoadJson((JSONObject)json);
                     _datas.Add(data);
                     _originalDataJsons.Add(GetId(data), json.ToString(4));
@@ -105,7 +105,7 @@ namespace editor.cfg.test
             return jsonArray.ToString(4);
         }
 
-        private string GetDataJson(test.NotIndexList data)
+        private string GetDataJson(editor.cfg.test.NotIndexList data)
         {
             var json = new JSONObject();
             data?.SaveJson(json);
@@ -145,7 +145,7 @@ namespace editor.cfg.test
             GUILayout.FlexibleSpace();
             if (GUILayout.Button("+", GUILayout.Width(20)))
             {
-                _datas.Add(new test.NotIndexList());
+                _datas.Add(new editor.cfg.test.NotIndexList());
             }
             if (GUILayout.Button("-", GUILayout.Width(20)))
             {
@@ -202,7 +202,7 @@ namespace editor.cfg.test
             GUILayout.EndHorizontal();
         }
 
-        private string GetId(test.NotIndexList data)
+        private string GetId(editor.cfg.test.NotIndexList data)
         {
             if (data == null)
             {
@@ -225,7 +225,7 @@ namespace editor.cfg.test
         {
         }
 
-        private test.NotIndexList SelectData
+        private editor.cfg.test.NotIndexList SelectData
         {
             get
             {

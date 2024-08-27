@@ -20,7 +20,7 @@ public sealed class TestIndex :  Luban.EditorBeanBase
 {
     public TestIndex()
     {
-            eles = new System.Collections.Generic.List<test.DemoType1>();
+            eles = new System.Collections.Generic.List<editor.cfg.test.DemoType1>();
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -40,11 +40,11 @@ public sealed class TestIndex :  Luban.EditorBeanBase
             var _fieldJson = _json["eles"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsArray) { throw new SerializationException(); } eles = new System.Collections.Generic.List<test.DemoType1>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { test.DemoType1 __v0;  if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = editor.cfg.test.DemoType1.LoadJsonDemoType1(__e0);  eles.Add(__v0); }  
+                if(!_fieldJson.IsArray) { throw new SerializationException(); } eles = new System.Collections.Generic.List<editor.cfg.test.DemoType1>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { editor.cfg.test.DemoType1 __v0;  if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = editor.cfg.test.DemoType1.LoadJsonDemoType1(__e0);  eles.Add(__v0); }  
             }
             else
             {
-                eles = new System.Collections.Generic.List<test.DemoType1>();
+                eles = new System.Collections.Generic.List<editor.cfg.test.DemoType1>();
             }
         }
         
@@ -55,8 +55,9 @@ public sealed class TestIndex :  Luban.EditorBeanBase
         {
             _json["id"] = new JSONNumber(id);
         }
+
+        if (eles != null)
         {
-            if (eles == null) { throw new System.ArgumentNullException(); }
             { var __cjson0 = new JSONArray(); foreach(var __e0 in eles) { { var __bjson = new JSONObject();  editor.cfg.test.DemoType1.SaveJsonDemoType1(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["eles"] = __cjson0; }
         }
     }
@@ -98,7 +99,7 @@ else
             break;
         }
         UnityEditor.EditorGUILayout.LabelField(__i1.ToString(), GUILayout.Width(20));
-        test.DemoType1 __e1 = this.eles[__i1];
+        editor.cfg.test.DemoType1 __e1 = this.eles[__i1];
         {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
@@ -118,14 +119,14 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.eles.Add(new test.DemoType1());
+        this.eles.Add(new editor.cfg.test.DemoType1());
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {
         ConfigEditorImportWindow.Open((__importJsonText1) => 
         {
             var __importJson1 = SimpleJSON.JSON.Parse(__importJsonText1);
-            test.DemoType1 __importElement1;
+            editor.cfg.test.DemoType1 __importElement1;
             if(!__importJson1.IsObject) { throw new SerializationException(); }  __importElement1 = editor.cfg.test.DemoType1.LoadJsonDemoType1(__importJson1);
             this.eles.Add(__importElement1);
         });
@@ -149,7 +150,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     }
 
     public int id;
-    public System.Collections.Generic.List<test.DemoType1> eles;
+    public System.Collections.Generic.List<editor.cfg.test.DemoType1> eles;
 
     public override string ToString()
     {

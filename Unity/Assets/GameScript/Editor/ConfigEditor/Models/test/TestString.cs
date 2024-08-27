@@ -23,8 +23,8 @@ public sealed class TestString :  Luban.EditorBeanBase
             id = "";
             s1 = "";
             s2 = "";
-            cs1 = new test.CompactString();
-            cs2 = new test.CompactString();
+            cs1 = new editor.cfg.test.CompactString();
+            cs2 = new editor.cfg.test.CompactString();
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -73,7 +73,7 @@ public sealed class TestString :  Luban.EditorBeanBase
             }
             else
             {
-                cs1 = new test.CompactString();
+                cs1 = new editor.cfg.test.CompactString();
             }
         }
         
@@ -85,7 +85,7 @@ public sealed class TestString :  Luban.EditorBeanBase
             }
             else
             {
-                cs2 = new test.CompactString();
+                cs2 = new editor.cfg.test.CompactString();
             }
         }
         
@@ -93,24 +93,29 @@ public sealed class TestString :  Luban.EditorBeanBase
 
     public override void SaveJson(SimpleJSON.JSONObject _json)
     {
+
+        if (id != null)
         {
-            if (id == null) { throw new System.ArgumentNullException(); }
             _json["id"] = new JSONString(id);
         }
+
+        if (s1 != null)
         {
-            if (s1 == null) { throw new System.ArgumentNullException(); }
             _json["s1"] = new JSONString(s1);
         }
+
+        if (s2 != null)
         {
-            if (s2 == null) { throw new System.ArgumentNullException(); }
             _json["s2"] = new JSONString(s2);
         }
+
+        if (cs1 != null)
         {
-            if (cs1 == null) { throw new System.ArgumentNullException(); }
             { var __bjson = new JSONObject();  editor.cfg.test.CompactString.SaveJsonCompactString(cs1, __bjson); _json["cs1"] = __bjson; }
         }
+
+        if (cs2 != null)
         {
-            if (cs2 == null) { throw new System.ArgumentNullException(); }
             { var __bjson = new JSONObject();  editor.cfg.test.CompactString.SaveJsonCompactString(cs2, __bjson); _json["cs2"] = __bjson; }
         }
     }
@@ -252,8 +257,8 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     public string id;
     public string s1;
     public string s2;
-    public test.CompactString cs1;
-    public test.CompactString cs2;
+    public editor.cfg.test.CompactString cs1;
+    public editor.cfg.test.CompactString cs2;
 
     public override string ToString()
     {

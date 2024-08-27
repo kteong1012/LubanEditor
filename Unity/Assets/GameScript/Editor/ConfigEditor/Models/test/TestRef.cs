@@ -309,32 +309,39 @@ public sealed class TestRef :  Luban.EditorBeanBase
         {
             _json["x4"] = new JSONNumber(x4);
         }
+
+        if (a1 != null)
         {
-            if (a1 == null) { throw new System.ArgumentNullException(); }
             { var __cjson0 = new JSONArray(); foreach(var __e0 in a1) { __cjson0["null"] = new JSONNumber(__e0); } _json["a1"] = __cjson0; }
         }
+
+        if (a2 != null)
         {
-            if (a2 == null) { throw new System.ArgumentNullException(); }
             { var __cjson0 = new JSONArray(); foreach(var __e0 in a2) { __cjson0["null"] = new JSONNumber(__e0); } _json["a2"] = __cjson0; }
         }
+
+        if (b1 != null)
         {
-            if (b1 == null) { throw new System.ArgumentNullException(); }
             { var __cjson0 = new JSONArray(); foreach(var __e0 in b1) { __cjson0["null"] = new JSONNumber(__e0); } _json["b1"] = __cjson0; }
         }
+
+        if (b2 != null)
         {
-            if (b2 == null) { throw new System.ArgumentNullException(); }
             { var __cjson0 = new JSONArray(); foreach(var __e0 in b2) { __cjson0["null"] = new JSONNumber(__e0); } _json["b2"] = __cjson0; }
         }
+
+        if (c1 != null)
         {
-            if (c1 == null) { throw new System.ArgumentNullException(); }
             { var __cjson0 = new JSONArray(); foreach(var __e0 in c1) { __cjson0["null"] = new JSONNumber(__e0); } _json["c1"] = __cjson0; }
         }
+
+        if (c2 != null)
         {
-            if (c2 == null) { throw new System.ArgumentNullException(); }
             { var __cjson0 = new JSONArray(); foreach(var __e0 in c2) { __cjson0["null"] = new JSONNumber(__e0); } _json["c2"] = __cjson0; }
         }
+
+        if (d1 != null)
         {
-            if (d1 == null) { throw new System.ArgumentNullException(); }
             {
                 var __cjson0 = new JSONArray();
                 foreach(var __e0 in d1)
@@ -347,8 +354,9 @@ public sealed class TestRef :  Luban.EditorBeanBase
                 _json["d1"] = __cjson0;
             }
         }
+
+        if (d2 != null)
         {
-            if (d2 == null) { throw new System.ArgumentNullException(); }
             {
                 var __cjson0 = new JSONArray();
                 foreach(var __e0 in d2)
@@ -367,8 +375,9 @@ public sealed class TestRef :  Luban.EditorBeanBase
         {
             _json["e2"] = new JSONNumber(e2);
         }
+
+        if (e3 != null)
         {
-            if (e3 == null) { throw new System.ArgumentNullException(); }
             _json["e3"] = new JSONString(e3);
         }
         {
@@ -377,12 +386,14 @@ public sealed class TestRef :  Luban.EditorBeanBase
         {
             _json["f2"] = new JSONNumber(f2);
         }
+
+        if (f3 != null)
         {
-            if (f3 == null) { throw new System.ArgumentNullException(); }
             _json["f3"] = new JSONString(f3);
         }
+
+        if (s1 != null)
         {
-            if (s1 == null) { throw new System.ArgumentNullException(); }
             { var __bjson = new JSONObject();  editor.cfg.test.RefDynamicBase.SaveJsonRefDynamicBase(s1, __bjson); _json["s1"] = __bjson; }
         }
     }
@@ -923,7 +934,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     public int f1;
     public long f2;
     public string f3;
-    public test.RefDynamicBase s1;
+    public editor.cfg.test.RefDynamicBase s1;
 
     public override string ToString()
     {

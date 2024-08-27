@@ -69,12 +69,14 @@ public sealed class UeSetDefaultFocus :  ai.Service
         {
             _json["id"] = new JSONNumber(id);
         }
+
+        if (nodeName != null)
         {
-            if (nodeName == null) { throw new System.ArgumentNullException(); }
             _json["node_name"] = new JSONString(nodeName);
         }
+
+        if (keyboardKey != null)
         {
-            if (keyboardKey == null) { throw new System.ArgumentNullException(); }
             _json["keyboard_key"] = new JSONString(keyboardKey);
         }
     }

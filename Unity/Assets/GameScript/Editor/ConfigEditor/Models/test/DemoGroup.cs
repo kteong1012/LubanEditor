@@ -20,7 +20,7 @@ public sealed class DemoGroup :  Luban.EditorBeanBase
 {
     public DemoGroup()
     {
-            x5 = new test.InnerGroup();
+            x5 = new editor.cfg.test.InnerGroup();
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -88,7 +88,7 @@ public sealed class DemoGroup :  Luban.EditorBeanBase
             }
             else
             {
-                x5 = new test.InnerGroup();
+                x5 = new editor.cfg.test.InnerGroup();
             }
         }
         
@@ -111,8 +111,9 @@ public sealed class DemoGroup :  Luban.EditorBeanBase
         {
             _json["x4"] = new JSONNumber(x4);
         }
+
+        if (x5 != null)
         {
-            if (x5 == null) { throw new System.ArgumentNullException(); }
             { var __bjson = new JSONObject();  editor.cfg.test.InnerGroup.SaveJsonInnerGroup(x5, __bjson); _json["x5"] = __bjson; }
         }
     }
@@ -214,7 +215,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     public int x2;
     public int x3;
     public int x4;
-    public test.InnerGroup x5;
+    public editor.cfg.test.InnerGroup x5;
 
     public override string ToString()
     {

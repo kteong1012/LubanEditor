@@ -66,7 +66,7 @@ public sealed class Equipment :  test.ItemBase
             var _fieldJson = _json["attr"];
             if (_fieldJson != null)
             {
-                if(_fieldJson.IsString) { attr = (test.DemoEnum)System.Enum.Parse(typeof(test.DemoEnum), _fieldJson); } else if(_fieldJson.IsNumber) { attr = (test.DemoEnum)(int)_fieldJson; } else { throw new SerializationException(); }  
+                if(_fieldJson.IsString) { attr = (editor.cfg.test.DemoEnum)System.Enum.Parse(typeof(editor.cfg.test.DemoEnum), _fieldJson); } else if(_fieldJson.IsNumber) { attr = (editor.cfg.test.DemoEnum)(int)_fieldJson; } else { throw new SerializationException(); }  
             }
             else
             {
@@ -92,12 +92,14 @@ public sealed class Equipment :  test.ItemBase
         {
             _json["id"] = new JSONNumber(id);
         }
+
+        if (name != null)
         {
-            if (name == null) { throw new System.ArgumentNullException(); }
             _json["name"] = new JSONString(name);
         }
+
+        if (desc != null)
         {
-            if (desc == null) { throw new System.ArgumentNullException(); }
             _json["desc"] = new JSONString(desc);
         }
         {
@@ -153,7 +155,7 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("attr", ""), GUILayout.Width(100));
 }
 
-this.attr = (test.DemoEnum)UnityEditor.EditorGUILayout.EnumPopup(this.attr, GUILayout.Width(150));
+this.attr = (editor.cfg.test.DemoEnum)UnityEditor.EditorGUILayout.EnumPopup(this.attr, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -179,7 +181,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
         _obj.SaveJson((SimpleJSON.JSONObject)_json);
     }
 
-    public test.DemoEnum attr;
+    public editor.cfg.test.DemoEnum attr;
     public int value;
 
     public override string ToString()

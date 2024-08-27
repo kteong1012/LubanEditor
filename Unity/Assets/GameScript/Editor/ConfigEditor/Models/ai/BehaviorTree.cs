@@ -104,20 +104,24 @@ public sealed class BehaviorTree :  Luban.EditorBeanBase
         {
             _json["id"] = new JSONNumber(id);
         }
+
+        if (name != null)
         {
-            if (name == null) { throw new System.ArgumentNullException(); }
             _json["name"] = new JSONString(name);
         }
+
+        if (desc != null)
         {
-            if (desc == null) { throw new System.ArgumentNullException(); }
             _json["desc"] = new JSONString(desc);
         }
+
+        if (blackboardId != null)
         {
-            if (blackboardId == null) { throw new System.ArgumentNullException(); }
             _json["blackboard_id"] = new JSONString(blackboardId);
         }
+
+        if (root != null)
         {
-            if (root == null) { throw new System.ArgumentNullException(); }
             { var __bjson = new JSONObject();  editor.cfg.ai.ComposeNode.SaveJsonComposeNode(root, __bjson); _json["root"] = __bjson; }
         }
     }
@@ -210,7 +214,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     public string name;
     public string desc;
     public string blackboardId;
-    public ai.ComposeNode root;
+    public editor.cfg.ai.ComposeNode root;
 
     public override string ToString()
     {

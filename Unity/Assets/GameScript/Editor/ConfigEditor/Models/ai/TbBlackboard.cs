@@ -25,7 +25,7 @@ namespace editor.cfg.ai
 {
     public partial class TbBlackboard : IConfigEditorTable
     {
-        private List<ai.Blackboard> _datas = new List<ai.Blackboard>();
+        private List<editor.cfg.ai.Blackboard> _datas = new List<editor.cfg.ai.Blackboard>();
         private readonly string _dataFilePath;
         private readonly Dictionary<string, string> _originalDataJsons = new Dictionary<string, string>();
         private string _originalTableJson;
@@ -52,7 +52,7 @@ namespace editor.cfg.ai
                 {
                     foreach (var node in json.AsArray)
                     {
-                        var data = new ai.Blackboard();
+                        var data = new editor.cfg.ai.Blackboard();
                         var dataNode = (JSONObject)node;
                         data.LoadJson(dataNode);
                         _datas.Add(data);
@@ -61,7 +61,7 @@ namespace editor.cfg.ai
                 }
                 else
                 {
-                    var data = new ai.Blackboard();
+                    var data = new editor.cfg.ai.Blackboard();
                     data.LoadJson((JSONObject)json);
                     _datas.Add(data);
                     _originalDataJsons.Add(GetId(data), json.ToString(4));
@@ -126,7 +126,7 @@ namespace editor.cfg.ai
             return jsonArray.ToString(4);
         }
 
-        private string GetDataJson(ai.Blackboard data)
+        private string GetDataJson(editor.cfg.ai.Blackboard data)
         {
             var json = new JSONObject();
             data?.SaveJson(json);
@@ -166,7 +166,7 @@ namespace editor.cfg.ai
             GUILayout.FlexibleSpace();
             if (GUILayout.Button("+", GUILayout.Width(20)))
             {
-                _datas.Add(new ai.Blackboard());
+                _datas.Add(new editor.cfg.ai.Blackboard());
             }
             if (GUILayout.Button("-", GUILayout.Width(20)))
             {
@@ -223,7 +223,7 @@ namespace editor.cfg.ai
             GUILayout.EndHorizontal();
         }
 
-        private string GetId(ai.Blackboard data)
+        private string GetId(editor.cfg.ai.Blackboard data)
         {
             if (data == null)
             {
@@ -246,7 +246,7 @@ namespace editor.cfg.ai
         {
         }
 
-        private ai.Blackboard SelectData
+        private editor.cfg.ai.Blackboard SelectData
         {
             get
             {

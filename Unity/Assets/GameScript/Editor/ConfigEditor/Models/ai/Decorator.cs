@@ -125,7 +125,7 @@ public abstract class Decorator :  ai.Node
         _obj.Instance.SaveJson((SimpleJSON.JSONObject)_json);
     }
 
-    public ai.EFlowAbortMode flowAbortMode;
+    public editor.cfg.ai.EFlowAbortMode flowAbortMode;
 
     public override string ToString()
     {

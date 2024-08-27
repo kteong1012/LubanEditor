@@ -20,9 +20,9 @@ public sealed class TestMultiColumn :  Luban.EditorBeanBase
 {
     public TestMultiColumn()
     {
-            a = new test.Foo();
-            b = new test.Foo();
-            c = new test.Foo();
+            a = new editor.cfg.test.Foo();
+            b = new editor.cfg.test.Foo();
+            c = new editor.cfg.test.Foo();
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -46,7 +46,7 @@ public sealed class TestMultiColumn :  Luban.EditorBeanBase
             }
             else
             {
-                a = new test.Foo();
+                a = new editor.cfg.test.Foo();
             }
         }
         
@@ -58,7 +58,7 @@ public sealed class TestMultiColumn :  Luban.EditorBeanBase
             }
             else
             {
-                b = new test.Foo();
+                b = new editor.cfg.test.Foo();
             }
         }
         
@@ -70,7 +70,7 @@ public sealed class TestMultiColumn :  Luban.EditorBeanBase
             }
             else
             {
-                c = new test.Foo();
+                c = new editor.cfg.test.Foo();
             }
         }
         
@@ -81,16 +81,19 @@ public sealed class TestMultiColumn :  Luban.EditorBeanBase
         {
             _json["id"] = new JSONNumber(id);
         }
+
+        if (a != null)
         {
-            if (a == null) { throw new System.ArgumentNullException(); }
             { var __bjson = new JSONObject();  editor.cfg.test.Foo.SaveJsonFoo(a, __bjson); _json["a"] = __bjson; }
         }
+
+        if (b != null)
         {
-            if (b == null) { throw new System.ArgumentNullException(); }
             { var __bjson = new JSONObject();  editor.cfg.test.Foo.SaveJsonFoo(b, __bjson); _json["b"] = __bjson; }
         }
+
+        if (c != null)
         {
-            if (c == null) { throw new System.ArgumentNullException(); }
             { var __bjson = new JSONObject();  editor.cfg.test.Foo.SaveJsonFoo(c, __bjson); _json["c"] = __bjson; }
         }
     }
@@ -252,9 +255,9 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     }
 
     public int id;
-    public test.Foo a;
-    public test.Foo b;
-    public test.Foo c;
+    public editor.cfg.test.Foo a;
+    public editor.cfg.test.Foo b;
+    public editor.cfg.test.Foo c;
 
     public override string ToString()
     {

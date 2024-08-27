@@ -69,12 +69,14 @@ public sealed class KeepFaceTarget :  ai.Service
         {
             _json["id"] = new JSONNumber(id);
         }
+
+        if (nodeName != null)
         {
-            if (nodeName == null) { throw new System.ArgumentNullException(); }
             _json["node_name"] = new JSONString(nodeName);
         }
+
+        if (targetActorKey != null)
         {
-            if (targetActorKey == null) { throw new System.ArgumentNullException(); }
             _json["target_actor_key"] = new JSONString(targetActorKey);
         }
     }

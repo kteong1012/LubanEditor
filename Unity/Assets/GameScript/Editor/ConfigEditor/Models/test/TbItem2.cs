@@ -25,7 +25,7 @@ namespace editor.cfg.test
 {
     public partial class TbItem2 : IConfigEditorTable
     {
-        private List<test.ItemBase> _datas = new List<test.ItemBase>();
+        private List<editor.cfg.test.ItemBase> _datas = new List<editor.cfg.test.ItemBase>();
         private readonly string _dataFilePath;
         private readonly Dictionary<string, string> _originalDataJsons = new Dictionary<string, string>();
         private string _originalTableJson;
@@ -126,7 +126,7 @@ namespace editor.cfg.test
             return jsonArray.ToString(4);
         }
 
-        private string GetDataJson(test.ItemBase data)
+        private string GetDataJson(editor.cfg.test.ItemBase data)
         {
             var json = new JSONObject();
             data?.SaveJson(json);
@@ -223,7 +223,7 @@ namespace editor.cfg.test
             GUILayout.EndHorizontal();
         }
 
-        private string GetId(test.ItemBase data)
+        private string GetId(editor.cfg.test.ItemBase data)
         {
             if (data == null)
             {
@@ -246,7 +246,7 @@ namespace editor.cfg.test
         {
         }
 
-        private test.ItemBase SelectData
+        private editor.cfg.test.ItemBase SelectData
         {
             get
             {

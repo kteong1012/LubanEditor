@@ -21,9 +21,9 @@ public sealed class TestScriptableObject :  Luban.EditorBeanBase
     public TestScriptableObject()
     {
             desc = "";
-            v2 = new vec2();
-            v3 = new vec3();
-            v4 = new vec4();
+            v2 = new editor.cfg.vec2();
+            v3 = new editor.cfg.vec3();
+            v4 = new editor.cfg.vec4();
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -81,7 +81,7 @@ public sealed class TestScriptableObject :  Luban.EditorBeanBase
             }
             else
             {
-                v2 = new vec2();
+                v2 = new editor.cfg.vec2();
             }
         }
         
@@ -93,7 +93,7 @@ public sealed class TestScriptableObject :  Luban.EditorBeanBase
             }
             else
             {
-                v3 = new vec3();
+                v3 = new editor.cfg.vec3();
             }
         }
         
@@ -105,7 +105,7 @@ public sealed class TestScriptableObject :  Luban.EditorBeanBase
             }
             else
             {
-                v4 = new vec4();
+                v4 = new editor.cfg.vec4();
             }
         }
         
@@ -116,8 +116,9 @@ public sealed class TestScriptableObject :  Luban.EditorBeanBase
         {
             _json["id"] = new JSONNumber(id);
         }
+
+        if (desc != null)
         {
-            if (desc == null) { throw new System.ArgumentNullException(); }
             _json["desc"] = new JSONString(desc);
         }
         {
@@ -327,9 +328,9 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     public string desc;
     public float rate;
     public int num;
-    public vec2 v2;
-    public vec3 v3;
-    public vec4 v4;
+    public editor.cfg.vec2 v2;
+    public editor.cfg.vec3 v3;
+    public editor.cfg.vec4 v4;
 
     public override string ToString()
     {

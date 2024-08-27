@@ -69,8 +69,9 @@ public sealed class TestExcelBean2 :  Luban.EditorBeanBase
         {
             _json["y1"] = new JSONNumber(y1);
         }
+
+        if (y2 != null)
         {
-            if (y2 == null) { throw new System.ArgumentNullException(); }
             _json["y2"] = new JSONString(y2);
         }
         {

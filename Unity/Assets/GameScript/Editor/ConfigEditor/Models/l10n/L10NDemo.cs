@@ -55,8 +55,9 @@ public sealed class L10NDemo :  Luban.EditorBeanBase
         {
             _json["id"] = new JSONNumber(id);
         }
+
+        if (text != null)
         {
-            if (text == null) { throw new System.ArgumentNullException(); }
             _json["text"] = new JSONString(text);
         }
     }

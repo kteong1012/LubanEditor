@@ -74,13 +74,9 @@ public sealed class DateTimeRange :  Luban.EditorBeanBase
 
     public override void SaveJson(SimpleJSON.JSONObject _json)
     {
-
-        if (startTime != null)
         {
             _json["start_time"] = new JSONString(startTime);
         }
-
-        if (endTime != null)
         {
             _json["end_time"] = new JSONString(endTime);
         }

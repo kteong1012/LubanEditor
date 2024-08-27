@@ -55,8 +55,9 @@ public sealed class Path :  Luban.EditorBeanBase
         {
             _json["id"] = new JSONNumber(id);
         }
+
+        if (res != null)
         {
-            if (res == null) { throw new System.ArgumentNullException(); }
             _json["res"] = new JSONString(res);
         }
     }

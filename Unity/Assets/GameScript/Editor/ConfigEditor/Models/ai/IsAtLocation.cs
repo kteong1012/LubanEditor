@@ -54,7 +54,7 @@ public sealed class IsAtLocation :  ai.Decorator
             var _fieldJson = _json["flow_abort_mode"];
             if (_fieldJson != null)
             {
-                if(_fieldJson.IsString) { flowAbortMode = (ai.EFlowAbortMode)System.Enum.Parse(typeof(ai.EFlowAbortMode), _fieldJson); } else if(_fieldJson.IsNumber) { flowAbortMode = (ai.EFlowAbortMode)(int)_fieldJson; } else { throw new SerializationException(); }  
+                if(_fieldJson.IsString) { flowAbortMode = (editor.cfg.ai.EFlowAbortMode)System.Enum.Parse(typeof(editor.cfg.ai.EFlowAbortMode), _fieldJson); } else if(_fieldJson.IsNumber) { flowAbortMode = (editor.cfg.ai.EFlowAbortMode)(int)_fieldJson; } else { throw new SerializationException(); }  
             }
             else
             {
@@ -103,8 +103,9 @@ public sealed class IsAtLocation :  ai.Decorator
         {
             _json["id"] = new JSONNumber(id);
         }
+
+        if (nodeName != null)
         {
-            if (nodeName == null) { throw new System.ArgumentNullException(); }
             _json["node_name"] = new JSONString(nodeName);
         }
         {
@@ -113,8 +114,9 @@ public sealed class IsAtLocation :  ai.Decorator
         {
             _json["acceptable_radius"] = new JSONNumber(acceptableRadius);
         }
+
+        if (keyboardKey != null)
         {
-            if (keyboardKey == null) { throw new System.ArgumentNullException(); }
             _json["keyboard_key"] = new JSONString(keyboardKey);
         }
         {
@@ -157,7 +159,7 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("flow_abort_mode", ""), GUILayout.Width(100));
 }
 
-this.flowAbortMode = (ai.EFlowAbortMode)UnityEditor.EditorGUILayout.EnumPopup(this.flowAbortMode, GUILayout.Width(150));
+this.flowAbortMode = (editor.cfg.ai.EFlowAbortMode)UnityEditor.EditorGUILayout.EnumPopup(this.flowAbortMode, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {

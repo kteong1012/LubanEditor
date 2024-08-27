@@ -20,7 +20,7 @@ public sealed class MultiRowType3 :  Luban.EditorBeanBase
 {
     public MultiRowType3()
     {
-            items = new System.Collections.Generic.List<test.MultiRowType1>();
+            items = new System.Collections.Generic.List<editor.cfg.test.MultiRowType1>();
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -40,11 +40,11 @@ public sealed class MultiRowType3 :  Luban.EditorBeanBase
             var _fieldJson = _json["items"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsArray) { throw new SerializationException(); } items = new System.Collections.Generic.List<test.MultiRowType1>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { test.MultiRowType1 __v0;  if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = editor.cfg.test.MultiRowType1.LoadJsonMultiRowType1(__e0);  items.Add(__v0); }  
+                if(!_fieldJson.IsArray) { throw new SerializationException(); } items = new System.Collections.Generic.List<editor.cfg.test.MultiRowType1>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { editor.cfg.test.MultiRowType1 __v0;  if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = editor.cfg.test.MultiRowType1.LoadJsonMultiRowType1(__e0);  items.Add(__v0); }  
             }
             else
             {
-                items = new System.Collections.Generic.List<test.MultiRowType1>();
+                items = new System.Collections.Generic.List<editor.cfg.test.MultiRowType1>();
             }
         }
         
@@ -55,8 +55,9 @@ public sealed class MultiRowType3 :  Luban.EditorBeanBase
         {
             _json["id"] = new JSONNumber(id);
         }
+
+        if (items != null)
         {
-            if (items == null) { throw new System.ArgumentNullException(); }
             { var __cjson0 = new JSONArray(); foreach(var __e0 in items) { { var __bjson = new JSONObject();  editor.cfg.test.MultiRowType1.SaveJsonMultiRowType1(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["items"] = __cjson0; }
         }
     }
@@ -98,7 +99,7 @@ else
             break;
         }
         UnityEditor.EditorGUILayout.LabelField(__i1.ToString(), GUILayout.Width(20));
-        test.MultiRowType1 __e1 = this.items[__i1];
+        editor.cfg.test.MultiRowType1 __e1 = this.items[__i1];
         {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
@@ -128,14 +129,14 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.items.Add(new test.MultiRowType1());
+        this.items.Add(new editor.cfg.test.MultiRowType1());
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {
         ConfigEditorImportWindow.Open((__importJsonText1) => 
         {
             var __importJson1 = SimpleJSON.JSON.Parse(__importJsonText1);
-            test.MultiRowType1 __importElement1;
+            editor.cfg.test.MultiRowType1 __importElement1;
             if(!__importJson1.IsObject) { throw new SerializationException(); }  __importElement1 = editor.cfg.test.MultiRowType1.LoadJsonMultiRowType1(__importJson1);
             this.items.Add(__importElement1);
         });
@@ -159,7 +160,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     }
 
     public int id;
-    public System.Collections.Generic.List<test.MultiRowType1> items;
+    public System.Collections.Generic.List<editor.cfg.test.MultiRowType1> items;
 
     public override string ToString()
     {

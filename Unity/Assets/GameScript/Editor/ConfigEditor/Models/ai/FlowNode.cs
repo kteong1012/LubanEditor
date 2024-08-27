@@ -20,8 +20,8 @@ public abstract class FlowNode :  ai.Node
 {
     public FlowNode()
     {
-            decorators = new System.Collections.Generic.List<ai.Decorator>();
-            services = new System.Collections.Generic.List<ai.Service>();
+            decorators = new System.Collections.Generic.List<editor.cfg.ai.Decorator>();
+            services = new System.Collections.Generic.List<editor.cfg.ai.Service>();
     }
     public override string GetTypeStr() => TYPE_STR;
     private const string TYPE_STR = "ai.FlowNode";
@@ -141,8 +141,8 @@ public abstract class FlowNode :  ai.Node
         _obj.Instance.SaveJson((SimpleJSON.JSONObject)_json);
     }
 
-    public System.Collections.Generic.List<ai.Decorator> decorators;
-    public System.Collections.Generic.List<ai.Service> services;
+    public System.Collections.Generic.List<editor.cfg.ai.Decorator> decorators;
+    public System.Collections.Generic.List<editor.cfg.ai.Service> services;
 
     public override string ToString()
     {

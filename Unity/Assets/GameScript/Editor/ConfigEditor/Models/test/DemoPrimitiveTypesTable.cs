@@ -22,9 +22,9 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
     {
             s1 = "";
             s2 = "";
-            v2 = new vec2();
-            v3 = new vec3();
-            v4 = new vec4();
+            v2 = new editor.cfg.vec2();
+            v3 = new editor.cfg.vec3();
+            v4 = new editor.cfg.vec4();
             t1 = "1970-01-01 00:00:00";
     }
 
@@ -139,7 +139,7 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
             }
             else
             {
-                v2 = new vec2();
+                v2 = new editor.cfg.vec2();
             }
         }
         
@@ -151,7 +151,7 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
             }
             else
             {
-                v3 = new vec3();
+                v3 = new editor.cfg.vec3();
             }
         }
         
@@ -163,7 +163,7 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
             }
             else
             {
-                v4 = new vec4();
+                v4 = new editor.cfg.vec4();
             }
         }
         
@@ -215,12 +215,14 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
         {
             _json["x7"] = new JSONNumber(x7);
         }
+
+        if (s1 != null)
         {
-            if (s1 == null) { throw new System.ArgumentNullException(); }
             _json["s1"] = new JSONString(s1);
         }
+
+        if (s2 != null)
         {
-            if (s2 == null) { throw new System.ArgumentNullException(); }
             _json["s2"] = new JSONString(s2);
         }
         {
@@ -492,9 +494,9 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     public double x7;
     public string s1;
     public string s2;
-    public vec2 v2;
-    public vec3 v3;
-    public vec4 v4;
+    public editor.cfg.vec2 v2;
+    public editor.cfg.vec3 v3;
+    public editor.cfg.vec4 v4;
     public string t1;
 
     public override string ToString()

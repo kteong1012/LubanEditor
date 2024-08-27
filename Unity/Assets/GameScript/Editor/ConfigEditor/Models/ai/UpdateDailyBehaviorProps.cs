@@ -173,44 +173,54 @@ public sealed class UpdateDailyBehaviorProps :  ai.Service
         {
             _json["id"] = new JSONNumber(id);
         }
+
+        if (nodeName != null)
         {
-            if (nodeName == null) { throw new System.ArgumentNullException(); }
             _json["node_name"] = new JSONString(nodeName);
         }
+
+        if (satietyKey != null)
         {
-            if (satietyKey == null) { throw new System.ArgumentNullException(); }
             _json["satiety_key"] = new JSONString(satietyKey);
         }
+
+        if (energyKey != null)
         {
-            if (energyKey == null) { throw new System.ArgumentNullException(); }
             _json["energy_key"] = new JSONString(energyKey);
         }
+
+        if (moodKey != null)
         {
-            if (moodKey == null) { throw new System.ArgumentNullException(); }
             _json["mood_key"] = new JSONString(moodKey);
         }
+
+        if (satietyLowerThresholdKey != null)
         {
-            if (satietyLowerThresholdKey == null) { throw new System.ArgumentNullException(); }
             _json["satiety_lower_threshold_key"] = new JSONString(satietyLowerThresholdKey);
         }
+
+        if (satietyUpperThresholdKey != null)
         {
-            if (satietyUpperThresholdKey == null) { throw new System.ArgumentNullException(); }
             _json["satiety_upper_threshold_key"] = new JSONString(satietyUpperThresholdKey);
         }
+
+        if (energyLowerThresholdKey != null)
         {
-            if (energyLowerThresholdKey == null) { throw new System.ArgumentNullException(); }
             _json["energy_lower_threshold_key"] = new JSONString(energyLowerThresholdKey);
         }
+
+        if (energyUpperThresholdKey != null)
         {
-            if (energyUpperThresholdKey == null) { throw new System.ArgumentNullException(); }
             _json["energy_upper_threshold_key"] = new JSONString(energyUpperThresholdKey);
         }
+
+        if (moodLowerThresholdKey != null)
         {
-            if (moodLowerThresholdKey == null) { throw new System.ArgumentNullException(); }
             _json["mood_lower_threshold_key"] = new JSONString(moodLowerThresholdKey);
         }
+
+        if (moodUpperThresholdKey != null)
         {
-            if (moodUpperThresholdKey == null) { throw new System.ArgumentNullException(); }
             _json["mood_upper_threshold_key"] = new JSONString(moodUpperThresholdKey);
         }
     }

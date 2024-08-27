@@ -25,7 +25,7 @@ namespace editor.cfg.tag
 {
     public partial class TbTestTag : IConfigEditorTable
     {
-        private List<tag.TestTag> _datas = new List<tag.TestTag>();
+        private List<editor.cfg.tag.TestTag> _datas = new List<editor.cfg.tag.TestTag>();
         private readonly string _dataFilePath;
         private readonly Dictionary<string, string> _originalDataJsons = new Dictionary<string, string>();
         private string _originalTableJson;
@@ -52,7 +52,7 @@ namespace editor.cfg.tag
                 {
                     foreach (var node in json.AsArray)
                     {
-                        var data = new tag.TestTag();
+                        var data = new editor.cfg.tag.TestTag();
                         var dataNode = (JSONObject)node;
                         data.LoadJson(dataNode);
                         _datas.Add(data);
@@ -61,7 +61,7 @@ namespace editor.cfg.tag
                 }
                 else
                 {
-                    var data = new tag.TestTag();
+                    var data = new editor.cfg.tag.TestTag();
                     data.LoadJson((JSONObject)json);
                     _datas.Add(data);
                     _originalDataJsons.Add(GetId(data), json.ToString(4));
@@ -126,7 +126,7 @@ namespace editor.cfg.tag
             return jsonArray.ToString(4);
         }
 
-        private string GetDataJson(tag.TestTag data)
+        private string GetDataJson(editor.cfg.tag.TestTag data)
         {
             var json = new JSONObject();
             data?.SaveJson(json);
@@ -166,7 +166,7 @@ namespace editor.cfg.tag
             GUILayout.FlexibleSpace();
             if (GUILayout.Button("+", GUILayout.Width(20)))
             {
-                _datas.Add(new tag.TestTag());
+                _datas.Add(new editor.cfg.tag.TestTag());
             }
             if (GUILayout.Button("-", GUILayout.Width(20)))
             {
@@ -223,7 +223,7 @@ namespace editor.cfg.tag
             GUILayout.EndHorizontal();
         }
 
-        private string GetId(tag.TestTag data)
+        private string GetId(editor.cfg.tag.TestTag data)
         {
             if (data == null)
             {
@@ -246,7 +246,7 @@ namespace editor.cfg.tag
         {
         }
 
-        private tag.TestTag SelectData
+        private editor.cfg.tag.TestTag SelectData
         {
             get
             {

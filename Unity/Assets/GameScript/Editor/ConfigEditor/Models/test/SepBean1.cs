@@ -69,8 +69,9 @@ public sealed class SepBean1 :  Luban.EditorBeanBase
         {
             _json["b"] = new JSONNumber(b);
         }
+
+        if (c != null)
         {
-            if (c == null) { throw new System.ArgumentNullException(); }
             _json["c"] = new JSONString(c);
         }
     }

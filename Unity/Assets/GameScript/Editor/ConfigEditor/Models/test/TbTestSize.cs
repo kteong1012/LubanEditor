@@ -25,7 +25,7 @@ namespace editor.cfg.test
 {
     public partial class TbTestSize : IConfigEditorTable
     {
-        private List<test.TestSize> _datas = new List<test.TestSize>();
+        private List<editor.cfg.test.TestSize> _datas = new List<editor.cfg.test.TestSize>();
         private readonly string _dataFilePath;
         private readonly Dictionary<string, string> _originalDataJsons = new Dictionary<string, string>();
         private string _originalTableJson;
@@ -52,7 +52,7 @@ namespace editor.cfg.test
                 {
                     foreach (var node in json.AsArray)
                     {
-                        var data = new test.TestSize();
+                        var data = new editor.cfg.test.TestSize();
                         var dataNode = (JSONObject)node;
                         data.LoadJson(dataNode);
                         _datas.Add(data);
@@ -61,7 +61,7 @@ namespace editor.cfg.test
                 }
                 else
                 {
-                    var data = new test.TestSize();
+                    var data = new editor.cfg.test.TestSize();
                     data.LoadJson((JSONObject)json);
                     _datas.Add(data);
                     _originalDataJsons.Add(GetId(data), json.ToString(4));
@@ -126,7 +126,7 @@ namespace editor.cfg.test
             return jsonArray.ToString(4);
         }
 
-        private string GetDataJson(test.TestSize data)
+        private string GetDataJson(editor.cfg.test.TestSize data)
         {
             var json = new JSONObject();
             data?.SaveJson(json);
@@ -166,7 +166,7 @@ namespace editor.cfg.test
             GUILayout.FlexibleSpace();
             if (GUILayout.Button("+", GUILayout.Width(20)))
             {
-                _datas.Add(new test.TestSize());
+                _datas.Add(new editor.cfg.test.TestSize());
             }
             if (GUILayout.Button("-", GUILayout.Width(20)))
             {
@@ -223,7 +223,7 @@ namespace editor.cfg.test
             GUILayout.EndHorizontal();
         }
 
-        private string GetId(test.TestSize data)
+        private string GetId(editor.cfg.test.TestSize data)
         {
             if (data == null)
             {
@@ -246,7 +246,7 @@ namespace editor.cfg.test
         {
         }
 
-        private test.TestSize SelectData
+        private editor.cfg.test.TestSize SelectData
         {
             get
             {

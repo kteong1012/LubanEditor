@@ -20,7 +20,7 @@ public sealed class H1 :  Luban.EditorBeanBase
 {
     public H1()
     {
-            y2 = new test.H2();
+            y2 = new editor.cfg.test.H2();
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -33,7 +33,7 @@ public sealed class H1 :  Luban.EditorBeanBase
             }
             else
             {
-                y2 = new test.H2();
+                y2 = new editor.cfg.test.H2();
             }
         }
         
@@ -52,8 +52,9 @@ public sealed class H1 :  Luban.EditorBeanBase
 
     public override void SaveJson(SimpleJSON.JSONObject _json)
     {
+
+        if (y2 != null)
         {
-            if (y2 == null) { throw new System.ArgumentNullException(); }
             { var __bjson = new JSONObject();  editor.cfg.test.H2.SaveJsonH2(y2, __bjson); _json["y2"] = __bjson; }
         }
         {
@@ -123,7 +124,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
         _obj.SaveJson((SimpleJSON.JSONObject)_json);
     }
 
-    public test.H2 y2;
+    public editor.cfg.test.H2 y2;
     public int y3;
 
     public override string ToString()

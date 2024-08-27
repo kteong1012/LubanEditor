@@ -90,12 +90,14 @@ public sealed class Item :  test.ItemBase
         {
             _json["id"] = new JSONNumber(id);
         }
+
+        if (name != null)
         {
-            if (name == null) { throw new System.ArgumentNullException(); }
             _json["name"] = new JSONString(name);
         }
+
+        if (desc != null)
         {
-            if (desc == null) { throw new System.ArgumentNullException(); }
             _json["desc"] = new JSONString(desc);
         }
         {

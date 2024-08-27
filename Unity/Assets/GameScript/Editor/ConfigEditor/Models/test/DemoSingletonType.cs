@@ -78,12 +78,14 @@ public sealed class DemoSingletonType :  Luban.EditorBeanBase
         {
             _json["id"] = new JSONNumber(id);
         }
+
+        if (name != null)
         {
-            if (name == null) { throw new System.ArgumentNullException(); }
             _json["name"] = new JSONString(name);
         }
+
+        if (date != null)
         {
-            if (date == null) { throw new System.ArgumentNullException(); }
             { var __bjson = new JSONObject();  editor.cfg.test.DemoDynamic.SaveJsonDemoDynamic(date, __bjson); _json["date"] = __bjson; }
         }
     }
@@ -154,7 +156,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
 
     public int id;
     public string name;
-    public test.DemoDynamic date;
+    public editor.cfg.test.DemoDynamic date;
 
     public override string ToString()
     {

@@ -21,7 +21,7 @@ public sealed class TestRow :  Luban.EditorBeanBase
     public TestRow()
     {
             z = "";
-            a = new test.Test3();
+            a = new editor.cfg.test.Test3();
             b = new System.Collections.Generic.List<int>();
     }
 
@@ -69,7 +69,7 @@ public sealed class TestRow :  Luban.EditorBeanBase
             }
             else
             {
-                a = new test.Test3();
+                a = new editor.cfg.test.Test3();
             }
         }
         
@@ -95,16 +95,19 @@ public sealed class TestRow :  Luban.EditorBeanBase
         {
             _json["y"] = new JSONBool(y);
         }
+
+        if (z != null)
         {
-            if (z == null) { throw new System.ArgumentNullException(); }
             _json["z"] = new JSONString(z);
         }
+
+        if (a != null)
         {
-            if (a == null) { throw new System.ArgumentNullException(); }
             { var __bjson = new JSONObject();  editor.cfg.test.Test3.SaveJsonTest3(a, __bjson); _json["a"] = __bjson; }
         }
+
+        if (b != null)
         {
-            if (b == null) { throw new System.ArgumentNullException(); }
             { var __cjson0 = new JSONArray(); foreach(var __e0 in b) { __cjson0["null"] = new JSONNumber(__e0); } _json["b"] = __cjson0; }
         }
     }
@@ -239,7 +242,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     public int x;
     public bool y;
     public string z;
-    public test.Test3 a;
+    public editor.cfg.test.Test3 a;
     public System.Collections.Generic.List<int> b;
 
     public override string ToString()

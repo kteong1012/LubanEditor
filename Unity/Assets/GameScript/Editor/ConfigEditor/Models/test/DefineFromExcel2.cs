@@ -23,14 +23,14 @@ public sealed class DefineFromExcel2 :  Luban.EditorBeanBase
             x10 = "";
             x13 = editor.cfg.test.DemoEnum.NONE;
             x132 = editor.cfg.test.DemoFlag.A;
-            v2 = new vec2();
+            v2 = new editor.cfg.vec2();
             t1 = "1970-01-01 00:00:00";
             k1 = System.Array.Empty<int>();
             k2 = System.Array.Empty<int>();
             k8 = new System.Collections.Generic.List<object[]>();
-            k9 = new System.Collections.Generic.List<test.DemoE2>();
-            k10 = new System.Collections.Generic.List<vec3>();
-            k11 = new System.Collections.Generic.List<vec4>();
+            k9 = new System.Collections.Generic.List<editor.cfg.test.DemoE2>();
+            k10 = new System.Collections.Generic.List<editor.cfg.vec3>();
+            k11 = new System.Collections.Generic.List<editor.cfg.vec4>();
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -106,7 +106,7 @@ public sealed class DefineFromExcel2 :  Luban.EditorBeanBase
             var _fieldJson = _json["x13"];
             if (_fieldJson != null)
             {
-                if(_fieldJson.IsString) { x13 = (test.DemoEnum)System.Enum.Parse(typeof(test.DemoEnum), _fieldJson); } else if(_fieldJson.IsNumber) { x13 = (test.DemoEnum)(int)_fieldJson; } else { throw new SerializationException(); }  
+                if(_fieldJson.IsString) { x13 = (editor.cfg.test.DemoEnum)System.Enum.Parse(typeof(editor.cfg.test.DemoEnum), _fieldJson); } else if(_fieldJson.IsNumber) { x13 = (editor.cfg.test.DemoEnum)(int)_fieldJson; } else { throw new SerializationException(); }  
             }
             else
             {
@@ -118,7 +118,7 @@ public sealed class DefineFromExcel2 :  Luban.EditorBeanBase
             var _fieldJson = _json["x13_2"];
             if (_fieldJson != null)
             {
-                if(_fieldJson.IsString) { x132 = (test.DemoFlag)System.Enum.Parse(typeof(test.DemoFlag), _fieldJson); } else if(_fieldJson.IsNumber) { x132 = (test.DemoFlag)(int)_fieldJson; } else { throw new SerializationException(); }  
+                if(_fieldJson.IsString) { x132 = (editor.cfg.test.DemoFlag)System.Enum.Parse(typeof(editor.cfg.test.DemoFlag), _fieldJson); } else if(_fieldJson.IsNumber) { x132 = (editor.cfg.test.DemoFlag)(int)_fieldJson; } else { throw new SerializationException(); }  
             }
             else
             {
@@ -180,7 +180,7 @@ public sealed class DefineFromExcel2 :  Luban.EditorBeanBase
             }
             else
             {
-                v2 = new vec2();
+                v2 = new editor.cfg.vec2();
             }
         }
         
@@ -247,11 +247,11 @@ public sealed class DefineFromExcel2 :  Luban.EditorBeanBase
             var _fieldJson = _json["k9"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsArray) { throw new SerializationException(); } k9 = new System.Collections.Generic.List<test.DemoE2>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { test.DemoE2 __v0;  if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = editor.cfg.test.DemoE2.LoadJsonDemoE2(__e0);  k9.Add(__v0); }  
+                if(!_fieldJson.IsArray) { throw new SerializationException(); } k9 = new System.Collections.Generic.List<editor.cfg.test.DemoE2>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { editor.cfg.test.DemoE2 __v0;  if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = editor.cfg.test.DemoE2.LoadJsonDemoE2(__e0);  k9.Add(__v0); }  
             }
             else
             {
-                k9 = new System.Collections.Generic.List<test.DemoE2>();
+                k9 = new System.Collections.Generic.List<editor.cfg.test.DemoE2>();
             }
         }
         
@@ -259,11 +259,11 @@ public sealed class DefineFromExcel2 :  Luban.EditorBeanBase
             var _fieldJson = _json["k10"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsArray) { throw new SerializationException(); } k10 = new System.Collections.Generic.List<vec3>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { vec3 __v0;  if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = editor.cfg.vec3.LoadJsonvec3(__e0);  k10.Add(__v0); }  
+                if(!_fieldJson.IsArray) { throw new SerializationException(); } k10 = new System.Collections.Generic.List<editor.cfg.vec3>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { editor.cfg.vec3 __v0;  if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = editor.cfg.vec3.LoadJsonvec3(__e0);  k10.Add(__v0); }  
             }
             else
             {
-                k10 = new System.Collections.Generic.List<vec3>();
+                k10 = new System.Collections.Generic.List<editor.cfg.vec3>();
             }
         }
         
@@ -271,11 +271,11 @@ public sealed class DefineFromExcel2 :  Luban.EditorBeanBase
             var _fieldJson = _json["k11"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsArray) { throw new SerializationException(); } k11 = new System.Collections.Generic.List<vec4>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { vec4 __v0;  if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = editor.cfg.vec4.LoadJsonvec4(__e0);  k11.Add(__v0); }  
+                if(!_fieldJson.IsArray) { throw new SerializationException(); } k11 = new System.Collections.Generic.List<editor.cfg.vec4>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { editor.cfg.vec4 __v0;  if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = editor.cfg.vec4.LoadJsonvec4(__e0);  k11.Add(__v0); }  
             }
             else
             {
-                k11 = new System.Collections.Generic.List<vec4>();
+                k11 = new System.Collections.Generic.List<editor.cfg.vec4>();
             }
         }
         
@@ -287,7 +287,7 @@ public sealed class DefineFromExcel2 :  Luban.EditorBeanBase
             }
             else
             {
-                v11 = new vec3();
+                v11 = new editor.cfg.vec3();
             }
         }
         
@@ -310,8 +310,9 @@ public sealed class DefineFromExcel2 :  Luban.EditorBeanBase
         {
             _json["x8"] = new JSONNumber(x8);
         }
+
+        if (x10 != null)
         {
-            if (x10 == null) { throw new System.ArgumentNullException(); }
             _json["x10"] = new JSONString(x10);
         }
         {
@@ -320,12 +321,14 @@ public sealed class DefineFromExcel2 :  Luban.EditorBeanBase
         {
             _json["x13_2"] = new JSONNumber((int)x132);
         }
+
+        if (x14 != null)
         {
-            if (x14 == null) { throw new System.ArgumentNullException(); }
             { var __bjson = new JSONObject();  editor.cfg.test.DemoDynamic.SaveJsonDemoDynamic(x14, __bjson); _json["x14"] = __bjson; }
         }
+
+        if (x15 != null)
         {
-            if (x15 == null) { throw new System.ArgumentNullException(); }
             { var __bjson = new JSONObject();  editor.cfg.test.Shape.SaveJsonShape(x15, __bjson); _json["x15"] = __bjson; }
         }
         {
@@ -334,16 +337,19 @@ public sealed class DefineFromExcel2 :  Luban.EditorBeanBase
         {
             _json["t1"] = new JSONString(t1);
         }
+
+        if (k1 != null)
         {
-            if (k1 == null) { throw new System.ArgumentNullException(); }
             { var __cjson0 = new JSONArray(); foreach(var __e0 in k1) { __cjson0["null"] = new JSONNumber(__e0); } _json["k1"] = __cjson0; }
         }
+
+        if (k2 != null)
         {
-            if (k2 == null) { throw new System.ArgumentNullException(); }
             { var __cjson0 = new JSONArray(); foreach(var __e0 in k2) { __cjson0["null"] = new JSONNumber(__e0); } _json["k2"] = __cjson0; }
         }
+
+        if (k8 != null)
         {
-            if (k8 == null) { throw new System.ArgumentNullException(); }
             {
                 var __cjson0 = new JSONArray();
                 foreach(var __e0 in k8)
@@ -356,20 +362,21 @@ public sealed class DefineFromExcel2 :  Luban.EditorBeanBase
                 _json["k8"] = __cjson0;
             }
         }
+
+        if (k9 != null)
         {
-            if (k9 == null) { throw new System.ArgumentNullException(); }
             { var __cjson0 = new JSONArray(); foreach(var __e0 in k9) { { var __bjson = new JSONObject();  editor.cfg.test.DemoE2.SaveJsonDemoE2(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["k9"] = __cjson0; }
         }
+
+        if (k10 != null)
         {
-            if (k10 == null) { throw new System.ArgumentNullException(); }
             { var __cjson0 = new JSONArray(); foreach(var __e0 in k10) { { var __bjson = new JSONObject();  editor.cfg.vec3.SaveJsonvec3(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["k10"] = __cjson0; }
         }
+
+        if (k11 != null)
         {
-            if (k11 == null) { throw new System.ArgumentNullException(); }
             { var __cjson0 = new JSONArray(); foreach(var __e0 in k11) { { var __bjson = new JSONObject();  editor.cfg.vec4.SaveJsonvec4(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["k11"] = __cjson0; }
         }
-
-        if (v11 != null)
         {
             { var __bjson = new JSONObject();  editor.cfg.vec3.SaveJsonvec3(v11, __bjson); _json["v11"] = __bjson; }
         }
@@ -450,7 +457,7 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x13", ""), GUILayout.Width(100));
 }
 
-this.x13 = (test.DemoEnum)UnityEditor.EditorGUILayout.EnumPopup(this.x13, GUILayout.Width(150));
+this.x13 = (editor.cfg.test.DemoEnum)UnityEditor.EditorGUILayout.EnumPopup(this.x13, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -461,7 +468,7 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x13_2", ""), GUILayout.Width(100));
 }
 
-this.x132 = (test.DemoFlag)UnityEditor.EditorGUILayout.EnumPopup(this.x132, GUILayout.Width(150));
+this.x132 = (editor.cfg.test.DemoFlag)UnityEditor.EditorGUILayout.EnumPopup(this.x132, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -723,7 +730,7 @@ else
             break;
         }
         UnityEditor.EditorGUILayout.LabelField(__i1.ToString(), GUILayout.Width(20));
-        test.DemoE2 __e1 = this.k9[__i1];
+        editor.cfg.test.DemoE2 __e1 = this.k9[__i1];
         {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
@@ -734,7 +741,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("y1", ""), GUILayout.Width(100));
 }
-__e1.y1 = UnityEditor.EditorGUILayout.IntField(__e1.y1.Value, GUILayout.Width(150));
+__e1.y1 = UnityEditor.EditorGUILayout.IntField(__e1.y1, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -753,14 +760,14 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.k9.Add(new test.DemoE2());
+        this.k9.Add(new editor.cfg.test.DemoE2());
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {
         ConfigEditorImportWindow.Open((__importJsonText1) => 
         {
             var __importJson1 = SimpleJSON.JSON.Parse(__importJsonText1);
-            test.DemoE2 __importElement1;
+            editor.cfg.test.DemoE2 __importElement1;
             if(!__importJson1.IsObject) { throw new SerializationException(); }  __importElement1 = editor.cfg.test.DemoE2.LoadJsonDemoE2(__importJson1);
             this.k9.Add(__importElement1);
         });
@@ -790,7 +797,7 @@ else
             break;
         }
         UnityEditor.EditorGUILayout.LabelField(__i1.ToString(), GUILayout.Width(20));
-        vec3 __e1 = this.k10[__i1];
+        editor.cfg.vec3 __e1 = this.k10[__i1];
         {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
@@ -830,14 +837,14 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.k10.Add(new vec3());
+        this.k10.Add(new editor.cfg.vec3());
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {
         ConfigEditorImportWindow.Open((__importJsonText1) => 
         {
             var __importJson1 = SimpleJSON.JSON.Parse(__importJsonText1);
-            vec3 __importElement1;
+            editor.cfg.vec3 __importElement1;
             if(!__importJson1.IsObject) { throw new SerializationException(); }  __importElement1 = editor.cfg.vec3.LoadJsonvec3(__importJson1);
             this.k10.Add(__importElement1);
         });
@@ -867,7 +874,7 @@ else
             break;
         }
         UnityEditor.EditorGUILayout.LabelField(__i1.ToString(), GUILayout.Width(20));
-        vec4 __e1 = this.k11[__i1];
+        editor.cfg.vec4 __e1 = this.k11[__i1];
         {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
@@ -917,14 +924,14 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.k11.Add(new vec4());
+        this.k11.Add(new editor.cfg.vec4());
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {
         ConfigEditorImportWindow.Open((__importJsonText1) => 
         {
             var __importJson1 = SimpleJSON.JSON.Parse(__importJsonText1);
-            vec4 __importElement1;
+            editor.cfg.vec4 __importElement1;
             if(!__importJson1.IsObject) { throw new SerializationException(); }  __importElement1 = editor.cfg.vec4.LoadJsonvec4(__importJson1);
             this.k11.Add(__importElement1);
         });
@@ -1001,19 +1008,19 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     public float x6;
     public int x8;
     public string x10;
-    public test.DemoEnum x13;
-    public test.DemoFlag x132;
-    public test.DemoDynamic x14;
-    public test.Shape x15;
-    public vec2 v2;
+    public editor.cfg.test.DemoEnum x13;
+    public editor.cfg.test.DemoFlag x132;
+    public editor.cfg.test.DemoDynamic x14;
+    public editor.cfg.test.Shape x15;
+    public editor.cfg.vec2 v2;
     public string t1;
     public int[] k1;
     public int[] k2;
     public System.Collections.Generic.List<object[]> k8;
-    public System.Collections.Generic.List<test.DemoE2> k9;
-    public System.Collections.Generic.List<vec3> k10;
-    public System.Collections.Generic.List<vec4> k11;
-    public vec3? v11;
+    public System.Collections.Generic.List<editor.cfg.test.DemoE2> k9;
+    public System.Collections.Generic.List<editor.cfg.vec3> k10;
+    public System.Collections.Generic.List<editor.cfg.vec4> k11;
+    public editor.cfg.vec3 v11;
 
     public override string ToString()
     {

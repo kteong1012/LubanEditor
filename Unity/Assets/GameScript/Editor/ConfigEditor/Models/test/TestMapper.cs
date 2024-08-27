@@ -21,7 +21,7 @@ public sealed class TestMapper :  Luban.EditorBeanBase
     public TestMapper()
     {
             audioType = editor.cfg.AudioType.UNKNOWN;
-            v2 = new vec2();
+            v2 = new editor.cfg.vec2();
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -41,7 +41,7 @@ public sealed class TestMapper :  Luban.EditorBeanBase
             var _fieldJson = _json["audio_type"];
             if (_fieldJson != null)
             {
-                if(_fieldJson.IsString) { audioType = (AudioType)System.Enum.Parse(typeof(AudioType), _fieldJson); } else if(_fieldJson.IsNumber) { audioType = (AudioType)(int)_fieldJson; } else { throw new SerializationException(); }  
+                if(_fieldJson.IsString) { audioType = (editor.cfg.AudioType)System.Enum.Parse(typeof(editor.cfg.AudioType), _fieldJson); } else if(_fieldJson.IsNumber) { audioType = (editor.cfg.AudioType)(int)_fieldJson; } else { throw new SerializationException(); }  
             }
             else
             {
@@ -57,7 +57,7 @@ public sealed class TestMapper :  Luban.EditorBeanBase
             }
             else
             {
-                v2 = new vec2();
+                v2 = new editor.cfg.vec2();
             }
         }
         
@@ -101,7 +101,7 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("audio_type", ""), GUILayout.Width(100));
 }
 
-this.audioType = (AudioType)UnityEditor.EditorGUILayout.EnumPopup(this.audioType, GUILayout.Width(150));
+this.audioType = (editor.cfg.AudioType)UnityEditor.EditorGUILayout.EnumPopup(this.audioType, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -150,8 +150,8 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     }
 
     public int id;
-    public AudioType audioType;
-    public vec2 v2;
+    public editor.cfg.AudioType audioType;
+    public editor.cfg.vec2 v2;
 
     public override string ToString()
     {

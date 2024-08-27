@@ -55,8 +55,9 @@ public sealed class CompositeJsonTable1 :  Luban.EditorBeanBase
         {
             _json["id"] = new JSONNumber(id);
         }
+
+        if (x != null)
         {
-            if (x == null) { throw new System.ArgumentNullException(); }
             _json["x"] = new JSONString(x);
         }
     }

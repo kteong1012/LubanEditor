@@ -25,7 +25,7 @@ namespace editor.cfg.ai
 {
     public partial class TbBehaviorTree : IConfigEditorTable
     {
-        private List<ai.BehaviorTree> _datas = new List<ai.BehaviorTree>();
+        private List<editor.cfg.ai.BehaviorTree> _datas = new List<editor.cfg.ai.BehaviorTree>();
         private readonly string _dataFilePath;
         private readonly Dictionary<string, string> _originalDataJsons = new Dictionary<string, string>();
         private string _originalTableJson;
@@ -52,7 +52,7 @@ namespace editor.cfg.ai
                 {
                     foreach (var node in json.AsArray)
                     {
-                        var data = new ai.BehaviorTree();
+                        var data = new editor.cfg.ai.BehaviorTree();
                         var dataNode = (JSONObject)node;
                         data.LoadJson(dataNode);
                         _datas.Add(data);
@@ -61,7 +61,7 @@ namespace editor.cfg.ai
                 }
                 else
                 {
-                    var data = new ai.BehaviorTree();
+                    var data = new editor.cfg.ai.BehaviorTree();
                     data.LoadJson((JSONObject)json);
                     _datas.Add(data);
                     _originalDataJsons.Add(GetId(data), json.ToString(4));
@@ -126,7 +126,7 @@ namespace editor.cfg.ai
             return jsonArray.ToString(4);
         }
 
-        private string GetDataJson(ai.BehaviorTree data)
+        private string GetDataJson(editor.cfg.ai.BehaviorTree data)
         {
             var json = new JSONObject();
             data?.SaveJson(json);
@@ -166,7 +166,7 @@ namespace editor.cfg.ai
             GUILayout.FlexibleSpace();
             if (GUILayout.Button("+", GUILayout.Width(20)))
             {
-                _datas.Add(new ai.BehaviorTree());
+                _datas.Add(new editor.cfg.ai.BehaviorTree());
             }
             if (GUILayout.Button("-", GUILayout.Width(20)))
             {
@@ -223,7 +223,7 @@ namespace editor.cfg.ai
             GUILayout.EndHorizontal();
         }
 
-        private string GetId(ai.BehaviorTree data)
+        private string GetId(editor.cfg.ai.BehaviorTree data)
         {
             if (data == null)
             {
@@ -246,7 +246,7 @@ namespace editor.cfg.ai
         {
         }
 
-        private ai.BehaviorTree SelectData
+        private editor.cfg.ai.BehaviorTree SelectData
         {
             get
             {

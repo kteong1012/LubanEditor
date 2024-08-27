@@ -55,8 +55,9 @@ public sealed class TestTag :  Luban.EditorBeanBase
         {
             _json["id"] = new JSONNumber(id);
         }
+
+        if (value != null)
         {
-            if (value == null) { throw new System.ArgumentNullException(); }
             _json["value"] = new JSONString(value);
         }
     }

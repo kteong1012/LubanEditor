@@ -62,7 +62,7 @@ public sealed class Item :  Luban.EditorBeanBase
             var _fieldJson = _json["major_type"];
             if (_fieldJson != null)
             {
-                if(_fieldJson.IsString) { majorType = (item.EMajorType)System.Enum.Parse(typeof(item.EMajorType), _fieldJson); } else if(_fieldJson.IsNumber) { majorType = (item.EMajorType)(int)_fieldJson; } else { throw new SerializationException(); }  
+                if(_fieldJson.IsString) { majorType = (editor.cfg.item.EMajorType)System.Enum.Parse(typeof(editor.cfg.item.EMajorType), _fieldJson); } else if(_fieldJson.IsNumber) { majorType = (editor.cfg.item.EMajorType)(int)_fieldJson; } else { throw new SerializationException(); }  
             }
             else
             {
@@ -74,7 +74,7 @@ public sealed class Item :  Luban.EditorBeanBase
             var _fieldJson = _json["minor_type"];
             if (_fieldJson != null)
             {
-                if(_fieldJson.IsString) { minorType = (item.EMinorType)System.Enum.Parse(typeof(item.EMinorType), _fieldJson); } else if(_fieldJson.IsNumber) { minorType = (item.EMinorType)(int)_fieldJson; } else { throw new SerializationException(); }  
+                if(_fieldJson.IsString) { minorType = (editor.cfg.item.EMinorType)System.Enum.Parse(typeof(editor.cfg.item.EMinorType), _fieldJson); } else if(_fieldJson.IsNumber) { minorType = (editor.cfg.item.EMinorType)(int)_fieldJson; } else { throw new SerializationException(); }  
             }
             else
             {
@@ -97,7 +97,7 @@ public sealed class Item :  Luban.EditorBeanBase
             var _fieldJson = _json["quality"];
             if (_fieldJson != null)
             {
-                if(_fieldJson.IsString) { quality = (item.EItemQuality)System.Enum.Parse(typeof(item.EItemQuality), _fieldJson); } else if(_fieldJson.IsNumber) { quality = (item.EItemQuality)(int)_fieldJson; } else { throw new SerializationException(); }  
+                if(_fieldJson.IsString) { quality = (editor.cfg.item.EItemQuality)System.Enum.Parse(typeof(editor.cfg.item.EItemQuality), _fieldJson); } else if(_fieldJson.IsNumber) { quality = (editor.cfg.item.EItemQuality)(int)_fieldJson; } else { throw new SerializationException(); }  
             }
             else
             {
@@ -171,8 +171,9 @@ public sealed class Item :  Luban.EditorBeanBase
         {
             _json["id"] = new JSONNumber(id);
         }
+
+        if (name != null)
         {
-            if (name == null) { throw new System.ArgumentNullException(); }
             _json["name"] = new JSONString(name);
         }
         {
@@ -187,20 +188,24 @@ public sealed class Item :  Luban.EditorBeanBase
         {
             _json["quality"] = new JSONNumber((int)quality);
         }
+
+        if (icon != null)
         {
-            if (icon == null) { throw new System.ArgumentNullException(); }
             _json["icon"] = new JSONString(icon);
         }
+
+        if (iconBackgroud != null)
         {
-            if (iconBackgroud == null) { throw new System.ArgumentNullException(); }
             _json["icon_backgroud"] = new JSONString(iconBackgroud);
         }
+
+        if (iconMask != null)
         {
-            if (iconMask == null) { throw new System.ArgumentNullException(); }
             _json["icon_mask"] = new JSONString(iconMask);
         }
+
+        if (desc != null)
         {
-            if (desc == null) { throw new System.ArgumentNullException(); }
             _json["desc"] = new JSONString(desc);
         }
         {
@@ -243,7 +248,7 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("major_type", ""), GUILayout.Width(100));
 }
 
-this.majorType = (item.EMajorType)UnityEditor.EditorGUILayout.EnumPopup(this.majorType, GUILayout.Width(150));
+this.majorType = (editor.cfg.item.EMajorType)UnityEditor.EditorGUILayout.EnumPopup(this.majorType, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -254,7 +259,7 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("minor_type", ""), GUILayout.Width(100));
 }
 
-this.minorType = (item.EMinorType)UnityEditor.EditorGUILayout.EnumPopup(this.minorType, GUILayout.Width(150));
+this.minorType = (editor.cfg.item.EMinorType)UnityEditor.EditorGUILayout.EnumPopup(this.minorType, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -265,7 +270,7 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("quality", ""), GUILayout.Width(100));
 }
 
-this.quality = (item.EItemQuality)UnityEditor.EditorGUILayout.EnumPopup(this.quality, GUILayout.Width(150));
+this.quality = (editor.cfg.item.EItemQuality)UnityEditor.EditorGUILayout.EnumPopup(this.quality, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -336,10 +341,10 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     /// </summary>
     public int id;
     public string name;
-    public item.EMajorType majorType;
-    public item.EMinorType minorType;
+    public editor.cfg.item.EMajorType majorType;
+    public editor.cfg.item.EMinorType minorType;
     public int maxPileNum;
-    public item.EItemQuality quality;
+    public editor.cfg.item.EItemQuality quality;
     public string icon;
     public string iconBackgroud;
     public string iconMask;

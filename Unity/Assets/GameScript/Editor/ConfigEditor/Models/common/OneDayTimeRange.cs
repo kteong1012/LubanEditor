@@ -20,8 +20,8 @@ public sealed class OneDayTimeRange :  Luban.EditorBeanBase
 {
     public OneDayTimeRange()
     {
-            startTime = new common.TimeOfDay();
-            endTime = new common.TimeOfDay();
+            startTime = new editor.cfg.common.TimeOfDay();
+            endTime = new editor.cfg.common.TimeOfDay();
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -34,7 +34,7 @@ public sealed class OneDayTimeRange :  Luban.EditorBeanBase
             }
             else
             {
-                startTime = new common.TimeOfDay();
+                startTime = new editor.cfg.common.TimeOfDay();
             }
         }
         
@@ -46,7 +46,7 @@ public sealed class OneDayTimeRange :  Luban.EditorBeanBase
             }
             else
             {
-                endTime = new common.TimeOfDay();
+                endTime = new editor.cfg.common.TimeOfDay();
             }
         }
         
@@ -54,12 +54,14 @@ public sealed class OneDayTimeRange :  Luban.EditorBeanBase
 
     public override void SaveJson(SimpleJSON.JSONObject _json)
     {
+
+        if (startTime != null)
         {
-            if (startTime == null) { throw new System.ArgumentNullException(); }
             { var __bjson = new JSONObject();  editor.cfg.common.TimeOfDay.SaveJsonTimeOfDay(startTime, __bjson); _json["start_time"] = __bjson; }
         }
+
+        if (endTime != null)
         {
-            if (endTime == null) { throw new System.ArgumentNullException(); }
             { var __bjson = new JSONObject();  editor.cfg.common.TimeOfDay.SaveJsonTimeOfDay(endTime, __bjson); _json["end_time"] = __bjson; }
         }
     }
@@ -168,8 +170,8 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
         _obj.SaveJson((SimpleJSON.JSONObject)_json);
     }
 
-    public common.TimeOfDay startTime;
-    public common.TimeOfDay endTime;
+    public editor.cfg.common.TimeOfDay startTime;
+    public editor.cfg.common.TimeOfDay endTime;
 
     public override string ToString()
     {

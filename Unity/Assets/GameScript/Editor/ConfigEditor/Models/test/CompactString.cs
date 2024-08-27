@@ -68,12 +68,14 @@ public sealed class CompactString :  Luban.EditorBeanBase
         {
             _json["id"] = new JSONNumber(id);
         }
+
+        if (s2 != null)
         {
-            if (s2 == null) { throw new System.ArgumentNullException(); }
             _json["s2"] = new JSONString(s2);
         }
+
+        if (s3 != null)
         {
-            if (s3 == null) { throw new System.ArgumentNullException(); }
             _json["s3"] = new JSONString(s3);
         }
     }

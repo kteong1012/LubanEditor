@@ -25,7 +25,7 @@ namespace editor.cfg.test
 {
     public partial class TbTestIndex : IConfigEditorTable
     {
-        private List<test.TestIndex> _datas = new List<test.TestIndex>();
+        private List<editor.cfg.test.TestIndex> _datas = new List<editor.cfg.test.TestIndex>();
         private readonly string _dataFilePath;
         private readonly Dictionary<string, string> _originalDataJsons = new Dictionary<string, string>();
         private string _originalTableJson;
@@ -52,7 +52,7 @@ namespace editor.cfg.test
                 {
                     foreach (var node in json.AsArray)
                     {
-                        var data = new test.TestIndex();
+                        var data = new editor.cfg.test.TestIndex();
                         var dataNode = (JSONObject)node;
                         data.LoadJson(dataNode);
                         _datas.Add(data);
@@ -61,7 +61,7 @@ namespace editor.cfg.test
                 }
                 else
                 {
-                    var data = new test.TestIndex();
+                    var data = new editor.cfg.test.TestIndex();
                     data.LoadJson((JSONObject)json);
                     _datas.Add(data);
                     _originalDataJsons.Add(GetId(data), json.ToString(4));
@@ -126,7 +126,7 @@ namespace editor.cfg.test
             return jsonArray.ToString(4);
         }
 
-        private string GetDataJson(test.TestIndex data)
+        private string GetDataJson(editor.cfg.test.TestIndex data)
         {
             var json = new JSONObject();
             data?.SaveJson(json);
@@ -166,7 +166,7 @@ namespace editor.cfg.test
             GUILayout.FlexibleSpace();
             if (GUILayout.Button("+", GUILayout.Width(20)))
             {
-                _datas.Add(new test.TestIndex());
+                _datas.Add(new editor.cfg.test.TestIndex());
             }
             if (GUILayout.Button("-", GUILayout.Width(20)))
             {
@@ -223,7 +223,7 @@ namespace editor.cfg.test
             GUILayout.EndHorizontal();
         }
 
-        private string GetId(test.TestIndex data)
+        private string GetId(editor.cfg.test.TestIndex data)
         {
             if (data == null)
             {
@@ -246,7 +246,7 @@ namespace editor.cfg.test
         {
         }
 
-        private test.TestIndex SelectData
+        private editor.cfg.test.TestIndex SelectData
         {
             get
             {

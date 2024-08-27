@@ -51,7 +51,7 @@ public sealed class TestNull :  Luban.EditorBeanBase
             var _fieldJson = _json["x2"];
             if (_fieldJson != null)
             {
-                if(_fieldJson.IsString) { x2 = (test.DemoEnum?)System.Enum.Parse(typeof(test.DemoEnum?), _fieldJson); } else if(_fieldJson.IsNumber) { x2 = (test.DemoEnum?)(int)_fieldJson; } else { throw new SerializationException(); }  
+                if(_fieldJson.IsString) { x2 = (editor.cfg.test.DemoEnum)System.Enum.Parse(typeof(editor.cfg.test.DemoEnum), _fieldJson); } else if(_fieldJson.IsNumber) { x2 = (editor.cfg.test.DemoEnum)(int)_fieldJson; } else { throw new SerializationException(); }  
             }
             else
             {
@@ -67,7 +67,7 @@ public sealed class TestNull :  Luban.EditorBeanBase
             }
             else
             {
-                x3 = new test.DemoType1();
+                x3 = new editor.cfg.test.DemoType1();
             }
         }
         
@@ -126,13 +126,9 @@ public sealed class TestNull :  Luban.EditorBeanBase
         {
             _json["id"] = new JSONNumber(id);
         }
-
-        if (x1 != null)
         {
-            _json["x1"] = new JSONNumber(x1.Value);
+            _json["x1"] = new JSONNumber(x1);
         }
-
-        if (x2 != null)
         {
             _json["x2"] = new JSONNumber((int)x2);
         }
@@ -182,7 +178,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x1", ""), GUILayout.Width(100));
 }
-this.x1 = UnityEditor.EditorGUILayout.IntField(this.x1.Value, GUILayout.Width(150));
+this.x1 = UnityEditor.EditorGUILayout.IntField(this.x1, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -193,7 +189,7 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x2", ""), GUILayout.Width(100));
 }
 
-this.x2 = (test.DemoEnum?)UnityEditor.EditorGUILayout.EnumPopup(this.x2.Value, GUILayout.Width(150));
+this.x2 = (editor.cfg.test.DemoEnum)UnityEditor.EditorGUILayout.EnumPopup(this.x2, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -276,10 +272,10 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     }
 
     public int id;
-    public int? x1;
-    public test.DemoEnum? x2;
-    public test.DemoType1 x3;
-    public test.DemoDynamic x4;
+    public int x1;
+    public editor.cfg.test.DemoEnum x2;
+    public editor.cfg.test.DemoType1 x3;
+    public editor.cfg.test.DemoDynamic x4;
     public string s1;
     public string s2;
 

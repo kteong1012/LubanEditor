@@ -125,8 +125,9 @@ public sealed class GlobalConfig :  Luban.EditorBeanBase
         {
             _json["x6"] = new JSONNumber(x6);
         }
+
+        if (x7 != null)
         {
-            if (x7 == null) { throw new System.ArgumentNullException(); }
             { var __cjson0 = new JSONArray(); foreach(var __e0 in x7) { __cjson0["null"] = new JSONNumber(__e0); } _json["x7"] = __cjson0; }
         }
     }

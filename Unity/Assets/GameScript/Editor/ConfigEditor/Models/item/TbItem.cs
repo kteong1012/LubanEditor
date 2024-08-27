@@ -28,7 +28,7 @@ namespace editor.cfg.item
 /// </summary>
     public partial class TbItem : IConfigEditorTable
     {
-        private List<item.Item> _datas = new List<item.Item>();
+        private List<editor.cfg.item.Item> _datas = new List<editor.cfg.item.Item>();
         private readonly string _dataFilePath;
         private readonly Dictionary<string, string> _originalDataJsons = new Dictionary<string, string>();
         private string _originalTableJson;
@@ -55,7 +55,7 @@ namespace editor.cfg.item
                 {
                     foreach (var node in json.AsArray)
                     {
-                        var data = new item.Item();
+                        var data = new editor.cfg.item.Item();
                         var dataNode = (JSONObject)node;
                         data.LoadJson(dataNode);
                         _datas.Add(data);
@@ -64,7 +64,7 @@ namespace editor.cfg.item
                 }
                 else
                 {
-                    var data = new item.Item();
+                    var data = new editor.cfg.item.Item();
                     data.LoadJson((JSONObject)json);
                     _datas.Add(data);
                     _originalDataJsons.Add(GetId(data), json.ToString(4));
@@ -129,7 +129,7 @@ namespace editor.cfg.item
             return jsonArray.ToString(4);
         }
 
-        private string GetDataJson(item.Item data)
+        private string GetDataJson(editor.cfg.item.Item data)
         {
             var json = new JSONObject();
             data?.SaveJson(json);
@@ -169,7 +169,7 @@ namespace editor.cfg.item
             GUILayout.FlexibleSpace();
             if (GUILayout.Button("+", GUILayout.Width(20)))
             {
-                _datas.Add(new item.Item());
+                _datas.Add(new editor.cfg.item.Item());
             }
             if (GUILayout.Button("-", GUILayout.Width(20)))
             {
@@ -226,7 +226,7 @@ namespace editor.cfg.item
             GUILayout.EndHorizontal();
         }
 
-        private string GetId(item.Item data)
+        private string GetId(editor.cfg.item.Item data)
         {
             if (data == null)
             {
@@ -249,7 +249,7 @@ namespace editor.cfg.item
         {
         }
 
-        private item.Item SelectData
+        private editor.cfg.item.Item SelectData
         {
             get
             {

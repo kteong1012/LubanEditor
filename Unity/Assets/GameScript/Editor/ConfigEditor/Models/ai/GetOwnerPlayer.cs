@@ -69,12 +69,14 @@ public sealed class GetOwnerPlayer :  ai.Service
         {
             _json["id"] = new JSONNumber(id);
         }
+
+        if (nodeName != null)
         {
-            if (nodeName == null) { throw new System.ArgumentNullException(); }
             _json["node_name"] = new JSONString(nodeName);
         }
+
+        if (playerActorKey != null)
         {
-            if (playerActorKey == null) { throw new System.ArgumentNullException(); }
             _json["player_actor_key"] = new JSONString(playerActorKey);
         }
     }
