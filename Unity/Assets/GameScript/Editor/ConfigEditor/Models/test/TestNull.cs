@@ -30,6 +30,9 @@ public sealed class TestNull :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  id = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -37,6 +40,10 @@ public sealed class TestNull :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x1 = _fieldJson;
+            }
+            else
+            {
+                x1 = 0;
             }
         }
         
@@ -46,13 +53,21 @@ public sealed class TestNull :  Luban.EditorBeanBase
             {
                 if(_fieldJson.IsString) { x2 = (test.DemoEnum?)System.Enum.Parse(typeof(test.DemoEnum?), _fieldJson); } else if(_fieldJson.IsNumber) { x2 = (test.DemoEnum?)(int)_fieldJson; } else { throw new SerializationException(); }  
             }
+            else
+            {
+                x2 = editor.cfg.test.DemoEnum.NONE;
+            }
         }
         
         { 
             var _fieldJson = _json["x3"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsObject) { throw new SerializationException(); }  x3 = test.DemoType1.LoadJsonDemoType1(_fieldJson);
+                if(!_fieldJson.IsObject) { throw new SerializationException(); }  x3 = editor.cfg.test.DemoType1.LoadJsonDemoType1(_fieldJson);
+            }
+            else
+            {
+                x3 = new test.DemoType1();
             }
         }
         
@@ -65,14 +80,18 @@ public sealed class TestNull :  Luban.EditorBeanBase
                 {
                     throw new SerializationException();
                 }
-                x4 = test.DemoDynamic.LoadJsonDemoDynamic(_fieldJson);
-                var __index0 = test.DemoDynamic.Types.IndexOf(x4.GetTypeStr());
+                x4 = editor.cfg.test.DemoDynamic.LoadJsonDemoDynamic(_fieldJson);
+                var __index0 = editor.cfg.test.DemoDynamic.Types.IndexOf(x4.GetTypeStr());
                 if (__index0 == -1)
                 {
                     throw new SerializationException();
                 }
                 x4.TypeIndex = __index0;
-                x4.Instance = test.DemoDynamic.LoadJsonDemoDynamic(_fieldJson);
+                x4.Instance = editor.cfg.test.DemoDynamic.LoadJsonDemoDynamic(_fieldJson);
+            }
+            else
+            {
+                x4 = new test.DemoD2(){ TypeIndex = 0};
             }
         }
         
@@ -82,6 +101,10 @@ public sealed class TestNull :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  s1 = _fieldJson;
             }
+            else
+            {
+                s1 = "";
+            }
         }
         
         { 
@@ -89,6 +112,10 @@ public sealed class TestNull :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  s2 = _fieldJson;
+            }
+            else
+            {
+                s2 = "";
             }
         }
         
@@ -112,12 +139,12 @@ public sealed class TestNull :  Luban.EditorBeanBase
 
         if (x3 != null)
         {
-            { var __bjson = new JSONObject();  test.DemoType1.SaveJsonDemoType1(x3, __bjson); _json["x3"] = __bjson; }
+            { var __bjson = new JSONObject();  editor.cfg.test.DemoType1.SaveJsonDemoType1(x3, __bjson); _json["x3"] = __bjson; }
         }
 
         if (x4 != null)
         {
-            { var __bjson = new JSONObject();  test.DemoDynamic.SaveJsonDemoDynamic(x4, __bjson); _json["x4"] = __bjson; }
+            { var __bjson = new JSONObject();  editor.cfg.test.DemoDynamic.SaveJsonDemoDynamic(x4, __bjson); _json["x4"] = __bjson; }
         }
 
         if (s1 != null)
@@ -165,6 +192,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x2", ""), GUILayout.Width(100));
 }
+
 this.x2 = (test.DemoEnum?)UnityEditor.EditorGUILayout.EnumPopup(this.x2.Value, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)

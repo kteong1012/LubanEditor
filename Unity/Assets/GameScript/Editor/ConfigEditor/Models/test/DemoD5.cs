@@ -33,13 +33,20 @@ public sealed class DemoD5 :  test.DemoDynamic
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x1 = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
             var _fieldJson = _json["time"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsObject) { throw new SerializationException(); }  time = test.DateTimeRange.LoadJsonDateTimeRange(_fieldJson);
+                if(!_fieldJson.IsObject) { throw new SerializationException(); }  time = editor.cfg.test.DateTimeRange.LoadJsonDateTimeRange(_fieldJson);
+            }
+            else
+            {
+                time = new test.DateTimeRange();
             }
         }
         
@@ -52,7 +59,7 @@ public sealed class DemoD5 :  test.DemoDynamic
         }
         {
             if (time == null) { throw new System.ArgumentNullException(); }
-            { var __bjson = new JSONObject();  test.DateTimeRange.SaveJsonDateTimeRange(time, __bjson); _json["time"] = __bjson; }
+            { var __bjson = new JSONObject();  editor.cfg.test.DateTimeRange.SaveJsonDateTimeRange(time, __bjson); _json["time"] = __bjson; }
         }
     }
 

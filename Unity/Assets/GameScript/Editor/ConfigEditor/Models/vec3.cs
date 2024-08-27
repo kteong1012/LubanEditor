@@ -30,6 +30,9 @@ public sealed class vec3 :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -38,6 +41,9 @@ public sealed class vec3 :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  y = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -45,6 +51,9 @@ public sealed class vec3 :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  z = _fieldJson;
+            }
+            else
+            {
             }
         }
         

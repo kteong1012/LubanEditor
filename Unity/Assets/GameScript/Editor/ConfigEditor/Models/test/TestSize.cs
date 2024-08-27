@@ -34,6 +34,9 @@ public sealed class TestSize :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  id = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -41,6 +44,10 @@ public sealed class TestSize :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsArray) { throw new SerializationException(); } int __n0 = _fieldJson.Count; x1 = new int[__n0]; int __i0=0; foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { int __v0;  if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0;  x1[__i0++] = __v0; }  
+            }
+            else
+            {
+                x1 = System.Array.Empty<int>();
             }
         }
         
@@ -50,6 +57,10 @@ public sealed class TestSize :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsArray) { throw new SerializationException(); } x2 = new System.Collections.Generic.List<int>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { int __v0;  if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0;  x2.Add(__v0); }  
             }
+            else
+            {
+                x2 = new System.Collections.Generic.List<int>();
+            }
         }
         
         { 
@@ -58,6 +69,10 @@ public sealed class TestSize :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsArray) { throw new SerializationException(); } x3 = new System.Collections.Generic.List<int>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { int __v0;  if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0;  x3.Add(__v0); }  
             }
+            else
+            {
+                x3 = new System.Collections.Generic.List<int>();
+            }
         }
         
         { 
@@ -65,6 +80,10 @@ public sealed class TestSize :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsArray) { throw new SerializationException(); } x4 = new System.Collections.Generic.List<object[]>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { int __k0;  if(!__e0[0].IsNumber) { throw new SerializationException(); }  __k0 = __e0[0]; int __v0;  if(!__e0[1].IsNumber) { throw new SerializationException(); }  __v0 = __e0[1];  x4.Add(new object[] { __k0, __v0 }); }  
+            }
+            else
+            {
+                x4 = new System.Collections.Generic.List<object[]>();
             }
         }
         
@@ -151,7 +170,7 @@ else
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
         var __list1 = new System.Collections.Generic.List<int>(this.x1);
-        __list1.Add(default);
+        __list1.Add(0);
         this.x1 = __list1.ToArray();
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
@@ -199,7 +218,7 @@ else
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.x2.Add(default);
+        this.x2.Add(0);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {
@@ -243,7 +262,7 @@ else
     }
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.x3.Add(default);
+        this.x3.Add(0);
     }
     UnityEditor.EditorGUILayout.EndVertical();
 }
@@ -270,8 +289,8 @@ else
         }
         UnityEditor.EditorGUILayout.LabelField(__i1.ToString(), GUILayout.Width(20));
         var __e1 = this.x4[__i1];
-        int __key1 = default;
-        int __value1 = default;
+        int __key1 = 0;
+        int __value1 = 0;
         if (__e1 == null)
         {
             __e1 = new object[2] { __key1, __value1 };

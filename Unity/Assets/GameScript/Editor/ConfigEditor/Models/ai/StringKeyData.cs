@@ -33,6 +33,10 @@ public sealed class StringKeyData :  ai.KeyData
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  value = _fieldJson;
             }
+            else
+            {
+                value = "";
+            }
         }
         
     }

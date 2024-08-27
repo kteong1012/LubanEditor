@@ -30,6 +30,9 @@ public sealed class CompositeJsonTable2 :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  id = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -37,6 +40,9 @@ public sealed class CompositeJsonTable2 :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  y = _fieldJson;
+            }
+            else
+            {
             }
         }
         

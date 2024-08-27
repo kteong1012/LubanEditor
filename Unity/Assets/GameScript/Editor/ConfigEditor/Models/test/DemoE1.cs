@@ -32,6 +32,9 @@ public sealed class DemoE1 :  test.DemoD3
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x1 = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -40,6 +43,9 @@ public sealed class DemoE1 :  test.DemoD3
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x3 = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -47,6 +53,9 @@ public sealed class DemoE1 :  test.DemoD3
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x4 = _fieldJson;
+            }
+            else
+            {
             }
         }
         

@@ -24,9 +24,9 @@ public sealed class Item :  Luban.EditorBeanBase
     public Item()
     {
             name = "";
-            majorType = item.EMajorType.CURRENCY;
-            minorType = item.EMinorType.DIAMOND;
-            quality = item.EItemQuality.WHITE;
+            majorType = editor.cfg.item.EMajorType.CURRENCY;
+            minorType = editor.cfg.item.EMinorType.DIAMOND;
+            quality = editor.cfg.item.EItemQuality.WHITE;
             icon = "";
             iconBackgroud = "";
             iconMask = "";
@@ -41,6 +41,9 @@ public sealed class Item :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  id = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -48,6 +51,10 @@ public sealed class Item :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  name = _fieldJson;
+            }
+            else
+            {
+                name = "";
             }
         }
         
@@ -57,6 +64,10 @@ public sealed class Item :  Luban.EditorBeanBase
             {
                 if(_fieldJson.IsString) { majorType = (item.EMajorType)System.Enum.Parse(typeof(item.EMajorType), _fieldJson); } else if(_fieldJson.IsNumber) { majorType = (item.EMajorType)(int)_fieldJson; } else { throw new SerializationException(); }  
             }
+            else
+            {
+                majorType = editor.cfg.item.EMajorType.CURRENCY;
+            }
         }
         
         { 
@@ -64,6 +75,10 @@ public sealed class Item :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(_fieldJson.IsString) { minorType = (item.EMinorType)System.Enum.Parse(typeof(item.EMinorType), _fieldJson); } else if(_fieldJson.IsNumber) { minorType = (item.EMinorType)(int)_fieldJson; } else { throw new SerializationException(); }  
+            }
+            else
+            {
+                minorType = editor.cfg.item.EMinorType.DIAMOND;
             }
         }
         
@@ -73,6 +88,9 @@ public sealed class Item :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  maxPileNum = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -80,6 +98,10 @@ public sealed class Item :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(_fieldJson.IsString) { quality = (item.EItemQuality)System.Enum.Parse(typeof(item.EItemQuality), _fieldJson); } else if(_fieldJson.IsNumber) { quality = (item.EItemQuality)(int)_fieldJson; } else { throw new SerializationException(); }  
+            }
+            else
+            {
+                quality = editor.cfg.item.EItemQuality.WHITE;
             }
         }
         
@@ -89,6 +111,10 @@ public sealed class Item :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  icon = _fieldJson;
             }
+            else
+            {
+                icon = "";
+            }
         }
         
         { 
@@ -96,6 +122,10 @@ public sealed class Item :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  iconBackgroud = _fieldJson;
+            }
+            else
+            {
+                iconBackgroud = "";
             }
         }
         
@@ -105,6 +135,10 @@ public sealed class Item :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  iconMask = _fieldJson;
             }
+            else
+            {
+                iconMask = "";
+            }
         }
         
         { 
@@ -113,6 +147,10 @@ public sealed class Item :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  desc = _fieldJson;
             }
+            else
+            {
+                desc = "";
+            }
         }
         
         { 
@@ -120,6 +158,9 @@ public sealed class Item :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  showOrder = _fieldJson;
+            }
+            else
+            {
             }
         }
         
@@ -201,6 +242,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("major_type", ""), GUILayout.Width(100));
 }
+
 this.majorType = (item.EMajorType)UnityEditor.EditorGUILayout.EnumPopup(this.majorType, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
@@ -211,6 +253,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("minor_type", ""), GUILayout.Width(100));
 }
+
 this.minorType = (item.EMinorType)UnityEditor.EditorGUILayout.EnumPopup(this.minorType, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
@@ -221,6 +264,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("quality", ""), GUILayout.Width(100));
 }
+
 this.quality = (item.EItemQuality)UnityEditor.EditorGUILayout.EnumPopup(this.quality, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)

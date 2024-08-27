@@ -32,6 +32,9 @@ public sealed class FloatKeyData :  ai.KeyData
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  value = _fieldJson;
             }
+            else
+            {
+            }
         }
         
     }

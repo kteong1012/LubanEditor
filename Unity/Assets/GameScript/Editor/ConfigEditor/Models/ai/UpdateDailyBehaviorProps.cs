@@ -41,6 +41,9 @@ public sealed class UpdateDailyBehaviorProps :  ai.Service
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  id = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -48,6 +51,10 @@ public sealed class UpdateDailyBehaviorProps :  ai.Service
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  nodeName = _fieldJson;
+            }
+            else
+            {
+                nodeName = "";
             }
         }
         
@@ -57,6 +64,10 @@ public sealed class UpdateDailyBehaviorProps :  ai.Service
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  satietyKey = _fieldJson;
             }
+            else
+            {
+                satietyKey = "";
+            }
         }
         
         { 
@@ -64,6 +75,10 @@ public sealed class UpdateDailyBehaviorProps :  ai.Service
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  energyKey = _fieldJson;
+            }
+            else
+            {
+                energyKey = "";
             }
         }
         
@@ -73,6 +88,10 @@ public sealed class UpdateDailyBehaviorProps :  ai.Service
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  moodKey = _fieldJson;
             }
+            else
+            {
+                moodKey = "";
+            }
         }
         
         { 
@@ -80,6 +99,10 @@ public sealed class UpdateDailyBehaviorProps :  ai.Service
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  satietyLowerThresholdKey = _fieldJson;
+            }
+            else
+            {
+                satietyLowerThresholdKey = "";
             }
         }
         
@@ -89,6 +112,10 @@ public sealed class UpdateDailyBehaviorProps :  ai.Service
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  satietyUpperThresholdKey = _fieldJson;
             }
+            else
+            {
+                satietyUpperThresholdKey = "";
+            }
         }
         
         { 
@@ -96,6 +123,10 @@ public sealed class UpdateDailyBehaviorProps :  ai.Service
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  energyLowerThresholdKey = _fieldJson;
+            }
+            else
+            {
+                energyLowerThresholdKey = "";
             }
         }
         
@@ -105,6 +136,10 @@ public sealed class UpdateDailyBehaviorProps :  ai.Service
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  energyUpperThresholdKey = _fieldJson;
             }
+            else
+            {
+                energyUpperThresholdKey = "";
+            }
         }
         
         { 
@@ -113,6 +148,10 @@ public sealed class UpdateDailyBehaviorProps :  ai.Service
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  moodLowerThresholdKey = _fieldJson;
             }
+            else
+            {
+                moodLowerThresholdKey = "";
+            }
         }
         
         { 
@@ -120,6 +159,10 @@ public sealed class UpdateDailyBehaviorProps :  ai.Service
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  moodUpperThresholdKey = _fieldJson;
+            }
+            else
+            {
+                moodUpperThresholdKey = "";
             }
         }
         

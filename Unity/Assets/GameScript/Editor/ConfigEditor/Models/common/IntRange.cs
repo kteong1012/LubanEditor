@@ -30,6 +30,9 @@ public sealed class IntRange :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  min = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -37,6 +40,9 @@ public sealed class IntRange :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  max = _fieldJson;
+            }
+            else
+            {
             }
         }
         

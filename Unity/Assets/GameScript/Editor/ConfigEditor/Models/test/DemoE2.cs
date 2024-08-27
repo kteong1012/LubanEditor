@@ -30,6 +30,10 @@ public sealed class DemoE2 :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  y1 = _fieldJson;
             }
+            else
+            {
+                y1 = 0;
+            }
         }
         
         { 
@@ -37,6 +41,9 @@ public sealed class DemoE2 :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsBoolean) { throw new SerializationException(); }  y2 = _fieldJson;
+            }
+            else
+            {
             }
         }
         

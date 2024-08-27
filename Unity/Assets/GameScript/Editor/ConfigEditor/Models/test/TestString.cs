@@ -35,6 +35,10 @@ public sealed class TestString :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  id = _fieldJson;
             }
+            else
+            {
+                id = "";
+            }
         }
         
         { 
@@ -42,6 +46,10 @@ public sealed class TestString :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  s1 = _fieldJson;
+            }
+            else
+            {
+                s1 = "";
             }
         }
         
@@ -51,13 +59,21 @@ public sealed class TestString :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  s2 = _fieldJson;
             }
+            else
+            {
+                s2 = "";
+            }
         }
         
         { 
             var _fieldJson = _json["cs1"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsObject) { throw new SerializationException(); }  cs1 = test.CompactString.LoadJsonCompactString(_fieldJson);
+                if(!_fieldJson.IsObject) { throw new SerializationException(); }  cs1 = editor.cfg.test.CompactString.LoadJsonCompactString(_fieldJson);
+            }
+            else
+            {
+                cs1 = new test.CompactString();
             }
         }
         
@@ -65,7 +81,11 @@ public sealed class TestString :  Luban.EditorBeanBase
             var _fieldJson = _json["cs2"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsObject) { throw new SerializationException(); }  cs2 = test.CompactString.LoadJsonCompactString(_fieldJson);
+                if(!_fieldJson.IsObject) { throw new SerializationException(); }  cs2 = editor.cfg.test.CompactString.LoadJsonCompactString(_fieldJson);
+            }
+            else
+            {
+                cs2 = new test.CompactString();
             }
         }
         
@@ -87,11 +107,11 @@ public sealed class TestString :  Luban.EditorBeanBase
         }
         {
             if (cs1 == null) { throw new System.ArgumentNullException(); }
-            { var __bjson = new JSONObject();  test.CompactString.SaveJsonCompactString(cs1, __bjson); _json["cs1"] = __bjson; }
+            { var __bjson = new JSONObject();  editor.cfg.test.CompactString.SaveJsonCompactString(cs1, __bjson); _json["cs1"] = __bjson; }
         }
         {
             if (cs2 == null) { throw new System.ArgumentNullException(); }
-            { var __bjson = new JSONObject();  test.CompactString.SaveJsonCompactString(cs2, __bjson); _json["cs2"] = __bjson; }
+            { var __bjson = new JSONObject();  editor.cfg.test.CompactString.SaveJsonCompactString(cs2, __bjson); _json["cs2"] = __bjson; }
         }
     }
 

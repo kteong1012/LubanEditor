@@ -20,7 +20,7 @@ public sealed class UeBlackboard :  ai.Decorator
 {
     public UeBlackboard()
     {
-            notifyObserver = ai.ENotifyObserverMode.ON_VALUE_CHANGE;
+            notifyObserver = editor.cfg.ai.ENotifyObserverMode.ON_VALUE_CHANGE;
             blackboardKey = "";
     }
     public override string GetTypeStr() => TYPE_STR;
@@ -34,6 +34,9 @@ public sealed class UeBlackboard :  ai.Decorator
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  id = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -41,6 +44,10 @@ public sealed class UeBlackboard :  ai.Decorator
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  nodeName = _fieldJson;
+            }
+            else
+            {
+                nodeName = "";
             }
         }
         
@@ -50,6 +57,10 @@ public sealed class UeBlackboard :  ai.Decorator
             {
                 if(_fieldJson.IsString) { flowAbortMode = (ai.EFlowAbortMode)System.Enum.Parse(typeof(ai.EFlowAbortMode), _fieldJson); } else if(_fieldJson.IsNumber) { flowAbortMode = (ai.EFlowAbortMode)(int)_fieldJson; } else { throw new SerializationException(); }  
             }
+            else
+            {
+                flowAbortMode = editor.cfg.ai.EFlowAbortMode.NONE;
+            }
         }
         
         { 
@@ -58,6 +69,10 @@ public sealed class UeBlackboard :  ai.Decorator
             {
                 if(_fieldJson.IsString) { notifyObserver = (ai.ENotifyObserverMode)System.Enum.Parse(typeof(ai.ENotifyObserverMode), _fieldJson); } else if(_fieldJson.IsNumber) { notifyObserver = (ai.ENotifyObserverMode)(int)_fieldJson; } else { throw new SerializationException(); }  
             }
+            else
+            {
+                notifyObserver = editor.cfg.ai.ENotifyObserverMode.ON_VALUE_CHANGE;
+            }
         }
         
         { 
@@ -65,6 +80,10 @@ public sealed class UeBlackboard :  ai.Decorator
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  blackboardKey = _fieldJson;
+            }
+            else
+            {
+                blackboardKey = "";
             }
         }
         
@@ -77,14 +96,17 @@ public sealed class UeBlackboard :  ai.Decorator
                 {
                     throw new SerializationException();
                 }
-                keyQuery = ai.KeyQueryOperator.LoadJsonKeyQueryOperator(_fieldJson);
-                var __index0 = ai.KeyQueryOperator.Types.IndexOf(keyQuery.GetTypeStr());
+                keyQuery = editor.cfg.ai.KeyQueryOperator.LoadJsonKeyQueryOperator(_fieldJson);
+                var __index0 = editor.cfg.ai.KeyQueryOperator.Types.IndexOf(keyQuery.GetTypeStr());
                 if (__index0 == -1)
                 {
                     throw new SerializationException();
                 }
                 keyQuery.TypeIndex = __index0;
-                keyQuery.Instance = ai.KeyQueryOperator.LoadJsonKeyQueryOperator(_fieldJson);
+                keyQuery.Instance = editor.cfg.ai.KeyQueryOperator.LoadJsonKeyQueryOperator(_fieldJson);
+            }
+            else
+            {
             }
         }
         
@@ -111,7 +133,7 @@ public sealed class UeBlackboard :  ai.Decorator
         }
         {
             if (keyQuery == null) { throw new System.ArgumentNullException(); }
-            { var __bjson = new JSONObject();  ai.KeyQueryOperator.SaveJsonKeyQueryOperator(keyQuery, __bjson); _json["key_query"] = __bjson; }
+            { var __bjson = new JSONObject();  editor.cfg.ai.KeyQueryOperator.SaveJsonKeyQueryOperator(keyQuery, __bjson); _json["key_query"] = __bjson; }
         }
     }
 
@@ -149,6 +171,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("flow_abort_mode", ""), GUILayout.Width(100));
 }
+
 this.flowAbortMode = (ai.EFlowAbortMode)UnityEditor.EditorGUILayout.EnumPopup(this.flowAbortMode, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
@@ -159,6 +182,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("notify_observer", ""), GUILayout.Width(100));
 }
+
 this.notifyObserver = (ai.ENotifyObserverMode)UnityEditor.EditorGUILayout.EnumPopup(this.notifyObserver, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)

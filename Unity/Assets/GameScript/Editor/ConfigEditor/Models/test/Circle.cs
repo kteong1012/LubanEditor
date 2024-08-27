@@ -35,6 +35,9 @@ public sealed class Circle :  Shape
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  radius = _fieldJson;
             }
+            else
+            {
+            }
         }
         
     }

@@ -30,6 +30,9 @@ public sealed class DemoType1 :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x1 = _fieldJson;
             }
+            else
+            {
+            }
         }
         
     }

@@ -43,6 +43,10 @@ public sealed class DateTimeRange :  Luban.EditorBeanBase
                     throw new SerializationException();
                 }
             }
+            else
+            {
+                startTime = "1970-01-01 00:00:00";
+            }
         }
         
         { 
@@ -61,6 +65,10 @@ public sealed class DateTimeRange :  Luban.EditorBeanBase
                 {
                     throw new SerializationException();
                 }
+            }
+            else
+            {
+                endTime = "1970-01-01 00:00:00";
             }
         }
         

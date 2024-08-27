@@ -30,6 +30,9 @@ public sealed class DemoExplicitType :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x1 = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -37,6 +40,9 @@ public sealed class DemoExplicitType :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x2 = _fieldJson;
+            }
+            else
+            {
             }
         }
         
@@ -46,6 +52,9 @@ public sealed class DemoExplicitType :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x3 = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -53,6 +62,9 @@ public sealed class DemoExplicitType :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x4 = _fieldJson;
+            }
+            else
+            {
             }
         }
         
@@ -62,6 +74,9 @@ public sealed class DemoExplicitType :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x5 = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -70,6 +85,9 @@ public sealed class DemoExplicitType :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x6 = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -77,6 +95,9 @@ public sealed class DemoExplicitType :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x7 = _fieldJson;
+            }
+            else
+            {
             }
         }
         

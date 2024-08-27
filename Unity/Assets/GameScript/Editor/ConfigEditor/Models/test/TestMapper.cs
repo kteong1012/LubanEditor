@@ -20,7 +20,7 @@ public sealed class TestMapper :  Luban.EditorBeanBase
 {
     public TestMapper()
     {
-            audioType = AudioType.UNKNOWN;
+            audioType = editor.cfg.AudioType.UNKNOWN;
             v2 = new vec2();
     }
 
@@ -32,6 +32,9 @@ public sealed class TestMapper :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  id = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -40,13 +43,21 @@ public sealed class TestMapper :  Luban.EditorBeanBase
             {
                 if(_fieldJson.IsString) { audioType = (AudioType)System.Enum.Parse(typeof(AudioType), _fieldJson); } else if(_fieldJson.IsNumber) { audioType = (AudioType)(int)_fieldJson; } else { throw new SerializationException(); }  
             }
+            else
+            {
+                audioType = editor.cfg.AudioType.UNKNOWN;
+            }
         }
         
         { 
             var _fieldJson = _json["v2"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsObject) { throw new SerializationException(); }  v2 = vec2.LoadJsonvec2(_fieldJson);
+                if(!_fieldJson.IsObject) { throw new SerializationException(); }  v2 = editor.cfg.vec2.LoadJsonvec2(_fieldJson);
+            }
+            else
+            {
+                v2 = new vec2();
             }
         }
         
@@ -61,7 +72,7 @@ public sealed class TestMapper :  Luban.EditorBeanBase
             _json["audio_type"] = new JSONNumber((int)audioType);
         }
         {
-            { var __bjson = new JSONObject();  vec2.SaveJsonvec2(v2, __bjson); _json["v2"] = __bjson; }
+            { var __bjson = new JSONObject();  editor.cfg.vec2.SaveJsonvec2(v2, __bjson); _json["v2"] = __bjson; }
         }
     }
 
@@ -89,6 +100,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("audio_type", ""), GUILayout.Width(100));
 }
+
 this.audioType = (AudioType)UnityEditor.EditorGUILayout.EnumPopup(this.audioType, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)

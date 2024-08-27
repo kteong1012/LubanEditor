@@ -34,6 +34,9 @@ public sealed class TestMap :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  id = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -41,6 +44,10 @@ public sealed class TestMap :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsArray) { throw new SerializationException(); } x1 = new System.Collections.Generic.List<object[]>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { int __k0;  if(!__e0[0].IsNumber) { throw new SerializationException(); }  __k0 = __e0[0]; int __v0;  if(!__e0[1].IsNumber) { throw new SerializationException(); }  __v0 = __e0[1];  x1.Add(new object[] { __k0, __v0 }); }  
+            }
+            else
+            {
+                x1 = new System.Collections.Generic.List<object[]>();
             }
         }
         
@@ -50,6 +57,10 @@ public sealed class TestMap :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsArray) { throw new SerializationException(); } x2 = new System.Collections.Generic.List<object[]>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { long __k0;  if(!__e0[0].IsNumber) { throw new SerializationException(); }  __k0 = __e0[0]; int __v0;  if(!__e0[1].IsNumber) { throw new SerializationException(); }  __v0 = __e0[1];  x2.Add(new object[] { __k0, __v0 }); }  
             }
+            else
+            {
+                x2 = new System.Collections.Generic.List<object[]>();
+            }
         }
         
         { 
@@ -58,6 +69,10 @@ public sealed class TestMap :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsArray) { throw new SerializationException(); } x3 = new System.Collections.Generic.List<object[]>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { string __k0;  if(!__e0[0].IsString) { throw new SerializationException(); }  __k0 = __e0[0]; int __v0;  if(!__e0[1].IsNumber) { throw new SerializationException(); }  __v0 = __e0[1];  x3.Add(new object[] { __k0, __v0 }); }  
             }
+            else
+            {
+                x3 = new System.Collections.Generic.List<object[]>();
+            }
         }
         
         { 
@@ -65,6 +80,10 @@ public sealed class TestMap :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsArray) { throw new SerializationException(); } x4 = new System.Collections.Generic.List<object[]>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { test.DemoEnum __k0;  if(__e0[0].IsString) { __k0 = (test.DemoEnum)System.Enum.Parse(typeof(test.DemoEnum), __e0[0]); } else if(__e0[0].IsNumber) { __k0 = (test.DemoEnum)(int)__e0[0]; } else { throw new SerializationException(); }   int __v0;  if(!__e0[1].IsNumber) { throw new SerializationException(); }  __v0 = __e0[1];  x4.Add(new object[] { __k0, __v0 }); }  
+            }
+            else
+            {
+                x4 = new System.Collections.Generic.List<object[]>();
             }
         }
         
@@ -171,8 +190,8 @@ else
         }
         UnityEditor.EditorGUILayout.LabelField(__i1.ToString(), GUILayout.Width(20));
         var __e1 = this.x1[__i1];
-        int __key1 = default;
-        int __value1 = default;
+        int __key1 = 0;
+        int __value1 = 0;
         if (__e1 == null)
         {
             __e1 = new object[2] { __key1, __value1 };
@@ -218,8 +237,8 @@ else
         }
         UnityEditor.EditorGUILayout.LabelField(__i1.ToString(), GUILayout.Width(20));
         var __e1 = this.x2[__i1];
-        long __key1 = default;
-        int __value1 = default;
+        long __key1 = 0;
+        int __value1 = 0;
         if (__e1 == null)
         {
             __e1 = new object[2] { __key1, __value1 };
@@ -266,7 +285,7 @@ else
         UnityEditor.EditorGUILayout.LabelField(__i1.ToString(), GUILayout.Width(20));
         var __e1 = this.x3[__i1];
         string __key1 = "";
-        int __value1 = default;
+        int __value1 = 0;
         if (__e1 == null)
         {
             __e1 = new object[2] { __key1, __value1 };
@@ -312,8 +331,8 @@ else
         }
         UnityEditor.EditorGUILayout.LabelField(__i1.ToString(), GUILayout.Width(20));
         var __e1 = this.x4[__i1];
-        test.DemoEnum __key1 = default;
-        int __value1 = default;
+        test.DemoEnum __key1 = editor.cfg.test.DemoEnum.NONE;
+        int __value1 = 0;
         if (__e1 == null)
         {
             __e1 = new object[2] { __key1, __value1 };
@@ -324,7 +343,8 @@ else
             __key1 = (test.DemoEnum)__e1[0];
             __value1 = (int)__e1[1];
         }
-        __key1 = (test.DemoEnum)UnityEditor.EditorGUILayout.EnumPopup(__key1, GUILayout.Width(150));;
+        
+__key1 = (test.DemoEnum)UnityEditor.EditorGUILayout.EnumPopup(__key1, GUILayout.Width(150));;
         __value1 = UnityEditor.EditorGUILayout.IntField(__value1, GUILayout.Width(150));;
         __e1[0] = __key1;
         __e1[1] = __value1;

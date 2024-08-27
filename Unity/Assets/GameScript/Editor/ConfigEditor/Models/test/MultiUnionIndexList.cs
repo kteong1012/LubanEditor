@@ -32,6 +32,9 @@ public sealed class MultiUnionIndexList :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  id1 = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -39,6 +42,9 @@ public sealed class MultiUnionIndexList :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  id2 = _fieldJson;
+            }
+            else
+            {
             }
         }
         
@@ -48,6 +54,10 @@ public sealed class MultiUnionIndexList :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  id3 = _fieldJson;
             }
+            else
+            {
+                id3 = "";
+            }
         }
         
         { 
@@ -56,6 +66,9 @@ public sealed class MultiUnionIndexList :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  num = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -63,6 +76,10 @@ public sealed class MultiUnionIndexList :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  desc = _fieldJson;
+            }
+            else
+            {
+                desc = "";
             }
         }
         

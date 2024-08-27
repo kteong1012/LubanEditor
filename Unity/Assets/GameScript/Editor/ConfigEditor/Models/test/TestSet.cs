@@ -35,6 +35,9 @@ public sealed class TestSet :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  id = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -42,6 +45,10 @@ public sealed class TestSet :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  x0 = _fieldJson;
+            }
+            else
+            {
+                x0 = "";
             }
         }
         
@@ -51,6 +58,10 @@ public sealed class TestSet :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsArray) { throw new SerializationException(); } x1 = new System.Collections.Generic.List<int>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { int __v0;  if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0;  x1.Add(__v0); }  
             }
+            else
+            {
+                x1 = new System.Collections.Generic.List<int>();
+            }
         }
         
         { 
@@ -58,6 +69,10 @@ public sealed class TestSet :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsArray) { throw new SerializationException(); } x2 = new System.Collections.Generic.List<long>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { long __v0;  if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0;  x2.Add(__v0); }  
+            }
+            else
+            {
+                x2 = new System.Collections.Generic.List<long>();
             }
         }
         
@@ -67,6 +82,10 @@ public sealed class TestSet :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsArray) { throw new SerializationException(); } x3 = new System.Collections.Generic.List<string>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { string __v0;  if(!__e0.IsString) { throw new SerializationException(); }  __v0 = __e0;  x3.Add(__v0); }  
             }
+            else
+            {
+                x3 = new System.Collections.Generic.List<string>();
+            }
         }
         
         { 
@@ -74,6 +93,10 @@ public sealed class TestSet :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsArray) { throw new SerializationException(); } x4 = new System.Collections.Generic.List<test.DemoEnum>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { test.DemoEnum __v0;  if(__e0.IsString) { __v0 = (test.DemoEnum)System.Enum.Parse(typeof(test.DemoEnum), __e0); } else if(__e0.IsNumber) { __v0 = (test.DemoEnum)(int)__e0; } else { throw new SerializationException(); }    x4.Add(__v0); }  
+            }
+            else
+            {
+                x4 = new System.Collections.Generic.List<test.DemoEnum>();
             }
         }
         
@@ -161,7 +184,7 @@ else
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.x1.Add(default);
+        this.x1.Add(0);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {
@@ -206,7 +229,7 @@ else
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.x2.Add(default);
+        this.x2.Add(0);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {
@@ -289,14 +312,15 @@ else
         }
         UnityEditor.EditorGUILayout.LabelField(__i1.ToString(), GUILayout.Width(20));
         test.DemoEnum __e1 = this.x4[__i1];
-        __e1 = (test.DemoEnum)UnityEditor.EditorGUILayout.EnumPopup(__e1, GUILayout.Width(150));;
+        
+__e1 = (test.DemoEnum)UnityEditor.EditorGUILayout.EnumPopup(__e1, GUILayout.Width(150));;
         this.x4[__i1] = __e1;
         UnityEditor.EditorGUILayout.EndHorizontal();
     }
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.x4.Add(default);
+        this.x4.Add(editor.cfg.test.DemoEnum.NONE);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {

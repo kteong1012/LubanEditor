@@ -30,6 +30,9 @@ public sealed class PatchDemo :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  id = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -37,6 +40,9 @@ public sealed class PatchDemo :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  value = _fieldJson;
+            }
+            else
+            {
             }
         }
         

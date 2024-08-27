@@ -33,13 +33,20 @@ public sealed class TestMultiColumn :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  id = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
             var _fieldJson = _json["a"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsObject) { throw new SerializationException(); }  a = test.Foo.LoadJsonFoo(_fieldJson);
+                if(!_fieldJson.IsObject) { throw new SerializationException(); }  a = editor.cfg.test.Foo.LoadJsonFoo(_fieldJson);
+            }
+            else
+            {
+                a = new test.Foo();
             }
         }
         
@@ -47,7 +54,11 @@ public sealed class TestMultiColumn :  Luban.EditorBeanBase
             var _fieldJson = _json["b"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsObject) { throw new SerializationException(); }  b = test.Foo.LoadJsonFoo(_fieldJson);
+                if(!_fieldJson.IsObject) { throw new SerializationException(); }  b = editor.cfg.test.Foo.LoadJsonFoo(_fieldJson);
+            }
+            else
+            {
+                b = new test.Foo();
             }
         }
         
@@ -55,7 +66,11 @@ public sealed class TestMultiColumn :  Luban.EditorBeanBase
             var _fieldJson = _json["c"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsObject) { throw new SerializationException(); }  c = test.Foo.LoadJsonFoo(_fieldJson);
+                if(!_fieldJson.IsObject) { throw new SerializationException(); }  c = editor.cfg.test.Foo.LoadJsonFoo(_fieldJson);
+            }
+            else
+            {
+                c = new test.Foo();
             }
         }
         
@@ -68,15 +83,15 @@ public sealed class TestMultiColumn :  Luban.EditorBeanBase
         }
         {
             if (a == null) { throw new System.ArgumentNullException(); }
-            { var __bjson = new JSONObject();  test.Foo.SaveJsonFoo(a, __bjson); _json["a"] = __bjson; }
+            { var __bjson = new JSONObject();  editor.cfg.test.Foo.SaveJsonFoo(a, __bjson); _json["a"] = __bjson; }
         }
         {
             if (b == null) { throw new System.ArgumentNullException(); }
-            { var __bjson = new JSONObject();  test.Foo.SaveJsonFoo(b, __bjson); _json["b"] = __bjson; }
+            { var __bjson = new JSONObject();  editor.cfg.test.Foo.SaveJsonFoo(b, __bjson); _json["b"] = __bjson; }
         }
         {
             if (c == null) { throw new System.ArgumentNullException(); }
-            { var __bjson = new JSONObject();  test.Foo.SaveJsonFoo(c, __bjson); _json["c"] = __bjson; }
+            { var __bjson = new JSONObject();  editor.cfg.test.Foo.SaveJsonFoo(c, __bjson); _json["c"] = __bjson; }
         }
     }
 

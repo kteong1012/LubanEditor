@@ -33,6 +33,9 @@ public sealed class TestRow :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -40,6 +43,9 @@ public sealed class TestRow :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsBoolean) { throw new SerializationException(); }  y = _fieldJson;
+            }
+            else
+            {
             }
         }
         
@@ -49,13 +55,21 @@ public sealed class TestRow :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  z = _fieldJson;
             }
+            else
+            {
+                z = "";
+            }
         }
         
         { 
             var _fieldJson = _json["a"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsObject) { throw new SerializationException(); }  a = test.Test3.LoadJsonTest3(_fieldJson);
+                if(!_fieldJson.IsObject) { throw new SerializationException(); }  a = editor.cfg.test.Test3.LoadJsonTest3(_fieldJson);
+            }
+            else
+            {
+                a = new test.Test3();
             }
         }
         
@@ -64,6 +78,10 @@ public sealed class TestRow :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsArray) { throw new SerializationException(); } b = new System.Collections.Generic.List<int>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { int __v0;  if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0;  b.Add(__v0); }  
+            }
+            else
+            {
+                b = new System.Collections.Generic.List<int>();
             }
         }
         
@@ -83,7 +101,7 @@ public sealed class TestRow :  Luban.EditorBeanBase
         }
         {
             if (a == null) { throw new System.ArgumentNullException(); }
-            { var __bjson = new JSONObject();  test.Test3.SaveJsonTest3(a, __bjson); _json["a"] = __bjson; }
+            { var __bjson = new JSONObject();  editor.cfg.test.Test3.SaveJsonTest3(a, __bjson); _json["a"] = __bjson; }
         }
         {
             if (b == null) { throw new System.ArgumentNullException(); }
@@ -188,7 +206,7 @@ else
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.b.Add(default);
+        this.b.Add(0);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {

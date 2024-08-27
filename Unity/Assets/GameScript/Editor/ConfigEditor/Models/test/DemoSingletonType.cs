@@ -31,6 +31,9 @@ public sealed class DemoSingletonType :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  id = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -38,6 +41,10 @@ public sealed class DemoSingletonType :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  name = _fieldJson;
+            }
+            else
+            {
+                name = "";
             }
         }
         
@@ -50,14 +57,17 @@ public sealed class DemoSingletonType :  Luban.EditorBeanBase
                 {
                     throw new SerializationException();
                 }
-                date = test.DemoDynamic.LoadJsonDemoDynamic(_fieldJson);
-                var __index0 = test.DemoDynamic.Types.IndexOf(date.GetTypeStr());
+                date = editor.cfg.test.DemoDynamic.LoadJsonDemoDynamic(_fieldJson);
+                var __index0 = editor.cfg.test.DemoDynamic.Types.IndexOf(date.GetTypeStr());
                 if (__index0 == -1)
                 {
                     throw new SerializationException();
                 }
                 date.TypeIndex = __index0;
-                date.Instance = test.DemoDynamic.LoadJsonDemoDynamic(_fieldJson);
+                date.Instance = editor.cfg.test.DemoDynamic.LoadJsonDemoDynamic(_fieldJson);
+            }
+            else
+            {
             }
         }
         
@@ -74,7 +84,7 @@ public sealed class DemoSingletonType :  Luban.EditorBeanBase
         }
         {
             if (date == null) { throw new System.ArgumentNullException(); }
-            { var __bjson = new JSONObject();  test.DemoDynamic.SaveJsonDemoDynamic(date, __bjson); _json["date"] = __bjson; }
+            { var __bjson = new JSONObject();  editor.cfg.test.DemoDynamic.SaveJsonDemoDynamic(date, __bjson); _json["date"] = __bjson; }
         }
     }
 

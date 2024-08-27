@@ -22,7 +22,7 @@ public sealed class BlackboardKey :  Luban.EditorBeanBase
     {
             name = "";
             desc = "";
-            keyType = ai.EKeyType.BOOL;
+            keyType = editor.cfg.ai.EKeyType.BOOL;
             typeClassName = "";
     }
 
@@ -34,6 +34,10 @@ public sealed class BlackboardKey :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  name = _fieldJson;
             }
+            else
+            {
+                name = "";
+            }
         }
         
         { 
@@ -41,6 +45,10 @@ public sealed class BlackboardKey :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  desc = _fieldJson;
+            }
+            else
+            {
+                desc = "";
             }
         }
         
@@ -50,6 +58,9 @@ public sealed class BlackboardKey :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsBoolean) { throw new SerializationException(); }  isStatic = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -58,6 +69,10 @@ public sealed class BlackboardKey :  Luban.EditorBeanBase
             {
                 if(_fieldJson.IsString) { keyType = (ai.EKeyType)System.Enum.Parse(typeof(ai.EKeyType), _fieldJson); } else if(_fieldJson.IsNumber) { keyType = (ai.EKeyType)(int)_fieldJson; } else { throw new SerializationException(); }  
             }
+            else
+            {
+                keyType = editor.cfg.ai.EKeyType.BOOL;
+            }
         }
         
         { 
@@ -65,6 +80,10 @@ public sealed class BlackboardKey :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  typeClassName = _fieldJson;
+            }
+            else
+            {
+                typeClassName = "";
             }
         }
         
@@ -136,6 +155,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("key_type", ""), GUILayout.Width(100));
 }
+
 this.keyType = (ai.EKeyType)UnityEditor.EditorGUILayout.EnumPopup(this.keyType, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)

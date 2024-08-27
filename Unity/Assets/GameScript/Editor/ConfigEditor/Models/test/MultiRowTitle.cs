@@ -35,6 +35,9 @@ public sealed class MultiRowTitle :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  id = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -43,13 +46,21 @@ public sealed class MultiRowTitle :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  name = _fieldJson;
             }
+            else
+            {
+                name = "";
+            }
         }
         
         { 
             var _fieldJson = _json["x1"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsObject) { throw new SerializationException(); }  x1 = test.H1.LoadJsonH1(_fieldJson);
+                if(!_fieldJson.IsObject) { throw new SerializationException(); }  x1 = editor.cfg.test.H1.LoadJsonH1(_fieldJson);
+            }
+            else
+            {
+                x1 = new test.H1();
             }
         }
         
@@ -57,7 +68,11 @@ public sealed class MultiRowTitle :  Luban.EditorBeanBase
             var _fieldJson = _json["x2_0"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsObject) { throw new SerializationException(); }  x20 = test.H2.LoadJsonH2(_fieldJson);
+                if(!_fieldJson.IsObject) { throw new SerializationException(); }  x20 = editor.cfg.test.H2.LoadJsonH2(_fieldJson);
+            }
+            else
+            {
+                x20 = new test.H2();
             }
         }
         
@@ -65,7 +80,11 @@ public sealed class MultiRowTitle :  Luban.EditorBeanBase
             var _fieldJson = _json["x2"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsArray) { throw new SerializationException(); } x2 = new System.Collections.Generic.List<test.H2>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { test.H2 __v0;  if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = test.H2.LoadJsonH2(__e0);  x2.Add(__v0); }  
+                if(!_fieldJson.IsArray) { throw new SerializationException(); } x2 = new System.Collections.Generic.List<test.H2>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { test.H2 __v0;  if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = editor.cfg.test.H2.LoadJsonH2(__e0);  x2.Add(__v0); }  
+            }
+            else
+            {
+                x2 = new System.Collections.Generic.List<test.H2>();
             }
         }
         
@@ -73,7 +92,11 @@ public sealed class MultiRowTitle :  Luban.EditorBeanBase
             var _fieldJson = _json["x3"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsArray) { throw new SerializationException(); } int __n0 = _fieldJson.Count; x3 = new test.H2[__n0]; int __i0=0; foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { test.H2 __v0;  if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = test.H2.LoadJsonH2(__e0);  x3[__i0++] = __v0; }  
+                if(!_fieldJson.IsArray) { throw new SerializationException(); } int __n0 = _fieldJson.Count; x3 = new test.H2[__n0]; int __i0=0; foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { test.H2 __v0;  if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = editor.cfg.test.H2.LoadJsonH2(__e0);  x3[__i0++] = __v0; }  
+            }
+            else
+            {
+                x3 = System.Array.Empty<test.H2>();
             }
         }
         
@@ -81,7 +104,11 @@ public sealed class MultiRowTitle :  Luban.EditorBeanBase
             var _fieldJson = _json["x4"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsArray) { throw new SerializationException(); } int __n0 = _fieldJson.Count; x4 = new test.H2[__n0]; int __i0=0; foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { test.H2 __v0;  if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = test.H2.LoadJsonH2(__e0);  x4[__i0++] = __v0; }  
+                if(!_fieldJson.IsArray) { throw new SerializationException(); } int __n0 = _fieldJson.Count; x4 = new test.H2[__n0]; int __i0=0; foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { test.H2 __v0;  if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = editor.cfg.test.H2.LoadJsonH2(__e0);  x4[__i0++] = __v0; }  
+            }
+            else
+            {
+                x4 = System.Array.Empty<test.H2>();
             }
         }
         
@@ -98,24 +125,24 @@ public sealed class MultiRowTitle :  Luban.EditorBeanBase
         }
         {
             if (x1 == null) { throw new System.ArgumentNullException(); }
-            { var __bjson = new JSONObject();  test.H1.SaveJsonH1(x1, __bjson); _json["x1"] = __bjson; }
+            { var __bjson = new JSONObject();  editor.cfg.test.H1.SaveJsonH1(x1, __bjson); _json["x1"] = __bjson; }
         }
 
         if (x20 != null)
         {
-            { var __bjson = new JSONObject();  test.H2.SaveJsonH2(x20, __bjson); _json["x2_0"] = __bjson; }
+            { var __bjson = new JSONObject();  editor.cfg.test.H2.SaveJsonH2(x20, __bjson); _json["x2_0"] = __bjson; }
         }
         {
             if (x2 == null) { throw new System.ArgumentNullException(); }
-            { var __cjson0 = new JSONArray(); foreach(var __e0 in x2) { { var __bjson = new JSONObject();  test.H2.SaveJsonH2(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["x2"] = __cjson0; }
+            { var __cjson0 = new JSONArray(); foreach(var __e0 in x2) { { var __bjson = new JSONObject();  editor.cfg.test.H2.SaveJsonH2(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["x2"] = __cjson0; }
         }
         {
             if (x3 == null) { throw new System.ArgumentNullException(); }
-            { var __cjson0 = new JSONArray(); foreach(var __e0 in x3) { { var __bjson = new JSONObject();  test.H2.SaveJsonH2(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["x3"] = __cjson0; }
+            { var __cjson0 = new JSONArray(); foreach(var __e0 in x3) { { var __bjson = new JSONObject();  editor.cfg.test.H2.SaveJsonH2(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["x3"] = __cjson0; }
         }
         {
             if (x4 == null) { throw new System.ArgumentNullException(); }
-            { var __cjson0 = new JSONArray(); foreach(var __e0 in x4) { { var __bjson = new JSONObject();  test.H2.SaveJsonH2(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["x4"] = __cjson0; }
+            { var __cjson0 = new JSONArray(); foreach(var __e0 in x4) { { var __bjson = new JSONObject();  editor.cfg.test.H2.SaveJsonH2(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["x4"] = __cjson0; }
         }
     }
 
@@ -290,7 +317,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
         {
             var __importJson1 = SimpleJSON.JSON.Parse(__importJsonText1);
             test.H2 __importElement1;
-            if(!__importJson1.IsObject) { throw new SerializationException(); }  __importElement1 = test.H2.LoadJsonH2(__importJson1);
+            if(!__importJson1.IsObject) { throw new SerializationException(); }  __importElement1 = editor.cfg.test.H2.LoadJsonH2(__importJson1);
             this.x2.Add(__importElement1);
         });
     }
@@ -361,7 +388,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
         {
             var __importJson1 = SimpleJSON.JSON.Parse(__importJsonText1);
             test.H2 __importElement1;
-            if(!__importJson1.IsObject) { throw new SerializationException(); }  __importElement1 = test.H2.LoadJsonH2(__importJson1);
+            if(!__importJson1.IsObject) { throw new SerializationException(); }  __importElement1 = editor.cfg.test.H2.LoadJsonH2(__importJson1);
             var __list1 = new System.Collections.Generic.List<test.H2>(this.x3);
             __list1.Add(__importElement1);
             this.x3 = __list1.ToArray();
@@ -434,7 +461,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
         {
             var __importJson1 = SimpleJSON.JSON.Parse(__importJsonText1);
             test.H2 __importElement1;
-            if(!__importJson1.IsObject) { throw new SerializationException(); }  __importElement1 = test.H2.LoadJsonH2(__importJson1);
+            if(!__importJson1.IsObject) { throw new SerializationException(); }  __importElement1 = editor.cfg.test.H2.LoadJsonH2(__importJson1);
             var __list1 = new System.Collections.Generic.List<test.H2>(this.x4);
             __list1.Add(__importElement1);
             this.x4 = __list1.ToArray();

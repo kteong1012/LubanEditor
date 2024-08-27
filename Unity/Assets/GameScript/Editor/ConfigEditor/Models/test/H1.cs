@@ -29,7 +29,11 @@ public sealed class H1 :  Luban.EditorBeanBase
             var _fieldJson = _json["y2"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsObject) { throw new SerializationException(); }  y2 = test.H2.LoadJsonH2(_fieldJson);
+                if(!_fieldJson.IsObject) { throw new SerializationException(); }  y2 = editor.cfg.test.H2.LoadJsonH2(_fieldJson);
+            }
+            else
+            {
+                y2 = new test.H2();
             }
         }
         
@@ -39,6 +43,9 @@ public sealed class H1 :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  y3 = _fieldJson;
             }
+            else
+            {
+            }
         }
         
     }
@@ -47,7 +54,7 @@ public sealed class H1 :  Luban.EditorBeanBase
     {
         {
             if (y2 == null) { throw new System.ArgumentNullException(); }
-            { var __bjson = new JSONObject();  test.H2.SaveJsonH2(y2, __bjson); _json["y2"] = __bjson; }
+            { var __bjson = new JSONObject();  editor.cfg.test.H2.SaveJsonH2(y2, __bjson); _json["y2"] = __bjson; }
         }
         {
             _json["y3"] = new JSONNumber(y3);

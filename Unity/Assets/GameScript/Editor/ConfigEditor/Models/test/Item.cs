@@ -32,6 +32,9 @@ public sealed class Item :  test.ItemBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  id = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -39,6 +42,10 @@ public sealed class Item :  test.ItemBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  name = _fieldJson;
+            }
+            else
+            {
+                name = "";
             }
         }
         
@@ -48,6 +55,10 @@ public sealed class Item :  test.ItemBase
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  desc = _fieldJson;
             }
+            else
+            {
+                desc = "";
+            }
         }
         
         { 
@@ -56,6 +67,9 @@ public sealed class Item :  test.ItemBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  num = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -63,6 +77,9 @@ public sealed class Item :  test.ItemBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  price = _fieldJson;
+            }
+            else
+            {
             }
         }
         

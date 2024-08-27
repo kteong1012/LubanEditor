@@ -32,6 +32,9 @@ public sealed class MoveToLocation :  ai.Task
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  id = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -39,6 +42,10 @@ public sealed class MoveToLocation :  ai.Task
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  nodeName = _fieldJson;
+            }
+            else
+            {
+                nodeName = "";
             }
         }
         
@@ -51,14 +58,18 @@ public sealed class MoveToLocation :  ai.Task
                 {
                     throw new SerializationException();
                 }
-                __v0 = ai.Decorator.LoadJsonDecorator(__e0);
-                var __index0 = ai.Decorator.Types.IndexOf(__v0.GetTypeStr());
+                __v0 = editor.cfg.ai.Decorator.LoadJsonDecorator(__e0);
+                var __index0 = editor.cfg.ai.Decorator.Types.IndexOf(__v0.GetTypeStr());
                 if (__index0 == -1)
                 {
                     throw new SerializationException();
                 }
                 __v0.TypeIndex = __index0;
-                __v0.Instance = ai.Decorator.LoadJsonDecorator(__e0);  decorators.Add(__v0); }  
+                __v0.Instance = editor.cfg.ai.Decorator.LoadJsonDecorator(__e0);  decorators.Add(__v0); }  
+            }
+            else
+            {
+                decorators = new System.Collections.Generic.List<ai.Decorator>();
             }
         }
         
@@ -71,14 +82,18 @@ public sealed class MoveToLocation :  ai.Task
                 {
                     throw new SerializationException();
                 }
-                __v0 = ai.Service.LoadJsonService(__e0);
-                var __index0 = ai.Service.Types.IndexOf(__v0.GetTypeStr());
+                __v0 = editor.cfg.ai.Service.LoadJsonService(__e0);
+                var __index0 = editor.cfg.ai.Service.Types.IndexOf(__v0.GetTypeStr());
                 if (__index0 == -1)
                 {
                     throw new SerializationException();
                 }
                 __v0.TypeIndex = __index0;
-                __v0.Instance = ai.Service.LoadJsonService(__e0);  services.Add(__v0); }  
+                __v0.Instance = editor.cfg.ai.Service.LoadJsonService(__e0);  services.Add(__v0); }  
+            }
+            else
+            {
+                services = new System.Collections.Generic.List<ai.Service>();
             }
         }
         
@@ -88,6 +103,9 @@ public sealed class MoveToLocation :  ai.Task
             {
                 if(!_fieldJson.IsBoolean) { throw new SerializationException(); }  ignoreRestartSelf = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -95,6 +113,9 @@ public sealed class MoveToLocation :  ai.Task
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  acceptableRadius = _fieldJson;
+            }
+            else
+            {
             }
         }
         
@@ -111,11 +132,11 @@ public sealed class MoveToLocation :  ai.Task
         }
         {
             if (decorators == null) { throw new System.ArgumentNullException(); }
-            { var __cjson0 = new JSONArray(); foreach(var __e0 in decorators) { { var __bjson = new JSONObject();  ai.Decorator.SaveJsonDecorator(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["decorators"] = __cjson0; }
+            { var __cjson0 = new JSONArray(); foreach(var __e0 in decorators) { { var __bjson = new JSONObject();  editor.cfg.ai.Decorator.SaveJsonDecorator(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["decorators"] = __cjson0; }
         }
         {
             if (services == null) { throw new System.ArgumentNullException(); }
-            { var __cjson0 = new JSONArray(); foreach(var __e0 in services) { { var __bjson = new JSONObject();  ai.Service.SaveJsonService(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["services"] = __cjson0; }
+            { var __cjson0 = new JSONArray(); foreach(var __e0 in services) { { var __bjson = new JSONObject();  editor.cfg.ai.Service.SaveJsonService(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["services"] = __cjson0; }
         }
         {
             _json["ignore_restart_self"] = new JSONBool(ignoreRestartSelf);
@@ -194,7 +215,7 @@ else
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.decorators.Add(default);
+        this.decorators.Add(new ai.UeLoop(){ TypeIndex = 0});
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {
@@ -207,14 +228,14 @@ if (!__importJson1.IsObject)
 {
     throw new SerializationException();
 }
-__importElement1 = ai.Decorator.LoadJsonDecorator(__importJson1);
-var __index2 = ai.Decorator.Types.IndexOf(__importElement1.GetTypeStr());
+__importElement1 = editor.cfg.ai.Decorator.LoadJsonDecorator(__importJson1);
+var __index2 = editor.cfg.ai.Decorator.Types.IndexOf(__importElement1.GetTypeStr());
 if (__index2 == -1)
 {
     throw new SerializationException();
 }
 __importElement1.TypeIndex = __index2;
-__importElement1.Instance = ai.Decorator.LoadJsonDecorator(__importJson1);
+__importElement1.Instance = editor.cfg.ai.Decorator.LoadJsonDecorator(__importJson1);
             this.decorators.Add(__importElement1);
         });
     }
@@ -265,7 +286,7 @@ else
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.services.Add(default);
+        this.services.Add(new ai.UeSetDefaultFocus(){ TypeIndex = 0});
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {
@@ -278,14 +299,14 @@ if (!__importJson1.IsObject)
 {
     throw new SerializationException();
 }
-__importElement1 = ai.Service.LoadJsonService(__importJson1);
-var __index2 = ai.Service.Types.IndexOf(__importElement1.GetTypeStr());
+__importElement1 = editor.cfg.ai.Service.LoadJsonService(__importJson1);
+var __index2 = editor.cfg.ai.Service.Types.IndexOf(__importElement1.GetTypeStr());
 if (__index2 == -1)
 {
     throw new SerializationException();
 }
 __importElement1.TypeIndex = __index2;
-__importElement1.Instance = ai.Service.LoadJsonService(__importJson1);
+__importElement1.Instance = editor.cfg.ai.Service.LoadJsonService(__importJson1);
             this.services.Add(__importElement1);
         });
     }

@@ -32,6 +32,9 @@ public sealed class DemoD2 :  test.DemoDynamic
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x1 = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -39,6 +42,9 @@ public sealed class DemoD2 :  test.DemoDynamic
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x2 = _fieldJson;
+            }
+            else
+            {
             }
         }
         

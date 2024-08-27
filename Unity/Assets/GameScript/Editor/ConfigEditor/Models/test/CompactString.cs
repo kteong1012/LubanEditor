@@ -32,6 +32,9 @@ public sealed class CompactString :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  id = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -40,6 +43,10 @@ public sealed class CompactString :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  s2 = _fieldJson;
             }
+            else
+            {
+                s2 = "";
+            }
         }
         
         { 
@@ -47,6 +54,10 @@ public sealed class CompactString :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  s3 = _fieldJson;
+            }
+            else
+            {
+                s3 = "";
             }
         }
         

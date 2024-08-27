@@ -20,7 +20,7 @@ public sealed class BinaryOperator :  ai.KeyQueryOperator
 {
     public BinaryOperator()
     {
-            oper = ai.EOperator.IS_EQUAL_TO;
+            oper = editor.cfg.ai.EOperator.IS_EQUAL_TO;
     }
     public override string GetTypeStr() => TYPE_STR;
     private const string TYPE_STR = "ai.BinaryOperator";
@@ -33,6 +33,10 @@ public sealed class BinaryOperator :  ai.KeyQueryOperator
             {
                 if(_fieldJson.IsString) { oper = (ai.EOperator)System.Enum.Parse(typeof(ai.EOperator), _fieldJson); } else if(_fieldJson.IsNumber) { oper = (ai.EOperator)(int)_fieldJson; } else { throw new SerializationException(); }  
             }
+            else
+            {
+                oper = editor.cfg.ai.EOperator.IS_EQUAL_TO;
+            }
         }
         
         { 
@@ -44,14 +48,17 @@ public sealed class BinaryOperator :  ai.KeyQueryOperator
                 {
                     throw new SerializationException();
                 }
-                data = ai.KeyData.LoadJsonKeyData(_fieldJson);
-                var __index0 = ai.KeyData.Types.IndexOf(data.GetTypeStr());
+                data = editor.cfg.ai.KeyData.LoadJsonKeyData(_fieldJson);
+                var __index0 = editor.cfg.ai.KeyData.Types.IndexOf(data.GetTypeStr());
                 if (__index0 == -1)
                 {
                     throw new SerializationException();
                 }
                 data.TypeIndex = __index0;
-                data.Instance = ai.KeyData.LoadJsonKeyData(_fieldJson);
+                data.Instance = editor.cfg.ai.KeyData.LoadJsonKeyData(_fieldJson);
+            }
+            else
+            {
             }
         }
         
@@ -64,7 +71,7 @@ public sealed class BinaryOperator :  ai.KeyQueryOperator
         }
         {
             if (data == null) { throw new System.ArgumentNullException(); }
-            { var __bjson = new JSONObject();  ai.KeyData.SaveJsonKeyData(data, __bjson); _json["data"] = __bjson; }
+            { var __bjson = new JSONObject();  editor.cfg.ai.KeyData.SaveJsonKeyData(data, __bjson); _json["data"] = __bjson; }
         }
     }
 
@@ -82,6 +89,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("oper", ""), GUILayout.Width(100));
 }
+
 this.oper = (ai.EOperator)UnityEditor.EditorGUILayout.EnumPopup(this.oper, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)

@@ -31,6 +31,9 @@ public sealed class TestTag :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  id = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -38,6 +41,10 @@ public sealed class TestTag :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  value = _fieldJson;
+            }
+            else
+            {
+                value = "";
             }
         }
         

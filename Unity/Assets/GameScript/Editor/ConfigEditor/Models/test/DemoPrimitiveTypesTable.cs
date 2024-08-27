@@ -36,6 +36,9 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsBoolean) { throw new SerializationException(); }  x1 = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -43,6 +46,9 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x2 = _fieldJson;
+            }
+            else
+            {
             }
         }
         
@@ -52,6 +58,9 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x3 = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -59,6 +68,9 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x4 = _fieldJson;
+            }
+            else
+            {
             }
         }
         
@@ -68,6 +80,9 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x5 = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -75,6 +90,9 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x6 = _fieldJson;
+            }
+            else
+            {
             }
         }
         
@@ -84,6 +102,9 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x7 = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -91,6 +112,10 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  s1 = _fieldJson;
+            }
+            else
+            {
+                s1 = "";
             }
         }
         
@@ -100,13 +125,21 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  s2 = _fieldJson;
             }
+            else
+            {
+                s2 = "";
+            }
         }
         
         { 
             var _fieldJson = _json["v2"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsObject) { throw new SerializationException(); }  v2 = vec2.LoadJsonvec2(_fieldJson);
+                if(!_fieldJson.IsObject) { throw new SerializationException(); }  v2 = editor.cfg.vec2.LoadJsonvec2(_fieldJson);
+            }
+            else
+            {
+                v2 = new vec2();
             }
         }
         
@@ -114,7 +147,11 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
             var _fieldJson = _json["v3"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsObject) { throw new SerializationException(); }  v3 = vec3.LoadJsonvec3(_fieldJson);
+                if(!_fieldJson.IsObject) { throw new SerializationException(); }  v3 = editor.cfg.vec3.LoadJsonvec3(_fieldJson);
+            }
+            else
+            {
+                v3 = new vec3();
             }
         }
         
@@ -122,7 +159,11 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
             var _fieldJson = _json["v4"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsObject) { throw new SerializationException(); }  v4 = vec4.LoadJsonvec4(_fieldJson);
+                if(!_fieldJson.IsObject) { throw new SerializationException(); }  v4 = editor.cfg.vec4.LoadJsonvec4(_fieldJson);
+            }
+            else
+            {
+                v4 = new vec4();
             }
         }
         
@@ -142,6 +183,10 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
                 {
                     throw new SerializationException();
                 }
+            }
+            else
+            {
+                t1 = "1970-01-01 00:00:00";
             }
         }
         
@@ -179,13 +224,13 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
             _json["s2"] = new JSONString(s2);
         }
         {
-            { var __bjson = new JSONObject();  vec2.SaveJsonvec2(v2, __bjson); _json["v2"] = __bjson; }
+            { var __bjson = new JSONObject();  editor.cfg.vec2.SaveJsonvec2(v2, __bjson); _json["v2"] = __bjson; }
         }
         {
-            { var __bjson = new JSONObject();  vec3.SaveJsonvec3(v3, __bjson); _json["v3"] = __bjson; }
+            { var __bjson = new JSONObject();  editor.cfg.vec3.SaveJsonvec3(v3, __bjson); _json["v3"] = __bjson; }
         }
         {
-            { var __bjson = new JSONObject();  vec4.SaveJsonvec4(v4, __bjson); _json["v4"] = __bjson; }
+            { var __bjson = new JSONObject();  editor.cfg.vec4.SaveJsonvec4(v4, __bjson); _json["v4"] = __bjson; }
         }
         {
             _json["t1"] = new JSONString(t1);

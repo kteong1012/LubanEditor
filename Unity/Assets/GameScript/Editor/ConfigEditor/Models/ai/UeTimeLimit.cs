@@ -32,6 +32,9 @@ public sealed class UeTimeLimit :  ai.Decorator
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  id = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -39,6 +42,10 @@ public sealed class UeTimeLimit :  ai.Decorator
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  nodeName = _fieldJson;
+            }
+            else
+            {
+                nodeName = "";
             }
         }
         
@@ -48,6 +55,10 @@ public sealed class UeTimeLimit :  ai.Decorator
             {
                 if(_fieldJson.IsString) { flowAbortMode = (ai.EFlowAbortMode)System.Enum.Parse(typeof(ai.EFlowAbortMode), _fieldJson); } else if(_fieldJson.IsNumber) { flowAbortMode = (ai.EFlowAbortMode)(int)_fieldJson; } else { throw new SerializationException(); }  
             }
+            else
+            {
+                flowAbortMode = editor.cfg.ai.EFlowAbortMode.NONE;
+            }
         }
         
         { 
@@ -55,6 +66,9 @@ public sealed class UeTimeLimit :  ai.Decorator
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  limitTime = _fieldJson;
+            }
+            else
+            {
             }
         }
         
@@ -111,6 +125,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("flow_abort_mode", ""), GUILayout.Width(100));
 }
+
 this.flowAbortMode = (ai.EFlowAbortMode)UnityEditor.EditorGUILayout.EnumPopup(this.flowAbortMode, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)

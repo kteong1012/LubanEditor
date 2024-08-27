@@ -30,6 +30,9 @@ public sealed class TimeOfDay :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  hour = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -38,6 +41,9 @@ public sealed class TimeOfDay :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  minute = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -45,6 +51,9 @@ public sealed class TimeOfDay :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  second = _fieldJson;
+            }
+            else
+            {
             }
         }
         

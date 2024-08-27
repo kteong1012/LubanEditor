@@ -34,6 +34,9 @@ public sealed class TestExcelBean2 :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  y1 = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -42,6 +45,10 @@ public sealed class TestExcelBean2 :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  y2 = _fieldJson;
             }
+            else
+            {
+                y2 = "";
+            }
         }
         
         { 
@@ -49,6 +56,9 @@ public sealed class TestExcelBean2 :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  y3 = _fieldJson;
+            }
+            else
+            {
             }
         }
         

@@ -32,6 +32,9 @@ public sealed class ExecuteTimeStatistic :  ai.Service
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  id = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -39,6 +42,10 @@ public sealed class ExecuteTimeStatistic :  ai.Service
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  nodeName = _fieldJson;
+            }
+            else
+            {
+                nodeName = "";
             }
         }
         

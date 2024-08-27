@@ -35,6 +35,9 @@ public sealed class Rectangle :  test.Shape
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  width = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -42,6 +45,9 @@ public sealed class Rectangle :  test.Shape
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  height = _fieldJson;
+            }
+            else
+            {
             }
         }
         

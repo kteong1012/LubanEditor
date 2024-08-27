@@ -31,6 +31,9 @@ public sealed class SepBean1 :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  a = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -39,6 +42,9 @@ public sealed class SepBean1 :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  b = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -46,6 +52,10 @@ public sealed class SepBean1 :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  c = _fieldJson;
+            }
+            else
+            {
+                c = "";
             }
         }
         

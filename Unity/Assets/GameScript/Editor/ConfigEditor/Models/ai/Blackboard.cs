@@ -34,6 +34,10 @@ public sealed class Blackboard :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  name = _fieldJson;
             }
+            else
+            {
+                name = "";
+            }
         }
         
         { 
@@ -41,6 +45,10 @@ public sealed class Blackboard :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  desc = _fieldJson;
+            }
+            else
+            {
+                desc = "";
             }
         }
         
@@ -50,13 +58,21 @@ public sealed class Blackboard :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  parentName = _fieldJson;
             }
+            else
+            {
+                parentName = "";
+            }
         }
         
         { 
             var _fieldJson = _json["keys"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsArray) { throw new SerializationException(); } keys = new System.Collections.Generic.List<ai.BlackboardKey>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { ai.BlackboardKey __v0;  if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = ai.BlackboardKey.LoadJsonBlackboardKey(__e0);  keys.Add(__v0); }  
+                if(!_fieldJson.IsArray) { throw new SerializationException(); } keys = new System.Collections.Generic.List<ai.BlackboardKey>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { ai.BlackboardKey __v0;  if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = editor.cfg.ai.BlackboardKey.LoadJsonBlackboardKey(__e0);  keys.Add(__v0); }  
+            }
+            else
+            {
+                keys = new System.Collections.Generic.List<ai.BlackboardKey>();
             }
         }
         
@@ -78,7 +94,7 @@ public sealed class Blackboard :  Luban.EditorBeanBase
         }
         {
             if (keys == null) { throw new System.ArgumentNullException(); }
-            { var __cjson0 = new JSONArray(); foreach(var __e0 in keys) { { var __bjson = new JSONObject();  ai.BlackboardKey.SaveJsonBlackboardKey(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["keys"] = __cjson0; }
+            { var __cjson0 = new JSONArray(); foreach(var __e0 in keys) { { var __bjson = new JSONObject();  editor.cfg.ai.BlackboardKey.SaveJsonBlackboardKey(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["keys"] = __cjson0; }
         }
     }
 
@@ -180,6 +196,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("key_type", ""), GUILayout.Width(100));
 }
+
 __e1.keyType = (ai.EKeyType)UnityEditor.EditorGUILayout.EnumPopup(__e1.keyType, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
@@ -207,7 +224,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
         {
             var __importJson1 = SimpleJSON.JSON.Parse(__importJsonText1);
             ai.BlackboardKey __importElement1;
-            if(!__importJson1.IsObject) { throw new SerializationException(); }  __importElement1 = ai.BlackboardKey.LoadJsonBlackboardKey(__importJson1);
+            if(!__importJson1.IsObject) { throw new SerializationException(); }  __importElement1 = editor.cfg.ai.BlackboardKey.LoadJsonBlackboardKey(__importJson1);
             this.keys.Add(__importElement1);
         });
     }

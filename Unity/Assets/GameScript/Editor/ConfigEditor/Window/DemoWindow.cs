@@ -1,6 +1,7 @@
 using editor.cfg;
 using System.IO;
 using UnityEditor;
+using UnityEngine;
 
 public class DemoWindow : EditorWindow
 {
@@ -24,15 +25,33 @@ public class DemoWindow : EditorWindow
         window.Show();
     }
 
+    private bool _movingTab = false;
     private void OnGUI()
     {
-        EditorConfig.OnGUI();
+        try
+        {
+            _movingTab = GUILayout.Toggle(_movingTab, "轮询测试", GUILayout.Width(100));
+            EditorConfig.OnGUI();
+        }
+        catch (System.Exception)
+        {
+            _movingTab = false;
+            throw;
+        }
+    }
+
+    private void Update()
+    {
+        if (_movingTab)
+        {
+            EditorConfig.MoveTab();
+        }
     }
 
     private string GetPath(string tableName)
     {
         var pathDir = "../Config/DataTables/EditorDatas";
-        if(File.Exists(Path.Combine(pathDir, tableName + ".json")))
+        if (File.Exists(Path.Combine(pathDir, tableName + ".json")))
         {
             return Path.Combine(pathDir, tableName + ".json");
         }

@@ -31,13 +31,20 @@ public sealed class TestIndex :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  id = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
             var _fieldJson = _json["eles"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsArray) { throw new SerializationException(); } eles = new System.Collections.Generic.List<test.DemoType1>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { test.DemoType1 __v0;  if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = test.DemoType1.LoadJsonDemoType1(__e0);  eles.Add(__v0); }  
+                if(!_fieldJson.IsArray) { throw new SerializationException(); } eles = new System.Collections.Generic.List<test.DemoType1>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { test.DemoType1 __v0;  if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = editor.cfg.test.DemoType1.LoadJsonDemoType1(__e0);  eles.Add(__v0); }  
+            }
+            else
+            {
+                eles = new System.Collections.Generic.List<test.DemoType1>();
             }
         }
         
@@ -50,7 +57,7 @@ public sealed class TestIndex :  Luban.EditorBeanBase
         }
         {
             if (eles == null) { throw new System.ArgumentNullException(); }
-            { var __cjson0 = new JSONArray(); foreach(var __e0 in eles) { { var __bjson = new JSONObject();  test.DemoType1.SaveJsonDemoType1(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["eles"] = __cjson0; }
+            { var __cjson0 = new JSONArray(); foreach(var __e0 in eles) { { var __bjson = new JSONObject();  editor.cfg.test.DemoType1.SaveJsonDemoType1(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["eles"] = __cjson0; }
         }
     }
 
@@ -119,7 +126,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
         {
             var __importJson1 = SimpleJSON.JSON.Parse(__importJsonText1);
             test.DemoType1 __importElement1;
-            if(!__importJson1.IsObject) { throw new SerializationException(); }  __importElement1 = test.DemoType1.LoadJsonDemoType1(__importJson1);
+            if(!__importJson1.IsObject) { throw new SerializationException(); }  __importElement1 = editor.cfg.test.DemoType1.LoadJsonDemoType1(__importJson1);
             this.eles.Add(__importElement1);
         });
     }

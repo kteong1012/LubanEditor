@@ -30,6 +30,9 @@ public sealed class TestGlobal :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  unlockEquip = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -37,6 +40,9 @@ public sealed class TestGlobal :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  unlockHero = _fieldJson;
+            }
+            else
+            {
             }
         }
         

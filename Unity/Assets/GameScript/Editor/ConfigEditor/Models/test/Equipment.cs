@@ -20,7 +20,7 @@ public sealed class Equipment :  test.ItemBase
 {
     public Equipment()
     {
-            attr = test.DemoEnum.NONE;
+            attr = editor.cfg.test.DemoEnum.NONE;
     }
     public override string GetTypeStr() => TYPE_STR;
     private const string TYPE_STR = "test.Equipment";
@@ -33,6 +33,9 @@ public sealed class Equipment :  test.ItemBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  id = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -40,6 +43,10 @@ public sealed class Equipment :  test.ItemBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  name = _fieldJson;
+            }
+            else
+            {
+                name = "";
             }
         }
         
@@ -49,6 +56,10 @@ public sealed class Equipment :  test.ItemBase
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  desc = _fieldJson;
             }
+            else
+            {
+                desc = "";
+            }
         }
         
         { 
@@ -57,6 +68,10 @@ public sealed class Equipment :  test.ItemBase
             {
                 if(_fieldJson.IsString) { attr = (test.DemoEnum)System.Enum.Parse(typeof(test.DemoEnum), _fieldJson); } else if(_fieldJson.IsNumber) { attr = (test.DemoEnum)(int)_fieldJson; } else { throw new SerializationException(); }  
             }
+            else
+            {
+                attr = editor.cfg.test.DemoEnum.NONE;
+            }
         }
         
         { 
@@ -64,6 +79,9 @@ public sealed class Equipment :  test.ItemBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  value = _fieldJson;
+            }
+            else
+            {
             }
         }
         
@@ -134,6 +152,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("attr", ""), GUILayout.Width(100));
 }
+
 this.attr = (test.DemoEnum)UnityEditor.EditorGUILayout.EnumPopup(this.attr, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)

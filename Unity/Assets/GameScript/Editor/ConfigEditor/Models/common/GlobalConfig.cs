@@ -31,6 +31,9 @@ public sealed class GlobalConfig :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x1 = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -38,6 +41,9 @@ public sealed class GlobalConfig :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x2 = _fieldJson;
+            }
+            else
+            {
             }
         }
         
@@ -47,6 +53,9 @@ public sealed class GlobalConfig :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x3 = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -54,6 +63,9 @@ public sealed class GlobalConfig :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x4 = _fieldJson;
+            }
+            else
+            {
             }
         }
         
@@ -63,6 +75,9 @@ public sealed class GlobalConfig :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x5 = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -71,6 +86,9 @@ public sealed class GlobalConfig :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x6 = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -78,6 +96,10 @@ public sealed class GlobalConfig :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsArray) { throw new SerializationException(); } x7 = new System.Collections.Generic.List<int>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { int __v0;  if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0;  x7.Add(__v0); }  
+            }
+            else
+            {
+                x7 = new System.Collections.Generic.List<int>();
             }
         }
         
@@ -204,7 +226,7 @@ else
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.x7.Add(default);
+        this.x7.Add(0);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {

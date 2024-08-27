@@ -40,6 +40,9 @@ public sealed class TestRef :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  id = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -47,6 +50,9 @@ public sealed class TestRef :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x1 = _fieldJson;
+            }
+            else
+            {
             }
         }
         
@@ -56,6 +62,9 @@ public sealed class TestRef :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x12 = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -63,6 +72,9 @@ public sealed class TestRef :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x2 = _fieldJson;
+            }
+            else
+            {
             }
         }
         
@@ -72,6 +84,9 @@ public sealed class TestRef :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x3 = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -79,6 +94,9 @@ public sealed class TestRef :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x4 = _fieldJson;
+            }
+            else
+            {
             }
         }
         
@@ -88,6 +106,10 @@ public sealed class TestRef :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsArray) { throw new SerializationException(); } int __n0 = _fieldJson.Count; a1 = new int[__n0]; int __i0=0; foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { int __v0;  if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0;  a1[__i0++] = __v0; }  
             }
+            else
+            {
+                a1 = System.Array.Empty<int>();
+            }
         }
         
         { 
@@ -95,6 +117,10 @@ public sealed class TestRef :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsArray) { throw new SerializationException(); } int __n0 = _fieldJson.Count; a2 = new int[__n0]; int __i0=0; foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { int __v0;  if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0;  a2[__i0++] = __v0; }  
+            }
+            else
+            {
+                a2 = System.Array.Empty<int>();
             }
         }
         
@@ -104,6 +130,10 @@ public sealed class TestRef :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsArray) { throw new SerializationException(); } b1 = new System.Collections.Generic.List<int>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { int __v0;  if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0;  b1.Add(__v0); }  
             }
+            else
+            {
+                b1 = new System.Collections.Generic.List<int>();
+            }
         }
         
         { 
@@ -111,6 +141,10 @@ public sealed class TestRef :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsArray) { throw new SerializationException(); } b2 = new System.Collections.Generic.List<int>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { int __v0;  if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0;  b2.Add(__v0); }  
+            }
+            else
+            {
+                b2 = new System.Collections.Generic.List<int>();
             }
         }
         
@@ -120,6 +154,10 @@ public sealed class TestRef :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsArray) { throw new SerializationException(); } c1 = new System.Collections.Generic.List<int>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { int __v0;  if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0;  c1.Add(__v0); }  
             }
+            else
+            {
+                c1 = new System.Collections.Generic.List<int>();
+            }
         }
         
         { 
@@ -127,6 +165,10 @@ public sealed class TestRef :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsArray) { throw new SerializationException(); } c2 = new System.Collections.Generic.List<int>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { int __v0;  if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0;  c2.Add(__v0); }  
+            }
+            else
+            {
+                c2 = new System.Collections.Generic.List<int>();
             }
         }
         
@@ -136,6 +178,10 @@ public sealed class TestRef :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsArray) { throw new SerializationException(); } d1 = new System.Collections.Generic.List<object[]>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { int __k0;  if(!__e0[0].IsNumber) { throw new SerializationException(); }  __k0 = __e0[0]; int __v0;  if(!__e0[1].IsNumber) { throw new SerializationException(); }  __v0 = __e0[1];  d1.Add(new object[] { __k0, __v0 }); }  
             }
+            else
+            {
+                d1 = new System.Collections.Generic.List<object[]>();
+            }
         }
         
         { 
@@ -143,6 +189,10 @@ public sealed class TestRef :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsArray) { throw new SerializationException(); } d2 = new System.Collections.Generic.List<object[]>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { int __k0;  if(!__e0[0].IsNumber) { throw new SerializationException(); }  __k0 = __e0[0]; int __v0;  if(!__e0[1].IsNumber) { throw new SerializationException(); }  __v0 = __e0[1];  d2.Add(new object[] { __k0, __v0 }); }  
+            }
+            else
+            {
+                d2 = new System.Collections.Generic.List<object[]>();
             }
         }
         
@@ -152,6 +202,9 @@ public sealed class TestRef :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  e1 = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -159,6 +212,9 @@ public sealed class TestRef :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  e2 = _fieldJson;
+            }
+            else
+            {
             }
         }
         
@@ -168,6 +224,10 @@ public sealed class TestRef :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  e3 = _fieldJson;
             }
+            else
+            {
+                e3 = "";
+            }
         }
         
         { 
@@ -175,6 +235,9 @@ public sealed class TestRef :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  f1 = _fieldJson;
+            }
+            else
+            {
             }
         }
         
@@ -184,6 +247,9 @@ public sealed class TestRef :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  f2 = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -191,6 +257,10 @@ public sealed class TestRef :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  f3 = _fieldJson;
+            }
+            else
+            {
+                f3 = "";
             }
         }
         
@@ -203,14 +273,17 @@ public sealed class TestRef :  Luban.EditorBeanBase
                 {
                     throw new SerializationException();
                 }
-                s1 = test.RefDynamicBase.LoadJsonRefDynamicBase(_fieldJson);
-                var __index0 = test.RefDynamicBase.Types.IndexOf(s1.GetTypeStr());
+                s1 = editor.cfg.test.RefDynamicBase.LoadJsonRefDynamicBase(_fieldJson);
+                var __index0 = editor.cfg.test.RefDynamicBase.Types.IndexOf(s1.GetTypeStr());
                 if (__index0 == -1)
                 {
                     throw new SerializationException();
                 }
                 s1.TypeIndex = __index0;
-                s1.Instance = test.RefDynamicBase.LoadJsonRefDynamicBase(_fieldJson);
+                s1.Instance = editor.cfg.test.RefDynamicBase.LoadJsonRefDynamicBase(_fieldJson);
+            }
+            else
+            {
             }
         }
         
@@ -310,7 +383,7 @@ public sealed class TestRef :  Luban.EditorBeanBase
         }
         {
             if (s1 == null) { throw new System.ArgumentNullException(); }
-            { var __bjson = new JSONObject();  test.RefDynamicBase.SaveJsonRefDynamicBase(s1, __bjson); _json["s1"] = __bjson; }
+            { var __bjson = new JSONObject();  editor.cfg.test.RefDynamicBase.SaveJsonRefDynamicBase(s1, __bjson); _json["s1"] = __bjson; }
         }
     }
 
@@ -412,7 +485,7 @@ else
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
         var __list1 = new System.Collections.Generic.List<int>(this.a1);
-        __list1.Add(default);
+        __list1.Add(0);
         this.a1 = __list1.ToArray();
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
@@ -463,7 +536,7 @@ else
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
         var __list1 = new System.Collections.Generic.List<int>(this.a2);
-        __list1.Add(default);
+        __list1.Add(0);
         this.a2 = __list1.ToArray();
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
@@ -511,7 +584,7 @@ else
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.b1.Add(default);
+        this.b1.Add(0);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {
@@ -556,7 +629,7 @@ else
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.b2.Add(default);
+        this.b2.Add(0);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {
@@ -600,7 +673,7 @@ else
     }
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.c1.Add(default);
+        this.c1.Add(0);
     }
     UnityEditor.EditorGUILayout.EndVertical();
 }
@@ -633,7 +706,7 @@ else
     }
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.c2.Add(default);
+        this.c2.Add(0);
     }
     UnityEditor.EditorGUILayout.EndVertical();
 }
@@ -660,8 +733,8 @@ else
         }
         UnityEditor.EditorGUILayout.LabelField(__i1.ToString(), GUILayout.Width(20));
         var __e1 = this.d1[__i1];
-        int __key1 = default;
-        int __value1 = default;
+        int __key1 = 0;
+        int __value1 = 0;
         if (__e1 == null)
         {
             __e1 = new object[2] { __key1, __value1 };
@@ -707,8 +780,8 @@ else
         }
         UnityEditor.EditorGUILayout.LabelField(__i1.ToString(), GUILayout.Width(20));
         var __e1 = this.d2[__i1];
-        int __key1 = default;
-        int __value1 = default;
+        int __key1 = 0;
+        int __value1 = 0;
         if (__e1 == null)
         {
             __e1 = new object[2] { __key1, __value1 };

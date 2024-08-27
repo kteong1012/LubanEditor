@@ -30,7 +30,11 @@ public sealed class OneDayTimeRange :  Luban.EditorBeanBase
             var _fieldJson = _json["start_time"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsObject) { throw new SerializationException(); }  startTime = common.TimeOfDay.LoadJsonTimeOfDay(_fieldJson);
+                if(!_fieldJson.IsObject) { throw new SerializationException(); }  startTime = editor.cfg.common.TimeOfDay.LoadJsonTimeOfDay(_fieldJson);
+            }
+            else
+            {
+                startTime = new common.TimeOfDay();
             }
         }
         
@@ -38,7 +42,11 @@ public sealed class OneDayTimeRange :  Luban.EditorBeanBase
             var _fieldJson = _json["end_time"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsObject) { throw new SerializationException(); }  endTime = common.TimeOfDay.LoadJsonTimeOfDay(_fieldJson);
+                if(!_fieldJson.IsObject) { throw new SerializationException(); }  endTime = editor.cfg.common.TimeOfDay.LoadJsonTimeOfDay(_fieldJson);
+            }
+            else
+            {
+                endTime = new common.TimeOfDay();
             }
         }
         
@@ -48,11 +56,11 @@ public sealed class OneDayTimeRange :  Luban.EditorBeanBase
     {
         {
             if (startTime == null) { throw new System.ArgumentNullException(); }
-            { var __bjson = new JSONObject();  common.TimeOfDay.SaveJsonTimeOfDay(startTime, __bjson); _json["start_time"] = __bjson; }
+            { var __bjson = new JSONObject();  editor.cfg.common.TimeOfDay.SaveJsonTimeOfDay(startTime, __bjson); _json["start_time"] = __bjson; }
         }
         {
             if (endTime == null) { throw new System.ArgumentNullException(); }
-            { var __bjson = new JSONObject();  common.TimeOfDay.SaveJsonTimeOfDay(endTime, __bjson); _json["end_time"] = __bjson; }
+            { var __bjson = new JSONObject();  editor.cfg.common.TimeOfDay.SaveJsonTimeOfDay(endTime, __bjson); _json["end_time"] = __bjson; }
         }
     }
 

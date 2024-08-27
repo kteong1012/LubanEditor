@@ -31,6 +31,9 @@ public sealed class DemoGroup :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  id = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -38,6 +41,9 @@ public sealed class DemoGroup :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x1 = _fieldJson;
+            }
+            else
+            {
             }
         }
         
@@ -47,6 +53,9 @@ public sealed class DemoGroup :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x2 = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -54,6 +63,9 @@ public sealed class DemoGroup :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x3 = _fieldJson;
+            }
+            else
+            {
             }
         }
         
@@ -63,13 +75,20 @@ public sealed class DemoGroup :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x4 = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
             var _fieldJson = _json["x5"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsObject) { throw new SerializationException(); }  x5 = test.InnerGroup.LoadJsonInnerGroup(_fieldJson);
+                if(!_fieldJson.IsObject) { throw new SerializationException(); }  x5 = editor.cfg.test.InnerGroup.LoadJsonInnerGroup(_fieldJson);
+            }
+            else
+            {
+                x5 = new test.InnerGroup();
             }
         }
         
@@ -94,7 +113,7 @@ public sealed class DemoGroup :  Luban.EditorBeanBase
         }
         {
             if (x5 == null) { throw new System.ArgumentNullException(); }
-            { var __bjson = new JSONObject();  test.InnerGroup.SaveJsonInnerGroup(x5, __bjson); _json["x5"] = __bjson; }
+            { var __bjson = new JSONObject();  editor.cfg.test.InnerGroup.SaveJsonInnerGroup(x5, __bjson); _json["x5"] = __bjson; }
         }
     }
 

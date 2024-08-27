@@ -33,6 +33,9 @@ public sealed class BehaviorTree :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  id = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -40,6 +43,10 @@ public sealed class BehaviorTree :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  name = _fieldJson;
+            }
+            else
+            {
+                name = "";
             }
         }
         
@@ -49,6 +56,10 @@ public sealed class BehaviorTree :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  desc = _fieldJson;
             }
+            else
+            {
+                desc = "";
+            }
         }
         
         { 
@@ -56,6 +67,10 @@ public sealed class BehaviorTree :  Luban.EditorBeanBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsString) { throw new SerializationException(); }  blackboardId = _fieldJson;
+            }
+            else
+            {
+                blackboardId = "";
             }
         }
         
@@ -68,14 +83,17 @@ public sealed class BehaviorTree :  Luban.EditorBeanBase
                 {
                     throw new SerializationException();
                 }
-                root = ai.ComposeNode.LoadJsonComposeNode(_fieldJson);
-                var __index0 = ai.ComposeNode.Types.IndexOf(root.GetTypeStr());
+                root = editor.cfg.ai.ComposeNode.LoadJsonComposeNode(_fieldJson);
+                var __index0 = editor.cfg.ai.ComposeNode.Types.IndexOf(root.GetTypeStr());
                 if (__index0 == -1)
                 {
                     throw new SerializationException();
                 }
                 root.TypeIndex = __index0;
-                root.Instance = ai.ComposeNode.LoadJsonComposeNode(_fieldJson);
+                root.Instance = editor.cfg.ai.ComposeNode.LoadJsonComposeNode(_fieldJson);
+            }
+            else
+            {
             }
         }
         
@@ -100,7 +118,7 @@ public sealed class BehaviorTree :  Luban.EditorBeanBase
         }
         {
             if (root == null) { throw new System.ArgumentNullException(); }
-            { var __bjson = new JSONObject();  ai.ComposeNode.SaveJsonComposeNode(root, __bjson); _json["root"] = __bjson; }
+            { var __bjson = new JSONObject();  editor.cfg.ai.ComposeNode.SaveJsonComposeNode(root, __bjson); _json["root"] = __bjson; }
         }
     }
 

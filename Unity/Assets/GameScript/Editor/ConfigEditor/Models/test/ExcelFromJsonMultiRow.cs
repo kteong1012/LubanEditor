@@ -31,6 +31,9 @@ public sealed class ExcelFromJsonMultiRow :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  id = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -39,13 +42,20 @@ public sealed class ExcelFromJsonMultiRow :  Luban.EditorBeanBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
             var _fieldJson = _json["items"];
             if (_fieldJson != null)
             {
-                if(!_fieldJson.IsArray) { throw new SerializationException(); } items = new System.Collections.Generic.List<test.TestRow>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { test.TestRow __v0;  if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = test.TestRow.LoadJsonTestRow(__e0);  items.Add(__v0); }  
+                if(!_fieldJson.IsArray) { throw new SerializationException(); } items = new System.Collections.Generic.List<test.TestRow>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { test.TestRow __v0;  if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = editor.cfg.test.TestRow.LoadJsonTestRow(__e0);  items.Add(__v0); }  
+            }
+            else
+            {
+                items = new System.Collections.Generic.List<test.TestRow>();
             }
         }
         
@@ -61,7 +71,7 @@ public sealed class ExcelFromJsonMultiRow :  Luban.EditorBeanBase
         }
         {
             if (items == null) { throw new System.ArgumentNullException(); }
-            { var __cjson0 = new JSONArray(); foreach(var __e0 in items) { { var __bjson = new JSONObject();  test.TestRow.SaveJsonTestRow(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["items"] = __cjson0; }
+            { var __cjson0 = new JSONArray(); foreach(var __e0 in items) { { var __bjson = new JSONObject();  editor.cfg.test.TestRow.SaveJsonTestRow(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["items"] = __cjson0; }
         }
     }
 
@@ -206,7 +216,7 @@ else
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        __e1.b.Add(default);
+        __e1.b.Add(0);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {
@@ -237,7 +247,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
         {
             var __importJson1 = SimpleJSON.JSON.Parse(__importJsonText1);
             test.TestRow __importElement1;
-            if(!__importJson1.IsObject) { throw new SerializationException(); }  __importElement1 = test.TestRow.LoadJsonTestRow(__importJson1);
+            if(!__importJson1.IsObject) { throw new SerializationException(); }  __importElement1 = editor.cfg.test.TestRow.LoadJsonTestRow(__importJson1);
             this.items.Add(__importElement1);
         });
     }

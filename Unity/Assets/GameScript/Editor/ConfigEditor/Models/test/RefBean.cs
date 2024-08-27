@@ -33,6 +33,9 @@ public sealed class RefBean :  test.RefDynamicBase
             {
                 if(!_fieldJson.IsNumber) { throw new SerializationException(); }  x = _fieldJson;
             }
+            else
+            {
+            }
         }
         
         { 
@@ -40,6 +43,10 @@ public sealed class RefBean :  test.RefDynamicBase
             if (_fieldJson != null)
             {
                 if(!_fieldJson.IsArray) { throw new SerializationException(); } arr = new System.Collections.Generic.List<int>(); foreach(SimpleJSON.JSONNode __e0 in _fieldJson.Children) { int __v0;  if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0;  arr.Add(__v0); }  
+            }
+            else
+            {
+                arr = new System.Collections.Generic.List<int>();
             }
         }
         
@@ -101,7 +108,7 @@ else
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.arr.Add(default);
+        this.arr.Add(0);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {

@@ -20,7 +20,7 @@ public abstract class Decorator :  ai.Node
 {
     public Decorator()
     {
-            flowAbortMode = ai.EFlowAbortMode.NONE;
+            flowAbortMode = editor.cfg.ai.EFlowAbortMode.NONE;
     }
     public override string GetTypeStr() => TYPE_STR;
     private const string TYPE_STR = "ai.Decorator";
