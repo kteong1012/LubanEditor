@@ -55,14 +55,18 @@ namespace editor.cfg.test
                     {
                         var data = editor.cfg.test.NotIndexList.LoadJsonNotIndexList(node.Value);
                         _datas.Add(data);
-                        _originalDataJsons.Add(GetId(data), node.Value.ToString(4));
+                        var dataJson = node.Value.ToString(4);
+                        data.OriginalDataJson = dataJson;
+                        _originalDataJsons.Add(GetId(data), dataJson);
                     }
                 }
                 else
                 {
                     var data = editor.cfg.test.NotIndexList.LoadJsonNotIndexList(json);
                     _datas.Add(data);
-                    _originalDataJsons.Add(GetId(data), json.ToString(4));
+                    var dataJson = json.ToString(4);
+                    data.OriginalDataJson = dataJson;
+                    _originalDataJsons.Add(GetId(data), dataJson);
                 }
             }
 
@@ -86,7 +90,8 @@ namespace editor.cfg.test
             _originalDataJsons.Clear();
             foreach (var data in _datas)
             {
-                _originalDataJsons.Add(GetId(data), GetDataJson(data));
+                data.OriginalDataJson = GetDataJson(data);
+                _originalDataJsons.Add(GetId(data), data.OriginalDataJson);
             }
             _originalTableJson = jsonText;
         }
@@ -180,9 +185,8 @@ namespace editor.cfg.test
                 if (__SelectData != null)
                 {
                     var id = GetId(__SelectData);
-                    var originalJson = "";
+                    var originalJson = __SelectData.OriginalDataJson ?? "";
                     var newJson = GetDataJson(__SelectData);
-                    _originalDataJsons.TryGetValue(id, out originalJson);
                     FileDiffTool.ShowWindow(originalJson, newJson, $"{_name}:{id}");
                 }
             }
