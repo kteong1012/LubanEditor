@@ -213,6 +213,7 @@ else
     if (this.keyQuery == null)
     {
         this.keyQuery = new ai.IsSet2();
+this.keyQuery.SetChangeAction((__x) => { this.keyQuery = __x as ai.KeyQueryOperator; });
         this.keyQuery.TypeIndex = 0;
     }
     UnityEditor.EditorGUILayout.BeginHorizontal();

@@ -187,6 +187,7 @@ else
     if (this.root == null)
     {
         this.root = new ai.Sequence();
+this.root.SetChangeAction((__x) => { this.root = __x as ai.ComposeNode; });
         this.root.TypeIndex = 0;
     }
     UnityEditor.EditorGUILayout.BeginHorizontal();

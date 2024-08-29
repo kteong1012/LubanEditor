@@ -260,8 +260,8 @@ else
         }
         else
         {
-            __key1 = (int)__e1[0];
-            __value1 = (int)__e1[1];
+            __key1 = __e1[0] != null ? (int)__e1[0] : default;
+            __value1 = __e1[1] != null ? (int)__e1[1] : default;
         }
         __key1 = UnityEditor.EditorGUILayout.IntField(__key1, GUILayout.Width(150));;
         __value1 = UnityEditor.EditorGUILayout.IntField(__value1, GUILayout.Width(150));;
@@ -307,8 +307,8 @@ else
         }
         else
         {
-            __key1 = (long)__e1[0];
-            __value1 = (int)__e1[1];
+            __key1 = __e1[0] != null ? (long)__e1[0] : default;
+            __value1 = __e1[1] != null ? (int)__e1[1] : default;
         }
         __key1 = UnityEditor.EditorGUILayout.LongField(__key1, GUILayout.Width(150));;
         __value1 = UnityEditor.EditorGUILayout.IntField(__value1, GUILayout.Width(150));;
@@ -354,8 +354,8 @@ else
         }
         else
         {
-            __key1 = (string)__e1[0];
-            __value1 = (int)__e1[1];
+            __key1 = __e1[0] != null ? (string)__e1[0] : default;
+            __value1 = __e1[1] != null ? (int)__e1[1] : default;
         }
         __key1 = UnityEditor.EditorGUILayout.TextField(__key1, GUILayout.Width(150));;
         __value1 = UnityEditor.EditorGUILayout.IntField(__value1, GUILayout.Width(150));;
@@ -401,8 +401,8 @@ else
         }
         else
         {
-            __key1 = (editor.cfg.test.DemoEnum)__e1[0];
-            __value1 = (int)__e1[1];
+            __key1 = __e1[0] != null ? (editor.cfg.test.DemoEnum)__e1[0] : default;
+            __value1 = __e1[1] != null ? (int)__e1[1] : default;
         }
         
 __key1 = (editor.cfg.test.DemoEnum)UnityEditor.EditorGUILayout.EnumPopup(__key1, GUILayout.Width(150));;

@@ -273,6 +273,7 @@ else
     if (__SelectData.root == null)
     {
         __SelectData.root = new ai.Sequence();
+__SelectData.root.SetChangeAction((__x) => { __SelectData.root = __x as ai.ComposeNode; });
         __SelectData.root.TypeIndex = 0;
     }
     UnityEditor.EditorGUILayout.BeginHorizontal();

@@ -756,8 +756,8 @@ else
         }
         else
         {
-            __key1 = (int)__e1[0];
-            __value1 = (int)__e1[1];
+            __key1 = __e1[0] != null ? (int)__e1[0] : default;
+            __value1 = __e1[1] != null ? (int)__e1[1] : default;
         }
         __key1 = UnityEditor.EditorGUILayout.IntField(__key1, GUILayout.Width(150));;
         __value1 = UnityEditor.EditorGUILayout.IntField(__value1, GUILayout.Width(150));;
@@ -803,8 +803,8 @@ else
         }
         else
         {
-            __key1 = (int)__e1[0];
-            __value1 = (int)__e1[1];
+            __key1 = __e1[0] != null ? (int)__e1[0] : default;
+            __value1 = __e1[1] != null ? (int)__e1[1] : default;
         }
         __key1 = UnityEditor.EditorGUILayout.IntField(__key1, GUILayout.Width(150));;
         __value1 = UnityEditor.EditorGUILayout.IntField(__value1, GUILayout.Width(150));;
@@ -893,6 +893,7 @@ else
     if (this.s1 == null)
     {
         this.s1 = new test.RefBean();
+this.s1.SetChangeAction((__x) => { this.s1 = __x as test.RefDynamicBase; });
         this.s1.TypeIndex = 0;
     }
     UnityEditor.EditorGUILayout.BeginHorizontal();

@@ -376,6 +376,7 @@ else
     if (__SelectData.x14 == null)
     {
         __SelectData.x14 = new test.DemoD2();
+__SelectData.x14.SetChangeAction((__x) => { __SelectData.x14 = __x as test.DemoDynamic; });
         __SelectData.x14.TypeIndex = 0;
     }
     UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -566,8 +567,8 @@ else
         }
         else
         {
-            __key1 = (int)__e1[0];
-            __value1 = (int)__e1[1];
+            __key1 = __e1[0] != null ? (int)__e1[0] : default;
+            __value1 = __e1[1] != null ? (int)__e1[1] : default;
         }
         __key1 = UnityEditor.EditorGUILayout.IntField(__key1, GUILayout.Width(150));;
         __value1 = UnityEditor.EditorGUILayout.IntField(__value1, GUILayout.Width(150));;
@@ -679,6 +680,7 @@ else
     if (__e1 == null)
     {
         __e1 = new test.DemoD2();
+__e1.SetChangeAction((__x) => { __e1 = __x as test.DemoDynamic; });
         __e1.TypeIndex = 0;
     }
     UnityEditor.EditorGUILayout.BeginHorizontal();

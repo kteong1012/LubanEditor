@@ -245,6 +245,7 @@ else
     if (__e1 == null)
     {
         __e1 = new ai.UeLoop();
+__e1.SetChangeAction((__x) => { __e1 = __x as ai.Decorator; });
         __e1.TypeIndex = 0;
     }
     UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -315,6 +316,7 @@ else
     if (__e1 == null)
     {
         __e1 = new ai.UeSetDefaultFocus();
+__e1.SetChangeAction((__x) => { __e1 = __x as ai.Service; });
         __e1.TypeIndex = 0;
     }
     UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -382,6 +384,7 @@ else
     if (this.mainTask == null)
     {
         this.mainTask = new ai.UeWait();
+this.mainTask.SetChangeAction((__x) => { this.mainTask = __x as ai.Task; });
         this.mainTask.TypeIndex = 0;
     }
     UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -406,6 +409,7 @@ else
     if (this.backgroundNode == null)
     {
         this.backgroundNode = new ai.Sequence();
+this.backgroundNode.SetChangeAction((__x) => { this.backgroundNode = __x as ai.FlowNode; });
         this.backgroundNode.TypeIndex = 0;
     }
     UnityEditor.EditorGUILayout.BeginHorizontal();

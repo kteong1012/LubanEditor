@@ -108,6 +108,7 @@ else
     if (this.data == null)
     {
         this.data = new ai.FloatKeyData();
+this.data.SetChangeAction((__x) => { this.data = __x as ai.KeyData; });
         this.data.TypeIndex = 0;
     }
     UnityEditor.EditorGUILayout.BeginHorizontal();

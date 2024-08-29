@@ -230,6 +230,7 @@ else
     if (this.x4 == null)
     {
         this.x4 = new test.DemoD2();
+this.x4.SetChangeAction((__x) => { this.x4 = __x as test.DemoDynamic; });
         this.x4.TypeIndex = 0;
     }
     UnityEditor.EditorGUILayout.BeginHorizontal();

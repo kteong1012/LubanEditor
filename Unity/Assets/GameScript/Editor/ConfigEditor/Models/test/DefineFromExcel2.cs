@@ -487,6 +487,7 @@ else
     if (this.x14 == null)
     {
         this.x14 = new test.DemoD2();
+this.x14.SetChangeAction((__x) => { this.x14 = __x as test.DemoDynamic; });
         this.x14.TypeIndex = 0;
     }
     UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -511,6 +512,7 @@ else
     if (this.x15 == null)
     {
         this.x15 = new test.Circle();
+this.x15.SetChangeAction((__x) => { this.x15 = __x as test.Shape; });
         this.x15.TypeIndex = 0;
     }
     UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -696,8 +698,8 @@ else
         }
         else
         {
-            __key1 = (int)__e1[0];
-            __value1 = (int)__e1[1];
+            __key1 = __e1[0] != null ? (int)__e1[0] : default;
+            __value1 = __e1[1] != null ? (int)__e1[1] : default;
         }
         __key1 = UnityEditor.EditorGUILayout.IntField(__key1, GUILayout.Width(150));;
         __value1 = UnityEditor.EditorGUILayout.IntField(__value1, GUILayout.Width(150));;

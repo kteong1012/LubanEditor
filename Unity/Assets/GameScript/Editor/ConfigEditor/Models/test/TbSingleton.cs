@@ -232,6 +232,7 @@ else
     if (__SelectData.date == null)
     {
         __SelectData.date = new test.DemoD2();
+__SelectData.date.SetChangeAction((__x) => { __SelectData.date = __x as test.DemoDynamic; });
         __SelectData.date.TypeIndex = 0;
     }
     UnityEditor.EditorGUILayout.BeginHorizontal();

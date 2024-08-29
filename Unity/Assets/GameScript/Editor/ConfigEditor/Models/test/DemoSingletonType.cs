@@ -131,6 +131,7 @@ else
     if (this.date == null)
     {
         this.date = new test.DemoD2();
+this.date.SetChangeAction((__x) => { this.date = __x as test.DemoDynamic; });
         this.date.TypeIndex = 0;
     }
     UnityEditor.EditorGUILayout.BeginHorizontal();

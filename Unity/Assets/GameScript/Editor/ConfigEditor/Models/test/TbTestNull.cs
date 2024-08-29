@@ -286,6 +286,7 @@ else
     if (__SelectData.x4 == null)
     {
         __SelectData.x4 = new test.DemoD2();
+__SelectData.x4.SetChangeAction((__x) => { __SelectData.x4 = __x as test.DemoDynamic; });
         __SelectData.x4.TypeIndex = 0;
     }
     UnityEditor.EditorGUILayout.BeginHorizontal();

@@ -225,6 +225,7 @@ else
     if (__e1 == null)
     {
         __e1 = new ai.UeLoop();
+__e1.SetChangeAction((__x) => { __e1 = __x as ai.Decorator; });
         __e1.TypeIndex = 0;
     }
     UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -295,6 +296,7 @@ else
     if (__e1 == null)
     {
         __e1 = new ai.UeSetDefaultFocus();
+__e1.SetChangeAction((__x) => { __e1 = __x as ai.Service; });
         __e1.TypeIndex = 0;
     }
     UnityEditor.EditorGUILayout.BeginHorizontal();
