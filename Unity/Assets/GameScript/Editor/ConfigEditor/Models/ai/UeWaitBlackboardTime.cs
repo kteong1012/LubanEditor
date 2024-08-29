@@ -19,8 +19,6 @@ namespace editor.cfg.ai
 
 public sealed class UeWaitBlackboardTime :  ai.Task 
 {
-    private Action<Luban.EditorBeanBase> _setChangeAction;
-    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
     public UeWaitBlackboardTime(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
         _setChangeAction = setChangeAction;

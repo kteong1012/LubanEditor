@@ -22,8 +22,6 @@ namespace editor.cfg.test2
 /// </summary>
 public sealed class Rectangle :  test.Shape 
 {
-    private Action<Luban.EditorBeanBase> _setChangeAction;
-    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
     public Rectangle(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
         _setChangeAction = setChangeAction;

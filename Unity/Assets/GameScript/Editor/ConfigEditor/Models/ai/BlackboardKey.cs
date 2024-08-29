@@ -19,8 +19,6 @@ namespace editor.cfg.ai
 
 public sealed class BlackboardKey :  Luban.EditorBeanBase 
 {
-    private Action<Luban.EditorBeanBase> _setChangeAction;
-    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
     public BlackboardKey(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
         _setChangeAction = setChangeAction;

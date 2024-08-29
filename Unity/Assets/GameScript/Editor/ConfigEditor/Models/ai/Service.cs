@@ -19,8 +19,6 @@ namespace editor.cfg.ai
 
 public abstract class Service :  ai.Node 
 {
-    private Action<Luban.EditorBeanBase> _setChangeAction;
-    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
     public Service(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
         _setChangeAction = setChangeAction;

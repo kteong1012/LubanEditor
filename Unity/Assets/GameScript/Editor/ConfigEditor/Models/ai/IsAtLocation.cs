@@ -19,8 +19,6 @@ namespace editor.cfg.ai
 
 public sealed class IsAtLocation :  ai.Decorator 
 {
-    private Action<Luban.EditorBeanBase> _setChangeAction;
-    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
     public IsAtLocation(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
         _setChangeAction = setChangeAction;

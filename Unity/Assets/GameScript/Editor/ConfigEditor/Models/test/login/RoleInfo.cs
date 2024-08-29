@@ -19,8 +19,6 @@ namespace editor.cfg.test.login
 
 public sealed class RoleInfo :  test.DemoD3 
 {
-    private Action<Luban.EditorBeanBase> _setChangeAction;
-    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
     public RoleInfo(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
         _setChangeAction = setChangeAction;

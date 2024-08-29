@@ -19,8 +19,6 @@ namespace editor.cfg
 
 public sealed class vec3 :  Luban.EditorBeanBase 
 {
-    private Action<Luban.EditorBeanBase> _setChangeAction;
-    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
     public vec3(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
         _setChangeAction = setChangeAction;

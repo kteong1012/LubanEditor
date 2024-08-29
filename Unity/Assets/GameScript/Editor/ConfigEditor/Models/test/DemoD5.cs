@@ -19,8 +19,6 @@ namespace editor.cfg.test
 
 public sealed class DemoD5 :  test.DemoDynamic 
 {
-    private Action<Luban.EditorBeanBase> _setChangeAction;
-    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
     public DemoD5(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
         _setChangeAction = setChangeAction;

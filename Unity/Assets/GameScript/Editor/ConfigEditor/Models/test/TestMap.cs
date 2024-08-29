@@ -19,8 +19,6 @@ namespace editor.cfg.test
 
 public sealed class TestMap :  Luban.EditorBeanBase 
 {
-    private Action<Luban.EditorBeanBase> _setChangeAction;
-    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
     public TestMap(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
         _setChangeAction = setChangeAction;

@@ -19,8 +19,6 @@ namespace editor.cfg.l10n
 
 public sealed class L10NDemo :  Luban.EditorBeanBase 
 {
-    private Action<Luban.EditorBeanBase> _setChangeAction;
-    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
     public L10NDemo(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
         _setChangeAction = setChangeAction;

@@ -19,8 +19,6 @@ namespace editor.cfg.ai
 
 public sealed class FloatKeyData :  ai.KeyData 
 {
-    private Action<Luban.EditorBeanBase> _setChangeAction;
-    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
     public FloatKeyData(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
         _setChangeAction = setChangeAction;

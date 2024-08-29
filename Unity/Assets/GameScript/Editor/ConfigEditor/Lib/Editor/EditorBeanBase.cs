@@ -14,6 +14,9 @@ namespace Luban
 
         public abstract void Render();
 
+        protected Action<Luban.EditorBeanBase> _setChangeAction;
+        public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+
         public void LoadJsonFile(string file)
         {
             string jsonText = System.IO.File.ReadAllText(file, Encoding.UTF8);
