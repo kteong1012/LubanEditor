@@ -12,14 +12,18 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.test
 {
 
 public sealed class InnerGroup :  Luban.EditorBeanBase 
 {
-    public InnerGroup()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public InnerGroup(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -114,6 +118,16 @@ this.y2 = UnityEditor.EditorGUILayout.IntField(this.y2, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("y3", "y3"), GUILayout.Width(100));
+}
+else
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("y3", ""), GUILayout.Width(100));
+}
+this.y3 = UnityEditor.EditorGUILayout.IntField(this.y3, GUILayout.Width(150));
+UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
+if (ConfigEditorSettings.showComment)
+{
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("y4", "y4"), GUILayout.Width(100));
 }
 else
@@ -123,8 +137,7 @@ else
 this.y4 = UnityEditor.EditorGUILayout.IntField(this.y4, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static InnerGroup LoadJsonInnerGroup(SimpleJSON.JSONNode _json)
+    public static InnerGroup LoadJsonInnerGroup(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         InnerGroup obj = new test.InnerGroup();
         obj.LoadJson((SimpleJSON.JSONObject)_json);
@@ -146,6 +159,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
         return "{ "
         + "y1:" + y1 + ","
         + "y2:" + y2 + ","
+        + "y3:" + y3 + ","
         + "y4:" + y4 + ","
         + "}";
     }

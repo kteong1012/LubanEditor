@@ -12,6 +12,7 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.test
 {
@@ -21,8 +22,11 @@ namespace editor.cfg.test
 /// </summary>
 public sealed class TestExcelBean1 :  Luban.EditorBeanBase 
 {
-    public TestExcelBean1()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public TestExcelBean1(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
             x2 = "";
     }
 
@@ -137,11 +141,10 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x4", "最差品质"), GUILayout.Width(100));
 }
-this.x4 = UnityEditor.EditorGUILayout.FloatField(this.x4, GUILayout.Width(150));
+this.x4 = UnityEditor.EditorGUILayout.DoubleField(this.x4, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static TestExcelBean1 LoadJsonTestExcelBean1(SimpleJSON.JSONNode _json)
+    public static TestExcelBean1 LoadJsonTestExcelBean1(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         TestExcelBean1 obj = new test.TestExcelBean1();
         obj.LoadJson((SimpleJSON.JSONObject)_json);
@@ -168,7 +171,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     /// <summary>
     /// 最差品质
     /// </summary>
-    public float x4;
+    public double x4;
 
     public override string ToString()
     {

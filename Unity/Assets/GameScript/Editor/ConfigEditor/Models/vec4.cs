@@ -12,14 +12,18 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg
 {
 
 public sealed class vec4 :  Luban.EditorBeanBase 
 {
-    public vec4()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public vec4(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -100,7 +104,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x", ""), GUILayout.Width(100));
 }
-this.x = UnityEditor.EditorGUILayout.FloatField(this.x, GUILayout.Width(150));
+this.x = UnityEditor.EditorGUILayout.DoubleField(this.x, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -110,7 +114,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("y", ""), GUILayout.Width(100));
 }
-this.y = UnityEditor.EditorGUILayout.FloatField(this.y, GUILayout.Width(150));
+this.y = UnityEditor.EditorGUILayout.DoubleField(this.y, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -120,7 +124,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("z", ""), GUILayout.Width(100));
 }
-this.z = UnityEditor.EditorGUILayout.FloatField(this.z, GUILayout.Width(150));
+this.z = UnityEditor.EditorGUILayout.DoubleField(this.z, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -130,11 +134,10 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("w", ""), GUILayout.Width(100));
 }
-this.w = UnityEditor.EditorGUILayout.FloatField(this.w, GUILayout.Width(150));
+this.w = UnityEditor.EditorGUILayout.DoubleField(this.w, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static vec4 LoadJsonvec4(SimpleJSON.JSONNode _json)
+    public static vec4 LoadJsonvec4(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         vec4 obj = new vec4();
         obj.LoadJson((SimpleJSON.JSONObject)_json);
@@ -146,10 +149,10 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
         _obj.SaveJson((SimpleJSON.JSONObject)_json);
     }
 
-    public float x;
-    public float y;
-    public float z;
-    public float w;
+    public double x;
+    public double y;
+    public double z;
+    public double w;
 
     public override string ToString()
     {

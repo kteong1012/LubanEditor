@@ -12,6 +12,7 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.test2
 {
@@ -21,8 +22,11 @@ namespace editor.cfg.test2
 /// </summary>
 public sealed class Rectangle :  test.Shape 
 {
-    public Rectangle()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public Rectangle(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
+        _setChangeAction = setChangeAction;
     }
     public override string GetTypeStr() => TYPE_STR;
     private const string TYPE_STR = "test2.Rectangle";
@@ -77,7 +81,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("width", "宽度"), GUILayout.Width(100));
 }
-this.width = UnityEditor.EditorGUILayout.FloatField(this.width, GUILayout.Width(150));
+this.width = UnityEditor.EditorGUILayout.DoubleField(this.width, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -87,11 +91,10 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("height", "高度"), GUILayout.Width(100));
 }
-this.height = UnityEditor.EditorGUILayout.FloatField(this.height, GUILayout.Width(150));
+this.height = UnityEditor.EditorGUILayout.DoubleField(this.height, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static Rectangle LoadJsonRectangle(SimpleJSON.JSONNode _json)
+    public static Rectangle LoadJsonRectangle(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         Rectangle obj = new test2.Rectangle();
         obj.LoadJson((SimpleJSON.JSONObject)_json);
@@ -106,11 +109,11 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     /// <summary>
     /// 宽度
     /// </summary>
-    public float width;
+    public double width;
     /// <summary>
     /// 高度
     /// </summary>
-    public float height;
+    public double height;
 
     public override string ToString()
     {

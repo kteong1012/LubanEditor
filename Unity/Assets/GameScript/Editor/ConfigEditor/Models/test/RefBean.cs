@@ -12,18 +12,22 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.test
 {
 
 public sealed class RefBean :  test.RefDynamicBase 
 {
-    public RefBean()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public RefBean(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
+        _setChangeAction = setChangeAction;
             arr = new System.Collections.Generic.List<int>();
     }
     public override string GetTypeStr() => TYPE_STR;
-    private const string TYPE_STR = "test.RefBean";
+    private const string TYPE_STR = "RefBean";
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
     {
@@ -60,7 +64,7 @@ public sealed class RefBean :  test.RefDynamicBase
 
         if (arr != null)
         {
-            { var __cjson0 = new JSONArray(); foreach(var __e0 in arr) { __cjson0["null"] = new JSONNumber(__e0); } _json["arr"] = __cjson0; }
+            { var __cjson0 = new JSONArray(); foreach(var __e0 in arr) { __cjson0["null"] = new JSONNumber(__e0); } __cjson0.Inline = __cjson0.Count == 0; _json["arr"] = __cjson0; }
         }
     }
 
@@ -126,8 +130,7 @@ else
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static RefBean LoadJsonRefBean(SimpleJSON.JSONNode _json)
+    public static RefBean LoadJsonRefBean(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         RefBean obj = new test.RefBean();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

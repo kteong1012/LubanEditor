@@ -12,17 +12,21 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.test
 {
 
 public sealed class Item :  test.ItemBase 
 {
-    public Item()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public Item(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
+        _setChangeAction = setChangeAction;
     }
     public override string GetTypeStr() => TYPE_STR;
-    private const string TYPE_STR = "test.Item";
+    private const string TYPE_STR = "Item";
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
     {
@@ -165,8 +169,7 @@ else
 this.price = UnityEditor.EditorGUILayout.IntField(this.price, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static Item LoadJsonItem(SimpleJSON.JSONNode _json)
+    public static Item LoadJsonItem(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         Item obj = new test.Item();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

@@ -12,17 +12,21 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.ai
 {
 
 public abstract class Task :  ai.FlowNode 
 {
-    public Task()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public Task(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
+        _setChangeAction = setChangeAction;
     }
     public override string GetTypeStr() => TYPE_STR;
-    private const string TYPE_STR = "ai.Task";
+    private const string TYPE_STR = "Task";
 
     private int _typeIndex = -1;
     public new int TypeIndex
@@ -35,39 +39,74 @@ public abstract class Task :  ai.FlowNode
                 return;
             }
             _typeIndex = value;
-            Instance = Create(Types[value]);
+            var obj = Create(Types[value], _setChangeAction);
+            _setChangeAction(obj);
         }
     }
-    public new Task Instance { get; set;}
     public new static List<string> Types = new List<string>()
     {
-        "ai.UeWait",
-        "ai.UeWaitBlackboardTime",
-        "ai.MoveToTarget",
-        "ai.ChooseSkill",
-        "ai.MoveToRandomLocation",
-        "ai.MoveToLocation",
-        "ai.DebugPrint",
+        "UeWait",
+        "UeWaitBlackboardTime",
+        "MoveToTarget",
+        "ChooseSkill",
+        "MoveToRandomLocation",
+        "MoveToLocation",
+        "DebugPrint",
     };
 
-    public new static Task Create(string type)
+    public new static Task Create(string type, Action<Luban.EditorBeanBase> setChangeAction)
     {
         switch (type)
         {
             case "ai.UeWait":   
-            case "UeWait":return new ai.UeWait();
+            case "UeWait":
+            {
+                var obj = new ai.UeWait(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.UeWaitBlackboardTime":   
-            case "UeWaitBlackboardTime":return new ai.UeWaitBlackboardTime();
+            case "UeWaitBlackboardTime":
+            {
+                var obj = new ai.UeWaitBlackboardTime(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.MoveToTarget":   
-            case "MoveToTarget":return new ai.MoveToTarget();
+            case "MoveToTarget":
+            {
+                var obj = new ai.MoveToTarget(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.ChooseSkill":   
-            case "ChooseSkill":return new ai.ChooseSkill();
+            case "ChooseSkill":
+            {
+                var obj = new ai.ChooseSkill(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.MoveToRandomLocation":   
-            case "MoveToRandomLocation":return new ai.MoveToRandomLocation();
+            case "MoveToRandomLocation":
+            {
+                var obj = new ai.MoveToRandomLocation(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.MoveToLocation":   
-            case "MoveToLocation":return new ai.MoveToLocation();
+            case "MoveToLocation":
+            {
+                var obj = new ai.MoveToLocation(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.DebugPrint":   
-            case "DebugPrint":return new ai.DebugPrint();
+            case "DebugPrint":
+            {
+                var obj = new ai.DebugPrint(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             default: return null;
         }
     }
@@ -88,30 +127,64 @@ public abstract class Task :  ai.FlowNode
     UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
     this.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.TypeIndex, __list0, GUILayout.Width(200));
     UnityEditor.EditorGUILayout.EndHorizontal();
-    this.Instance.Render();
+    this?.Render();
     UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static Task LoadJsonTask(SimpleJSON.JSONNode _json)
+    public static Task LoadJsonTask(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         string type = _json["$type"];
         Task obj;
         switch (type)
         {
             case "ai.UeWait":   
-            case "UeWait":obj = new ai.UeWait(); break;
+            case "UeWait":
+            {
+                obj = new ai.UeWait(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("UeWait");
+                break;
+            }
             case "ai.UeWaitBlackboardTime":   
-            case "UeWaitBlackboardTime":obj = new ai.UeWaitBlackboardTime(); break;
+            case "UeWaitBlackboardTime":
+            {
+                obj = new ai.UeWaitBlackboardTime(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("UeWaitBlackboardTime");
+                break;
+            }
             case "ai.MoveToTarget":   
-            case "MoveToTarget":obj = new ai.MoveToTarget(); break;
+            case "MoveToTarget":
+            {
+                obj = new ai.MoveToTarget(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("MoveToTarget");
+                break;
+            }
             case "ai.ChooseSkill":   
-            case "ChooseSkill":obj = new ai.ChooseSkill(); break;
+            case "ChooseSkill":
+            {
+                obj = new ai.ChooseSkill(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("ChooseSkill");
+                break;
+            }
             case "ai.MoveToRandomLocation":   
-            case "MoveToRandomLocation":obj = new ai.MoveToRandomLocation(); break;
+            case "MoveToRandomLocation":
+            {
+                obj = new ai.MoveToRandomLocation(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("MoveToRandomLocation");
+                break;
+            }
             case "ai.MoveToLocation":   
-            case "MoveToLocation":obj = new ai.MoveToLocation(); break;
+            case "MoveToLocation":
+            {
+                obj = new ai.MoveToLocation(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("MoveToLocation");
+                break;
+            }
             case "ai.DebugPrint":   
-            case "DebugPrint":obj = new ai.DebugPrint(); break;
+            case "DebugPrint":
+            {
+                obj = new ai.DebugPrint(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("DebugPrint");
+                break;
+            }
             default: throw new SerializationException();
         }
         obj.LoadJson((SimpleJSON.JSONObject)_json);
@@ -120,8 +193,8 @@ public abstract class Task :  ai.FlowNode
         
     public static void SaveJsonTask(Task _obj, SimpleJSON.JSONNode _json)
     {
-        _json["$type"] = _obj.Instance.GetTypeStr();
-        _obj.Instance.SaveJson((SimpleJSON.JSONObject)_json);
+        _json["$type"] = _obj.GetTypeStr();
+        _obj.SaveJson((SimpleJSON.JSONObject)_json);
     }
 
     public bool ignoreRestartSelf;

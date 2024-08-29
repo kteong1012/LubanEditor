@@ -12,14 +12,18 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.common
 {
 
 public sealed class OneDayTimeRange :  Luban.EditorBeanBase 
 {
-    public OneDayTimeRange()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public OneDayTimeRange(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
             startTime = new editor.cfg.common.TimeOfDay();
             endTime = new editor.cfg.common.TimeOfDay();
     }
@@ -35,6 +39,7 @@ public sealed class OneDayTimeRange :  Luban.EditorBeanBase
             else
             {
                 startTime = new editor.cfg.common.TimeOfDay();
+                startTime.SetChangeAction((__x) => startTime = __x as editor.cfg.common.TimeOfDay);
             }
         }
         
@@ -47,6 +52,7 @@ public sealed class OneDayTimeRange :  Luban.EditorBeanBase
             else
             {
                 endTime = new editor.cfg.common.TimeOfDay();
+                endTime.SetChangeAction((__x) => endTime = __x as editor.cfg.common.TimeOfDay);
             }
         }
         
@@ -157,8 +163,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static OneDayTimeRange LoadJsonOneDayTimeRange(SimpleJSON.JSONNode _json)
+    public static OneDayTimeRange LoadJsonOneDayTimeRange(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         OneDayTimeRange obj = new common.OneDayTimeRange();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

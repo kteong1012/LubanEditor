@@ -12,19 +12,23 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.ai
 {
 
 public sealed class DistanceLessThan :  ai.Decorator 
 {
-    public DistanceLessThan()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public DistanceLessThan(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
+        _setChangeAction = setChangeAction;
             actor1Key = "";
             actor2Key = "";
     }
     public override string GetTypeStr() => TYPE_STR;
-    private const string TYPE_STR = "ai.DistanceLessThan";
+    private const string TYPE_STR = "DistanceLessThan";
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
     {
@@ -207,7 +211,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("distance", ""), GUILayout.Width(100));
 }
-this.distance = UnityEditor.EditorGUILayout.FloatField(this.distance, GUILayout.Width(150));
+this.distance = UnityEditor.EditorGUILayout.DoubleField(this.distance, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -220,8 +224,7 @@ else
 this.reverseResult = UnityEditor.EditorGUILayout.Toggle(this.reverseResult, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static DistanceLessThan LoadJsonDistanceLessThan(SimpleJSON.JSONNode _json)
+    public static DistanceLessThan LoadJsonDistanceLessThan(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         DistanceLessThan obj = new ai.DistanceLessThan();
         obj.LoadJson((SimpleJSON.JSONObject)_json);
@@ -235,7 +238,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
 
     public string actor1Key;
     public string actor2Key;
-    public float distance;
+    public double distance;
     public bool reverseResult;
 
     public override string ToString()

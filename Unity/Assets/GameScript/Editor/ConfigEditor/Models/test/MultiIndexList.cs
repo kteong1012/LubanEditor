@@ -12,14 +12,18 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.test
 {
 
 public sealed class MultiIndexList :  Luban.EditorBeanBase 
 {
-    public MultiIndexList()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public MultiIndexList(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
             id3 = "";
             desc = "";
     }
@@ -165,8 +169,7 @@ else
 this.desc = UnityEditor.EditorGUILayout.TextField(this.desc, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static MultiIndexList LoadJsonMultiIndexList(SimpleJSON.JSONNode _json)
+    public static MultiIndexList LoadJsonMultiIndexList(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         MultiIndexList obj = new test.MultiIndexList();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

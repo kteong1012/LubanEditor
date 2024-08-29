@@ -12,16 +12,20 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.test
 {
 
 public sealed class DateTimeRange :  Luban.EditorBeanBase 
 {
-    public DateTimeRange()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public DateTimeRange(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
-            startTime = "1970-01-01 00:00:00";
-            endTime = "1970-01-01 00:00:00";
+        _setChangeAction = setChangeAction;
+            startTime = 0;
+            endTime = 0;
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -45,7 +49,7 @@ public sealed class DateTimeRange :  Luban.EditorBeanBase
             }
             else
             {
-                startTime = "1970-01-01 00:00:00";
+                startTime = 0;
             }
         }
         
@@ -68,7 +72,7 @@ public sealed class DateTimeRange :  Luban.EditorBeanBase
             }
             else
             {
-                endTime = "1970-01-01 00:00:00";
+                endTime = 0;
             }
         }
         
@@ -77,10 +81,10 @@ public sealed class DateTimeRange :  Luban.EditorBeanBase
     public override void SaveJson(SimpleJSON.JSONObject _json)
     {
         {
-            _json["start_time"] = new JSONString(startTime);
+            _json["start_time"] = new JSONNumber(startTime);
         }
         {
-            _json["end_time"] = new JSONString(endTime);
+            _json["end_time"] = new JSONNumber(endTime);
         }
     }
 
@@ -98,7 +102,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("start_time", ""), GUILayout.Width(100));
 }
-this.startTime = UnityEditor.EditorGUILayout.TextField(this.startTime, GUILayout.Width(150));
+this.startTime = UnityEditor.EditorGUILayout.LongField(this.startTime, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -108,11 +112,10 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("end_time", ""), GUILayout.Width(100));
 }
-this.endTime = UnityEditor.EditorGUILayout.TextField(this.endTime, GUILayout.Width(150));
+this.endTime = UnityEditor.EditorGUILayout.LongField(this.endTime, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static DateTimeRange LoadJsonDateTimeRange(SimpleJSON.JSONNode _json)
+    public static DateTimeRange LoadJsonDateTimeRange(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         DateTimeRange obj = new test.DateTimeRange();
         obj.LoadJson((SimpleJSON.JSONObject)_json);
@@ -124,8 +127,8 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
         _obj.SaveJson((SimpleJSON.JSONObject)_json);
     }
 
-    public string startTime;
-    public string endTime;
+    public long startTime;
+    public long endTime;
 
     public override string ToString()
     {

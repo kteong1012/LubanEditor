@@ -12,18 +12,22 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.ai
 {
 
 public sealed class BinaryOperator :  ai.KeyQueryOperator 
 {
-    public BinaryOperator()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public BinaryOperator(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
+        _setChangeAction = setChangeAction;
             oper = editor.cfg.ai.EOperator.IS_EQUAL_TO;
     }
     public override string GetTypeStr() => TYPE_STR;
-    private const string TYPE_STR = "ai.BinaryOperator";
+    private const string TYPE_STR = "BinaryOperator";
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
     {
@@ -48,14 +52,13 @@ public sealed class BinaryOperator :  ai.KeyQueryOperator
                 {
                     throw new SerializationException();
                 }
-                data = editor.cfg.ai.KeyData.LoadJsonKeyData(_fieldJson);
+                data = editor.cfg.ai.KeyData.LoadJsonKeyData(_fieldJson, (__newIns0)=>{ data = __newIns0 as ai.KeyData ; });
                 var __index0 = editor.cfg.ai.KeyData.Types.IndexOf(data.GetTypeStr());
                 if (__index0 == -1)
                 {
                     throw new SerializationException();
                 }
                 data.TypeIndex = __index0;
-                data.Instance = editor.cfg.ai.KeyData.LoadJsonKeyData(_fieldJson);
             }
             else
             {
@@ -113,13 +116,12 @@ else
     UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
     this.data.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.data.TypeIndex, __list1, GUILayout.Width(200));
     UnityEditor.EditorGUILayout.EndHorizontal();
-    this.data.Instance.Render();
+    this.data?.Render();
     UnityEditor.EditorGUILayout.EndVertical();
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static BinaryOperator LoadJsonBinaryOperator(SimpleJSON.JSONNode _json)
+    public static BinaryOperator LoadJsonBinaryOperator(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         BinaryOperator obj = new ai.BinaryOperator();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

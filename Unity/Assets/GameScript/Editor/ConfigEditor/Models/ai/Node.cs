@@ -12,14 +12,18 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.ai
 {
 
 public abstract class Node :  Luban.EditorBeanBase 
 {
-    public Node()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public Node(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
             nodeName = "";
     }
     public abstract string GetTypeStr();
@@ -35,87 +39,202 @@ public abstract class Node :  Luban.EditorBeanBase
                 return;
             }
             _typeIndex = value;
-            Instance = Create(Types[value]);
+            var obj = Create(Types[value], _setChangeAction);
+            _setChangeAction(obj);
         }
     }
-    public Node Instance { get; set;}
     public static List<string> Types = new List<string>()
     {
-        "ai.UeSetDefaultFocus",
-        "ai.ExecuteTimeStatistic",
-        "ai.ChooseTarget",
-        "ai.KeepFaceTarget",
-        "ai.GetOwnerPlayer",
-        "ai.UpdateDailyBehaviorProps",
-        "ai.UeLoop",
-        "ai.UeCooldown",
-        "ai.UeTimeLimit",
-        "ai.UeBlackboard",
-        "ai.UeForceSuccess",
-        "ai.IsAtLocation",
-        "ai.DistanceLessThan",
-        "ai.Sequence",
-        "ai.Selector",
-        "ai.SimpleParallel",
-        "ai.UeWait",
-        "ai.UeWaitBlackboardTime",
-        "ai.MoveToTarget",
-        "ai.ChooseSkill",
-        "ai.MoveToRandomLocation",
-        "ai.MoveToLocation",
-        "ai.DebugPrint",
+        "UeSetDefaultFocus",
+        "ExecuteTimeStatistic",
+        "ChooseTarget",
+        "KeepFaceTarget",
+        "GetOwnerPlayer",
+        "UpdateDailyBehaviorProps",
+        "UeLoop",
+        "UeCooldown",
+        "UeTimeLimit",
+        "UeBlackboard",
+        "UeForceSuccess",
+        "IsAtLocation",
+        "DistanceLessThan",
+        "Sequence",
+        "Selector",
+        "SimpleParallel",
+        "UeWait",
+        "UeWaitBlackboardTime",
+        "MoveToTarget",
+        "ChooseSkill",
+        "MoveToRandomLocation",
+        "MoveToLocation",
+        "DebugPrint",
     };
 
-    public static Node Create(string type)
+    public static Node Create(string type, Action<Luban.EditorBeanBase> setChangeAction)
     {
         switch (type)
         {
             case "ai.UeSetDefaultFocus":   
-            case "UeSetDefaultFocus":return new ai.UeSetDefaultFocus();
+            case "UeSetDefaultFocus":
+            {
+                var obj = new ai.UeSetDefaultFocus(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.ExecuteTimeStatistic":   
-            case "ExecuteTimeStatistic":return new ai.ExecuteTimeStatistic();
+            case "ExecuteTimeStatistic":
+            {
+                var obj = new ai.ExecuteTimeStatistic(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.ChooseTarget":   
-            case "ChooseTarget":return new ai.ChooseTarget();
+            case "ChooseTarget":
+            {
+                var obj = new ai.ChooseTarget(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.KeepFaceTarget":   
-            case "KeepFaceTarget":return new ai.KeepFaceTarget();
+            case "KeepFaceTarget":
+            {
+                var obj = new ai.KeepFaceTarget(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.GetOwnerPlayer":   
-            case "GetOwnerPlayer":return new ai.GetOwnerPlayer();
+            case "GetOwnerPlayer":
+            {
+                var obj = new ai.GetOwnerPlayer(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.UpdateDailyBehaviorProps":   
-            case "UpdateDailyBehaviorProps":return new ai.UpdateDailyBehaviorProps();
+            case "UpdateDailyBehaviorProps":
+            {
+                var obj = new ai.UpdateDailyBehaviorProps(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.UeLoop":   
-            case "UeLoop":return new ai.UeLoop();
+            case "UeLoop":
+            {
+                var obj = new ai.UeLoop(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.UeCooldown":   
-            case "UeCooldown":return new ai.UeCooldown();
+            case "UeCooldown":
+            {
+                var obj = new ai.UeCooldown(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.UeTimeLimit":   
-            case "UeTimeLimit":return new ai.UeTimeLimit();
+            case "UeTimeLimit":
+            {
+                var obj = new ai.UeTimeLimit(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.UeBlackboard":   
-            case "UeBlackboard":return new ai.UeBlackboard();
+            case "UeBlackboard":
+            {
+                var obj = new ai.UeBlackboard(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.UeForceSuccess":   
-            case "UeForceSuccess":return new ai.UeForceSuccess();
+            case "UeForceSuccess":
+            {
+                var obj = new ai.UeForceSuccess(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.IsAtLocation":   
-            case "IsAtLocation":return new ai.IsAtLocation();
+            case "IsAtLocation":
+            {
+                var obj = new ai.IsAtLocation(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.DistanceLessThan":   
-            case "DistanceLessThan":return new ai.DistanceLessThan();
+            case "DistanceLessThan":
+            {
+                var obj = new ai.DistanceLessThan(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.Sequence":   
-            case "Sequence":return new ai.Sequence();
+            case "Sequence":
+            {
+                var obj = new ai.Sequence(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.Selector":   
-            case "Selector":return new ai.Selector();
+            case "Selector":
+            {
+                var obj = new ai.Selector(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.SimpleParallel":   
-            case "SimpleParallel":return new ai.SimpleParallel();
+            case "SimpleParallel":
+            {
+                var obj = new ai.SimpleParallel(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.UeWait":   
-            case "UeWait":return new ai.UeWait();
+            case "UeWait":
+            {
+                var obj = new ai.UeWait(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.UeWaitBlackboardTime":   
-            case "UeWaitBlackboardTime":return new ai.UeWaitBlackboardTime();
+            case "UeWaitBlackboardTime":
+            {
+                var obj = new ai.UeWaitBlackboardTime(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.MoveToTarget":   
-            case "MoveToTarget":return new ai.MoveToTarget();
+            case "MoveToTarget":
+            {
+                var obj = new ai.MoveToTarget(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.ChooseSkill":   
-            case "ChooseSkill":return new ai.ChooseSkill();
+            case "ChooseSkill":
+            {
+                var obj = new ai.ChooseSkill(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.MoveToRandomLocation":   
-            case "MoveToRandomLocation":return new ai.MoveToRandomLocation();
+            case "MoveToRandomLocation":
+            {
+                var obj = new ai.MoveToRandomLocation(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.MoveToLocation":   
-            case "MoveToLocation":return new ai.MoveToLocation();
+            case "MoveToLocation":
+            {
+                var obj = new ai.MoveToLocation(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.DebugPrint":   
-            case "DebugPrint":return new ai.DebugPrint();
+            case "DebugPrint":
+            {
+                var obj = new ai.DebugPrint(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             default: return null;
         }
     }
@@ -136,62 +255,176 @@ public abstract class Node :  Luban.EditorBeanBase
     UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
     this.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.TypeIndex, __list0, GUILayout.Width(200));
     UnityEditor.EditorGUILayout.EndHorizontal();
-    this.Instance.Render();
+    this?.Render();
     UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static Node LoadJsonNode(SimpleJSON.JSONNode _json)
+    public static Node LoadJsonNode(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         string type = _json["$type"];
         Node obj;
         switch (type)
         {
             case "ai.UeSetDefaultFocus":   
-            case "UeSetDefaultFocus":obj = new ai.UeSetDefaultFocus(); break;
+            case "UeSetDefaultFocus":
+            {
+                obj = new ai.UeSetDefaultFocus(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("UeSetDefaultFocus");
+                break;
+            }
             case "ai.ExecuteTimeStatistic":   
-            case "ExecuteTimeStatistic":obj = new ai.ExecuteTimeStatistic(); break;
+            case "ExecuteTimeStatistic":
+            {
+                obj = new ai.ExecuteTimeStatistic(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("ExecuteTimeStatistic");
+                break;
+            }
             case "ai.ChooseTarget":   
-            case "ChooseTarget":obj = new ai.ChooseTarget(); break;
+            case "ChooseTarget":
+            {
+                obj = new ai.ChooseTarget(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("ChooseTarget");
+                break;
+            }
             case "ai.KeepFaceTarget":   
-            case "KeepFaceTarget":obj = new ai.KeepFaceTarget(); break;
+            case "KeepFaceTarget":
+            {
+                obj = new ai.KeepFaceTarget(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("KeepFaceTarget");
+                break;
+            }
             case "ai.GetOwnerPlayer":   
-            case "GetOwnerPlayer":obj = new ai.GetOwnerPlayer(); break;
+            case "GetOwnerPlayer":
+            {
+                obj = new ai.GetOwnerPlayer(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("GetOwnerPlayer");
+                break;
+            }
             case "ai.UpdateDailyBehaviorProps":   
-            case "UpdateDailyBehaviorProps":obj = new ai.UpdateDailyBehaviorProps(); break;
+            case "UpdateDailyBehaviorProps":
+            {
+                obj = new ai.UpdateDailyBehaviorProps(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("UpdateDailyBehaviorProps");
+                break;
+            }
             case "ai.UeLoop":   
-            case "UeLoop":obj = new ai.UeLoop(); break;
+            case "UeLoop":
+            {
+                obj = new ai.UeLoop(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("UeLoop");
+                break;
+            }
             case "ai.UeCooldown":   
-            case "UeCooldown":obj = new ai.UeCooldown(); break;
+            case "UeCooldown":
+            {
+                obj = new ai.UeCooldown(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("UeCooldown");
+                break;
+            }
             case "ai.UeTimeLimit":   
-            case "UeTimeLimit":obj = new ai.UeTimeLimit(); break;
+            case "UeTimeLimit":
+            {
+                obj = new ai.UeTimeLimit(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("UeTimeLimit");
+                break;
+            }
             case "ai.UeBlackboard":   
-            case "UeBlackboard":obj = new ai.UeBlackboard(); break;
+            case "UeBlackboard":
+            {
+                obj = new ai.UeBlackboard(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("UeBlackboard");
+                break;
+            }
             case "ai.UeForceSuccess":   
-            case "UeForceSuccess":obj = new ai.UeForceSuccess(); break;
+            case "UeForceSuccess":
+            {
+                obj = new ai.UeForceSuccess(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("UeForceSuccess");
+                break;
+            }
             case "ai.IsAtLocation":   
-            case "IsAtLocation":obj = new ai.IsAtLocation(); break;
+            case "IsAtLocation":
+            {
+                obj = new ai.IsAtLocation(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("IsAtLocation");
+                break;
+            }
             case "ai.DistanceLessThan":   
-            case "DistanceLessThan":obj = new ai.DistanceLessThan(); break;
+            case "DistanceLessThan":
+            {
+                obj = new ai.DistanceLessThan(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("DistanceLessThan");
+                break;
+            }
             case "ai.Sequence":   
-            case "Sequence":obj = new ai.Sequence(); break;
+            case "Sequence":
+            {
+                obj = new ai.Sequence(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("Sequence");
+                break;
+            }
             case "ai.Selector":   
-            case "Selector":obj = new ai.Selector(); break;
+            case "Selector":
+            {
+                obj = new ai.Selector(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("Selector");
+                break;
+            }
             case "ai.SimpleParallel":   
-            case "SimpleParallel":obj = new ai.SimpleParallel(); break;
+            case "SimpleParallel":
+            {
+                obj = new ai.SimpleParallel(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("SimpleParallel");
+                break;
+            }
             case "ai.UeWait":   
-            case "UeWait":obj = new ai.UeWait(); break;
+            case "UeWait":
+            {
+                obj = new ai.UeWait(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("UeWait");
+                break;
+            }
             case "ai.UeWaitBlackboardTime":   
-            case "UeWaitBlackboardTime":obj = new ai.UeWaitBlackboardTime(); break;
+            case "UeWaitBlackboardTime":
+            {
+                obj = new ai.UeWaitBlackboardTime(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("UeWaitBlackboardTime");
+                break;
+            }
             case "ai.MoveToTarget":   
-            case "MoveToTarget":obj = new ai.MoveToTarget(); break;
+            case "MoveToTarget":
+            {
+                obj = new ai.MoveToTarget(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("MoveToTarget");
+                break;
+            }
             case "ai.ChooseSkill":   
-            case "ChooseSkill":obj = new ai.ChooseSkill(); break;
+            case "ChooseSkill":
+            {
+                obj = new ai.ChooseSkill(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("ChooseSkill");
+                break;
+            }
             case "ai.MoveToRandomLocation":   
-            case "MoveToRandomLocation":obj = new ai.MoveToRandomLocation(); break;
+            case "MoveToRandomLocation":
+            {
+                obj = new ai.MoveToRandomLocation(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("MoveToRandomLocation");
+                break;
+            }
             case "ai.MoveToLocation":   
-            case "MoveToLocation":obj = new ai.MoveToLocation(); break;
+            case "MoveToLocation":
+            {
+                obj = new ai.MoveToLocation(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("MoveToLocation");
+                break;
+            }
             case "ai.DebugPrint":   
-            case "DebugPrint":obj = new ai.DebugPrint(); break;
+            case "DebugPrint":
+            {
+                obj = new ai.DebugPrint(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("DebugPrint");
+                break;
+            }
             default: throw new SerializationException();
         }
         obj.LoadJson((SimpleJSON.JSONObject)_json);
@@ -200,8 +433,8 @@ public abstract class Node :  Luban.EditorBeanBase
         
     public static void SaveJsonNode(Node _obj, SimpleJSON.JSONNode _json)
     {
-        _json["$type"] = _obj.Instance.GetTypeStr();
-        _obj.Instance.SaveJson((SimpleJSON.JSONObject)_json);
+        _json["$type"] = _obj.GetTypeStr();
+        _obj.SaveJson((SimpleJSON.JSONObject)_json);
     }
 
     public int id;

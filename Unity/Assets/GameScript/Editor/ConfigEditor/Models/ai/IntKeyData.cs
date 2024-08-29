@@ -12,17 +12,21 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.ai
 {
 
 public sealed class IntKeyData :  ai.KeyData 
 {
-    public IntKeyData()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public IntKeyData(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
+        _setChangeAction = setChangeAction;
     }
     public override string GetTypeStr() => TYPE_STR;
-    private const string TYPE_STR = "ai.IntKeyData";
+    private const string TYPE_STR = "IntKeyData";
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
     {
@@ -63,8 +67,7 @@ else
 this.value = UnityEditor.EditorGUILayout.IntField(this.value, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static IntKeyData LoadJsonIntKeyData(SimpleJSON.JSONNode _json)
+    public static IntKeyData LoadJsonIntKeyData(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         IntKeyData obj = new ai.IntKeyData();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

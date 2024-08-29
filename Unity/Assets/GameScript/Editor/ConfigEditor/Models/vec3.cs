@@ -12,14 +12,18 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg
 {
 
 public sealed class vec3 :  Luban.EditorBeanBase 
 {
-    public vec3()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public vec3(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -86,7 +90,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x", ""), GUILayout.Width(100));
 }
-this.x = UnityEditor.EditorGUILayout.FloatField(this.x, GUILayout.Width(150));
+this.x = UnityEditor.EditorGUILayout.DoubleField(this.x, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -96,7 +100,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("y", ""), GUILayout.Width(100));
 }
-this.y = UnityEditor.EditorGUILayout.FloatField(this.y, GUILayout.Width(150));
+this.y = UnityEditor.EditorGUILayout.DoubleField(this.y, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -106,11 +110,10 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("z", ""), GUILayout.Width(100));
 }
-this.z = UnityEditor.EditorGUILayout.FloatField(this.z, GUILayout.Width(150));
+this.z = UnityEditor.EditorGUILayout.DoubleField(this.z, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static vec3 LoadJsonvec3(SimpleJSON.JSONNode _json)
+    public static vec3 LoadJsonvec3(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         vec3 obj = new vec3();
         obj.LoadJson((SimpleJSON.JSONObject)_json);
@@ -122,9 +125,9 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
         _obj.SaveJson((SimpleJSON.JSONObject)_json);
     }
 
-    public float x;
-    public float y;
-    public float z;
+    public double x;
+    public double y;
+    public double z;
 
     public override string ToString()
     {

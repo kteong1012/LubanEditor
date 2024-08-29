@@ -12,19 +12,23 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.ai
 {
 
 public sealed class UeBlackboard :  ai.Decorator 
 {
-    public UeBlackboard()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public UeBlackboard(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
+        _setChangeAction = setChangeAction;
             notifyObserver = editor.cfg.ai.ENotifyObserverMode.ON_VALUE_CHANGE;
             blackboardKey = "";
     }
     public override string GetTypeStr() => TYPE_STR;
-    private const string TYPE_STR = "ai.UeBlackboard";
+    private const string TYPE_STR = "UeBlackboard";
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
     {
@@ -96,14 +100,13 @@ public sealed class UeBlackboard :  ai.Decorator
                 {
                     throw new SerializationException();
                 }
-                keyQuery = editor.cfg.ai.KeyQueryOperator.LoadJsonKeyQueryOperator(_fieldJson);
+                keyQuery = editor.cfg.ai.KeyQueryOperator.LoadJsonKeyQueryOperator(_fieldJson, (__newIns0)=>{ keyQuery = __newIns0 as ai.KeyQueryOperator ; });
                 var __index0 = editor.cfg.ai.KeyQueryOperator.Types.IndexOf(keyQuery.GetTypeStr());
                 if (__index0 == -1)
                 {
                     throw new SerializationException();
                 }
                 keyQuery.TypeIndex = __index0;
-                keyQuery.Instance = editor.cfg.ai.KeyQueryOperator.LoadJsonKeyQueryOperator(_fieldJson);
             }
             else
             {
@@ -218,13 +221,12 @@ else
     UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
     this.keyQuery.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.keyQuery.TypeIndex, __list1, GUILayout.Width(200));
     UnityEditor.EditorGUILayout.EndHorizontal();
-    this.keyQuery.Instance.Render();
+    this.keyQuery?.Render();
     UnityEditor.EditorGUILayout.EndVertical();
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static UeBlackboard LoadJsonUeBlackboard(SimpleJSON.JSONNode _json)
+    public static UeBlackboard LoadJsonUeBlackboard(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         UeBlackboard obj = new ai.UeBlackboard();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

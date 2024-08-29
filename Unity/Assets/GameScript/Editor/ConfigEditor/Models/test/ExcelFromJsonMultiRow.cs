@@ -12,14 +12,18 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.test
 {
 
 public sealed class ExcelFromJsonMultiRow :  Luban.EditorBeanBase 
 {
-    public ExcelFromJsonMultiRow()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public ExcelFromJsonMultiRow(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
             items = new System.Collections.Generic.List<editor.cfg.test.TestRow>();
     }
 
@@ -72,7 +76,7 @@ public sealed class ExcelFromJsonMultiRow :  Luban.EditorBeanBase
 
         if (items != null)
         {
-            { var __cjson0 = new JSONArray(); foreach(var __e0 in items) { { var __bjson = new JSONObject();  editor.cfg.test.TestRow.SaveJsonTestRow(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["items"] = __cjson0; }
+            { var __cjson0 = new JSONArray(); foreach(var __e0 in items) { { var __bjson = new JSONObject();  editor.cfg.test.TestRow.SaveJsonTestRow(__e0, __bjson); __cjson0["null"] = __bjson; } } __cjson0.Inline = __cjson0.Count == 0; _json["items"] = __cjson0; }
         }
     }
 
@@ -257,8 +261,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static ExcelFromJsonMultiRow LoadJsonExcelFromJsonMultiRow(SimpleJSON.JSONNode _json)
+    public static ExcelFromJsonMultiRow LoadJsonExcelFromJsonMultiRow(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         ExcelFromJsonMultiRow obj = new test.ExcelFromJsonMultiRow();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

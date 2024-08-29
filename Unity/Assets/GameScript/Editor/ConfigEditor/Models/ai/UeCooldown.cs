@@ -12,17 +12,21 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.ai
 {
 
 public sealed class UeCooldown :  ai.Decorator 
 {
-    public UeCooldown()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public UeCooldown(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
+        _setChangeAction = setChangeAction;
     }
     public override string GetTypeStr() => TYPE_STR;
-    private const string TYPE_STR = "ai.UeCooldown";
+    private const string TYPE_STR = "UeCooldown";
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
     {
@@ -137,11 +141,10 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("cooldown_time", ""), GUILayout.Width(100));
 }
-this.cooldownTime = UnityEditor.EditorGUILayout.FloatField(this.cooldownTime, GUILayout.Width(150));
+this.cooldownTime = UnityEditor.EditorGUILayout.DoubleField(this.cooldownTime, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static UeCooldown LoadJsonUeCooldown(SimpleJSON.JSONNode _json)
+    public static UeCooldown LoadJsonUeCooldown(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         UeCooldown obj = new ai.UeCooldown();
         obj.LoadJson((SimpleJSON.JSONObject)_json);
@@ -153,7 +156,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
         _obj.SaveJson((SimpleJSON.JSONObject)_json);
     }
 
-    public float cooldownTime;
+    public double cooldownTime;
 
     public override string ToString()
     {

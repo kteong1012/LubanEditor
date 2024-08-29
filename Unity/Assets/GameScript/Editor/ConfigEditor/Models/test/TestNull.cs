@@ -12,14 +12,18 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.test
 {
 
 public sealed class TestNull :  Luban.EditorBeanBase 
 {
-    public TestNull()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public TestNull(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -68,6 +72,7 @@ public sealed class TestNull :  Luban.EditorBeanBase
             else
             {
                 x3 = new editor.cfg.test.DemoType1();
+                x3.SetChangeAction((__x) => x3 = __x as editor.cfg.test.DemoType1);
             }
         }
         
@@ -80,18 +85,18 @@ public sealed class TestNull :  Luban.EditorBeanBase
                 {
                     throw new SerializationException();
                 }
-                x4 = editor.cfg.test.DemoDynamic.LoadJsonDemoDynamic(_fieldJson);
+                x4 = editor.cfg.test.DemoDynamic.LoadJsonDemoDynamic(_fieldJson, (__newIns0)=>{ x4 = __newIns0 as test.DemoDynamic ; });
                 var __index0 = editor.cfg.test.DemoDynamic.Types.IndexOf(x4.GetTypeStr());
                 if (__index0 == -1)
                 {
                     throw new SerializationException();
                 }
                 x4.TypeIndex = __index0;
-                x4.Instance = editor.cfg.test.DemoDynamic.LoadJsonDemoDynamic(_fieldJson);
             }
             else
             {
-                x4 = new test.DemoD2(){ TypeIndex = 0};
+                x4 = new test.DemoD2();
+                x4.SetChangeAction((__x) => x4 = __x as editor.cfg.test.DemoDynamic);
             }
         }
         
@@ -233,7 +238,7 @@ else
     UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
     this.x4.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.x4.TypeIndex, __list1, GUILayout.Width(200));
     UnityEditor.EditorGUILayout.EndHorizontal();
-    this.x4.Instance.Render();
+    this.x4?.Render();
     UnityEditor.EditorGUILayout.EndVertical();
 }
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -258,8 +263,7 @@ else
 this.s2 = UnityEditor.EditorGUILayout.TextField(this.s2, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static TestNull LoadJsonTestNull(SimpleJSON.JSONNode _json)
+    public static TestNull LoadJsonTestNull(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         TestNull obj = new test.TestNull();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

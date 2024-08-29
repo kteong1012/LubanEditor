@@ -12,14 +12,18 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.ai
 {
 
 public abstract class KeyData :  Luban.EditorBeanBase 
 {
-    public KeyData()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public KeyData(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
     }
     public abstract string GetTypeStr();
 
@@ -34,30 +38,50 @@ public abstract class KeyData :  Luban.EditorBeanBase
                 return;
             }
             _typeIndex = value;
-            Instance = Create(Types[value]);
+            var obj = Create(Types[value], _setChangeAction);
+            _setChangeAction(obj);
         }
     }
-    public KeyData Instance { get; set;}
     public static List<string> Types = new List<string>()
     {
-        "ai.FloatKeyData",
-        "ai.IntKeyData",
-        "ai.StringKeyData",
-        "ai.BlackboardKeyData",
+        "FloatKeyData",
+        "IntKeyData",
+        "StringKeyData",
+        "BlackboardKeyData",
     };
 
-    public static KeyData Create(string type)
+    public static KeyData Create(string type, Action<Luban.EditorBeanBase> setChangeAction)
     {
         switch (type)
         {
             case "ai.FloatKeyData":   
-            case "FloatKeyData":return new ai.FloatKeyData();
+            case "FloatKeyData":
+            {
+                var obj = new ai.FloatKeyData(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.IntKeyData":   
-            case "IntKeyData":return new ai.IntKeyData();
+            case "IntKeyData":
+            {
+                var obj = new ai.IntKeyData(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.StringKeyData":   
-            case "StringKeyData":return new ai.StringKeyData();
+            case "StringKeyData":
+            {
+                var obj = new ai.StringKeyData(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.BlackboardKeyData":   
-            case "BlackboardKeyData":return new ai.BlackboardKeyData();
+            case "BlackboardKeyData":
+            {
+                var obj = new ai.BlackboardKeyData(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             default: return null;
         }
     }
@@ -78,24 +102,43 @@ public abstract class KeyData :  Luban.EditorBeanBase
     UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
     this.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.TypeIndex, __list0, GUILayout.Width(200));
     UnityEditor.EditorGUILayout.EndHorizontal();
-    this.Instance.Render();
+    this?.Render();
     UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static KeyData LoadJsonKeyData(SimpleJSON.JSONNode _json)
+    public static KeyData LoadJsonKeyData(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         string type = _json["$type"];
         KeyData obj;
         switch (type)
         {
             case "ai.FloatKeyData":   
-            case "FloatKeyData":obj = new ai.FloatKeyData(); break;
+            case "FloatKeyData":
+            {
+                obj = new ai.FloatKeyData(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("FloatKeyData");
+                break;
+            }
             case "ai.IntKeyData":   
-            case "IntKeyData":obj = new ai.IntKeyData(); break;
+            case "IntKeyData":
+            {
+                obj = new ai.IntKeyData(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("IntKeyData");
+                break;
+            }
             case "ai.StringKeyData":   
-            case "StringKeyData":obj = new ai.StringKeyData(); break;
+            case "StringKeyData":
+            {
+                obj = new ai.StringKeyData(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("StringKeyData");
+                break;
+            }
             case "ai.BlackboardKeyData":   
-            case "BlackboardKeyData":obj = new ai.BlackboardKeyData(); break;
+            case "BlackboardKeyData":
+            {
+                obj = new ai.BlackboardKeyData(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("BlackboardKeyData");
+                break;
+            }
             default: throw new SerializationException();
         }
         obj.LoadJson((SimpleJSON.JSONObject)_json);
@@ -104,8 +147,8 @@ public abstract class KeyData :  Luban.EditorBeanBase
         
     public static void SaveJsonKeyData(KeyData _obj, SimpleJSON.JSONNode _json)
     {
-        _json["$type"] = _obj.Instance.GetTypeStr();
-        _obj.Instance.SaveJson((SimpleJSON.JSONObject)_json);
+        _json["$type"] = _obj.GetTypeStr();
+        _obj.SaveJson((SimpleJSON.JSONObject)_json);
     }
 
 

@@ -12,20 +12,24 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.test
 {
 
 public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase 
 {
-    public DemoPrimitiveTypesTable()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public DemoPrimitiveTypesTable(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
             s1 = "";
             s2 = "";
             v2 = new editor.cfg.vec2();
             v3 = new editor.cfg.vec3();
             v4 = new editor.cfg.vec4();
-            t1 = "1970-01-01 00:00:00";
+            t1 = 0;
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -140,6 +144,7 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
             else
             {
                 v2 = new editor.cfg.vec2();
+                v2.SetChangeAction((__x) => v2 = __x as editor.cfg.vec2);
             }
         }
         
@@ -152,6 +157,7 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
             else
             {
                 v3 = new editor.cfg.vec3();
+                v3.SetChangeAction((__x) => v3 = __x as editor.cfg.vec3);
             }
         }
         
@@ -164,6 +170,7 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
             else
             {
                 v4 = new editor.cfg.vec4();
+                v4.SetChangeAction((__x) => v4 = __x as editor.cfg.vec4);
             }
         }
         
@@ -186,7 +193,7 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
             }
             else
             {
-                t1 = "1970-01-01 00:00:00";
+                t1 = 0;
             }
         }
         
@@ -235,7 +242,7 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
             { var __bjson = new JSONObject();  editor.cfg.vec4.SaveJsonvec4(v4, __bjson); _json["v4"] = __bjson; }
         }
         {
-            _json["t1"] = new JSONString(t1);
+            _json["t1"] = new JSONNumber(t1);
         }
     }
 
@@ -303,7 +310,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x6", ""), GUILayout.Width(100));
 }
-this.x6 = UnityEditor.EditorGUILayout.FloatField(this.x6, GUILayout.Width(150));
+this.x6 = UnityEditor.EditorGUILayout.DoubleField(this.x6, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -353,7 +360,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x", ""), GUILayout.Width(100));
 }
-this.v2.x = UnityEditor.EditorGUILayout.FloatField(this.v2.x, GUILayout.Width(150));
+this.v2.x = UnityEditor.EditorGUILayout.DoubleField(this.v2.x, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -363,7 +370,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("y", ""), GUILayout.Width(100));
 }
-this.v2.y = UnityEditor.EditorGUILayout.FloatField(this.v2.y, GUILayout.Width(150));
+this.v2.y = UnityEditor.EditorGUILayout.DoubleField(this.v2.y, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -385,7 +392,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x", ""), GUILayout.Width(100));
 }
-this.v3.x = UnityEditor.EditorGUILayout.FloatField(this.v3.x, GUILayout.Width(150));
+this.v3.x = UnityEditor.EditorGUILayout.DoubleField(this.v3.x, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -395,7 +402,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("y", ""), GUILayout.Width(100));
 }
-this.v3.y = UnityEditor.EditorGUILayout.FloatField(this.v3.y, GUILayout.Width(150));
+this.v3.y = UnityEditor.EditorGUILayout.DoubleField(this.v3.y, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -405,7 +412,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("z", ""), GUILayout.Width(100));
 }
-this.v3.z = UnityEditor.EditorGUILayout.FloatField(this.v3.z, GUILayout.Width(150));
+this.v3.z = UnityEditor.EditorGUILayout.DoubleField(this.v3.z, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -427,7 +434,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x", ""), GUILayout.Width(100));
 }
-this.v4.x = UnityEditor.EditorGUILayout.FloatField(this.v4.x, GUILayout.Width(150));
+this.v4.x = UnityEditor.EditorGUILayout.DoubleField(this.v4.x, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -437,7 +444,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("y", ""), GUILayout.Width(100));
 }
-this.v4.y = UnityEditor.EditorGUILayout.FloatField(this.v4.y, GUILayout.Width(150));
+this.v4.y = UnityEditor.EditorGUILayout.DoubleField(this.v4.y, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -447,7 +454,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("z", ""), GUILayout.Width(100));
 }
-this.v4.z = UnityEditor.EditorGUILayout.FloatField(this.v4.z, GUILayout.Width(150));
+this.v4.z = UnityEditor.EditorGUILayout.DoubleField(this.v4.z, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -457,7 +464,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("w", ""), GUILayout.Width(100));
 }
-this.v4.w = UnityEditor.EditorGUILayout.FloatField(this.v4.w, GUILayout.Width(150));
+this.v4.w = UnityEditor.EditorGUILayout.DoubleField(this.v4.w, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -469,11 +476,10 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("t1", ""), GUILayout.Width(100));
 }
-this.t1 = UnityEditor.EditorGUILayout.TextField(this.t1, GUILayout.Width(150));
+this.t1 = UnityEditor.EditorGUILayout.LongField(this.t1, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static DemoPrimitiveTypesTable LoadJsonDemoPrimitiveTypesTable(SimpleJSON.JSONNode _json)
+    public static DemoPrimitiveTypesTable LoadJsonDemoPrimitiveTypesTable(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         DemoPrimitiveTypesTable obj = new test.DemoPrimitiveTypesTable();
         obj.LoadJson((SimpleJSON.JSONObject)_json);
@@ -490,14 +496,14 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     public short x3;
     public int x4;
     public long x5;
-    public float x6;
+    public double x6;
     public double x7;
     public string s1;
     public string s2;
     public editor.cfg.vec2 v2;
     public editor.cfg.vec3 v3;
     public editor.cfg.vec4 v4;
-    public string t1;
+    public long t1;
 
     public override string ToString()
     {

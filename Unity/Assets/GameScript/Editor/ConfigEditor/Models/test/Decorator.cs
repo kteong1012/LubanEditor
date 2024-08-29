@@ -12,17 +12,21 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.test
 {
 
 public sealed class Decorator :  test.ItemBase 
 {
-    public Decorator()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public Decorator(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
+        _setChangeAction = setChangeAction;
     }
     public override string GetTypeStr() => TYPE_STR;
-    private const string TYPE_STR = "test.Decorator";
+    private const string TYPE_STR = "Decorator";
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
     {
@@ -141,8 +145,7 @@ else
 this.duration = UnityEditor.EditorGUILayout.IntField(this.duration, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static Decorator LoadJsonDecorator(SimpleJSON.JSONNode _json)
+    public static Decorator LoadJsonDecorator(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         Decorator obj = new test.Decorator();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

@@ -12,18 +12,22 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.ai
 {
 
 public abstract class Decorator :  ai.Node 
 {
-    public Decorator()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public Decorator(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
+        _setChangeAction = setChangeAction;
             flowAbortMode = editor.cfg.ai.EFlowAbortMode.NONE;
     }
     public override string GetTypeStr() => TYPE_STR;
-    private const string TYPE_STR = "ai.Decorator";
+    private const string TYPE_STR = "Decorator";
 
     private int _typeIndex = -1;
     public new int TypeIndex
@@ -36,39 +40,74 @@ public abstract class Decorator :  ai.Node
                 return;
             }
             _typeIndex = value;
-            Instance = Create(Types[value]);
+            var obj = Create(Types[value], _setChangeAction);
+            _setChangeAction(obj);
         }
     }
-    public new Decorator Instance { get; set;}
     public new static List<string> Types = new List<string>()
     {
-        "ai.UeLoop",
-        "ai.UeCooldown",
-        "ai.UeTimeLimit",
-        "ai.UeBlackboard",
-        "ai.UeForceSuccess",
-        "ai.IsAtLocation",
-        "ai.DistanceLessThan",
+        "UeLoop",
+        "UeCooldown",
+        "UeTimeLimit",
+        "UeBlackboard",
+        "UeForceSuccess",
+        "IsAtLocation",
+        "DistanceLessThan",
     };
 
-    public new static Decorator Create(string type)
+    public new static Decorator Create(string type, Action<Luban.EditorBeanBase> setChangeAction)
     {
         switch (type)
         {
             case "ai.UeLoop":   
-            case "UeLoop":return new ai.UeLoop();
+            case "UeLoop":
+            {
+                var obj = new ai.UeLoop(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.UeCooldown":   
-            case "UeCooldown":return new ai.UeCooldown();
+            case "UeCooldown":
+            {
+                var obj = new ai.UeCooldown(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.UeTimeLimit":   
-            case "UeTimeLimit":return new ai.UeTimeLimit();
+            case "UeTimeLimit":
+            {
+                var obj = new ai.UeTimeLimit(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.UeBlackboard":   
-            case "UeBlackboard":return new ai.UeBlackboard();
+            case "UeBlackboard":
+            {
+                var obj = new ai.UeBlackboard(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.UeForceSuccess":   
-            case "UeForceSuccess":return new ai.UeForceSuccess();
+            case "UeForceSuccess":
+            {
+                var obj = new ai.UeForceSuccess(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.IsAtLocation":   
-            case "IsAtLocation":return new ai.IsAtLocation();
+            case "IsAtLocation":
+            {
+                var obj = new ai.IsAtLocation(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.DistanceLessThan":   
-            case "DistanceLessThan":return new ai.DistanceLessThan();
+            case "DistanceLessThan":
+            {
+                var obj = new ai.DistanceLessThan(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             default: return null;
         }
     }
@@ -89,30 +128,64 @@ public abstract class Decorator :  ai.Node
     UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
     this.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.TypeIndex, __list0, GUILayout.Width(200));
     UnityEditor.EditorGUILayout.EndHorizontal();
-    this.Instance.Render();
+    this?.Render();
     UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static Decorator LoadJsonDecorator(SimpleJSON.JSONNode _json)
+    public static Decorator LoadJsonDecorator(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         string type = _json["$type"];
         Decorator obj;
         switch (type)
         {
             case "ai.UeLoop":   
-            case "UeLoop":obj = new ai.UeLoop(); break;
+            case "UeLoop":
+            {
+                obj = new ai.UeLoop(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("UeLoop");
+                break;
+            }
             case "ai.UeCooldown":   
-            case "UeCooldown":obj = new ai.UeCooldown(); break;
+            case "UeCooldown":
+            {
+                obj = new ai.UeCooldown(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("UeCooldown");
+                break;
+            }
             case "ai.UeTimeLimit":   
-            case "UeTimeLimit":obj = new ai.UeTimeLimit(); break;
+            case "UeTimeLimit":
+            {
+                obj = new ai.UeTimeLimit(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("UeTimeLimit");
+                break;
+            }
             case "ai.UeBlackboard":   
-            case "UeBlackboard":obj = new ai.UeBlackboard(); break;
+            case "UeBlackboard":
+            {
+                obj = new ai.UeBlackboard(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("UeBlackboard");
+                break;
+            }
             case "ai.UeForceSuccess":   
-            case "UeForceSuccess":obj = new ai.UeForceSuccess(); break;
+            case "UeForceSuccess":
+            {
+                obj = new ai.UeForceSuccess(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("UeForceSuccess");
+                break;
+            }
             case "ai.IsAtLocation":   
-            case "IsAtLocation":obj = new ai.IsAtLocation(); break;
+            case "IsAtLocation":
+            {
+                obj = new ai.IsAtLocation(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("IsAtLocation");
+                break;
+            }
             case "ai.DistanceLessThan":   
-            case "DistanceLessThan":obj = new ai.DistanceLessThan(); break;
+            case "DistanceLessThan":
+            {
+                obj = new ai.DistanceLessThan(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("DistanceLessThan");
+                break;
+            }
             default: throw new SerializationException();
         }
         obj.LoadJson((SimpleJSON.JSONObject)_json);
@@ -121,8 +194,8 @@ public abstract class Decorator :  ai.Node
         
     public static void SaveJsonDecorator(Decorator _obj, SimpleJSON.JSONNode _json)
     {
-        _json["$type"] = _obj.Instance.GetTypeStr();
-        _obj.Instance.SaveJson((SimpleJSON.JSONObject)_json);
+        _json["$type"] = _obj.GetTypeStr();
+        _obj.SaveJson((SimpleJSON.JSONObject)_json);
     }
 
     public editor.cfg.ai.EFlowAbortMode flowAbortMode;

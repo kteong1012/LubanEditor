@@ -12,14 +12,18 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.test
 {
 
 public abstract class RefDynamicBase :  Luban.EditorBeanBase 
 {
-    public RefDynamicBase()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public RefDynamicBase(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
     }
     public abstract string GetTypeStr();
 
@@ -34,21 +38,26 @@ public abstract class RefDynamicBase :  Luban.EditorBeanBase
                 return;
             }
             _typeIndex = value;
-            Instance = Create(Types[value]);
+            var obj = Create(Types[value], _setChangeAction);
+            _setChangeAction(obj);
         }
     }
-    public RefDynamicBase Instance { get; set;}
     public static List<string> Types = new List<string>()
     {
-        "test.RefBean",
+        "RefBean",
     };
 
-    public static RefDynamicBase Create(string type)
+    public static RefDynamicBase Create(string type, Action<Luban.EditorBeanBase> setChangeAction)
     {
         switch (type)
         {
             case "test.RefBean":   
-            case "RefBean":return new test.RefBean();
+            case "RefBean":
+            {
+                var obj = new test.RefBean(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             default: return null;
         }
     }
@@ -69,18 +78,22 @@ public abstract class RefDynamicBase :  Luban.EditorBeanBase
     UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
     this.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.TypeIndex, __list0, GUILayout.Width(200));
     UnityEditor.EditorGUILayout.EndHorizontal();
-    this.Instance.Render();
+    this?.Render();
     UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static RefDynamicBase LoadJsonRefDynamicBase(SimpleJSON.JSONNode _json)
+    public static RefDynamicBase LoadJsonRefDynamicBase(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         string type = _json["$type"];
         RefDynamicBase obj;
         switch (type)
         {
             case "test.RefBean":   
-            case "RefBean":obj = new test.RefBean(); break;
+            case "RefBean":
+            {
+                obj = new test.RefBean(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("RefBean");
+                break;
+            }
             default: throw new SerializationException();
         }
         obj.LoadJson((SimpleJSON.JSONObject)_json);
@@ -89,8 +102,8 @@ public abstract class RefDynamicBase :  Luban.EditorBeanBase
         
     public static void SaveJsonRefDynamicBase(RefDynamicBase _obj, SimpleJSON.JSONNode _json)
     {
-        _json["$type"] = _obj.Instance.GetTypeStr();
-        _obj.Instance.SaveJson((SimpleJSON.JSONObject)_json);
+        _json["$type"] = _obj.GetTypeStr();
+        _obj.SaveJson((SimpleJSON.JSONObject)_json);
     }
 
     public int x;

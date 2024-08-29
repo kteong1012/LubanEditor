@@ -12,18 +12,22 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.test
 {
 
 public sealed class TestUeType :  Luban.EditorBeanBase 
 {
-    public TestUeType()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public TestUeType(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
             x10 = "";
             x12 = new editor.cfg.test.DemoType1();
             x13 = editor.cfg.test.ETestUeType.WHITE;
-            t1 = "1970-01-01 00:00:00";
+            t1 = 0;
             k1 = System.Array.Empty<int>();
             k2 = new System.Collections.Generic.List<int>();
             k5 = new System.Collections.Generic.List<int>();
@@ -120,6 +124,7 @@ public sealed class TestUeType :  Luban.EditorBeanBase
             else
             {
                 x12 = new editor.cfg.test.DemoType1();
+                x12.SetChangeAction((__x) => x12 = __x as editor.cfg.test.DemoType1);
             }
         }
         
@@ -154,7 +159,7 @@ public sealed class TestUeType :  Luban.EditorBeanBase
             }
             else
             {
-                t1 = "1970-01-01 00:00:00";
+                t1 = 0;
             }
         }
         
@@ -254,22 +259,22 @@ public sealed class TestUeType :  Luban.EditorBeanBase
             _json["x13"] = new JSONNumber((int)x13);
         }
         {
-            _json["t1"] = new JSONString(t1);
+            _json["t1"] = new JSONNumber(t1);
         }
 
         if (k1 != null)
         {
-            { var __cjson0 = new JSONArray(); foreach(var __e0 in k1) { __cjson0["null"] = new JSONNumber(__e0); } _json["k1"] = __cjson0; }
+            { var __cjson0 = new JSONArray(); foreach(var __e0 in k1) { __cjson0["null"] = new JSONNumber(__e0); } __cjson0.Inline = __cjson0.Count == 0; _json["k1"] = __cjson0; }
         }
 
         if (k2 != null)
         {
-            { var __cjson0 = new JSONArray(); foreach(var __e0 in k2) { __cjson0["null"] = new JSONNumber(__e0); } _json["k2"] = __cjson0; }
+            { var __cjson0 = new JSONArray(); foreach(var __e0 in k2) { __cjson0["null"] = new JSONNumber(__e0); } __cjson0.Inline = __cjson0.Count == 0; _json["k2"] = __cjson0; }
         }
 
         if (k5 != null)
         {
-            { var __cjson0 = new JSONArray(); foreach(var __e0 in k5) { __cjson0["null"] = new JSONNumber(__e0); } _json["k5"] = __cjson0; }
+            { var __cjson0 = new JSONArray(); foreach(var __e0 in k5) { __cjson0["null"] = new JSONNumber(__e0); } __cjson0.Inline = __cjson0.Count == 0; _json["k5"] = __cjson0; }
         }
 
         if (k8 != null)
@@ -283,13 +288,14 @@ public sealed class TestUeType :  Luban.EditorBeanBase
                     __entry0["null"] = new JSONNumber((int)__e0[0]);
                     __entry0["null"] = new JSONNumber((int)__e0[1]);
                 }
+                __cjson0.Inline = __cjson0.Count == 0;
                 _json["k8"] = __cjson0;
             }
         }
 
         if (k9 != null)
         {
-            { var __cjson0 = new JSONArray(); foreach(var __e0 in k9) { { var __bjson = new JSONObject();  editor.cfg.test.DemoE2.SaveJsonDemoE2(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["k9"] = __cjson0; }
+            { var __cjson0 = new JSONArray(); foreach(var __e0 in k9) { { var __bjson = new JSONObject();  editor.cfg.test.DemoE2.SaveJsonDemoE2(__e0, __bjson); __cjson0["null"] = __bjson; } } __cjson0.Inline = __cjson0.Count == 0; _json["k9"] = __cjson0; }
         }
     }
 
@@ -357,7 +363,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x6", ""), GUILayout.Width(100));
 }
-this.x6 = UnityEditor.EditorGUILayout.FloatField(this.x6, GUILayout.Width(150));
+this.x6 = UnityEditor.EditorGUILayout.DoubleField(this.x6, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -410,7 +416,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("t1", ""), GUILayout.Width(100));
 }
-this.t1 = UnityEditor.EditorGUILayout.TextField(this.t1, GUILayout.Width(150));
+this.t1 = UnityEditor.EditorGUILayout.LongField(this.t1, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -656,8 +662,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static TestUeType LoadJsonTestUeType(SimpleJSON.JSONNode _json)
+    public static TestUeType LoadJsonTestUeType(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         TestUeType obj = new test.TestUeType();
         obj.LoadJson((SimpleJSON.JSONObject)_json);
@@ -674,11 +679,11 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     public short x3;
     public int x4;
     public long x5;
-    public float x6;
+    public double x6;
     public string x10;
     public editor.cfg.test.DemoType1 x12;
     public editor.cfg.test.ETestUeType x13;
-    public string t1;
+    public long t1;
     public int[] k1;
     public System.Collections.Generic.List<int> k2;
     public System.Collections.Generic.List<int> k5;

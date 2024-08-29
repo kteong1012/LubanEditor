@@ -12,18 +12,22 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.ai
 {
 
 public sealed class SimpleParallel :  ai.ComposeNode 
 {
-    public SimpleParallel()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public SimpleParallel(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
+        _setChangeAction = setChangeAction;
             finishMode = editor.cfg.ai.EFinishMode.IMMEDIATE;
     }
     public override string GetTypeStr() => TYPE_STR;
-    private const string TYPE_STR = "ai.SimpleParallel";
+    private const string TYPE_STR = "SimpleParallel";
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
     {
@@ -59,14 +63,13 @@ public sealed class SimpleParallel :  ai.ComposeNode
                 {
                     throw new SerializationException();
                 }
-                __v0 = editor.cfg.ai.Decorator.LoadJsonDecorator(__e0);
+                __v0 = editor.cfg.ai.Decorator.LoadJsonDecorator(__e0, (__newIns0)=>{ __v0 = __newIns0 as ai.Decorator ; });
                 var __index0 = editor.cfg.ai.Decorator.Types.IndexOf(__v0.GetTypeStr());
                 if (__index0 == -1)
                 {
                     throw new SerializationException();
                 }
-                __v0.TypeIndex = __index0;
-                __v0.Instance = editor.cfg.ai.Decorator.LoadJsonDecorator(__e0);  decorators.Add(__v0); }  
+                __v0.TypeIndex = __index0;  decorators.Add(__v0); }  
             }
             else
             {
@@ -83,14 +86,13 @@ public sealed class SimpleParallel :  ai.ComposeNode
                 {
                     throw new SerializationException();
                 }
-                __v0 = editor.cfg.ai.Service.LoadJsonService(__e0);
+                __v0 = editor.cfg.ai.Service.LoadJsonService(__e0, (__newIns0)=>{ __v0 = __newIns0 as ai.Service ; });
                 var __index0 = editor.cfg.ai.Service.Types.IndexOf(__v0.GetTypeStr());
                 if (__index0 == -1)
                 {
                     throw new SerializationException();
                 }
-                __v0.TypeIndex = __index0;
-                __v0.Instance = editor.cfg.ai.Service.LoadJsonService(__e0);  services.Add(__v0); }  
+                __v0.TypeIndex = __index0;  services.Add(__v0); }  
             }
             else
             {
@@ -119,14 +121,13 @@ public sealed class SimpleParallel :  ai.ComposeNode
                 {
                     throw new SerializationException();
                 }
-                mainTask = editor.cfg.ai.Task.LoadJsonTask(_fieldJson);
+                mainTask = editor.cfg.ai.Task.LoadJsonTask(_fieldJson, (__newIns0)=>{ mainTask = __newIns0 as ai.Task ; });
                 var __index0 = editor.cfg.ai.Task.Types.IndexOf(mainTask.GetTypeStr());
                 if (__index0 == -1)
                 {
                     throw new SerializationException();
                 }
                 mainTask.TypeIndex = __index0;
-                mainTask.Instance = editor.cfg.ai.Task.LoadJsonTask(_fieldJson);
             }
             else
             {
@@ -142,14 +143,13 @@ public sealed class SimpleParallel :  ai.ComposeNode
                 {
                     throw new SerializationException();
                 }
-                backgroundNode = editor.cfg.ai.FlowNode.LoadJsonFlowNode(_fieldJson);
+                backgroundNode = editor.cfg.ai.FlowNode.LoadJsonFlowNode(_fieldJson, (__newIns0)=>{ backgroundNode = __newIns0 as ai.FlowNode ; });
                 var __index0 = editor.cfg.ai.FlowNode.Types.IndexOf(backgroundNode.GetTypeStr());
                 if (__index0 == -1)
                 {
                     throw new SerializationException();
                 }
                 backgroundNode.TypeIndex = __index0;
-                backgroundNode.Instance = editor.cfg.ai.FlowNode.LoadJsonFlowNode(_fieldJson);
             }
             else
             {
@@ -171,12 +171,12 @@ public sealed class SimpleParallel :  ai.ComposeNode
 
         if (decorators != null)
         {
-            { var __cjson0 = new JSONArray(); foreach(var __e0 in decorators) { { var __bjson = new JSONObject();  editor.cfg.ai.Decorator.SaveJsonDecorator(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["decorators"] = __cjson0; }
+            { var __cjson0 = new JSONArray(); foreach(var __e0 in decorators) { { var __bjson = new JSONObject();  editor.cfg.ai.Decorator.SaveJsonDecorator(__e0, __bjson); __cjson0["null"] = __bjson; } } __cjson0.Inline = __cjson0.Count == 0; _json["decorators"] = __cjson0; }
         }
 
         if (services != null)
         {
-            { var __cjson0 = new JSONArray(); foreach(var __e0 in services) { { var __bjson = new JSONObject();  editor.cfg.ai.Service.SaveJsonService(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["services"] = __cjson0; }
+            { var __cjson0 = new JSONArray(); foreach(var __e0 in services) { { var __bjson = new JSONObject();  editor.cfg.ai.Service.SaveJsonService(__e0, __bjson); __cjson0["null"] = __bjson; } } __cjson0.Inline = __cjson0.Count == 0; _json["services"] = __cjson0; }
         }
         {
             _json["finish_mode"] = new JSONNumber((int)finishMode);
@@ -253,7 +253,7 @@ else
     UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
     __e1.TypeIndex = UnityEditor.EditorGUILayout.Popup(__e1.TypeIndex, __list2, GUILayout.Width(200));
     UnityEditor.EditorGUILayout.EndHorizontal();
-    __e1.Instance.Render();
+    __e1?.Render();
     UnityEditor.EditorGUILayout.EndVertical();
 };
         this.decorators[__i1] = __e1;
@@ -262,7 +262,7 @@ else
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.decorators.Add(new ai.UeLoop(){ TypeIndex = 0});
+        this.decorators.Add(new ai.UeLoop());
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {
@@ -275,14 +275,13 @@ if (!__importJson1.IsObject)
 {
     throw new SerializationException();
 }
-__importElement1 = editor.cfg.ai.Decorator.LoadJsonDecorator(__importJson1);
+__importElement1 = editor.cfg.ai.Decorator.LoadJsonDecorator(__importJson1, (__newIns2)=>{ __importElement1 = __newIns2 as ai.Decorator ; });
 var __index2 = editor.cfg.ai.Decorator.Types.IndexOf(__importElement1.GetTypeStr());
 if (__index2 == -1)
 {
     throw new SerializationException();
 }
 __importElement1.TypeIndex = __index2;
-__importElement1.Instance = editor.cfg.ai.Decorator.LoadJsonDecorator(__importJson1);
             this.decorators.Add(__importElement1);
         });
     }
@@ -324,7 +323,7 @@ else
     UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
     __e1.TypeIndex = UnityEditor.EditorGUILayout.Popup(__e1.TypeIndex, __list2, GUILayout.Width(200));
     UnityEditor.EditorGUILayout.EndHorizontal();
-    __e1.Instance.Render();
+    __e1?.Render();
     UnityEditor.EditorGUILayout.EndVertical();
 };
         this.services[__i1] = __e1;
@@ -333,7 +332,7 @@ else
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.services.Add(new ai.UeSetDefaultFocus(){ TypeIndex = 0});
+        this.services.Add(new ai.UeSetDefaultFocus());
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {
@@ -346,14 +345,13 @@ if (!__importJson1.IsObject)
 {
     throw new SerializationException();
 }
-__importElement1 = editor.cfg.ai.Service.LoadJsonService(__importJson1);
+__importElement1 = editor.cfg.ai.Service.LoadJsonService(__importJson1, (__newIns2)=>{ __importElement1 = __newIns2 as ai.Service ; });
 var __index2 = editor.cfg.ai.Service.Types.IndexOf(__importElement1.GetTypeStr());
 if (__index2 == -1)
 {
     throw new SerializationException();
 }
 __importElement1.TypeIndex = __index2;
-__importElement1.Instance = editor.cfg.ai.Service.LoadJsonService(__importJson1);
             this.services.Add(__importElement1);
         });
     }
@@ -392,7 +390,7 @@ else
     UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
     this.mainTask.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.mainTask.TypeIndex, __list1, GUILayout.Width(200));
     UnityEditor.EditorGUILayout.EndHorizontal();
-    this.mainTask.Instance.Render();
+    this.mainTask?.Render();
     UnityEditor.EditorGUILayout.EndVertical();
 }
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -416,13 +414,12 @@ else
     UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
     this.backgroundNode.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.backgroundNode.TypeIndex, __list1, GUILayout.Width(200));
     UnityEditor.EditorGUILayout.EndHorizontal();
-    this.backgroundNode.Instance.Render();
+    this.backgroundNode?.Render();
     UnityEditor.EditorGUILayout.EndVertical();
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static SimpleParallel LoadJsonSimpleParallel(SimpleJSON.JSONNode _json)
+    public static SimpleParallel LoadJsonSimpleParallel(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         SimpleParallel obj = new ai.SimpleParallel();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

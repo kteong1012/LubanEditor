@@ -12,14 +12,18 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.test
 {
 
 public sealed class TestBeRef :  Luban.EditorBeanBase 
 {
-    public TestBeRef()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public TestBeRef(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -85,8 +89,7 @@ else
 this.count = UnityEditor.EditorGUILayout.IntField(this.count, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static TestBeRef LoadJsonTestBeRef(SimpleJSON.JSONNode _json)
+    public static TestBeRef LoadJsonTestBeRef(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         TestBeRef obj = new test.TestBeRef();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

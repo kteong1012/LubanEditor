@@ -12,14 +12,18 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.tag
 {
 
 public sealed class TestTag :  Luban.EditorBeanBase 
 {
-    public TestTag()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public TestTag(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
             value = "";
     }
 
@@ -89,8 +93,7 @@ else
 this.value = UnityEditor.EditorGUILayout.TextField(this.value, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static TestTag LoadJsonTestTag(SimpleJSON.JSONNode _json)
+    public static TestTag LoadJsonTestTag(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         TestTag obj = new tag.TestTag();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

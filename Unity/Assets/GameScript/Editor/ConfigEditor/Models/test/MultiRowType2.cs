@@ -12,14 +12,18 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.test
 {
 
 public sealed class MultiRowType2 :  Luban.EditorBeanBase 
 {
-    public MultiRowType2()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public MultiRowType2(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -106,11 +110,10 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("y", ""), GUILayout.Width(100));
 }
-this.y = UnityEditor.EditorGUILayout.FloatField(this.y, GUILayout.Width(150));
+this.y = UnityEditor.EditorGUILayout.DoubleField(this.y, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static MultiRowType2 LoadJsonMultiRowType2(SimpleJSON.JSONNode _json)
+    public static MultiRowType2 LoadJsonMultiRowType2(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         MultiRowType2 obj = new test.MultiRowType2();
         obj.LoadJson((SimpleJSON.JSONObject)_json);
@@ -124,7 +127,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
 
     public int id;
     public int x;
-    public float y;
+    public double y;
 
     public override string ToString()
     {

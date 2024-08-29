@@ -12,17 +12,21 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.ai
 {
 
 public sealed class IsNotSet :  ai.KeyQueryOperator 
 {
-    public IsNotSet()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public IsNotSet(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
+        _setChangeAction = setChangeAction;
     }
     public override string GetTypeStr() => TYPE_STR;
-    private const string TYPE_STR = "ai.IsNotSet";
+    private const string TYPE_STR = "IsNotSet";
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
     {
@@ -39,8 +43,7 @@ public sealed class IsNotSet :  ai.KeyQueryOperator
 {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static IsNotSet LoadJsonIsNotSet(SimpleJSON.JSONNode _json)
+    public static IsNotSet LoadJsonIsNotSet(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         IsNotSet obj = new ai.IsNotSet();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

@@ -12,17 +12,21 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.ai
 {
 
 public sealed class ExecuteTimeStatistic :  ai.Service 
 {
-    public ExecuteTimeStatistic()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public ExecuteTimeStatistic(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
+        _setChangeAction = setChangeAction;
     }
     public override string GetTypeStr() => TYPE_STR;
-    private const string TYPE_STR = "ai.ExecuteTimeStatistic";
+    private const string TYPE_STR = "ExecuteTimeStatistic";
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
     {
@@ -90,8 +94,7 @@ else
 this.nodeName = UnityEditor.EditorGUILayout.TextField(this.nodeName, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static ExecuteTimeStatistic LoadJsonExecuteTimeStatistic(SimpleJSON.JSONNode _json)
+    public static ExecuteTimeStatistic LoadJsonExecuteTimeStatistic(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         ExecuteTimeStatistic obj = new ai.ExecuteTimeStatistic();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

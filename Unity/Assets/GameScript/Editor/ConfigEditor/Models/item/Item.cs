@@ -12,6 +12,7 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.item
 {
@@ -21,8 +22,11 @@ namespace editor.cfg.item
 /// </summary>
 public sealed class Item :  Luban.EditorBeanBase 
 {
-    public Item()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public Item(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
             name = "";
             majorType = editor.cfg.item.EMajorType.CURRENCY;
             minorType = editor.cfg.item.EMinorType.DIAMOND;
@@ -263,6 +267,16 @@ this.minorType = (editor.cfg.item.EMinorType)UnityEditor.EditorGUILayout.EnumPop
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("max_pile_num", "max_pile_num"), GUILayout.Width(100));
+}
+else
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("max_pile_num", ""), GUILayout.Width(100));
+}
+this.maxPileNum = UnityEditor.EditorGUILayout.IntField(this.maxPileNum, GUILayout.Width(150));
+UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
+if (ConfigEditorSettings.showComment)
+{
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("quality", "quality"), GUILayout.Width(100));
 }
 else
@@ -323,8 +337,7 @@ else
 this.showOrder = UnityEditor.EditorGUILayout.IntField(this.showOrder, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static Item LoadJsonItem(SimpleJSON.JSONNode _json)
+    public static Item LoadJsonItem(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         Item obj = new item.Item();
         obj.LoadJson((SimpleJSON.JSONObject)_json);
@@ -358,6 +371,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
         + "name:" + name + ","
         + "majorType:" + majorType + ","
         + "minorType:" + minorType + ","
+        + "maxPileNum:" + maxPileNum + ","
         + "quality:" + quality + ","
         + "icon:" + icon + ","
         + "iconBackgroud:" + iconBackgroud + ","

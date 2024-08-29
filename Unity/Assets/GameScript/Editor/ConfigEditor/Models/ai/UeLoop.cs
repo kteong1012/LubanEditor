@@ -12,17 +12,21 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.ai
 {
 
 public sealed class UeLoop :  ai.Decorator 
 {
-    public UeLoop()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public UeLoop(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
+        _setChangeAction = setChangeAction;
     }
     public override string GetTypeStr() => TYPE_STR;
-    private const string TYPE_STR = "ai.UeLoop";
+    private const string TYPE_STR = "UeLoop";
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
     {
@@ -185,11 +189,10 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("infinite_loop_timeout_time", ""), GUILayout.Width(100));
 }
-this.infiniteLoopTimeoutTime = UnityEditor.EditorGUILayout.FloatField(this.infiniteLoopTimeoutTime, GUILayout.Width(150));
+this.infiniteLoopTimeoutTime = UnityEditor.EditorGUILayout.DoubleField(this.infiniteLoopTimeoutTime, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static UeLoop LoadJsonUeLoop(SimpleJSON.JSONNode _json)
+    public static UeLoop LoadJsonUeLoop(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         UeLoop obj = new ai.UeLoop();
         obj.LoadJson((SimpleJSON.JSONObject)_json);
@@ -203,7 +206,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
 
     public int numLoops;
     public bool infiniteLoop;
-    public float infiniteLoopTimeoutTime;
+    public double infiniteLoopTimeoutTime;
 
     public override string ToString()
     {

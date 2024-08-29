@@ -12,17 +12,21 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.ai
 {
 
 public abstract class ComposeNode :  ai.FlowNode 
 {
-    public ComposeNode()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public ComposeNode(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
+        _setChangeAction = setChangeAction;
     }
     public override string GetTypeStr() => TYPE_STR;
-    private const string TYPE_STR = "ai.ComposeNode";
+    private const string TYPE_STR = "ComposeNode";
 
     private int _typeIndex = -1;
     public new int TypeIndex
@@ -35,27 +39,42 @@ public abstract class ComposeNode :  ai.FlowNode
                 return;
             }
             _typeIndex = value;
-            Instance = Create(Types[value]);
+            var obj = Create(Types[value], _setChangeAction);
+            _setChangeAction(obj);
         }
     }
-    public new ComposeNode Instance { get; set;}
     public new static List<string> Types = new List<string>()
     {
-        "ai.Sequence",
-        "ai.Selector",
-        "ai.SimpleParallel",
+        "Sequence",
+        "Selector",
+        "SimpleParallel",
     };
 
-    public new static ComposeNode Create(string type)
+    public new static ComposeNode Create(string type, Action<Luban.EditorBeanBase> setChangeAction)
     {
         switch (type)
         {
             case "ai.Sequence":   
-            case "Sequence":return new ai.Sequence();
+            case "Sequence":
+            {
+                var obj = new ai.Sequence(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.Selector":   
-            case "Selector":return new ai.Selector();
+            case "Selector":
+            {
+                var obj = new ai.Selector(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.SimpleParallel":   
-            case "SimpleParallel":return new ai.SimpleParallel();
+            case "SimpleParallel":
+            {
+                var obj = new ai.SimpleParallel(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             default: return null;
         }
     }
@@ -76,22 +95,36 @@ public abstract class ComposeNode :  ai.FlowNode
     UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
     this.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.TypeIndex, __list0, GUILayout.Width(200));
     UnityEditor.EditorGUILayout.EndHorizontal();
-    this.Instance.Render();
+    this?.Render();
     UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static ComposeNode LoadJsonComposeNode(SimpleJSON.JSONNode _json)
+    public static ComposeNode LoadJsonComposeNode(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         string type = _json["$type"];
         ComposeNode obj;
         switch (type)
         {
             case "ai.Sequence":   
-            case "Sequence":obj = new ai.Sequence(); break;
+            case "Sequence":
+            {
+                obj = new ai.Sequence(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("Sequence");
+                break;
+            }
             case "ai.Selector":   
-            case "Selector":obj = new ai.Selector(); break;
+            case "Selector":
+            {
+                obj = new ai.Selector(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("Selector");
+                break;
+            }
             case "ai.SimpleParallel":   
-            case "SimpleParallel":obj = new ai.SimpleParallel(); break;
+            case "SimpleParallel":
+            {
+                obj = new ai.SimpleParallel(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("SimpleParallel");
+                break;
+            }
             default: throw new SerializationException();
         }
         obj.LoadJson((SimpleJSON.JSONObject)_json);
@@ -100,8 +133,8 @@ public abstract class ComposeNode :  ai.FlowNode
         
     public static void SaveJsonComposeNode(ComposeNode _obj, SimpleJSON.JSONNode _json)
     {
-        _json["$type"] = _obj.Instance.GetTypeStr();
-        _obj.Instance.SaveJson((SimpleJSON.JSONObject)_json);
+        _json["$type"] = _obj.GetTypeStr();
+        _obj.SaveJson((SimpleJSON.JSONObject)_json);
     }
 
 

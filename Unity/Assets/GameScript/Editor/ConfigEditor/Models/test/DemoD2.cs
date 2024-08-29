@@ -12,17 +12,21 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.test
 {
 
 public sealed class DemoD2 :  test.DemoDynamic 
 {
-    public DemoD2()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public DemoD2(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
+        _setChangeAction = setChangeAction;
     }
     public override string GetTypeStr() => TYPE_STR;
-    private const string TYPE_STR = "test.DemoD2";
+    private const string TYPE_STR = "DemoD2";
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
     {
@@ -87,8 +91,7 @@ else
 this.x2 = UnityEditor.EditorGUILayout.IntField(this.x2, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static DemoD2 LoadJsonDemoD2(SimpleJSON.JSONNode _json)
+    public static DemoD2 LoadJsonDemoD2(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         DemoD2 obj = new test.DemoD2();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

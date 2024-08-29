@@ -12,14 +12,18 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.test
 {
 
 public sealed class TestScriptableObject :  Luban.EditorBeanBase 
 {
-    public TestScriptableObject()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public TestScriptableObject(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
             desc = "";
             v2 = new editor.cfg.vec2();
             v3 = new editor.cfg.vec3();
@@ -82,6 +86,7 @@ public sealed class TestScriptableObject :  Luban.EditorBeanBase
             else
             {
                 v2 = new editor.cfg.vec2();
+                v2.SetChangeAction((__x) => v2 = __x as editor.cfg.vec2);
             }
         }
         
@@ -94,6 +99,7 @@ public sealed class TestScriptableObject :  Luban.EditorBeanBase
             else
             {
                 v3 = new editor.cfg.vec3();
+                v3.SetChangeAction((__x) => v3 = __x as editor.cfg.vec3);
             }
         }
         
@@ -106,6 +112,7 @@ public sealed class TestScriptableObject :  Luban.EditorBeanBase
             else
             {
                 v4 = new editor.cfg.vec4();
+                v4.SetChangeAction((__x) => v4 = __x as editor.cfg.vec4);
             }
         }
         
@@ -172,7 +179,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("rate", ""), GUILayout.Width(100));
 }
-this.rate = UnityEditor.EditorGUILayout.FloatField(this.rate, GUILayout.Width(150));
+this.rate = UnityEditor.EditorGUILayout.DoubleField(this.rate, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -202,7 +209,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x", ""), GUILayout.Width(100));
 }
-this.v2.x = UnityEditor.EditorGUILayout.FloatField(this.v2.x, GUILayout.Width(150));
+this.v2.x = UnityEditor.EditorGUILayout.DoubleField(this.v2.x, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -212,7 +219,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("y", ""), GUILayout.Width(100));
 }
-this.v2.y = UnityEditor.EditorGUILayout.FloatField(this.v2.y, GUILayout.Width(150));
+this.v2.y = UnityEditor.EditorGUILayout.DoubleField(this.v2.y, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -234,7 +241,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x", ""), GUILayout.Width(100));
 }
-this.v3.x = UnityEditor.EditorGUILayout.FloatField(this.v3.x, GUILayout.Width(150));
+this.v3.x = UnityEditor.EditorGUILayout.DoubleField(this.v3.x, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -244,7 +251,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("y", ""), GUILayout.Width(100));
 }
-this.v3.y = UnityEditor.EditorGUILayout.FloatField(this.v3.y, GUILayout.Width(150));
+this.v3.y = UnityEditor.EditorGUILayout.DoubleField(this.v3.y, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -254,7 +261,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("z", ""), GUILayout.Width(100));
 }
-this.v3.z = UnityEditor.EditorGUILayout.FloatField(this.v3.z, GUILayout.Width(150));
+this.v3.z = UnityEditor.EditorGUILayout.DoubleField(this.v3.z, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -276,7 +283,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x", ""), GUILayout.Width(100));
 }
-this.v4.x = UnityEditor.EditorGUILayout.FloatField(this.v4.x, GUILayout.Width(150));
+this.v4.x = UnityEditor.EditorGUILayout.DoubleField(this.v4.x, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -286,7 +293,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("y", ""), GUILayout.Width(100));
 }
-this.v4.y = UnityEditor.EditorGUILayout.FloatField(this.v4.y, GUILayout.Width(150));
+this.v4.y = UnityEditor.EditorGUILayout.DoubleField(this.v4.y, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -296,7 +303,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("z", ""), GUILayout.Width(100));
 }
-this.v4.z = UnityEditor.EditorGUILayout.FloatField(this.v4.z, GUILayout.Width(150));
+this.v4.z = UnityEditor.EditorGUILayout.DoubleField(this.v4.z, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -306,13 +313,12 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("w", ""), GUILayout.Width(100));
 }
-this.v4.w = UnityEditor.EditorGUILayout.FloatField(this.v4.w, GUILayout.Width(150));
+this.v4.w = UnityEditor.EditorGUILayout.DoubleField(this.v4.w, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static TestScriptableObject LoadJsonTestScriptableObject(SimpleJSON.JSONNode _json)
+    public static TestScriptableObject LoadJsonTestScriptableObject(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         TestScriptableObject obj = new test.TestScriptableObject();
         obj.LoadJson((SimpleJSON.JSONObject)_json);
@@ -326,7 +332,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
 
     public int id;
     public string desc;
-    public float rate;
+    public double rate;
     public int num;
     public editor.cfg.vec2 v2;
     public editor.cfg.vec3 v3;

@@ -12,14 +12,18 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.common
 {
 
 public sealed class GlobalConfig :  Luban.EditorBeanBase 
 {
-    public GlobalConfig()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public GlobalConfig(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
             x7 = new System.Collections.Generic.List<int>();
     }
 
@@ -128,7 +132,7 @@ public sealed class GlobalConfig :  Luban.EditorBeanBase
 
         if (x7 != null)
         {
-            { var __cjson0 = new JSONArray(); foreach(var __e0 in x7) { __cjson0["null"] = new JSONNumber(__e0); } _json["x7"] = __cjson0; }
+            { var __cjson0 = new JSONArray(); foreach(var __e0 in x7) { __cjson0["null"] = new JSONNumber(__e0); } __cjson0.Inline = __cjson0.Count == 0; _json["x7"] = __cjson0; }
         }
     }
 
@@ -244,8 +248,7 @@ else
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static GlobalConfig LoadJsonGlobalConfig(SimpleJSON.JSONNode _json)
+    public static GlobalConfig LoadJsonGlobalConfig(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         GlobalConfig obj = new common.GlobalConfig();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

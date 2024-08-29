@@ -143,6 +143,16 @@ namespace editor.cfg
             {
                 _tables.Add("test.TbDemoGroup_C", new test.TbDemoGroup_C(path));
             }
+            path = pathFunc("test_tbdemogroup_s");
+            if (!string.IsNullOrEmpty(path))
+            {
+                _tables.Add("test.TbDemoGroup_S", new test.TbDemoGroup_S(path));
+            }
+            path = pathFunc("test_tbdemogroup_e");
+            if (!string.IsNullOrEmpty(path))
+            {
+                _tables.Add("test.TbDemoGroup_E", new test.TbDemoGroup_E(path));
+            }
             path = pathFunc("test_tbtestglobal");
             if (!string.IsNullOrEmpty(path))
             {

@@ -12,17 +12,21 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.ai
 {
 
 public sealed class UeForceSuccess :  ai.Decorator 
 {
-    public UeForceSuccess()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public UeForceSuccess(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
+        _setChangeAction = setChangeAction;
     }
     public override string GetTypeStr() => TYPE_STR;
-    private const string TYPE_STR = "ai.UeForceSuccess";
+    private const string TYPE_STR = "UeForceSuccess";
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
     {
@@ -116,8 +120,7 @@ else
 this.flowAbortMode = (editor.cfg.ai.EFlowAbortMode)UnityEditor.EditorGUILayout.EnumPopup(this.flowAbortMode, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static UeForceSuccess LoadJsonUeForceSuccess(SimpleJSON.JSONNode _json)
+    public static UeForceSuccess LoadJsonUeForceSuccess(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         UeForceSuccess obj = new ai.UeForceSuccess();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

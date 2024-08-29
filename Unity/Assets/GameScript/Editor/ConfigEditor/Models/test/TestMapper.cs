@@ -12,14 +12,18 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.test
 {
 
 public sealed class TestMapper :  Luban.EditorBeanBase 
 {
-    public TestMapper()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public TestMapper(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
             audioType = editor.cfg.AudioType.UNKNOWN;
             v2 = new editor.cfg.vec2();
     }
@@ -58,6 +62,7 @@ public sealed class TestMapper :  Luban.EditorBeanBase
             else
             {
                 v2 = new editor.cfg.vec2();
+                v2.SetChangeAction((__x) => v2 = __x as editor.cfg.vec2);
             }
         }
         
@@ -121,7 +126,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x", ""), GUILayout.Width(100));
 }
-this.v2.x = UnityEditor.EditorGUILayout.FloatField(this.v2.x, GUILayout.Width(150));
+this.v2.x = UnityEditor.EditorGUILayout.DoubleField(this.v2.x, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -131,13 +136,12 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("y", ""), GUILayout.Width(100));
 }
-this.v2.y = UnityEditor.EditorGUILayout.FloatField(this.v2.y, GUILayout.Width(150));
+this.v2.y = UnityEditor.EditorGUILayout.DoubleField(this.v2.y, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static TestMapper LoadJsonTestMapper(SimpleJSON.JSONNode _json)
+    public static TestMapper LoadJsonTestMapper(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         TestMapper obj = new test.TestMapper();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

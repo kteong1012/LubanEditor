@@ -12,18 +12,22 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.ai
 {
 
 public sealed class MoveToTarget :  ai.Task 
 {
-    public MoveToTarget()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public MoveToTarget(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
+        _setChangeAction = setChangeAction;
             targetActorKey = "";
     }
     public override string GetTypeStr() => TYPE_STR;
-    private const string TYPE_STR = "ai.MoveToTarget";
+    private const string TYPE_STR = "MoveToTarget";
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
     {
@@ -59,14 +63,13 @@ public sealed class MoveToTarget :  ai.Task
                 {
                     throw new SerializationException();
                 }
-                __v0 = editor.cfg.ai.Decorator.LoadJsonDecorator(__e0);
+                __v0 = editor.cfg.ai.Decorator.LoadJsonDecorator(__e0, (__newIns0)=>{ __v0 = __newIns0 as ai.Decorator ; });
                 var __index0 = editor.cfg.ai.Decorator.Types.IndexOf(__v0.GetTypeStr());
                 if (__index0 == -1)
                 {
                     throw new SerializationException();
                 }
-                __v0.TypeIndex = __index0;
-                __v0.Instance = editor.cfg.ai.Decorator.LoadJsonDecorator(__e0);  decorators.Add(__v0); }  
+                __v0.TypeIndex = __index0;  decorators.Add(__v0); }  
             }
             else
             {
@@ -83,14 +86,13 @@ public sealed class MoveToTarget :  ai.Task
                 {
                     throw new SerializationException();
                 }
-                __v0 = editor.cfg.ai.Service.LoadJsonService(__e0);
+                __v0 = editor.cfg.ai.Service.LoadJsonService(__e0, (__newIns0)=>{ __v0 = __newIns0 as ai.Service ; });
                 var __index0 = editor.cfg.ai.Service.Types.IndexOf(__v0.GetTypeStr());
                 if (__index0 == -1)
                 {
                     throw new SerializationException();
                 }
-                __v0.TypeIndex = __index0;
-                __v0.Instance = editor.cfg.ai.Service.LoadJsonService(__e0);  services.Add(__v0); }  
+                __v0.TypeIndex = __index0;  services.Add(__v0); }  
             }
             else
             {
@@ -147,12 +149,12 @@ public sealed class MoveToTarget :  ai.Task
 
         if (decorators != null)
         {
-            { var __cjson0 = new JSONArray(); foreach(var __e0 in decorators) { { var __bjson = new JSONObject();  editor.cfg.ai.Decorator.SaveJsonDecorator(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["decorators"] = __cjson0; }
+            { var __cjson0 = new JSONArray(); foreach(var __e0 in decorators) { { var __bjson = new JSONObject();  editor.cfg.ai.Decorator.SaveJsonDecorator(__e0, __bjson); __cjson0["null"] = __bjson; } } __cjson0.Inline = __cjson0.Count == 0; _json["decorators"] = __cjson0; }
         }
 
         if (services != null)
         {
-            { var __cjson0 = new JSONArray(); foreach(var __e0 in services) { { var __bjson = new JSONObject();  editor.cfg.ai.Service.SaveJsonService(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["services"] = __cjson0; }
+            { var __cjson0 = new JSONArray(); foreach(var __e0 in services) { { var __bjson = new JSONObject();  editor.cfg.ai.Service.SaveJsonService(__e0, __bjson); __cjson0["null"] = __bjson; } } __cjson0.Inline = __cjson0.Count == 0; _json["services"] = __cjson0; }
         }
         {
             _json["ignore_restart_self"] = new JSONBool(ignoreRestartSelf);
@@ -227,7 +229,7 @@ else
     UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
     __e1.TypeIndex = UnityEditor.EditorGUILayout.Popup(__e1.TypeIndex, __list2, GUILayout.Width(200));
     UnityEditor.EditorGUILayout.EndHorizontal();
-    __e1.Instance.Render();
+    __e1?.Render();
     UnityEditor.EditorGUILayout.EndVertical();
 };
         this.decorators[__i1] = __e1;
@@ -236,7 +238,7 @@ else
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.decorators.Add(new ai.UeLoop(){ TypeIndex = 0});
+        this.decorators.Add(new ai.UeLoop());
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {
@@ -249,14 +251,13 @@ if (!__importJson1.IsObject)
 {
     throw new SerializationException();
 }
-__importElement1 = editor.cfg.ai.Decorator.LoadJsonDecorator(__importJson1);
+__importElement1 = editor.cfg.ai.Decorator.LoadJsonDecorator(__importJson1, (__newIns2)=>{ __importElement1 = __newIns2 as ai.Decorator ; });
 var __index2 = editor.cfg.ai.Decorator.Types.IndexOf(__importElement1.GetTypeStr());
 if (__index2 == -1)
 {
     throw new SerializationException();
 }
 __importElement1.TypeIndex = __index2;
-__importElement1.Instance = editor.cfg.ai.Decorator.LoadJsonDecorator(__importJson1);
             this.decorators.Add(__importElement1);
         });
     }
@@ -298,7 +299,7 @@ else
     UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
     __e1.TypeIndex = UnityEditor.EditorGUILayout.Popup(__e1.TypeIndex, __list2, GUILayout.Width(200));
     UnityEditor.EditorGUILayout.EndHorizontal();
-    __e1.Instance.Render();
+    __e1?.Render();
     UnityEditor.EditorGUILayout.EndVertical();
 };
         this.services[__i1] = __e1;
@@ -307,7 +308,7 @@ else
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.services.Add(new ai.UeSetDefaultFocus(){ TypeIndex = 0});
+        this.services.Add(new ai.UeSetDefaultFocus());
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {
@@ -320,14 +321,13 @@ if (!__importJson1.IsObject)
 {
     throw new SerializationException();
 }
-__importElement1 = editor.cfg.ai.Service.LoadJsonService(__importJson1);
+__importElement1 = editor.cfg.ai.Service.LoadJsonService(__importJson1, (__newIns2)=>{ __importElement1 = __newIns2 as ai.Service ; });
 var __index2 = editor.cfg.ai.Service.Types.IndexOf(__importElement1.GetTypeStr());
 if (__index2 == -1)
 {
     throw new SerializationException();
 }
 __importElement1.TypeIndex = __index2;
-__importElement1.Instance = editor.cfg.ai.Service.LoadJsonService(__importJson1);
             this.services.Add(__importElement1);
         });
     }
@@ -363,11 +363,10 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("acceptable_radius", ""), GUILayout.Width(100));
 }
-this.acceptableRadius = UnityEditor.EditorGUILayout.FloatField(this.acceptableRadius, GUILayout.Width(150));
+this.acceptableRadius = UnityEditor.EditorGUILayout.DoubleField(this.acceptableRadius, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static MoveToTarget LoadJsonMoveToTarget(SimpleJSON.JSONNode _json)
+    public static MoveToTarget LoadJsonMoveToTarget(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         MoveToTarget obj = new ai.MoveToTarget();
         obj.LoadJson((SimpleJSON.JSONObject)_json);
@@ -380,7 +379,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     }
 
     public string targetActorKey;
-    public float acceptableRadius;
+    public double acceptableRadius;
 
     public override string ToString()
     {

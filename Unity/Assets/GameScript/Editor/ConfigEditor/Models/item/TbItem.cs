@@ -35,6 +35,7 @@ namespace editor.cfg.item
 
         public bool IsLoaded => _datas.Count > 0;
         private string _name => "TbItem";
+        private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
 
 
         public TbItem(string dataFilePath)
@@ -55,17 +56,14 @@ namespace editor.cfg.item
                 {
                     foreach (var node in json.AsArray)
                     {
-                        var data = new editor.cfg.item.Item();
-                        var dataNode = (JSONObject)node;
-                        data.LoadJson(dataNode);
+                        var data = editor.cfg.item.Item.LoadJsonItem(node.Value);
                         _datas.Add(data);
-                        _originalDataJsons.Add(GetId(data), dataNode.ToString(4));
+                        _originalDataJsons.Add(GetId(data), node.Value.ToString(4));
                     }
                 }
                 else
                 {
-                    var data = new editor.cfg.item.Item();
-                    data.LoadJson((JSONObject)json);
+                    var data = editor.cfg.item.Item.LoadJsonItem(json);
                     _datas.Add(data);
                     _originalDataJsons.Add(GetId(data), json.ToString(4));
                 }
@@ -123,7 +121,7 @@ namespace editor.cfg.item
             foreach (var data in _datas)
             {
                 var json = new JSONObject();
-                data.SaveJson(json);
+                editor.cfg.item.Item.SaveJsonItem(data, json);
                 jsonArray.Add(json);
             }
             return jsonArray.ToString(4);
@@ -132,7 +130,7 @@ namespace editor.cfg.item
         private string GetDataJson(editor.cfg.item.Item data)
         {
             var json = new JSONObject();
-            data?.SaveJson(json);
+            editor.cfg.item.Item.SaveJsonItem(data, json);
             return json.ToString(4);
         }
 
@@ -190,9 +188,9 @@ namespace editor.cfg.item
             GUILayout.BeginHorizontal();
             if (GUILayout.Button("复制Json", GUILayout.Width(100)))
             {
-                if (SelectData != null)
+                if (__SelectData != null)
                 {
-                    var text = GetDataJson(SelectData);
+                    var text = GetDataJson(__SelectData);
                     GUIUtility.systemCopyBuffer = text;
                     EditorUtility.DisplayDialog("提示", $"已复制到剪切板:\n{text}", "确定");
                 }
@@ -203,11 +201,11 @@ namespace editor.cfg.item
             }
             if (GUILayout.Button("预览差异", GUILayout.Width(100)))
             {
-                if (SelectData != null)
+                if (__SelectData != null)
                 {
-                    var id = GetId(SelectData);
+                    var id = GetId(__SelectData);
                     var originalJson = "";
-                    var newJson = GetDataJson(SelectData);
+                    var newJson = GetDataJson(__SelectData);
                     _originalDataJsons.TryGetValue(id, out originalJson);
                     FileDiffTool.ShowWindow(originalJson, newJson, $"{_name}:{id}");
                 }
@@ -220,7 +218,124 @@ namespace editor.cfg.item
             }
             GUILayout.EndHorizontal();
             _dataScrollPos = GUILayout.BeginScrollView(_dataScrollPos);
-            SelectData?.Render();
+            if (__SelectData != default)
+            {
+{
+    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);UnityEditor.EditorGUILayout.BeginHorizontal();
+if (ConfigEditorSettings.showComment)
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("道具id", "id"), GUILayout.Width(100));
+}
+else
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("id", "道具id"), GUILayout.Width(100));
+}
+__SelectData.id = UnityEditor.EditorGUILayout.IntField(__SelectData.id, GUILayout.Width(150));
+UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
+if (ConfigEditorSettings.showComment)
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("name", "name"), GUILayout.Width(100));
+}
+else
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("name", ""), GUILayout.Width(100));
+}
+__SelectData.name = UnityEditor.EditorGUILayout.TextField(__SelectData.name, GUILayout.Width(150));
+UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
+if (ConfigEditorSettings.showComment)
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("major_type", "major_type"), GUILayout.Width(100));
+}
+else
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("major_type", ""), GUILayout.Width(100));
+}
+
+__SelectData.majorType = (editor.cfg.item.EMajorType)UnityEditor.EditorGUILayout.EnumPopup(__SelectData.majorType, GUILayout.Width(150));
+UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
+if (ConfigEditorSettings.showComment)
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("minor_type", "minor_type"), GUILayout.Width(100));
+}
+else
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("minor_type", ""), GUILayout.Width(100));
+}
+
+__SelectData.minorType = (editor.cfg.item.EMinorType)UnityEditor.EditorGUILayout.EnumPopup(__SelectData.minorType, GUILayout.Width(150));
+UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
+if (ConfigEditorSettings.showComment)
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("max_pile_num", "max_pile_num"), GUILayout.Width(100));
+}
+else
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("max_pile_num", ""), GUILayout.Width(100));
+}
+__SelectData.maxPileNum = UnityEditor.EditorGUILayout.IntField(__SelectData.maxPileNum, GUILayout.Width(150));
+UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
+if (ConfigEditorSettings.showComment)
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("quality", "quality"), GUILayout.Width(100));
+}
+else
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("quality", ""), GUILayout.Width(100));
+}
+
+__SelectData.quality = (editor.cfg.item.EItemQuality)UnityEditor.EditorGUILayout.EnumPopup(__SelectData.quality, GUILayout.Width(150));
+UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
+if (ConfigEditorSettings.showComment)
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("icon", "icon"), GUILayout.Width(100));
+}
+else
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("icon", ""), GUILayout.Width(100));
+}
+__SelectData.icon = UnityEditor.EditorGUILayout.TextField(__SelectData.icon, GUILayout.Width(150));
+UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
+if (ConfigEditorSettings.showComment)
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("icon_backgroud", "icon_backgroud"), GUILayout.Width(100));
+}
+else
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("icon_backgroud", ""), GUILayout.Width(100));
+}
+__SelectData.iconBackgroud = UnityEditor.EditorGUILayout.TextField(__SelectData.iconBackgroud, GUILayout.Width(150));
+UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
+if (ConfigEditorSettings.showComment)
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("icon_mask", "icon_mask"), GUILayout.Width(100));
+}
+else
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("icon_mask", ""), GUILayout.Width(100));
+}
+__SelectData.iconMask = UnityEditor.EditorGUILayout.TextField(__SelectData.iconMask, GUILayout.Width(150));
+UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
+if (ConfigEditorSettings.showComment)
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("desc", "desc"), GUILayout.Width(100));
+}
+else
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("desc", ""), GUILayout.Width(100));
+}
+__SelectData.desc = UnityEditor.EditorGUILayout.TextField(__SelectData.desc, GUILayout.Width(150));
+UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
+if (ConfigEditorSettings.showComment)
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("show_order", "show_order"), GUILayout.Width(100));
+}
+else
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("show_order", ""), GUILayout.Width(100));
+}
+__SelectData.showOrder = UnityEditor.EditorGUILayout.IntField(__SelectData.showOrder, GUILayout.Width(150));
+UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
+}            }
             GUILayout.EndScrollView();
             GUILayout.EndVertical();
             GUILayout.EndHorizontal();
@@ -237,7 +352,7 @@ namespace editor.cfg.item
 
         public void Sort()
         {
-            var temp = GetId(SelectData);
+            var temp = GetId(__SelectData);
             _datas = _datas.OrderBy(data => Convert.ToInt64(GetId(data))).ToList();
             if (!string.IsNullOrEmpty(temp))
             {
@@ -249,7 +364,7 @@ namespace editor.cfg.item
         {
         }
 
-        private editor.cfg.item.Item SelectData
+        private editor.cfg.item.Item __SelectData
         {
             get
             {

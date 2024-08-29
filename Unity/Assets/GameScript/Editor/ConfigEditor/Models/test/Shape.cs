@@ -12,14 +12,18 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.test
 {
 
 public abstract class Shape :  Luban.EditorBeanBase 
 {
-    public Shape()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public Shape(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
     }
     public abstract string GetTypeStr();
 
@@ -34,23 +38,33 @@ public abstract class Shape :  Luban.EditorBeanBase
                 return;
             }
             _typeIndex = value;
-            Instance = Create(Types[value]);
+            var obj = Create(Types[value], _setChangeAction);
+            _setChangeAction(obj);
         }
     }
-    public Shape Instance { get; set;}
     public static List<string> Types = new List<string>()
     {
-        "test.Circle",
+        "Circle",
         "test2.Rectangle",
     };
 
-    public static Shape Create(string type)
+    public static Shape Create(string type, Action<Luban.EditorBeanBase> setChangeAction)
     {
         switch (type)
         {
             case "test.Circle":   
-            case "Circle":return new test.Circle();
-            case "test2.Rectangle":return new test2.Rectangle();
+            case "Circle":
+            {
+                var obj = new test.Circle(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
+            case "test2.Rectangle":
+            {
+                var obj = new test2.Rectangle(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             default: return null;
         }
     }
@@ -71,19 +85,28 @@ public abstract class Shape :  Luban.EditorBeanBase
     UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
     this.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.TypeIndex, __list0, GUILayout.Width(200));
     UnityEditor.EditorGUILayout.EndHorizontal();
-    this.Instance.Render();
+    this?.Render();
     UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static Shape LoadJsonShape(SimpleJSON.JSONNode _json)
+    public static Shape LoadJsonShape(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         string type = _json["$type"];
         Shape obj;
         switch (type)
         {
             case "test.Circle":   
-            case "Circle":obj = new test.Circle(); break;
-            case "test2.Rectangle":obj = new test2.Rectangle(); break;
+            case "Circle":
+            {
+                obj = new test.Circle(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("Circle");
+                break;
+            }
+            case "test2.Rectangle":
+            {
+                obj = new test2.Rectangle(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("test2.Rectangle");
+                break;
+            }
             default: throw new SerializationException();
         }
         obj.LoadJson((SimpleJSON.JSONObject)_json);
@@ -92,8 +115,8 @@ public abstract class Shape :  Luban.EditorBeanBase
         
     public static void SaveJsonShape(Shape _obj, SimpleJSON.JSONNode _json)
     {
-        _json["$type"] = _obj.Instance.GetTypeStr();
-        _obj.Instance.SaveJson((SimpleJSON.JSONObject)_json);
+        _json["$type"] = _obj.GetTypeStr();
+        _obj.SaveJson((SimpleJSON.JSONObject)_json);
     }
 
 

@@ -12,14 +12,18 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.test
 {
 
 public sealed class DemoSingletonType :  Luban.EditorBeanBase 
 {
-    public DemoSingletonType()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public DemoSingletonType(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
             name = "";
     }
 
@@ -57,14 +61,13 @@ public sealed class DemoSingletonType :  Luban.EditorBeanBase
                 {
                     throw new SerializationException();
                 }
-                date = editor.cfg.test.DemoDynamic.LoadJsonDemoDynamic(_fieldJson);
+                date = editor.cfg.test.DemoDynamic.LoadJsonDemoDynamic(_fieldJson, (__newIns0)=>{ date = __newIns0 as test.DemoDynamic ; });
                 var __index0 = editor.cfg.test.DemoDynamic.Types.IndexOf(date.GetTypeStr());
                 if (__index0 == -1)
                 {
                     throw new SerializationException();
                 }
                 date.TypeIndex = __index0;
-                date.Instance = editor.cfg.test.DemoDynamic.LoadJsonDemoDynamic(_fieldJson);
             }
             else
             {
@@ -136,13 +139,12 @@ else
     UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
     this.date.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.date.TypeIndex, __list1, GUILayout.Width(200));
     UnityEditor.EditorGUILayout.EndHorizontal();
-    this.date.Instance.Render();
+    this.date?.Render();
     UnityEditor.EditorGUILayout.EndVertical();
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static DemoSingletonType LoadJsonDemoSingletonType(SimpleJSON.JSONNode _json)
+    public static DemoSingletonType LoadJsonDemoSingletonType(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         DemoSingletonType obj = new test.DemoSingletonType();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

@@ -12,14 +12,18 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.test
 {
 
 public sealed class CompositeJsonTable2 :  Luban.EditorBeanBase 
 {
-    public CompositeJsonTable2()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public CompositeJsonTable2(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -85,8 +89,7 @@ else
 this.y = UnityEditor.EditorGUILayout.IntField(this.y, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static CompositeJsonTable2 LoadJsonCompositeJsonTable2(SimpleJSON.JSONNode _json)
+    public static CompositeJsonTable2 LoadJsonCompositeJsonTable2(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         CompositeJsonTable2 obj = new test.CompositeJsonTable2();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

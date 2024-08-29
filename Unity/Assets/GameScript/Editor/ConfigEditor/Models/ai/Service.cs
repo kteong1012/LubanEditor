@@ -12,17 +12,21 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.ai
 {
 
 public abstract class Service :  ai.Node 
 {
-    public Service()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public Service(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
+        _setChangeAction = setChangeAction;
     }
     public override string GetTypeStr() => TYPE_STR;
-    private const string TYPE_STR = "ai.Service";
+    private const string TYPE_STR = "Service";
 
     private int _typeIndex = -1;
     public new int TypeIndex
@@ -35,36 +39,66 @@ public abstract class Service :  ai.Node
                 return;
             }
             _typeIndex = value;
-            Instance = Create(Types[value]);
+            var obj = Create(Types[value], _setChangeAction);
+            _setChangeAction(obj);
         }
     }
-    public new Service Instance { get; set;}
     public new static List<string> Types = new List<string>()
     {
-        "ai.UeSetDefaultFocus",
-        "ai.ExecuteTimeStatistic",
-        "ai.ChooseTarget",
-        "ai.KeepFaceTarget",
-        "ai.GetOwnerPlayer",
-        "ai.UpdateDailyBehaviorProps",
+        "UeSetDefaultFocus",
+        "ExecuteTimeStatistic",
+        "ChooseTarget",
+        "KeepFaceTarget",
+        "GetOwnerPlayer",
+        "UpdateDailyBehaviorProps",
     };
 
-    public new static Service Create(string type)
+    public new static Service Create(string type, Action<Luban.EditorBeanBase> setChangeAction)
     {
         switch (type)
         {
             case "ai.UeSetDefaultFocus":   
-            case "UeSetDefaultFocus":return new ai.UeSetDefaultFocus();
+            case "UeSetDefaultFocus":
+            {
+                var obj = new ai.UeSetDefaultFocus(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.ExecuteTimeStatistic":   
-            case "ExecuteTimeStatistic":return new ai.ExecuteTimeStatistic();
+            case "ExecuteTimeStatistic":
+            {
+                var obj = new ai.ExecuteTimeStatistic(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.ChooseTarget":   
-            case "ChooseTarget":return new ai.ChooseTarget();
+            case "ChooseTarget":
+            {
+                var obj = new ai.ChooseTarget(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.KeepFaceTarget":   
-            case "KeepFaceTarget":return new ai.KeepFaceTarget();
+            case "KeepFaceTarget":
+            {
+                var obj = new ai.KeepFaceTarget(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.GetOwnerPlayer":   
-            case "GetOwnerPlayer":return new ai.GetOwnerPlayer();
+            case "GetOwnerPlayer":
+            {
+                var obj = new ai.GetOwnerPlayer(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.UpdateDailyBehaviorProps":   
-            case "UpdateDailyBehaviorProps":return new ai.UpdateDailyBehaviorProps();
+            case "UpdateDailyBehaviorProps":
+            {
+                var obj = new ai.UpdateDailyBehaviorProps(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             default: return null;
         }
     }
@@ -85,28 +119,57 @@ public abstract class Service :  ai.Node
     UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
     this.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.TypeIndex, __list0, GUILayout.Width(200));
     UnityEditor.EditorGUILayout.EndHorizontal();
-    this.Instance.Render();
+    this?.Render();
     UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static Service LoadJsonService(SimpleJSON.JSONNode _json)
+    public static Service LoadJsonService(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         string type = _json["$type"];
         Service obj;
         switch (type)
         {
             case "ai.UeSetDefaultFocus":   
-            case "UeSetDefaultFocus":obj = new ai.UeSetDefaultFocus(); break;
+            case "UeSetDefaultFocus":
+            {
+                obj = new ai.UeSetDefaultFocus(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("UeSetDefaultFocus");
+                break;
+            }
             case "ai.ExecuteTimeStatistic":   
-            case "ExecuteTimeStatistic":obj = new ai.ExecuteTimeStatistic(); break;
+            case "ExecuteTimeStatistic":
+            {
+                obj = new ai.ExecuteTimeStatistic(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("ExecuteTimeStatistic");
+                break;
+            }
             case "ai.ChooseTarget":   
-            case "ChooseTarget":obj = new ai.ChooseTarget(); break;
+            case "ChooseTarget":
+            {
+                obj = new ai.ChooseTarget(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("ChooseTarget");
+                break;
+            }
             case "ai.KeepFaceTarget":   
-            case "KeepFaceTarget":obj = new ai.KeepFaceTarget(); break;
+            case "KeepFaceTarget":
+            {
+                obj = new ai.KeepFaceTarget(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("KeepFaceTarget");
+                break;
+            }
             case "ai.GetOwnerPlayer":   
-            case "GetOwnerPlayer":obj = new ai.GetOwnerPlayer(); break;
+            case "GetOwnerPlayer":
+            {
+                obj = new ai.GetOwnerPlayer(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("GetOwnerPlayer");
+                break;
+            }
             case "ai.UpdateDailyBehaviorProps":   
-            case "UpdateDailyBehaviorProps":obj = new ai.UpdateDailyBehaviorProps(); break;
+            case "UpdateDailyBehaviorProps":
+            {
+                obj = new ai.UpdateDailyBehaviorProps(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("UpdateDailyBehaviorProps");
+                break;
+            }
             default: throw new SerializationException();
         }
         obj.LoadJson((SimpleJSON.JSONObject)_json);
@@ -115,8 +178,8 @@ public abstract class Service :  ai.Node
         
     public static void SaveJsonService(Service _obj, SimpleJSON.JSONNode _json)
     {
-        _json["$type"] = _obj.Instance.GetTypeStr();
-        _obj.Instance.SaveJson((SimpleJSON.JSONObject)_json);
+        _json["$type"] = _obj.GetTypeStr();
+        _obj.SaveJson((SimpleJSON.JSONObject)_json);
     }
 
 

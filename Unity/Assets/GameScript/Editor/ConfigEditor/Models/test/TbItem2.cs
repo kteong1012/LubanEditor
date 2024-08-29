@@ -32,6 +32,7 @@ namespace editor.cfg.test
 
         public bool IsLoaded => _datas.Count > 0;
         private string _name => "TbItem2";
+        private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
 
 
         public TbItem2(string dataFilePath)
@@ -52,17 +53,14 @@ namespace editor.cfg.test
                 {
                     foreach (var node in json.AsArray)
                     {
-                        var data = new test.Item();
-                        var dataNode = (JSONObject)node;
-                        data.LoadJson(dataNode);
+                        var data = editor.cfg.test.ItemBase.LoadJsonItemBase(node.Value);
                         _datas.Add(data);
-                        _originalDataJsons.Add(GetId(data), dataNode.ToString(4));
+                        _originalDataJsons.Add(GetId(data), node.Value.ToString(4));
                     }
                 }
                 else
                 {
-                    var data = new test.Item();
-                    data.LoadJson((JSONObject)json);
+                    var data = editor.cfg.test.ItemBase.LoadJsonItemBase(json);
                     _datas.Add(data);
                     _originalDataJsons.Add(GetId(data), json.ToString(4));
                 }
@@ -120,7 +118,7 @@ namespace editor.cfg.test
             foreach (var data in _datas)
             {
                 var json = new JSONObject();
-                data.SaveJson(json);
+                editor.cfg.test.ItemBase.SaveJsonItemBase(data, json);
                 jsonArray.Add(json);
             }
             return jsonArray.ToString(4);
@@ -129,7 +127,7 @@ namespace editor.cfg.test
         private string GetDataJson(editor.cfg.test.ItemBase data)
         {
             var json = new JSONObject();
-            data?.SaveJson(json);
+            editor.cfg.test.ItemBase.SaveJsonItemBase(data, json);
             return json.ToString(4);
         }
 
@@ -187,9 +185,9 @@ namespace editor.cfg.test
             GUILayout.BeginHorizontal();
             if (GUILayout.Button("复制Json", GUILayout.Width(100)))
             {
-                if (SelectData != null)
+                if (__SelectData != null)
                 {
-                    var text = GetDataJson(SelectData);
+                    var text = GetDataJson(__SelectData);
                     GUIUtility.systemCopyBuffer = text;
                     EditorUtility.DisplayDialog("提示", $"已复制到剪切板:\n{text}", "确定");
                 }
@@ -200,11 +198,11 @@ namespace editor.cfg.test
             }
             if (GUILayout.Button("预览差异", GUILayout.Width(100)))
             {
-                if (SelectData != null)
+                if (__SelectData != null)
                 {
-                    var id = GetId(SelectData);
+                    var id = GetId(__SelectData);
                     var originalJson = "";
-                    var newJson = GetDataJson(SelectData);
+                    var newJson = GetDataJson(__SelectData);
                     _originalDataJsons.TryGetValue(id, out originalJson);
                     FileDiffTool.ShowWindow(originalJson, newJson, $"{_name}:{id}");
                 }
@@ -217,7 +215,23 @@ namespace editor.cfg.test
             }
             GUILayout.EndHorizontal();
             _dataScrollPos = GUILayout.BeginScrollView(_dataScrollPos);
-            SelectData?.Render();
+            if (__SelectData != default)
+            {
+{
+    var __list0 = test.ItemBase.Types.Select(t => new GUIContent(t)).ToArray();
+    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+    if (__SelectData == null)
+    {
+        
+        __SelectData.TypeIndex = 0;
+    }
+    UnityEditor.EditorGUILayout.BeginHorizontal();
+    UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
+    __SelectData.TypeIndex = UnityEditor.EditorGUILayout.Popup(__SelectData.TypeIndex, __list0, GUILayout.Width(200));
+    UnityEditor.EditorGUILayout.EndHorizontal();
+    __SelectData?.Render();
+    UnityEditor.EditorGUILayout.EndVertical();
+}            }
             GUILayout.EndScrollView();
             GUILayout.EndVertical();
             GUILayout.EndHorizontal();
@@ -234,7 +248,7 @@ namespace editor.cfg.test
 
         public void Sort()
         {
-            var temp = GetId(SelectData);
+            var temp = GetId(__SelectData);
             _datas = _datas.OrderBy(data => Convert.ToInt64(GetId(data))).ToList();
             if (!string.IsNullOrEmpty(temp))
             {
@@ -246,7 +260,7 @@ namespace editor.cfg.test
         {
         }
 
-        private editor.cfg.test.ItemBase SelectData
+        private editor.cfg.test.ItemBase __SelectData
         {
             get
             {

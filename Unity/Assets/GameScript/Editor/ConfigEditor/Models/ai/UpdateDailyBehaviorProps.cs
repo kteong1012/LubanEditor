@@ -12,14 +12,18 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.ai
 {
 
 public sealed class UpdateDailyBehaviorProps :  ai.Service 
 {
-    public UpdateDailyBehaviorProps()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public UpdateDailyBehaviorProps(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
+        _setChangeAction = setChangeAction;
             satietyKey = "";
             energyKey = "";
             moodKey = "";
@@ -31,7 +35,7 @@ public sealed class UpdateDailyBehaviorProps :  ai.Service
             moodUpperThresholdKey = "";
     }
     public override string GetTypeStr() => TYPE_STR;
-    private const string TYPE_STR = "ai.UpdateDailyBehaviorProps";
+    private const string TYPE_STR = "UpdateDailyBehaviorProps";
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
     {
@@ -342,8 +346,7 @@ else
 this.moodUpperThresholdKey = UnityEditor.EditorGUILayout.TextField(this.moodUpperThresholdKey, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static UpdateDailyBehaviorProps LoadJsonUpdateDailyBehaviorProps(SimpleJSON.JSONNode _json)
+    public static UpdateDailyBehaviorProps LoadJsonUpdateDailyBehaviorProps(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         UpdateDailyBehaviorProps obj = new ai.UpdateDailyBehaviorProps();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

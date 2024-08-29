@@ -12,14 +12,18 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.test
 {
 
 public sealed class MultiRowType1 :  Luban.EditorBeanBase 
 {
-    public MultiRowType1()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public MultiRowType1(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -85,8 +89,7 @@ else
 this.x = UnityEditor.EditorGUILayout.IntField(this.x, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static MultiRowType1 LoadJsonMultiRowType1(SimpleJSON.JSONNode _json)
+    public static MultiRowType1 LoadJsonMultiRowType1(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         MultiRowType1 obj = new test.MultiRowType1();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

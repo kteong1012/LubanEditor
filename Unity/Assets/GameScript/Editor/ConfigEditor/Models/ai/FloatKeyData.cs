@@ -12,17 +12,21 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.ai
 {
 
 public sealed class FloatKeyData :  ai.KeyData 
 {
-    public FloatKeyData()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public FloatKeyData(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
+        _setChangeAction = setChangeAction;
     }
     public override string GetTypeStr() => TYPE_STR;
-    private const string TYPE_STR = "ai.FloatKeyData";
+    private const string TYPE_STR = "FloatKeyData";
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
     {
@@ -60,11 +64,10 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("value", ""), GUILayout.Width(100));
 }
-this.value = UnityEditor.EditorGUILayout.FloatField(this.value, GUILayout.Width(150));
+this.value = UnityEditor.EditorGUILayout.DoubleField(this.value, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static FloatKeyData LoadJsonFloatKeyData(SimpleJSON.JSONNode _json)
+    public static FloatKeyData LoadJsonFloatKeyData(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         FloatKeyData obj = new ai.FloatKeyData();
         obj.LoadJson((SimpleJSON.JSONObject)_json);
@@ -76,7 +79,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
         _obj.SaveJson((SimpleJSON.JSONObject)_json);
     }
 
-    public float value;
+    public double value;
 
     public override string ToString()
     {

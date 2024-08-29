@@ -12,14 +12,18 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.test
 {
 
 public sealed class CompactString :  Luban.EditorBeanBase 
 {
-    public CompactString()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public CompactString(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
             s2 = "";
             s3 = "";
     }
@@ -117,8 +121,7 @@ else
 this.s3 = UnityEditor.EditorGUILayout.TextField(this.s3, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static CompactString LoadJsonCompactString(SimpleJSON.JSONNode _json)
+    public static CompactString LoadJsonCompactString(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         CompactString obj = new test.CompactString();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

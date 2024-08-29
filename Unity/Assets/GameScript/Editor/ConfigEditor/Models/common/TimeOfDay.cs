@@ -12,14 +12,18 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.common
 {
 
 public sealed class TimeOfDay :  Luban.EditorBeanBase 
 {
-    public TimeOfDay()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public TimeOfDay(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -109,8 +113,7 @@ else
 this.second = UnityEditor.EditorGUILayout.IntField(this.second, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static TimeOfDay LoadJsonTimeOfDay(SimpleJSON.JSONNode _json)
+    public static TimeOfDay LoadJsonTimeOfDay(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         TimeOfDay obj = new common.TimeOfDay();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

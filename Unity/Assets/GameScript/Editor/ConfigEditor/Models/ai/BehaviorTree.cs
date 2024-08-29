@@ -12,14 +12,18 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.ai
 {
 
 public sealed class BehaviorTree :  Luban.EditorBeanBase 
 {
-    public BehaviorTree()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public BehaviorTree(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
             name = "";
             desc = "";
             blackboardId = "";
@@ -83,14 +87,13 @@ public sealed class BehaviorTree :  Luban.EditorBeanBase
                 {
                     throw new SerializationException();
                 }
-                root = editor.cfg.ai.ComposeNode.LoadJsonComposeNode(_fieldJson);
+                root = editor.cfg.ai.ComposeNode.LoadJsonComposeNode(_fieldJson, (__newIns0)=>{ root = __newIns0 as ai.ComposeNode ; });
                 var __index0 = editor.cfg.ai.ComposeNode.Types.IndexOf(root.GetTypeStr());
                 if (__index0 == -1)
                 {
                     throw new SerializationException();
                 }
                 root.TypeIndex = __index0;
-                root.Instance = editor.cfg.ai.ComposeNode.LoadJsonComposeNode(_fieldJson);
             }
             else
             {
@@ -192,13 +195,12 @@ else
     UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
     this.root.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.root.TypeIndex, __list1, GUILayout.Width(200));
     UnityEditor.EditorGUILayout.EndHorizontal();
-    this.root.Instance.Render();
+    this.root?.Render();
     UnityEditor.EditorGUILayout.EndVertical();
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static BehaviorTree LoadJsonBehaviorTree(SimpleJSON.JSONNode _json)
+    public static BehaviorTree LoadJsonBehaviorTree(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         BehaviorTree obj = new ai.BehaviorTree();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

@@ -12,14 +12,18 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.test.login
 {
 
 public sealed class RoleInfo :  test.DemoD3 
 {
-    public RoleInfo()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public RoleInfo(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
+        _setChangeAction = setChangeAction;
     }
     public override string GetTypeStr() => TYPE_STR;
     private const string TYPE_STR = "test.login.RoleInfo";
@@ -111,8 +115,7 @@ else
 this.roleId = UnityEditor.EditorGUILayout.LongField(this.roleId, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static RoleInfo LoadJsonRoleInfo(SimpleJSON.JSONNode _json)
+    public static RoleInfo LoadJsonRoleInfo(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         RoleInfo obj = new test.login.RoleInfo();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

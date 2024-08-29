@@ -12,18 +12,22 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.ai
 {
 
 public sealed class KeepFaceTarget :  ai.Service 
 {
-    public KeepFaceTarget()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public KeepFaceTarget(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
+        _setChangeAction = setChangeAction;
             targetActorKey = "";
     }
     public override string GetTypeStr() => TYPE_STR;
-    private const string TYPE_STR = "ai.KeepFaceTarget";
+    private const string TYPE_STR = "KeepFaceTarget";
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
     {
@@ -118,8 +122,7 @@ else
 this.targetActorKey = UnityEditor.EditorGUILayout.TextField(this.targetActorKey, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static KeepFaceTarget LoadJsonKeepFaceTarget(SimpleJSON.JSONNode _json)
+    public static KeepFaceTarget LoadJsonKeepFaceTarget(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         KeepFaceTarget obj = new ai.KeepFaceTarget();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

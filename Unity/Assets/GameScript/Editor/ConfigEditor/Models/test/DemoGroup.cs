@@ -12,14 +12,18 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.test
 {
 
 public sealed class DemoGroup :  Luban.EditorBeanBase 
 {
-    public DemoGroup()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public DemoGroup(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
             x5 = new editor.cfg.test.InnerGroup();
     }
 
@@ -89,6 +93,7 @@ public sealed class DemoGroup :  Luban.EditorBeanBase
             else
             {
                 x5 = new editor.cfg.test.InnerGroup();
+                x5.SetChangeAction((__x) => x5 = __x as editor.cfg.test.InnerGroup);
             }
         }
         
@@ -146,6 +151,26 @@ this.x1 = UnityEditor.EditorGUILayout.IntField(this.x1, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x2", "x2"), GUILayout.Width(100));
+}
+else
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x2", ""), GUILayout.Width(100));
+}
+this.x2 = UnityEditor.EditorGUILayout.IntField(this.x2, GUILayout.Width(150));
+UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
+if (ConfigEditorSettings.showComment)
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x3", "x3"), GUILayout.Width(100));
+}
+else
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x3", ""), GUILayout.Width(100));
+}
+this.x3 = UnityEditor.EditorGUILayout.IntField(this.x3, GUILayout.Width(150));
+UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
+if (ConfigEditorSettings.showComment)
+{
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x4", "x4"), GUILayout.Width(100));
 }
 else
@@ -186,6 +211,16 @@ this.x5.y2 = UnityEditor.EditorGUILayout.IntField(this.x5.y2, GUILayout.Width(15
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("y3", "y3"), GUILayout.Width(100));
+}
+else
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("y3", ""), GUILayout.Width(100));
+}
+this.x5.y3 = UnityEditor.EditorGUILayout.IntField(this.x5.y3, GUILayout.Width(150));
+UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
+if (ConfigEditorSettings.showComment)
+{
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("y4", "y4"), GUILayout.Width(100));
 }
 else
@@ -197,8 +232,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static DemoGroup LoadJsonDemoGroup(SimpleJSON.JSONNode _json)
+    public static DemoGroup LoadJsonDemoGroup(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         DemoGroup obj = new test.DemoGroup();
         obj.LoadJson((SimpleJSON.JSONObject)_json);
@@ -222,6 +256,8 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
         return "{ "
         + "id:" + id + ","
         + "x1:" + x1 + ","
+        + "x2:" + x2 + ","
+        + "x3:" + x3 + ","
         + "x4:" + x4 + ","
         + "x5:" + x5 + ","
         + "}";

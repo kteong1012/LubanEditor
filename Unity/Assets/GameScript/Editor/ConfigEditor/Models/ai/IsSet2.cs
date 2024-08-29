@@ -12,17 +12,21 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.ai
 {
 
 public sealed class IsSet2 :  ai.KeyQueryOperator 
 {
-    public IsSet2()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public IsSet2(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
+        _setChangeAction = setChangeAction;
     }
     public override string GetTypeStr() => TYPE_STR;
-    private const string TYPE_STR = "ai.IsSet2";
+    private const string TYPE_STR = "IsSet2";
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
     {
@@ -39,8 +43,7 @@ public sealed class IsSet2 :  ai.KeyQueryOperator
 {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static IsSet2 LoadJsonIsSet2(SimpleJSON.JSONNode _json)
+    public static IsSet2 LoadJsonIsSet2(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         IsSet2 obj = new ai.IsSet2();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

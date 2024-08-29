@@ -12,18 +12,22 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.ai
 {
 
 public sealed class IsAtLocation :  ai.Decorator 
 {
-    public IsAtLocation()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public IsAtLocation(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
+        _setChangeAction = setChangeAction;
             keyboardKey = "";
     }
     public override string GetTypeStr() => TYPE_STR;
-    private const string TYPE_STR = "ai.IsAtLocation";
+    private const string TYPE_STR = "IsAtLocation";
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
     {
@@ -169,7 +173,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("acceptable_radius", ""), GUILayout.Width(100));
 }
-this.acceptableRadius = UnityEditor.EditorGUILayout.FloatField(this.acceptableRadius, GUILayout.Width(150));
+this.acceptableRadius = UnityEditor.EditorGUILayout.DoubleField(this.acceptableRadius, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -192,8 +196,7 @@ else
 this.inverseCondition = UnityEditor.EditorGUILayout.Toggle(this.inverseCondition, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static IsAtLocation LoadJsonIsAtLocation(SimpleJSON.JSONNode _json)
+    public static IsAtLocation LoadJsonIsAtLocation(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         IsAtLocation obj = new ai.IsAtLocation();
         obj.LoadJson((SimpleJSON.JSONObject)_json);
@@ -205,7 +208,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
         _obj.SaveJson((SimpleJSON.JSONObject)_json);
     }
 
-    public float acceptableRadius;
+    public double acceptableRadius;
     public string keyboardKey;
     public bool inverseCondition;
 

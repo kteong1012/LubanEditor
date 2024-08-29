@@ -12,14 +12,18 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.ai
 {
 
 public sealed class Blackboard :  Luban.EditorBeanBase 
 {
-    public Blackboard()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public Blackboard(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
             name = "";
             desc = "";
             parentName = "";
@@ -98,7 +102,7 @@ public sealed class Blackboard :  Luban.EditorBeanBase
 
         if (keys != null)
         {
-            { var __cjson0 = new JSONArray(); foreach(var __e0 in keys) { { var __bjson = new JSONObject();  editor.cfg.ai.BlackboardKey.SaveJsonBlackboardKey(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["keys"] = __cjson0; }
+            { var __cjson0 = new JSONArray(); foreach(var __e0 in keys) { { var __bjson = new JSONObject();  editor.cfg.ai.BlackboardKey.SaveJsonBlackboardKey(__e0, __bjson); __cjson0["null"] = __bjson; } } __cjson0.Inline = __cjson0.Count == 0; _json["keys"] = __cjson0; }
         }
     }
 
@@ -237,8 +241,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static Blackboard LoadJsonBlackboard(SimpleJSON.JSONNode _json)
+    public static Blackboard LoadJsonBlackboard(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         Blackboard obj = new ai.Blackboard();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

@@ -12,14 +12,18 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.test
 {
 
 public sealed class DetectEncoding :  Luban.EditorBeanBase 
 {
-    public DetectEncoding()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public DetectEncoding(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
             name = "";
     }
 
@@ -89,8 +93,7 @@ else
 this.name = UnityEditor.EditorGUILayout.TextField(this.name, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static DetectEncoding LoadJsonDetectEncoding(SimpleJSON.JSONNode _json)
+    public static DetectEncoding LoadJsonDetectEncoding(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         DetectEncoding obj = new test.DetectEncoding();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

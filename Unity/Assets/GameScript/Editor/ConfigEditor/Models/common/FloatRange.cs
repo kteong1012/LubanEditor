@@ -12,14 +12,18 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.common
 {
 
 public sealed class FloatRange :  Luban.EditorBeanBase 
 {
-    public FloatRange()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public FloatRange(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -72,7 +76,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("min", ""), GUILayout.Width(100));
 }
-this.min = UnityEditor.EditorGUILayout.FloatField(this.min, GUILayout.Width(150));
+this.min = UnityEditor.EditorGUILayout.DoubleField(this.min, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -82,11 +86,10 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("max", ""), GUILayout.Width(100));
 }
-this.max = UnityEditor.EditorGUILayout.FloatField(this.max, GUILayout.Width(150));
+this.max = UnityEditor.EditorGUILayout.DoubleField(this.max, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static FloatRange LoadJsonFloatRange(SimpleJSON.JSONNode _json)
+    public static FloatRange LoadJsonFloatRange(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         FloatRange obj = new common.FloatRange();
         obj.LoadJson((SimpleJSON.JSONObject)_json);
@@ -98,8 +101,8 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
         _obj.SaveJson((SimpleJSON.JSONObject)_json);
     }
 
-    public float min;
-    public float max;
+    public double min;
+    public double max;
 
     public override string ToString()
     {

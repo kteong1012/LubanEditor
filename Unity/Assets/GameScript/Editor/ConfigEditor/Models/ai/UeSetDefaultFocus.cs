@@ -12,18 +12,22 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.ai
 {
 
 public sealed class UeSetDefaultFocus :  ai.Service 
 {
-    public UeSetDefaultFocus()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public UeSetDefaultFocus(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
+        _setChangeAction = setChangeAction;
             keyboardKey = "";
     }
     public override string GetTypeStr() => TYPE_STR;
-    private const string TYPE_STR = "ai.UeSetDefaultFocus";
+    private const string TYPE_STR = "UeSetDefaultFocus";
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
     {
@@ -118,8 +122,7 @@ else
 this.keyboardKey = UnityEditor.EditorGUILayout.TextField(this.keyboardKey, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static UeSetDefaultFocus LoadJsonUeSetDefaultFocus(SimpleJSON.JSONNode _json)
+    public static UeSetDefaultFocus LoadJsonUeSetDefaultFocus(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         UeSetDefaultFocus obj = new ai.UeSetDefaultFocus();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

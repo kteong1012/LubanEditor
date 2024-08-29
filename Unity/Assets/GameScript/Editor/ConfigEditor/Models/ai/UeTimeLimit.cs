@@ -12,17 +12,21 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.ai
 {
 
 public sealed class UeTimeLimit :  ai.Decorator 
 {
-    public UeTimeLimit()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public UeTimeLimit(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
+        _setChangeAction = setChangeAction;
     }
     public override string GetTypeStr() => TYPE_STR;
-    private const string TYPE_STR = "ai.UeTimeLimit";
+    private const string TYPE_STR = "UeTimeLimit";
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
     {
@@ -137,11 +141,10 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("limit_time", ""), GUILayout.Width(100));
 }
-this.limitTime = UnityEditor.EditorGUILayout.FloatField(this.limitTime, GUILayout.Width(150));
+this.limitTime = UnityEditor.EditorGUILayout.DoubleField(this.limitTime, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static UeTimeLimit LoadJsonUeTimeLimit(SimpleJSON.JSONNode _json)
+    public static UeTimeLimit LoadJsonUeTimeLimit(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         UeTimeLimit obj = new ai.UeTimeLimit();
         obj.LoadJson((SimpleJSON.JSONObject)_json);
@@ -153,7 +156,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
         _obj.SaveJson((SimpleJSON.JSONObject)_json);
     }
 
-    public float limitTime;
+    public double limitTime;
 
     public override string ToString()
     {

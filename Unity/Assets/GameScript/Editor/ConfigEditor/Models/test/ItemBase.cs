@@ -12,14 +12,18 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.test
 {
 
 public abstract class ItemBase :  Luban.EditorBeanBase 
 {
-    public ItemBase()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public ItemBase(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
             name = "";
             desc = "";
     }
@@ -36,27 +40,42 @@ public abstract class ItemBase :  Luban.EditorBeanBase
                 return;
             }
             _typeIndex = value;
-            Instance = Create(Types[value]);
+            var obj = Create(Types[value], _setChangeAction);
+            _setChangeAction(obj);
         }
     }
-    public ItemBase Instance { get; set;}
     public static List<string> Types = new List<string>()
     {
-        "test.Item",
-        "test.Equipment",
-        "test.Decorator",
+        "Item",
+        "Equipment",
+        "Decorator",
     };
 
-    public static ItemBase Create(string type)
+    public static ItemBase Create(string type, Action<Luban.EditorBeanBase> setChangeAction)
     {
         switch (type)
         {
             case "test.Item":   
-            case "Item":return new test.Item();
+            case "Item":
+            {
+                var obj = new test.Item(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "test.Equipment":   
-            case "Equipment":return new test.Equipment();
+            case "Equipment":
+            {
+                var obj = new test.Equipment(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "test.Decorator":   
-            case "Decorator":return new test.Decorator();
+            case "Decorator":
+            {
+                var obj = new test.Decorator(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             default: return null;
         }
     }
@@ -77,22 +96,36 @@ public abstract class ItemBase :  Luban.EditorBeanBase
     UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
     this.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.TypeIndex, __list0, GUILayout.Width(200));
     UnityEditor.EditorGUILayout.EndHorizontal();
-    this.Instance.Render();
+    this?.Render();
     UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static ItemBase LoadJsonItemBase(SimpleJSON.JSONNode _json)
+    public static ItemBase LoadJsonItemBase(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         string type = _json["$type"];
         ItemBase obj;
         switch (type)
         {
             case "test.Item":   
-            case "Item":obj = new test.Item(); break;
+            case "Item":
+            {
+                obj = new test.Item(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("Item");
+                break;
+            }
             case "test.Equipment":   
-            case "Equipment":obj = new test.Equipment(); break;
+            case "Equipment":
+            {
+                obj = new test.Equipment(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("Equipment");
+                break;
+            }
             case "test.Decorator":   
-            case "Decorator":obj = new test.Decorator(); break;
+            case "Decorator":
+            {
+                obj = new test.Decorator(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("Decorator");
+                break;
+            }
             default: throw new SerializationException();
         }
         obj.LoadJson((SimpleJSON.JSONObject)_json);
@@ -101,8 +134,8 @@ public abstract class ItemBase :  Luban.EditorBeanBase
         
     public static void SaveJsonItemBase(ItemBase _obj, SimpleJSON.JSONNode _json)
     {
-        _json["$type"] = _obj.Instance.GetTypeStr();
-        _obj.Instance.SaveJson((SimpleJSON.JSONObject)_json);
+        _json["$type"] = _obj.GetTypeStr();
+        _obj.SaveJson((SimpleJSON.JSONObject)_json);
     }
 
     public int id;

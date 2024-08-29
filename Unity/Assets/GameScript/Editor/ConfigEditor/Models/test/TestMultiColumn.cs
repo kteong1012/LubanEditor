@@ -12,14 +12,18 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.test
 {
 
 public sealed class TestMultiColumn :  Luban.EditorBeanBase 
 {
-    public TestMultiColumn()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public TestMultiColumn(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
             a = new editor.cfg.test.Foo();
             b = new editor.cfg.test.Foo();
             c = new editor.cfg.test.Foo();
@@ -47,6 +51,7 @@ public sealed class TestMultiColumn :  Luban.EditorBeanBase
             else
             {
                 a = new editor.cfg.test.Foo();
+                a.SetChangeAction((__x) => a = __x as editor.cfg.test.Foo);
             }
         }
         
@@ -59,6 +64,7 @@ public sealed class TestMultiColumn :  Luban.EditorBeanBase
             else
             {
                 b = new editor.cfg.test.Foo();
+                b.SetChangeAction((__x) => b = __x as editor.cfg.test.Foo);
             }
         }
         
@@ -71,6 +77,7 @@ public sealed class TestMultiColumn :  Luban.EditorBeanBase
             else
             {
                 c = new editor.cfg.test.Foo();
+                c.SetChangeAction((__x) => c = __x as editor.cfg.test.Foo);
             }
         }
         
@@ -241,8 +248,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static TestMultiColumn LoadJsonTestMultiColumn(SimpleJSON.JSONNode _json)
+    public static TestMultiColumn LoadJsonTestMultiColumn(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         TestMultiColumn obj = new test.TestMultiColumn();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

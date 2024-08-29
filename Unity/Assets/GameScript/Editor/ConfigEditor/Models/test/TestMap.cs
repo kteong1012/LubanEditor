@@ -12,14 +12,18 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.test
 {
 
 public sealed class TestMap :  Luban.EditorBeanBase 
 {
-    public TestMap()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public TestMap(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
             x1 = new System.Collections.Generic.List<object[]>();
             x2 = new System.Collections.Generic.List<object[]>();
             x3 = new System.Collections.Generic.List<object[]>();
@@ -106,6 +110,7 @@ public sealed class TestMap :  Luban.EditorBeanBase
                     __entry0["null"] = new JSONNumber((int)__e0[0]);
                     __entry0["null"] = new JSONNumber((int)__e0[1]);
                 }
+                __cjson0.Inline = __cjson0.Count == 0;
                 _json["x1"] = __cjson0;
             }
         }
@@ -121,6 +126,7 @@ public sealed class TestMap :  Luban.EditorBeanBase
                     __entry0["null"] = new JSONNumber((long)__e0[0]);
                     __entry0["null"] = new JSONNumber((int)__e0[1]);
                 }
+                __cjson0.Inline = __cjson0.Count == 0;
                 _json["x2"] = __cjson0;
             }
         }
@@ -136,6 +142,7 @@ public sealed class TestMap :  Luban.EditorBeanBase
                     __entry0["null"] = new JSONString((string)__e0[0]);
                     __entry0["null"] = new JSONNumber((int)__e0[1]);
                 }
+                __cjson0.Inline = __cjson0.Count == 0;
                 _json["x3"] = __cjson0;
             }
         }
@@ -151,6 +158,7 @@ public sealed class TestMap :  Luban.EditorBeanBase
                     __entry0["null"] = new JSONNumber((int)(editor.cfg.test.DemoEnum)__e0[0]);
                     __entry0["null"] = new JSONNumber((int)__e0[1]);
                 }
+                __cjson0.Inline = __cjson0.Count == 0;
                 _json["x4"] = __cjson0;
             }
         }
@@ -362,8 +370,7 @@ __key1 = (editor.cfg.test.DemoEnum)UnityEditor.EditorGUILayout.EnumPopup(__key1,
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static TestMap LoadJsonTestMap(SimpleJSON.JSONNode _json)
+    public static TestMap LoadJsonTestMap(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         TestMap obj = new test.TestMap();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

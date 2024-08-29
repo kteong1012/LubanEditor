@@ -12,17 +12,21 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.test
 {
 
 public abstract class DemoD3 :  test.DemoDynamic 
 {
-    public DemoD3()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public DemoD3(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
+        _setChangeAction = setChangeAction;
     }
     public override string GetTypeStr() => TYPE_STR;
-    private const string TYPE_STR = "test.DemoD3";
+    private const string TYPE_STR = "DemoD3";
 
     private int _typeIndex = -1;
     public new int TypeIndex
@@ -35,23 +39,33 @@ public abstract class DemoD3 :  test.DemoDynamic
                 return;
             }
             _typeIndex = value;
-            Instance = Create(Types[value]);
+            var obj = Create(Types[value], _setChangeAction);
+            _setChangeAction(obj);
         }
     }
-    public new DemoD3 Instance { get; set;}
     public new static List<string> Types = new List<string>()
     {
-        "test.DemoE1",
+        "DemoE1",
         "test.login.RoleInfo",
     };
 
-    public new static DemoD3 Create(string type)
+    public new static DemoD3 Create(string type, Action<Luban.EditorBeanBase> setChangeAction)
     {
         switch (type)
         {
             case "test.DemoE1":   
-            case "DemoE1":return new test.DemoE1();
-            case "test.login.RoleInfo":return new test.login.RoleInfo();
+            case "DemoE1":
+            {
+                var obj = new test.DemoE1(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
+            case "test.login.RoleInfo":
+            {
+                var obj = new test.login.RoleInfo(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             default: return null;
         }
     }
@@ -72,19 +86,28 @@ public abstract class DemoD3 :  test.DemoDynamic
     UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
     this.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.TypeIndex, __list0, GUILayout.Width(200));
     UnityEditor.EditorGUILayout.EndHorizontal();
-    this.Instance.Render();
+    this?.Render();
     UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static DemoD3 LoadJsonDemoD3(SimpleJSON.JSONNode _json)
+    public static DemoD3 LoadJsonDemoD3(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         string type = _json["$type"];
         DemoD3 obj;
         switch (type)
         {
             case "test.DemoE1":   
-            case "DemoE1":obj = new test.DemoE1(); break;
-            case "test.login.RoleInfo":obj = new test.login.RoleInfo(); break;
+            case "DemoE1":
+            {
+                obj = new test.DemoE1(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("DemoE1");
+                break;
+            }
+            case "test.login.RoleInfo":
+            {
+                obj = new test.login.RoleInfo(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("test.login.RoleInfo");
+                break;
+            }
             default: throw new SerializationException();
         }
         obj.LoadJson((SimpleJSON.JSONObject)_json);
@@ -93,8 +116,8 @@ public abstract class DemoD3 :  test.DemoDynamic
         
     public static void SaveJsonDemoD3(DemoD3 _obj, SimpleJSON.JSONNode _json)
     {
-        _json["$type"] = _obj.Instance.GetTypeStr();
-        _obj.Instance.SaveJson((SimpleJSON.JSONObject)_json);
+        _json["$type"] = _obj.GetTypeStr();
+        _obj.SaveJson((SimpleJSON.JSONObject)_json);
     }
 
     public int x3;

@@ -12,19 +12,23 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.test
 {
 
 public sealed class DefineFromExcel2 :  Luban.EditorBeanBase 
 {
-    public DefineFromExcel2()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public DefineFromExcel2(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
             x10 = "";
             x13 = editor.cfg.test.DemoEnum.NONE;
             x132 = editor.cfg.test.DemoFlag.A;
             v2 = new editor.cfg.vec2();
-            t1 = "1970-01-01 00:00:00";
+            t1 = 0;
             k1 = System.Array.Empty<int>();
             k2 = System.Array.Empty<int>();
             k8 = new System.Collections.Generic.List<object[]>();
@@ -135,14 +139,13 @@ public sealed class DefineFromExcel2 :  Luban.EditorBeanBase
                 {
                     throw new SerializationException();
                 }
-                x14 = editor.cfg.test.DemoDynamic.LoadJsonDemoDynamic(_fieldJson);
+                x14 = editor.cfg.test.DemoDynamic.LoadJsonDemoDynamic(_fieldJson, (__newIns0)=>{ x14 = __newIns0 as test.DemoDynamic ; });
                 var __index0 = editor.cfg.test.DemoDynamic.Types.IndexOf(x14.GetTypeStr());
                 if (__index0 == -1)
                 {
                     throw new SerializationException();
                 }
                 x14.TypeIndex = __index0;
-                x14.Instance = editor.cfg.test.DemoDynamic.LoadJsonDemoDynamic(_fieldJson);
             }
             else
             {
@@ -158,14 +161,13 @@ public sealed class DefineFromExcel2 :  Luban.EditorBeanBase
                 {
                     throw new SerializationException();
                 }
-                x15 = editor.cfg.test.Shape.LoadJsonShape(_fieldJson);
+                x15 = editor.cfg.test.Shape.LoadJsonShape(_fieldJson, (__newIns0)=>{ x15 = __newIns0 as test.Shape ; });
                 var __index0 = editor.cfg.test.Shape.Types.IndexOf(x15.GetTypeStr());
                 if (__index0 == -1)
                 {
                     throw new SerializationException();
                 }
                 x15.TypeIndex = __index0;
-                x15.Instance = editor.cfg.test.Shape.LoadJsonShape(_fieldJson);
             }
             else
             {
@@ -181,6 +183,7 @@ public sealed class DefineFromExcel2 :  Luban.EditorBeanBase
             else
             {
                 v2 = new editor.cfg.vec2();
+                v2.SetChangeAction((__x) => v2 = __x as editor.cfg.vec2);
             }
         }
         
@@ -203,7 +206,7 @@ public sealed class DefineFromExcel2 :  Luban.EditorBeanBase
             }
             else
             {
-                t1 = "1970-01-01 00:00:00";
+                t1 = 0;
             }
         }
         
@@ -288,6 +291,7 @@ public sealed class DefineFromExcel2 :  Luban.EditorBeanBase
             else
             {
                 v11 = new editor.cfg.vec3();
+                v11.SetChangeAction((__x) => v11 = __x as editor.cfg.vec3);
             }
         }
         
@@ -335,17 +339,17 @@ public sealed class DefineFromExcel2 :  Luban.EditorBeanBase
             { var __bjson = new JSONObject();  editor.cfg.vec2.SaveJsonvec2(v2, __bjson); _json["v2"] = __bjson; }
         }
         {
-            _json["t1"] = new JSONString(t1);
+            _json["t1"] = new JSONNumber(t1);
         }
 
         if (k1 != null)
         {
-            { var __cjson0 = new JSONArray(); foreach(var __e0 in k1) { __cjson0["null"] = new JSONNumber(__e0); } _json["k1"] = __cjson0; }
+            { var __cjson0 = new JSONArray(); foreach(var __e0 in k1) { __cjson0["null"] = new JSONNumber(__e0); } __cjson0.Inline = __cjson0.Count == 0; _json["k1"] = __cjson0; }
         }
 
         if (k2 != null)
         {
-            { var __cjson0 = new JSONArray(); foreach(var __e0 in k2) { __cjson0["null"] = new JSONNumber(__e0); } _json["k2"] = __cjson0; }
+            { var __cjson0 = new JSONArray(); foreach(var __e0 in k2) { __cjson0["null"] = new JSONNumber(__e0); } __cjson0.Inline = __cjson0.Count == 0; _json["k2"] = __cjson0; }
         }
 
         if (k8 != null)
@@ -359,23 +363,24 @@ public sealed class DefineFromExcel2 :  Luban.EditorBeanBase
                     __entry0["null"] = new JSONNumber((int)__e0[0]);
                     __entry0["null"] = new JSONNumber((int)__e0[1]);
                 }
+                __cjson0.Inline = __cjson0.Count == 0;
                 _json["k8"] = __cjson0;
             }
         }
 
         if (k9 != null)
         {
-            { var __cjson0 = new JSONArray(); foreach(var __e0 in k9) { { var __bjson = new JSONObject();  editor.cfg.test.DemoE2.SaveJsonDemoE2(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["k9"] = __cjson0; }
+            { var __cjson0 = new JSONArray(); foreach(var __e0 in k9) { { var __bjson = new JSONObject();  editor.cfg.test.DemoE2.SaveJsonDemoE2(__e0, __bjson); __cjson0["null"] = __bjson; } } __cjson0.Inline = __cjson0.Count == 0; _json["k9"] = __cjson0; }
         }
 
         if (k10 != null)
         {
-            { var __cjson0 = new JSONArray(); foreach(var __e0 in k10) { { var __bjson = new JSONObject();  editor.cfg.vec3.SaveJsonvec3(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["k10"] = __cjson0; }
+            { var __cjson0 = new JSONArray(); foreach(var __e0 in k10) { { var __bjson = new JSONObject();  editor.cfg.vec3.SaveJsonvec3(__e0, __bjson); __cjson0["null"] = __bjson; } } __cjson0.Inline = __cjson0.Count == 0; _json["k10"] = __cjson0; }
         }
 
         if (k11 != null)
         {
-            { var __cjson0 = new JSONArray(); foreach(var __e0 in k11) { { var __bjson = new JSONObject();  editor.cfg.vec4.SaveJsonvec4(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["k11"] = __cjson0; }
+            { var __cjson0 = new JSONArray(); foreach(var __e0 in k11) { { var __bjson = new JSONObject();  editor.cfg.vec4.SaveJsonvec4(__e0, __bjson); __cjson0["null"] = __bjson; } } __cjson0.Inline = __cjson0.Count == 0; _json["k11"] = __cjson0; }
         }
         {
             { var __bjson = new JSONObject();  editor.cfg.vec3.SaveJsonvec3(v11, __bjson); _json["v11"] = __bjson; }
@@ -426,7 +431,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x6", ""), GUILayout.Width(100));
 }
-this.x6 = UnityEditor.EditorGUILayout.FloatField(this.x6, GUILayout.Width(150));
+this.x6 = UnityEditor.EditorGUILayout.DoubleField(this.x6, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -490,7 +495,7 @@ else
     UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
     this.x14.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.x14.TypeIndex, __list1, GUILayout.Width(200));
     UnityEditor.EditorGUILayout.EndHorizontal();
-    this.x14.Instance.Render();
+    this.x14?.Render();
     UnityEditor.EditorGUILayout.EndVertical();
 }
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -514,7 +519,7 @@ else
     UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
     this.x15.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.x15.TypeIndex, __list1, GUILayout.Width(200));
     UnityEditor.EditorGUILayout.EndHorizontal();
-    this.x15.Instance.Render();
+    this.x15?.Render();
     UnityEditor.EditorGUILayout.EndVertical();
 }
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -536,7 +541,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x", ""), GUILayout.Width(100));
 }
-this.v2.x = UnityEditor.EditorGUILayout.FloatField(this.v2.x, GUILayout.Width(150));
+this.v2.x = UnityEditor.EditorGUILayout.DoubleField(this.v2.x, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -546,7 +551,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("y", ""), GUILayout.Width(100));
 }
-this.v2.y = UnityEditor.EditorGUILayout.FloatField(this.v2.y, GUILayout.Width(150));
+this.v2.y = UnityEditor.EditorGUILayout.DoubleField(this.v2.y, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -558,7 +563,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("t1", ""), GUILayout.Width(100));
 }
-this.t1 = UnityEditor.EditorGUILayout.TextField(this.t1, GUILayout.Width(150));
+this.t1 = UnityEditor.EditorGUILayout.LongField(this.t1, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -808,7 +813,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x", ""), GUILayout.Width(100));
 }
-__e1.x = UnityEditor.EditorGUILayout.FloatField(__e1.x, GUILayout.Width(150));
+__e1.x = UnityEditor.EditorGUILayout.DoubleField(__e1.x, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -818,7 +823,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("y", ""), GUILayout.Width(100));
 }
-__e1.y = UnityEditor.EditorGUILayout.FloatField(__e1.y, GUILayout.Width(150));
+__e1.y = UnityEditor.EditorGUILayout.DoubleField(__e1.y, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -828,7 +833,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("z", ""), GUILayout.Width(100));
 }
-__e1.z = UnityEditor.EditorGUILayout.FloatField(__e1.z, GUILayout.Width(150));
+__e1.z = UnityEditor.EditorGUILayout.DoubleField(__e1.z, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 };
         this.k10[__i1] = __e1;
@@ -885,7 +890,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x", ""), GUILayout.Width(100));
 }
-__e1.x = UnityEditor.EditorGUILayout.FloatField(__e1.x, GUILayout.Width(150));
+__e1.x = UnityEditor.EditorGUILayout.DoubleField(__e1.x, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -895,7 +900,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("y", ""), GUILayout.Width(100));
 }
-__e1.y = UnityEditor.EditorGUILayout.FloatField(__e1.y, GUILayout.Width(150));
+__e1.y = UnityEditor.EditorGUILayout.DoubleField(__e1.y, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -905,7 +910,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("z", ""), GUILayout.Width(100));
 }
-__e1.z = UnityEditor.EditorGUILayout.FloatField(__e1.z, GUILayout.Width(150));
+__e1.z = UnityEditor.EditorGUILayout.DoubleField(__e1.z, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -915,7 +920,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("w", ""), GUILayout.Width(100));
 }
-__e1.w = UnityEditor.EditorGUILayout.FloatField(__e1.w, GUILayout.Width(150));
+__e1.w = UnityEditor.EditorGUILayout.DoubleField(__e1.w, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 };
         this.k11[__i1] = __e1;
@@ -958,7 +963,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x", ""), GUILayout.Width(100));
 }
-this.v11.x = UnityEditor.EditorGUILayout.FloatField(this.v11.x, GUILayout.Width(150));
+this.v11.x = UnityEditor.EditorGUILayout.DoubleField(this.v11.x, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -968,7 +973,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("y", ""), GUILayout.Width(100));
 }
-this.v11.y = UnityEditor.EditorGUILayout.FloatField(this.v11.y, GUILayout.Width(150));
+this.v11.y = UnityEditor.EditorGUILayout.DoubleField(this.v11.y, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -978,13 +983,12 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("z", ""), GUILayout.Width(100));
 }
-this.v11.z = UnityEditor.EditorGUILayout.FloatField(this.v11.z, GUILayout.Width(150));
+this.v11.z = UnityEditor.EditorGUILayout.DoubleField(this.v11.z, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static DefineFromExcel2 LoadJsonDefineFromExcel2(SimpleJSON.JSONNode _json)
+    public static DefineFromExcel2 LoadJsonDefineFromExcel2(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         DefineFromExcel2 obj = new test.DefineFromExcel2();
         obj.LoadJson((SimpleJSON.JSONObject)_json);
@@ -1005,7 +1009,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     /// </summary>
     public bool x1;
     public long x5;
-    public float x6;
+    public double x6;
     public int x8;
     public string x10;
     public editor.cfg.test.DemoEnum x13;
@@ -1013,7 +1017,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     public editor.cfg.test.DemoDynamic x14;
     public editor.cfg.test.Shape x15;
     public editor.cfg.vec2 v2;
-    public string t1;
+    public long t1;
     public int[] k1;
     public int[] k2;
     public System.Collections.Generic.List<object[]> k8;

@@ -12,14 +12,18 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.test
 {
 
 public sealed class MultiRowTitle :  Luban.EditorBeanBase 
 {
-    public MultiRowTitle()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public MultiRowTitle(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
             name = "";
             x1 = new editor.cfg.test.H1();
             x2 = new System.Collections.Generic.List<editor.cfg.test.H2>();
@@ -61,6 +65,7 @@ public sealed class MultiRowTitle :  Luban.EditorBeanBase
             else
             {
                 x1 = new editor.cfg.test.H1();
+                x1.SetChangeAction((__x) => x1 = __x as editor.cfg.test.H1);
             }
         }
         
@@ -73,6 +78,7 @@ public sealed class MultiRowTitle :  Luban.EditorBeanBase
             else
             {
                 x20 = new editor.cfg.test.H2();
+                x20.SetChangeAction((__x) => x20 = __x as editor.cfg.test.H2);
             }
         }
         
@@ -137,17 +143,17 @@ public sealed class MultiRowTitle :  Luban.EditorBeanBase
 
         if (x2 != null)
         {
-            { var __cjson0 = new JSONArray(); foreach(var __e0 in x2) { { var __bjson = new JSONObject();  editor.cfg.test.H2.SaveJsonH2(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["x2"] = __cjson0; }
+            { var __cjson0 = new JSONArray(); foreach(var __e0 in x2) { { var __bjson = new JSONObject();  editor.cfg.test.H2.SaveJsonH2(__e0, __bjson); __cjson0["null"] = __bjson; } } __cjson0.Inline = __cjson0.Count == 0; _json["x2"] = __cjson0; }
         }
 
         if (x3 != null)
         {
-            { var __cjson0 = new JSONArray(); foreach(var __e0 in x3) { { var __bjson = new JSONObject();  editor.cfg.test.H2.SaveJsonH2(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["x3"] = __cjson0; }
+            { var __cjson0 = new JSONArray(); foreach(var __e0 in x3) { { var __bjson = new JSONObject();  editor.cfg.test.H2.SaveJsonH2(__e0, __bjson); __cjson0["null"] = __bjson; } } __cjson0.Inline = __cjson0.Count == 0; _json["x3"] = __cjson0; }
         }
 
         if (x4 != null)
         {
-            { var __cjson0 = new JSONArray(); foreach(var __e0 in x4) { { var __bjson = new JSONObject();  editor.cfg.test.H2.SaveJsonH2(__e0, __bjson); __cjson0["null"] = __bjson; } } _json["x4"] = __cjson0; }
+            { var __cjson0 = new JSONArray(); foreach(var __e0 in x4) { { var __bjson = new JSONObject();  editor.cfg.test.H2.SaveJsonH2(__e0, __bjson); __cjson0["null"] = __bjson; } } __cjson0.Inline = __cjson0.Count == 0; _json["x4"] = __cjson0; }
         }
     }
 
@@ -477,8 +483,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static MultiRowTitle LoadJsonMultiRowTitle(SimpleJSON.JSONNode _json)
+    public static MultiRowTitle LoadJsonMultiRowTitle(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         MultiRowTitle obj = new test.MultiRowTitle();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

@@ -12,14 +12,18 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.ai
 {
 
 public abstract class KeyQueryOperator :  Luban.EditorBeanBase 
 {
-    public KeyQueryOperator()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public KeyQueryOperator(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
     }
     public abstract string GetTypeStr();
 
@@ -34,27 +38,42 @@ public abstract class KeyQueryOperator :  Luban.EditorBeanBase
                 return;
             }
             _typeIndex = value;
-            Instance = Create(Types[value]);
+            var obj = Create(Types[value], _setChangeAction);
+            _setChangeAction(obj);
         }
     }
-    public KeyQueryOperator Instance { get; set;}
     public static List<string> Types = new List<string>()
     {
-        "ai.IsSet2",
-        "ai.IsNotSet",
-        "ai.BinaryOperator",
+        "IsSet2",
+        "IsNotSet",
+        "BinaryOperator",
     };
 
-    public static KeyQueryOperator Create(string type)
+    public static KeyQueryOperator Create(string type, Action<Luban.EditorBeanBase> setChangeAction)
     {
         switch (type)
         {
             case "ai.IsSet2":   
-            case "IsSet2":return new ai.IsSet2();
+            case "IsSet2":
+            {
+                var obj = new ai.IsSet2(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.IsNotSet":   
-            case "IsNotSet":return new ai.IsNotSet();
+            case "IsNotSet":
+            {
+                var obj = new ai.IsNotSet(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.BinaryOperator":   
-            case "BinaryOperator":return new ai.BinaryOperator();
+            case "BinaryOperator":
+            {
+                var obj = new ai.BinaryOperator(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             default: return null;
         }
     }
@@ -75,22 +94,36 @@ public abstract class KeyQueryOperator :  Luban.EditorBeanBase
     UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
     this.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.TypeIndex, __list0, GUILayout.Width(200));
     UnityEditor.EditorGUILayout.EndHorizontal();
-    this.Instance.Render();
+    this?.Render();
     UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static KeyQueryOperator LoadJsonKeyQueryOperator(SimpleJSON.JSONNode _json)
+    public static KeyQueryOperator LoadJsonKeyQueryOperator(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         string type = _json["$type"];
         KeyQueryOperator obj;
         switch (type)
         {
             case "ai.IsSet2":   
-            case "IsSet2":obj = new ai.IsSet2(); break;
+            case "IsSet2":
+            {
+                obj = new ai.IsSet2(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("IsSet2");
+                break;
+            }
             case "ai.IsNotSet":   
-            case "IsNotSet":obj = new ai.IsNotSet(); break;
+            case "IsNotSet":
+            {
+                obj = new ai.IsNotSet(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("IsNotSet");
+                break;
+            }
             case "ai.BinaryOperator":   
-            case "BinaryOperator":obj = new ai.BinaryOperator(); break;
+            case "BinaryOperator":
+            {
+                obj = new ai.BinaryOperator(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("BinaryOperator");
+                break;
+            }
             default: throw new SerializationException();
         }
         obj.LoadJson((SimpleJSON.JSONObject)_json);
@@ -99,8 +132,8 @@ public abstract class KeyQueryOperator :  Luban.EditorBeanBase
         
     public static void SaveJsonKeyQueryOperator(KeyQueryOperator _obj, SimpleJSON.JSONNode _json)
     {
-        _json["$type"] = _obj.Instance.GetTypeStr();
-        _obj.Instance.SaveJson((SimpleJSON.JSONObject)_json);
+        _json["$type"] = _obj.GetTypeStr();
+        _obj.SaveJson((SimpleJSON.JSONObject)_json);
     }
 
 

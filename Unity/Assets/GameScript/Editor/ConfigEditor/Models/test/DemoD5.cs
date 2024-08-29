@@ -12,18 +12,22 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.test
 {
 
 public sealed class DemoD5 :  test.DemoDynamic 
 {
-    public DemoD5()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public DemoD5(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
+        _setChangeAction = setChangeAction;
             time = new editor.cfg.test.DateTimeRange();
     }
     public override string GetTypeStr() => TYPE_STR;
-    private const string TYPE_STR = "test.DemoD5";
+    private const string TYPE_STR = "DemoD5";
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
     {
@@ -47,6 +51,7 @@ public sealed class DemoD5 :  test.DemoDynamic
             else
             {
                 time = new editor.cfg.test.DateTimeRange();
+                time.SetChangeAction((__x) => time = __x as editor.cfg.test.DateTimeRange);
             }
         }
         
@@ -98,7 +103,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("start_time", ""), GUILayout.Width(100));
 }
-this.time.startTime = UnityEditor.EditorGUILayout.TextField(this.time.startTime, GUILayout.Width(150));
+this.time.startTime = UnityEditor.EditorGUILayout.LongField(this.time.startTime, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -108,13 +113,12 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("end_time", ""), GUILayout.Width(100));
 }
-this.time.endTime = UnityEditor.EditorGUILayout.TextField(this.time.endTime, GUILayout.Width(150));
+this.time.endTime = UnityEditor.EditorGUILayout.LongField(this.time.endTime, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static DemoD5 LoadJsonDemoD5(SimpleJSON.JSONNode _json)
+    public static DemoD5 LoadJsonDemoD5(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         DemoD5 obj = new test.DemoD5();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

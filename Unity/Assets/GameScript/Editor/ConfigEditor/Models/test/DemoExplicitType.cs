@@ -12,14 +12,18 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.test
 {
 
 public sealed class DemoExplicitType :  Luban.EditorBeanBase 
 {
-    public DemoExplicitType()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public DemoExplicitType(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -182,7 +186,7 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x5", ""), GUILayout.Width(100));
 }
-this.x5 = UnityEditor.EditorGUILayout.FloatField(this.x5, GUILayout.Width(150));
+this.x5 = UnityEditor.EditorGUILayout.DoubleField(this.x5, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -205,8 +209,7 @@ else
 this.x7 = UnityEditor.EditorGUILayout.LongField(this.x7, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static DemoExplicitType LoadJsonDemoExplicitType(SimpleJSON.JSONNode _json)
+    public static DemoExplicitType LoadJsonDemoExplicitType(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         DemoExplicitType obj = new test.DemoExplicitType();
         obj.LoadJson((SimpleJSON.JSONObject)_json);
@@ -222,7 +225,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     public short x2;
     public int x3;
     public long x4;
-    public float x5;
+    public double x5;
     public double x6;
     public long x7;
 

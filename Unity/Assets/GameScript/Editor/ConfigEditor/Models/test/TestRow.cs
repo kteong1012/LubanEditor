@@ -12,14 +12,18 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.test
 {
 
 public sealed class TestRow :  Luban.EditorBeanBase 
 {
-    public TestRow()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public TestRow(Action<Luban.EditorBeanBase> setChangeAction = null) 
     {
+        _setChangeAction = setChangeAction;
             z = "";
             a = new editor.cfg.test.Test3();
             b = new System.Collections.Generic.List<int>();
@@ -70,6 +74,7 @@ public sealed class TestRow :  Luban.EditorBeanBase
             else
             {
                 a = new editor.cfg.test.Test3();
+                a.SetChangeAction((__x) => a = __x as editor.cfg.test.Test3);
             }
         }
         
@@ -108,7 +113,7 @@ public sealed class TestRow :  Luban.EditorBeanBase
 
         if (b != null)
         {
-            { var __cjson0 = new JSONArray(); foreach(var __e0 in b) { __cjson0["null"] = new JSONNumber(__e0); } _json["b"] = __cjson0; }
+            { var __cjson0 = new JSONArray(); foreach(var __e0 in b) { __cjson0["null"] = new JSONNumber(__e0); } __cjson0.Inline = __cjson0.Count == 0; _json["b"] = __cjson0; }
         }
     }
 
@@ -226,8 +231,7 @@ else
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static TestRow LoadJsonTestRow(SimpleJSON.JSONNode _json)
+    public static TestRow LoadJsonTestRow(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         TestRow obj = new test.TestRow();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

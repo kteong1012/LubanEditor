@@ -12,18 +12,22 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.ai
 {
 
 public sealed class StringKeyData :  ai.KeyData 
 {
-    public StringKeyData()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public StringKeyData(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
+        _setChangeAction = setChangeAction;
             value = "";
     }
     public override string GetTypeStr() => TYPE_STR;
-    private const string TYPE_STR = "ai.StringKeyData";
+    private const string TYPE_STR = "StringKeyData";
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
     {
@@ -67,8 +71,7 @@ else
 this.value = UnityEditor.EditorGUILayout.TextField(this.value, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static StringKeyData LoadJsonStringKeyData(SimpleJSON.JSONNode _json)
+    public static StringKeyData LoadJsonStringKeyData(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         StringKeyData obj = new ai.StringKeyData();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

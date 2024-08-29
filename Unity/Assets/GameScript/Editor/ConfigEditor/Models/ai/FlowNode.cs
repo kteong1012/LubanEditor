@@ -12,19 +12,23 @@ using SimpleJSON;
 using Luban;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace editor.cfg.ai
 {
 
 public abstract class FlowNode :  ai.Node 
 {
-    public FlowNode()
+    private Action<Luban.EditorBeanBase> _setChangeAction;
+    public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+    public FlowNode(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
     {
+        _setChangeAction = setChangeAction;
             decorators = new System.Collections.Generic.List<editor.cfg.ai.Decorator>();
             services = new System.Collections.Generic.List<editor.cfg.ai.Service>();
     }
     public override string GetTypeStr() => TYPE_STR;
-    private const string TYPE_STR = "ai.FlowNode";
+    private const string TYPE_STR = "FlowNode";
 
     private int _typeIndex = -1;
     public new int TypeIndex
@@ -37,48 +41,98 @@ public abstract class FlowNode :  ai.Node
                 return;
             }
             _typeIndex = value;
-            Instance = Create(Types[value]);
+            var obj = Create(Types[value], _setChangeAction);
+            _setChangeAction(obj);
         }
     }
-    public new FlowNode Instance { get; set;}
     public new static List<string> Types = new List<string>()
     {
-        "ai.Sequence",
-        "ai.Selector",
-        "ai.SimpleParallel",
-        "ai.UeWait",
-        "ai.UeWaitBlackboardTime",
-        "ai.MoveToTarget",
-        "ai.ChooseSkill",
-        "ai.MoveToRandomLocation",
-        "ai.MoveToLocation",
-        "ai.DebugPrint",
+        "Sequence",
+        "Selector",
+        "SimpleParallel",
+        "UeWait",
+        "UeWaitBlackboardTime",
+        "MoveToTarget",
+        "ChooseSkill",
+        "MoveToRandomLocation",
+        "MoveToLocation",
+        "DebugPrint",
     };
 
-    public new static FlowNode Create(string type)
+    public new static FlowNode Create(string type, Action<Luban.EditorBeanBase> setChangeAction)
     {
         switch (type)
         {
             case "ai.Sequence":   
-            case "Sequence":return new ai.Sequence();
+            case "Sequence":
+            {
+                var obj = new ai.Sequence(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.Selector":   
-            case "Selector":return new ai.Selector();
+            case "Selector":
+            {
+                var obj = new ai.Selector(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.SimpleParallel":   
-            case "SimpleParallel":return new ai.SimpleParallel();
+            case "SimpleParallel":
+            {
+                var obj = new ai.SimpleParallel(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.UeWait":   
-            case "UeWait":return new ai.UeWait();
+            case "UeWait":
+            {
+                var obj = new ai.UeWait(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.UeWaitBlackboardTime":   
-            case "UeWaitBlackboardTime":return new ai.UeWaitBlackboardTime();
+            case "UeWaitBlackboardTime":
+            {
+                var obj = new ai.UeWaitBlackboardTime(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.MoveToTarget":   
-            case "MoveToTarget":return new ai.MoveToTarget();
+            case "MoveToTarget":
+            {
+                var obj = new ai.MoveToTarget(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.ChooseSkill":   
-            case "ChooseSkill":return new ai.ChooseSkill();
+            case "ChooseSkill":
+            {
+                var obj = new ai.ChooseSkill(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.MoveToRandomLocation":   
-            case "MoveToRandomLocation":return new ai.MoveToRandomLocation();
+            case "MoveToRandomLocation":
+            {
+                var obj = new ai.MoveToRandomLocation(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.MoveToLocation":   
-            case "MoveToLocation":return new ai.MoveToLocation();
+            case "MoveToLocation":
+            {
+                var obj = new ai.MoveToLocation(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             case "ai.DebugPrint":   
-            case "DebugPrint":return new ai.DebugPrint();
+            case "DebugPrint":
+            {
+                var obj = new ai.DebugPrint(setChangeAction);
+                obj._typeIndex = Types.IndexOf(type);
+                return obj;
+            }
             default: return null;
         }
     }
@@ -99,36 +153,85 @@ public abstract class FlowNode :  ai.Node
     UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
     this.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.TypeIndex, __list0, GUILayout.Width(200));
     UnityEditor.EditorGUILayout.EndHorizontal();
-    this.Instance.Render();
+    this?.Render();
     UnityEditor.EditorGUILayout.EndVertical();
 }    }
-
-    public static FlowNode LoadJsonFlowNode(SimpleJSON.JSONNode _json)
+    public static FlowNode LoadJsonFlowNode(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
         string type = _json["$type"];
         FlowNode obj;
         switch (type)
         {
             case "ai.Sequence":   
-            case "Sequence":obj = new ai.Sequence(); break;
+            case "Sequence":
+            {
+                obj = new ai.Sequence(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("Sequence");
+                break;
+            }
             case "ai.Selector":   
-            case "Selector":obj = new ai.Selector(); break;
+            case "Selector":
+            {
+                obj = new ai.Selector(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("Selector");
+                break;
+            }
             case "ai.SimpleParallel":   
-            case "SimpleParallel":obj = new ai.SimpleParallel(); break;
+            case "SimpleParallel":
+            {
+                obj = new ai.SimpleParallel(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("SimpleParallel");
+                break;
+            }
             case "ai.UeWait":   
-            case "UeWait":obj = new ai.UeWait(); break;
+            case "UeWait":
+            {
+                obj = new ai.UeWait(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("UeWait");
+                break;
+            }
             case "ai.UeWaitBlackboardTime":   
-            case "UeWaitBlackboardTime":obj = new ai.UeWaitBlackboardTime(); break;
+            case "UeWaitBlackboardTime":
+            {
+                obj = new ai.UeWaitBlackboardTime(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("UeWaitBlackboardTime");
+                break;
+            }
             case "ai.MoveToTarget":   
-            case "MoveToTarget":obj = new ai.MoveToTarget(); break;
+            case "MoveToTarget":
+            {
+                obj = new ai.MoveToTarget(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("MoveToTarget");
+                break;
+            }
             case "ai.ChooseSkill":   
-            case "ChooseSkill":obj = new ai.ChooseSkill(); break;
+            case "ChooseSkill":
+            {
+                obj = new ai.ChooseSkill(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("ChooseSkill");
+                break;
+            }
             case "ai.MoveToRandomLocation":   
-            case "MoveToRandomLocation":obj = new ai.MoveToRandomLocation(); break;
+            case "MoveToRandomLocation":
+            {
+                obj = new ai.MoveToRandomLocation(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("MoveToRandomLocation");
+                break;
+            }
             case "ai.MoveToLocation":   
-            case "MoveToLocation":obj = new ai.MoveToLocation(); break;
+            case "MoveToLocation":
+            {
+                obj = new ai.MoveToLocation(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("MoveToLocation");
+                break;
+            }
             case "ai.DebugPrint":   
-            case "DebugPrint":obj = new ai.DebugPrint(); break;
+            case "DebugPrint":
+            {
+                obj = new ai.DebugPrint(setChangeAction); 
+                obj._typeIndex = Types.IndexOf("DebugPrint");
+                break;
+            }
             default: throw new SerializationException();
         }
         obj.LoadJson((SimpleJSON.JSONObject)_json);
@@ -137,8 +240,8 @@ public abstract class FlowNode :  ai.Node
         
     public static void SaveJsonFlowNode(FlowNode _obj, SimpleJSON.JSONNode _json)
     {
-        _json["$type"] = _obj.Instance.GetTypeStr();
-        _obj.Instance.SaveJson((SimpleJSON.JSONObject)_json);
+        _json["$type"] = _obj.GetTypeStr();
+        _obj.SaveJson((SimpleJSON.JSONObject)_json);
     }
 
     public System.Collections.Generic.List<editor.cfg.ai.Decorator> decorators;
