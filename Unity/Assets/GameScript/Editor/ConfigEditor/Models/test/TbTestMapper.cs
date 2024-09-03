@@ -221,62 +221,8 @@ namespace editor.cfg.test
             _dataScrollPos = GUILayout.BeginScrollView(_dataScrollPos);
             if (__SelectData != default)
             {
-{
-    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);UnityEditor.EditorGUILayout.BeginHorizontal();
-if (ConfigEditorSettings.showComment)
-{
-    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("id", "id"), GUILayout.Width(100));
-}
-else
-{
-    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("id", ""), GUILayout.Width(100));
-}
-__SelectData.id = UnityEditor.EditorGUILayout.IntField(__SelectData.id, GUILayout.Width(150));
-UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
-if (ConfigEditorSettings.showComment)
-{
-    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("audio_type", "audio_type"), GUILayout.Width(100));
-}
-else
-{
-    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("audio_type", ""), GUILayout.Width(100));
-}
-
-__SelectData.audioType = (editor.cfg.AudioType)UnityEditor.EditorGUILayout.EnumPopup(__SelectData.audioType, GUILayout.Width(150));
-UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
-if (ConfigEditorSettings.showComment)
-{
-    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("v2", "v2"), GUILayout.Width(100));
-}
-else
-{
-    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("v2", ""), GUILayout.Width(100));
-}
-{
-    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);UnityEditor.EditorGUILayout.BeginHorizontal();
-if (ConfigEditorSettings.showComment)
-{
-    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x", "x"), GUILayout.Width(100));
-}
-else
-{
-    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x", ""), GUILayout.Width(100));
-}
-__SelectData.v2.x = UnityEditor.EditorGUILayout.DoubleField(__SelectData.v2.x, GUILayout.Width(150));
-UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
-if (ConfigEditorSettings.showComment)
-{
-    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("y", "y"), GUILayout.Width(100));
-}
-else
-{
-    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("y", ""), GUILayout.Width(100));
-}
-__SelectData.v2.y = UnityEditor.EditorGUILayout.DoubleField(__SelectData.v2.y, GUILayout.Width(150));
-UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
-}
-UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
-}            }
+                editor.cfg.test.TestMapper.RenderTestMapper(__SelectData);
+            }
             GUILayout.EndScrollView();
             GUILayout.EndVertical();
             GUILayout.EndHorizontal();

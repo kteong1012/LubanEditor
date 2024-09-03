@@ -200,54 +200,8 @@ namespace editor.cfg.test
             _dataScrollPos = GUILayout.BeginScrollView(_dataScrollPos);
             if (__SelectData != default)
             {
-{
-    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);UnityEditor.EditorGUILayout.BeginHorizontal();
-if (ConfigEditorSettings.showComment)
-{
-    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("id", "id"), GUILayout.Width(100));
-}
-else
-{
-    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("id", ""), GUILayout.Width(100));
-}
-__SelectData.id = UnityEditor.EditorGUILayout.IntField(__SelectData.id, GUILayout.Width(150));
-UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
-if (ConfigEditorSettings.showComment)
-{
-    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("name", "name"), GUILayout.Width(100));
-}
-else
-{
-    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("name", ""), GUILayout.Width(100));
-}
-__SelectData.name = UnityEditor.EditorGUILayout.TextField(__SelectData.name, GUILayout.Width(150));
-UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
-if (ConfigEditorSettings.showComment)
-{
-    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("date", "date"), GUILayout.Width(100));
-}
-else
-{
-    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("date", ""), GUILayout.Width(100));
-}
-{
-    var __list1 = test.DemoDynamic.Types.Select(t => new GUIContent(t)).ToArray();
-    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-    if (__SelectData.date == null)
-    {
-        __SelectData.date = new test.DemoD2();
-__SelectData.date.SetChangeAction((__x) => { __SelectData.date = __x as test.DemoDynamic; });
-        __SelectData.date.TypeIndex = 0;
-    }
-    UnityEditor.EditorGUILayout.BeginHorizontal();
-    UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
-    __SelectData.date.TypeIndex = UnityEditor.EditorGUILayout.Popup(__SelectData.date.TypeIndex, __list1, GUILayout.Width(200));
-    UnityEditor.EditorGUILayout.EndHorizontal();
-    __SelectData.date?.Render();
-    UnityEditor.EditorGUILayout.EndVertical();
-}
-UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
-}            }
+                editor.cfg.test.DemoSingletonType.RenderDemoSingletonType(__SelectData);
+            }
             GUILayout.EndScrollView();
             GUILayout.EndVertical();
             GUILayout.EndHorizontal();

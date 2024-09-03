@@ -34,6 +34,7 @@ public sealed class MultiRowType2 :  Luban.EditorBeanBase
             }
             else
             {
+                id = 0;
             }
         }
         
@@ -45,6 +46,7 @@ public sealed class MultiRowType2 :  Luban.EditorBeanBase
             }
             else
             {
+                x = 0;
             }
         }
         
@@ -56,6 +58,7 @@ public sealed class MultiRowType2 :  Luban.EditorBeanBase
             }
             else
             {
+                y = 0;
             }
         }
         
@@ -74,7 +77,14 @@ public sealed class MultiRowType2 :  Luban.EditorBeanBase
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderMultiRowType2(MultiRowType2 obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {

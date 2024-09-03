@@ -221,74 +221,8 @@ namespace editor.cfg.ai
             _dataScrollPos = GUILayout.BeginScrollView(_dataScrollPos);
             if (__SelectData != default)
             {
-{
-    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);UnityEditor.EditorGUILayout.BeginHorizontal();
-if (ConfigEditorSettings.showComment)
-{
-    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("id", "id"), GUILayout.Width(100));
-}
-else
-{
-    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("id", ""), GUILayout.Width(100));
-}
-__SelectData.id = UnityEditor.EditorGUILayout.IntField(__SelectData.id, GUILayout.Width(150));
-UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
-if (ConfigEditorSettings.showComment)
-{
-    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("name", "name"), GUILayout.Width(100));
-}
-else
-{
-    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("name", ""), GUILayout.Width(100));
-}
-__SelectData.name = UnityEditor.EditorGUILayout.TextField(__SelectData.name, GUILayout.Width(150));
-UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
-if (ConfigEditorSettings.showComment)
-{
-    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("desc", "desc"), GUILayout.Width(100));
-}
-else
-{
-    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("desc", ""), GUILayout.Width(100));
-}
-__SelectData.desc = UnityEditor.EditorGUILayout.TextField(__SelectData.desc, GUILayout.Width(150));
-UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
-if (ConfigEditorSettings.showComment)
-{
-    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("blackboard_id", "blackboard_id"), GUILayout.Width(100));
-}
-else
-{
-    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("blackboard_id", ""), GUILayout.Width(100));
-}
-__SelectData.blackboardId = UnityEditor.EditorGUILayout.TextField(__SelectData.blackboardId, GUILayout.Width(150));
-UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
-if (ConfigEditorSettings.showComment)
-{
-    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("root", "root"), GUILayout.Width(100));
-}
-else
-{
-    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("root", ""), GUILayout.Width(100));
-}
-{
-    var __list1 = ai.ComposeNode.Types.Select(t => new GUIContent(t)).ToArray();
-    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-    if (__SelectData.root == null)
-    {
-        __SelectData.root = new ai.Sequence();
-__SelectData.root.SetChangeAction((__x) => { __SelectData.root = __x as ai.ComposeNode; });
-        __SelectData.root.TypeIndex = 0;
-    }
-    UnityEditor.EditorGUILayout.BeginHorizontal();
-    UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
-    __SelectData.root.TypeIndex = UnityEditor.EditorGUILayout.Popup(__SelectData.root.TypeIndex, __list1, GUILayout.Width(200));
-    UnityEditor.EditorGUILayout.EndHorizontal();
-    __SelectData.root?.Render();
-    UnityEditor.EditorGUILayout.EndVertical();
-}
-UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
-}            }
+                editor.cfg.ai.BehaviorTree.RenderBehaviorTree(__SelectData);
+            }
             GUILayout.EndScrollView();
             GUILayout.EndVertical();
             GUILayout.EndHorizontal();

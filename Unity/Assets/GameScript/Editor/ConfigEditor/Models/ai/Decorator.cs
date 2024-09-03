@@ -42,7 +42,17 @@ public abstract class Decorator :  ai.Node
             _setChangeAction(obj);
         }
     }
-    public new static List<string> Types = new List<string>()
+    private new static string[] Types = new string[]
+    {
+        "UeLoop",
+        "UeCooldown",
+        "UeTimeLimit",
+        "UeBlackboard",
+        "UeForceSuccess",
+        "IsAtLocation",
+        "DistanceLessThan",
+    };
+    private new static string[] TypeAlias = new string[]
     {
         "UeLoop",
         "UeCooldown",
@@ -61,73 +71,73 @@ public abstract class Decorator :  ai.Node
             case "UeLoop":
             {
                 var obj = new ai.UeLoop(setChangeAction);
-                obj._typeIndex = Types.IndexOf(type);
+                obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.UeCooldown":   
             case "UeCooldown":
             {
                 var obj = new ai.UeCooldown(setChangeAction);
-                obj._typeIndex = Types.IndexOf(type);
+                obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.UeTimeLimit":   
             case "UeTimeLimit":
             {
                 var obj = new ai.UeTimeLimit(setChangeAction);
-                obj._typeIndex = Types.IndexOf(type);
+                obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.UeBlackboard":   
             case "UeBlackboard":
             {
                 var obj = new ai.UeBlackboard(setChangeAction);
-                obj._typeIndex = Types.IndexOf(type);
+                obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.UeForceSuccess":   
             case "UeForceSuccess":
             {
                 var obj = new ai.UeForceSuccess(setChangeAction);
-                obj._typeIndex = Types.IndexOf(type);
+                obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.IsAtLocation":   
             case "IsAtLocation":
             {
                 var obj = new ai.IsAtLocation(setChangeAction);
-                obj._typeIndex = Types.IndexOf(type);
+                obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.DistanceLessThan":   
             case "DistanceLessThan":
             {
                 var obj = new ai.DistanceLessThan(setChangeAction);
-                obj._typeIndex = Types.IndexOf(type);
+                obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             default: return null;
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderDecorator(Decorator obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        var array = ConfigEditorSettings.showComment ? TypeAlias : Types;
+        UnityEditor.EditorGUILayout.BeginHorizontal();
+        UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
+        obj.TypeIndex = UnityEditor.EditorGUILayout.Popup(obj.TypeIndex, array, GUILayout.Width(200));
+        UnityEditor.EditorGUILayout.EndHorizontal();
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {
 {
-    var __list0 = ai.Decorator.Types.Select(t => new GUIContent(t)).ToArray();
-    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-    if (this == null)
-    {
-        
-        this.TypeIndex = 0;
-    }
-    UnityEditor.EditorGUILayout.BeginHorizontal();
-    UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
-    this.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.TypeIndex, __list0, GUILayout.Width(200));
-    UnityEditor.EditorGUILayout.EndHorizontal();
-    this?.Render();
-    UnityEditor.EditorGUILayout.EndVertical();
+    ai.Decorator.RenderDecorator(this);
 }    }
     public static Decorator LoadJsonDecorator(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
@@ -139,49 +149,49 @@ public abstract class Decorator :  ai.Node
             case "UeLoop":
             {
                 obj = new ai.UeLoop(setChangeAction); 
-                obj._typeIndex = Types.IndexOf("UeLoop");
+                obj._typeIndex = Array.IndexOf(Types, "UeLoop");
                 break;
             }
             case "ai.UeCooldown":   
             case "UeCooldown":
             {
                 obj = new ai.UeCooldown(setChangeAction); 
-                obj._typeIndex = Types.IndexOf("UeCooldown");
+                obj._typeIndex = Array.IndexOf(Types, "UeCooldown");
                 break;
             }
             case "ai.UeTimeLimit":   
             case "UeTimeLimit":
             {
                 obj = new ai.UeTimeLimit(setChangeAction); 
-                obj._typeIndex = Types.IndexOf("UeTimeLimit");
+                obj._typeIndex = Array.IndexOf(Types, "UeTimeLimit");
                 break;
             }
             case "ai.UeBlackboard":   
             case "UeBlackboard":
             {
                 obj = new ai.UeBlackboard(setChangeAction); 
-                obj._typeIndex = Types.IndexOf("UeBlackboard");
+                obj._typeIndex = Array.IndexOf(Types, "UeBlackboard");
                 break;
             }
             case "ai.UeForceSuccess":   
             case "UeForceSuccess":
             {
                 obj = new ai.UeForceSuccess(setChangeAction); 
-                obj._typeIndex = Types.IndexOf("UeForceSuccess");
+                obj._typeIndex = Array.IndexOf(Types, "UeForceSuccess");
                 break;
             }
             case "ai.IsAtLocation":   
             case "IsAtLocation":
             {
                 obj = new ai.IsAtLocation(setChangeAction); 
-                obj._typeIndex = Types.IndexOf("IsAtLocation");
+                obj._typeIndex = Array.IndexOf(Types, "IsAtLocation");
                 break;
             }
             case "ai.DistanceLessThan":   
             case "DistanceLessThan":
             {
                 obj = new ai.DistanceLessThan(setChangeAction); 
-                obj._typeIndex = Types.IndexOf("DistanceLessThan");
+                obj._typeIndex = Array.IndexOf(Types, "DistanceLessThan");
                 break;
             }
             default: throw new SerializationException();

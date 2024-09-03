@@ -36,6 +36,7 @@ public sealed class CompactString :  Luban.EditorBeanBase
             }
             else
             {
+                id = 0;
             }
         }
         
@@ -82,7 +83,14 @@ public sealed class CompactString :  Luban.EditorBeanBase
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderCompactString(CompactString obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {

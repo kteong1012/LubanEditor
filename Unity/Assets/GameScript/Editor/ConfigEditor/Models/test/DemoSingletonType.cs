@@ -35,6 +35,7 @@ public sealed class DemoSingletonType :  Luban.EditorBeanBase
             }
             else
             {
+                id = 0;
             }
         }
         
@@ -60,15 +61,14 @@ public sealed class DemoSingletonType :  Luban.EditorBeanBase
                     throw new SerializationException();
                 }
                 date = editor.cfg.test.DemoDynamic.LoadJsonDemoDynamic(_fieldJson, (__newIns0)=>{ date = __newIns0 as test.DemoDynamic ; });
-                var __index0 = editor.cfg.test.DemoDynamic.Types.IndexOf(date.GetTypeStr());
-                if (__index0 == -1)
-                {
-                    throw new SerializationException();
-                }
-                date.TypeIndex = __index0;
             }
             else
             {
+                void _Func(Luban.EditorBeanBase __x)
+                {
+                    date = __x as test.DemoDynamic;
+                }
+                date = test.DemoDynamic.Create("DemoD2", _Func);
             }
         }
         
@@ -91,7 +91,14 @@ public sealed class DemoSingletonType :  Luban.EditorBeanBase
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderDemoSingletonType(DemoSingletonType obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {
@@ -126,20 +133,7 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("date", ""), GUILayout.Width(100));
 }
 {
-    var __list1 = test.DemoDynamic.Types.Select(t => new GUIContent(t)).ToArray();
-    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-    if (this.date == null)
-    {
-        this.date = new test.DemoD2();
-this.date.SetChangeAction((__x) => { this.date = __x as test.DemoDynamic; });
-        this.date.TypeIndex = 0;
-    }
-    UnityEditor.EditorGUILayout.BeginHorizontal();
-    UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
-    this.date.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.date.TypeIndex, __list1, GUILayout.Width(200));
-    UnityEditor.EditorGUILayout.EndHorizontal();
-    this.date?.Render();
-    UnityEditor.EditorGUILayout.EndVertical();
+    test.DemoDynamic.RenderDemoDynamic(this.date);
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }

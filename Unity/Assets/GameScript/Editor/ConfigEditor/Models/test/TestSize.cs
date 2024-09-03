@@ -38,6 +38,7 @@ public sealed class TestSize :  Luban.EditorBeanBase
             }
             else
             {
+                id = 0;
             }
         }
         
@@ -129,7 +130,14 @@ public sealed class TestSize :  Luban.EditorBeanBase
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderTestSize(TestSize obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {
@@ -177,7 +185,9 @@ else
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
         var __list1 = new System.Collections.Generic.List<int>(this.x1);
-        __list1.Add(0);
+        int __e1;
+        __e1 = 0;;
+        __list1.Add(__e1);
         this.x1 = __list1.ToArray();
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
@@ -225,7 +235,9 @@ else
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.x2.Add(0);
+        int __e1;
+        __e1 = 0;;
+        this.x2.Add(__e1);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {
@@ -269,7 +281,9 @@ else
     }
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.x3.Add(0);
+        int __e1;
+        __e1 = 0;;
+        this.x3.Add(__e1);
     }
     UnityEditor.EditorGUILayout.EndVertical();
 }

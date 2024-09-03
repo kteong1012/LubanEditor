@@ -35,6 +35,7 @@ public sealed class TestIndex :  Luban.EditorBeanBase
             }
             else
             {
+                id = 0;
             }
         }
         
@@ -64,7 +65,14 @@ public sealed class TestIndex :  Luban.EditorBeanBase
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderTestIndex(TestIndex obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {
@@ -121,7 +129,13 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.eles.Add(new editor.cfg.test.DemoType1());
+        editor.cfg.test.DemoType1 __e1;
+        void _Func(Luban.EditorBeanBase __x)
+{
+    __e1 = __x as test.DemoType1;
+}
+__e1 = new test.DemoType1(_Func);;
+        this.eles.Add(__e1);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {

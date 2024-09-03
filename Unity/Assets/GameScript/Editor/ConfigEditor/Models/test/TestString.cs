@@ -75,8 +75,11 @@ public sealed class TestString :  Luban.EditorBeanBase
             }
             else
             {
-                cs1 = new editor.cfg.test.CompactString();
-                cs1.SetChangeAction((__x) => cs1 = __x as editor.cfg.test.CompactString);
+                void _Func(Luban.EditorBeanBase __x)
+                {
+                    cs1 = __x as test.CompactString;
+                }
+                cs1 = new test.CompactString(_Func);
             }
         }
         
@@ -88,8 +91,11 @@ public sealed class TestString :  Luban.EditorBeanBase
             }
             else
             {
-                cs2 = new editor.cfg.test.CompactString();
-                cs2.SetChangeAction((__x) => cs2 = __x as editor.cfg.test.CompactString);
+                void _Func(Luban.EditorBeanBase __x)
+                {
+                    cs2 = __x as test.CompactString;
+                }
+                cs2 = new test.CompactString(_Func);
             }
         }
         
@@ -124,7 +130,14 @@ public sealed class TestString :  Luban.EditorBeanBase
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderTestString(TestString obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {

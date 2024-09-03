@@ -221,21 +221,8 @@ namespace editor.cfg.test
             _dataScrollPos = GUILayout.BeginScrollView(_dataScrollPos);
             if (__SelectData != default)
             {
-{
-    var __list0 = test.ItemBase.Types.Select(t => new GUIContent(t)).ToArray();
-    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-    if (__SelectData == null)
-    {
-        
-        __SelectData.TypeIndex = 0;
-    }
-    UnityEditor.EditorGUILayout.BeginHorizontal();
-    UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
-    __SelectData.TypeIndex = UnityEditor.EditorGUILayout.Popup(__SelectData.TypeIndex, __list0, GUILayout.Width(200));
-    UnityEditor.EditorGUILayout.EndHorizontal();
-    __SelectData?.Render();
-    UnityEditor.EditorGUILayout.EndVertical();
-}            }
+                editor.cfg.test.ItemBase.RenderItemBase(__SelectData);
+            }
             GUILayout.EndScrollView();
             GUILayout.EndVertical();
             GUILayout.EndHorizontal();

@@ -34,6 +34,7 @@ public sealed class vec3 :  Luban.EditorBeanBase
             }
             else
             {
+                x = 0;
             }
         }
         
@@ -45,6 +46,7 @@ public sealed class vec3 :  Luban.EditorBeanBase
             }
             else
             {
+                y = 0;
             }
         }
         
@@ -56,6 +58,7 @@ public sealed class vec3 :  Luban.EditorBeanBase
             }
             else
             {
+                z = 0;
             }
         }
         
@@ -74,7 +77,14 @@ public sealed class vec3 :  Luban.EditorBeanBase
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void Rendervec3(vec3 obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {

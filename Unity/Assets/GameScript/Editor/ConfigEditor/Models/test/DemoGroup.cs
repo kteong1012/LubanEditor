@@ -35,6 +35,7 @@ public sealed class DemoGroup :  Luban.EditorBeanBase
             }
             else
             {
+                id = 0;
             }
         }
         
@@ -46,6 +47,7 @@ public sealed class DemoGroup :  Luban.EditorBeanBase
             }
             else
             {
+                x1 = 0;
             }
         }
         
@@ -57,6 +59,7 @@ public sealed class DemoGroup :  Luban.EditorBeanBase
             }
             else
             {
+                x2 = 0;
             }
         }
         
@@ -68,6 +71,7 @@ public sealed class DemoGroup :  Luban.EditorBeanBase
             }
             else
             {
+                x3 = 0;
             }
         }
         
@@ -79,6 +83,7 @@ public sealed class DemoGroup :  Luban.EditorBeanBase
             }
             else
             {
+                x4 = 0;
             }
         }
         
@@ -90,8 +95,11 @@ public sealed class DemoGroup :  Luban.EditorBeanBase
             }
             else
             {
-                x5 = new editor.cfg.test.InnerGroup();
-                x5.SetChangeAction((__x) => x5 = __x as editor.cfg.test.InnerGroup);
+                void _Func(Luban.EditorBeanBase __x)
+                {
+                    x5 = __x as test.InnerGroup;
+                }
+                x5 = new test.InnerGroup(_Func);
             }
         }
         
@@ -121,7 +129,14 @@ public sealed class DemoGroup :  Luban.EditorBeanBase
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderDemoGroup(DemoGroup obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {

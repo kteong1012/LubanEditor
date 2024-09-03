@@ -41,7 +41,16 @@ public abstract class Service :  ai.Node
             _setChangeAction(obj);
         }
     }
-    public new static List<string> Types = new List<string>()
+    private new static string[] Types = new string[]
+    {
+        "UeSetDefaultFocus",
+        "ExecuteTimeStatistic",
+        "ChooseTarget",
+        "KeepFaceTarget",
+        "GetOwnerPlayer",
+        "UpdateDailyBehaviorProps",
+    };
+    private new static string[] TypeAlias = new string[]
     {
         "UeSetDefaultFocus",
         "ExecuteTimeStatistic",
@@ -59,66 +68,66 @@ public abstract class Service :  ai.Node
             case "UeSetDefaultFocus":
             {
                 var obj = new ai.UeSetDefaultFocus(setChangeAction);
-                obj._typeIndex = Types.IndexOf(type);
+                obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.ExecuteTimeStatistic":   
             case "ExecuteTimeStatistic":
             {
                 var obj = new ai.ExecuteTimeStatistic(setChangeAction);
-                obj._typeIndex = Types.IndexOf(type);
+                obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.ChooseTarget":   
             case "ChooseTarget":
             {
                 var obj = new ai.ChooseTarget(setChangeAction);
-                obj._typeIndex = Types.IndexOf(type);
+                obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.KeepFaceTarget":   
             case "KeepFaceTarget":
             {
                 var obj = new ai.KeepFaceTarget(setChangeAction);
-                obj._typeIndex = Types.IndexOf(type);
+                obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.GetOwnerPlayer":   
             case "GetOwnerPlayer":
             {
                 var obj = new ai.GetOwnerPlayer(setChangeAction);
-                obj._typeIndex = Types.IndexOf(type);
+                obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.UpdateDailyBehaviorProps":   
             case "UpdateDailyBehaviorProps":
             {
                 var obj = new ai.UpdateDailyBehaviorProps(setChangeAction);
-                obj._typeIndex = Types.IndexOf(type);
+                obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             default: return null;
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderService(Service obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        var array = ConfigEditorSettings.showComment ? TypeAlias : Types;
+        UnityEditor.EditorGUILayout.BeginHorizontal();
+        UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
+        obj.TypeIndex = UnityEditor.EditorGUILayout.Popup(obj.TypeIndex, array, GUILayout.Width(200));
+        UnityEditor.EditorGUILayout.EndHorizontal();
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {
 {
-    var __list0 = ai.Service.Types.Select(t => new GUIContent(t)).ToArray();
-    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-    if (this == null)
-    {
-        
-        this.TypeIndex = 0;
-    }
-    UnityEditor.EditorGUILayout.BeginHorizontal();
-    UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
-    this.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.TypeIndex, __list0, GUILayout.Width(200));
-    UnityEditor.EditorGUILayout.EndHorizontal();
-    this?.Render();
-    UnityEditor.EditorGUILayout.EndVertical();
+    ai.Service.RenderService(this);
 }    }
     public static Service LoadJsonService(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
@@ -130,42 +139,42 @@ public abstract class Service :  ai.Node
             case "UeSetDefaultFocus":
             {
                 obj = new ai.UeSetDefaultFocus(setChangeAction); 
-                obj._typeIndex = Types.IndexOf("UeSetDefaultFocus");
+                obj._typeIndex = Array.IndexOf(Types, "UeSetDefaultFocus");
                 break;
             }
             case "ai.ExecuteTimeStatistic":   
             case "ExecuteTimeStatistic":
             {
                 obj = new ai.ExecuteTimeStatistic(setChangeAction); 
-                obj._typeIndex = Types.IndexOf("ExecuteTimeStatistic");
+                obj._typeIndex = Array.IndexOf(Types, "ExecuteTimeStatistic");
                 break;
             }
             case "ai.ChooseTarget":   
             case "ChooseTarget":
             {
                 obj = new ai.ChooseTarget(setChangeAction); 
-                obj._typeIndex = Types.IndexOf("ChooseTarget");
+                obj._typeIndex = Array.IndexOf(Types, "ChooseTarget");
                 break;
             }
             case "ai.KeepFaceTarget":   
             case "KeepFaceTarget":
             {
                 obj = new ai.KeepFaceTarget(setChangeAction); 
-                obj._typeIndex = Types.IndexOf("KeepFaceTarget");
+                obj._typeIndex = Array.IndexOf(Types, "KeepFaceTarget");
                 break;
             }
             case "ai.GetOwnerPlayer":   
             case "GetOwnerPlayer":
             {
                 obj = new ai.GetOwnerPlayer(setChangeAction); 
-                obj._typeIndex = Types.IndexOf("GetOwnerPlayer");
+                obj._typeIndex = Array.IndexOf(Types, "GetOwnerPlayer");
                 break;
             }
             case "ai.UpdateDailyBehaviorProps":   
             case "UpdateDailyBehaviorProps":
             {
                 obj = new ai.UpdateDailyBehaviorProps(setChangeAction); 
-                obj._typeIndex = Types.IndexOf("UpdateDailyBehaviorProps");
+                obj._typeIndex = Array.IndexOf(Types, "UpdateDailyBehaviorProps");
                 break;
             }
             default: throw new SerializationException();

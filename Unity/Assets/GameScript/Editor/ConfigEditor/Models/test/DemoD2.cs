@@ -36,6 +36,7 @@ public sealed class DemoD2 :  test.DemoDynamic
             }
             else
             {
+                x1 = 0;
             }
         }
         
@@ -47,6 +48,7 @@ public sealed class DemoD2 :  test.DemoDynamic
             }
             else
             {
+                x2 = 0;
             }
         }
         
@@ -62,7 +64,14 @@ public sealed class DemoD2 :  test.DemoDynamic
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderDemoD2(DemoD2 obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {

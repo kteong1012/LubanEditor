@@ -37,6 +37,7 @@ public sealed class SimpleParallel :  ai.ComposeNode
             }
             else
             {
+                id = 0;
             }
         }
         
@@ -61,13 +62,7 @@ public sealed class SimpleParallel :  ai.ComposeNode
                 {
                     throw new SerializationException();
                 }
-                __v0 = editor.cfg.ai.Decorator.LoadJsonDecorator(__e0, (__newIns0)=>{ __v0 = __newIns0 as ai.Decorator ; });
-                var __index0 = editor.cfg.ai.Decorator.Types.IndexOf(__v0.GetTypeStr());
-                if (__index0 == -1)
-                {
-                    throw new SerializationException();
-                }
-                __v0.TypeIndex = __index0;  decorators.Add(__v0); }  
+                __v0 = editor.cfg.ai.Decorator.LoadJsonDecorator(__e0, (__newIns0)=>{ __v0 = __newIns0 as ai.Decorator ; });  decorators.Add(__v0); }  
             }
             else
             {
@@ -84,13 +79,7 @@ public sealed class SimpleParallel :  ai.ComposeNode
                 {
                     throw new SerializationException();
                 }
-                __v0 = editor.cfg.ai.Service.LoadJsonService(__e0, (__newIns0)=>{ __v0 = __newIns0 as ai.Service ; });
-                var __index0 = editor.cfg.ai.Service.Types.IndexOf(__v0.GetTypeStr());
-                if (__index0 == -1)
-                {
-                    throw new SerializationException();
-                }
-                __v0.TypeIndex = __index0;  services.Add(__v0); }  
+                __v0 = editor.cfg.ai.Service.LoadJsonService(__e0, (__newIns0)=>{ __v0 = __newIns0 as ai.Service ; });  services.Add(__v0); }  
             }
             else
             {
@@ -120,15 +109,14 @@ public sealed class SimpleParallel :  ai.ComposeNode
                     throw new SerializationException();
                 }
                 mainTask = editor.cfg.ai.Task.LoadJsonTask(_fieldJson, (__newIns0)=>{ mainTask = __newIns0 as ai.Task ; });
-                var __index0 = editor.cfg.ai.Task.Types.IndexOf(mainTask.GetTypeStr());
-                if (__index0 == -1)
-                {
-                    throw new SerializationException();
-                }
-                mainTask.TypeIndex = __index0;
             }
             else
             {
+                void _Func(Luban.EditorBeanBase __x)
+                {
+                    mainTask = __x as ai.Task;
+                }
+                mainTask = ai.Task.Create("UeWait", _Func);
             }
         }
         
@@ -142,15 +130,14 @@ public sealed class SimpleParallel :  ai.ComposeNode
                     throw new SerializationException();
                 }
                 backgroundNode = editor.cfg.ai.FlowNode.LoadJsonFlowNode(_fieldJson, (__newIns0)=>{ backgroundNode = __newIns0 as ai.FlowNode ; });
-                var __index0 = editor.cfg.ai.FlowNode.Types.IndexOf(backgroundNode.GetTypeStr());
-                if (__index0 == -1)
-                {
-                    throw new SerializationException();
-                }
-                backgroundNode.TypeIndex = __index0;
             }
             else
             {
+                void _Func(Luban.EditorBeanBase __x)
+                {
+                    backgroundNode = __x as ai.FlowNode;
+                }
+                backgroundNode = ai.FlowNode.Create("Sequence", _Func);
             }
         }
         
@@ -191,7 +178,14 @@ public sealed class SimpleParallel :  ai.ComposeNode
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderSimpleParallel(SimpleParallel obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {
@@ -240,20 +234,7 @@ else
         UnityEditor.EditorGUILayout.LabelField(__i1.ToString(), GUILayout.Width(20));
         editor.cfg.ai.Decorator __e1 = this.decorators[__i1];
         {
-    var __list2 = ai.Decorator.Types.Select(t => new GUIContent(t)).ToArray();
-    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-    if (__e1 == null)
-    {
-        __e1 = new ai.UeLoop();
-__e1.SetChangeAction((__x) => { __e1 = __x as ai.Decorator; });
-        __e1.TypeIndex = 0;
-    }
-    UnityEditor.EditorGUILayout.BeginHorizontal();
-    UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
-    __e1.TypeIndex = UnityEditor.EditorGUILayout.Popup(__e1.TypeIndex, __list2, GUILayout.Width(200));
-    UnityEditor.EditorGUILayout.EndHorizontal();
-    __e1?.Render();
-    UnityEditor.EditorGUILayout.EndVertical();
+    ai.Decorator.RenderDecorator(__e1);
 };
         this.decorators[__i1] = __e1;
         UnityEditor.EditorGUILayout.EndHorizontal();
@@ -261,7 +242,13 @@ __e1.SetChangeAction((__x) => { __e1 = __x as ai.Decorator; });
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.decorators.Add(new ai.UeLoop());
+        editor.cfg.ai.Decorator __e1;
+        void _Func(Luban.EditorBeanBase __x)
+{
+    __e1 = __x as ai.Decorator;
+}
+__e1 = ai.Decorator.Create("UeLoop", _Func);;
+        this.decorators.Add(__e1);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {
@@ -275,12 +262,6 @@ if (!__importJson1.IsObject)
     throw new SerializationException();
 }
 __importElement1 = editor.cfg.ai.Decorator.LoadJsonDecorator(__importJson1, (__newIns2)=>{ __importElement1 = __newIns2 as ai.Decorator ; });
-var __index2 = editor.cfg.ai.Decorator.Types.IndexOf(__importElement1.GetTypeStr());
-if (__index2 == -1)
-{
-    throw new SerializationException();
-}
-__importElement1.TypeIndex = __index2;
             this.decorators.Add(__importElement1);
         });
     }
@@ -311,20 +292,7 @@ else
         UnityEditor.EditorGUILayout.LabelField(__i1.ToString(), GUILayout.Width(20));
         editor.cfg.ai.Service __e1 = this.services[__i1];
         {
-    var __list2 = ai.Service.Types.Select(t => new GUIContent(t)).ToArray();
-    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-    if (__e1 == null)
-    {
-        __e1 = new ai.UeSetDefaultFocus();
-__e1.SetChangeAction((__x) => { __e1 = __x as ai.Service; });
-        __e1.TypeIndex = 0;
-    }
-    UnityEditor.EditorGUILayout.BeginHorizontal();
-    UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
-    __e1.TypeIndex = UnityEditor.EditorGUILayout.Popup(__e1.TypeIndex, __list2, GUILayout.Width(200));
-    UnityEditor.EditorGUILayout.EndHorizontal();
-    __e1?.Render();
-    UnityEditor.EditorGUILayout.EndVertical();
+    ai.Service.RenderService(__e1);
 };
         this.services[__i1] = __e1;
         UnityEditor.EditorGUILayout.EndHorizontal();
@@ -332,7 +300,13 @@ __e1.SetChangeAction((__x) => { __e1 = __x as ai.Service; });
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.services.Add(new ai.UeSetDefaultFocus());
+        editor.cfg.ai.Service __e1;
+        void _Func(Luban.EditorBeanBase __x)
+{
+    __e1 = __x as ai.Service;
+}
+__e1 = ai.Service.Create("UeSetDefaultFocus", _Func);;
+        this.services.Add(__e1);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {
@@ -346,12 +320,6 @@ if (!__importJson1.IsObject)
     throw new SerializationException();
 }
 __importElement1 = editor.cfg.ai.Service.LoadJsonService(__importJson1, (__newIns2)=>{ __importElement1 = __newIns2 as ai.Service ; });
-var __index2 = editor.cfg.ai.Service.Types.IndexOf(__importElement1.GetTypeStr());
-if (__index2 == -1)
-{
-    throw new SerializationException();
-}
-__importElement1.TypeIndex = __index2;
             this.services.Add(__importElement1);
         });
     }
@@ -379,20 +347,7 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("main_task", ""), GUILayout.Width(100));
 }
 {
-    var __list1 = ai.Task.Types.Select(t => new GUIContent(t)).ToArray();
-    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-    if (this.mainTask == null)
-    {
-        this.mainTask = new ai.UeWait();
-this.mainTask.SetChangeAction((__x) => { this.mainTask = __x as ai.Task; });
-        this.mainTask.TypeIndex = 0;
-    }
-    UnityEditor.EditorGUILayout.BeginHorizontal();
-    UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
-    this.mainTask.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.mainTask.TypeIndex, __list1, GUILayout.Width(200));
-    UnityEditor.EditorGUILayout.EndHorizontal();
-    this.mainTask?.Render();
-    UnityEditor.EditorGUILayout.EndVertical();
+    ai.Task.RenderTask(this.mainTask);
 }
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
@@ -404,20 +359,7 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("background_node", ""), GUILayout.Width(100));
 }
 {
-    var __list1 = ai.FlowNode.Types.Select(t => new GUIContent(t)).ToArray();
-    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-    if (this.backgroundNode == null)
-    {
-        this.backgroundNode = new ai.Sequence();
-this.backgroundNode.SetChangeAction((__x) => { this.backgroundNode = __x as ai.FlowNode; });
-        this.backgroundNode.TypeIndex = 0;
-    }
-    UnityEditor.EditorGUILayout.BeginHorizontal();
-    UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
-    this.backgroundNode.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.backgroundNode.TypeIndex, __list1, GUILayout.Width(200));
-    UnityEditor.EditorGUILayout.EndHorizontal();
-    this.backgroundNode?.Render();
-    UnityEditor.EditorGUILayout.EndVertical();
+    ai.FlowNode.RenderFlowNode(this.backgroundNode);
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }

@@ -39,6 +39,7 @@ public sealed class MultiRowTitle :  Luban.EditorBeanBase
             }
             else
             {
+                id = 0;
             }
         }
         
@@ -62,8 +63,11 @@ public sealed class MultiRowTitle :  Luban.EditorBeanBase
             }
             else
             {
-                x1 = new editor.cfg.test.H1();
-                x1.SetChangeAction((__x) => x1 = __x as editor.cfg.test.H1);
+                void _Func(Luban.EditorBeanBase __x)
+                {
+                    x1 = __x as test.H1;
+                }
+                x1 = new test.H1(_Func);
             }
         }
         
@@ -75,8 +79,11 @@ public sealed class MultiRowTitle :  Luban.EditorBeanBase
             }
             else
             {
-                x20 = new editor.cfg.test.H2();
-                x20.SetChangeAction((__x) => x20 = __x as editor.cfg.test.H2);
+                void _Func(Luban.EditorBeanBase __x)
+                {
+                    x20 = __x as test.H2;
+                }
+                x20 = new test.H2(_Func);
             }
         }
         
@@ -155,7 +162,14 @@ public sealed class MultiRowTitle :  Luban.EditorBeanBase
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderMultiRowTitle(MultiRowTitle obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {
@@ -318,7 +332,13 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.x2.Add(new editor.cfg.test.H2());
+        editor.cfg.test.H2 __e1;
+        void _Func(Luban.EditorBeanBase __x)
+{
+    __e1 = __x as test.H2;
+}
+__e1 = new test.H2(_Func);;
+        this.x2.Add(__e1);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {
@@ -388,7 +408,13 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
         var __list1 = new System.Collections.Generic.List<editor.cfg.test.H2>(this.x3);
-        __list1.Add(new editor.cfg.test.H2());
+        editor.cfg.test.H2 __e1;
+        void _Func(Luban.EditorBeanBase __x)
+{
+    __e1 = __x as test.H2;
+}
+__e1 = new test.H2(_Func);;
+        __list1.Add(__e1);
         this.x3 = __list1.ToArray();
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
@@ -461,7 +487,13 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
         var __list1 = new System.Collections.Generic.List<editor.cfg.test.H2>(this.x4);
-        __list1.Add(new editor.cfg.test.H2());
+        editor.cfg.test.H2 __e1;
+        void _Func(Luban.EditorBeanBase __x)
+{
+    __e1 = __x as test.H2;
+}
+__e1 = new test.H2(_Func);;
+        __list1.Add(__e1);
         this.x4 = __list1.ToArray();
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))

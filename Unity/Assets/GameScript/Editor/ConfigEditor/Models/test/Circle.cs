@@ -39,6 +39,7 @@ public sealed class Circle :  Shape
             }
             else
             {
+                radius = 0;
             }
         }
         
@@ -51,7 +52,14 @@ public sealed class Circle :  Shape
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderCircle(Circle obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {

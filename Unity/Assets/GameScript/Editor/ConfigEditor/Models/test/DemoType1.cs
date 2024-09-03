@@ -34,6 +34,7 @@ public sealed class DemoType1 :  Luban.EditorBeanBase
             }
             else
             {
+                x1 = 0;
             }
         }
         
@@ -46,7 +47,14 @@ public sealed class DemoType1 :  Luban.EditorBeanBase
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderDemoType1(DemoType1 obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {

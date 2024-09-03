@@ -34,6 +34,7 @@ public sealed class TestNull :  Luban.EditorBeanBase
             }
             else
             {
+                id = 0;
             }
         }
         
@@ -69,8 +70,11 @@ public sealed class TestNull :  Luban.EditorBeanBase
             }
             else
             {
-                x3 = new editor.cfg.test.DemoType1();
-                x3.SetChangeAction((__x) => x3 = __x as editor.cfg.test.DemoType1);
+                void _Func(Luban.EditorBeanBase __x)
+                {
+                    x3 = __x as test.DemoType1;
+                }
+                x3 = new test.DemoType1(_Func);
             }
         }
         
@@ -84,17 +88,14 @@ public sealed class TestNull :  Luban.EditorBeanBase
                     throw new SerializationException();
                 }
                 x4 = editor.cfg.test.DemoDynamic.LoadJsonDemoDynamic(_fieldJson, (__newIns0)=>{ x4 = __newIns0 as test.DemoDynamic ; });
-                var __index0 = editor.cfg.test.DemoDynamic.Types.IndexOf(x4.GetTypeStr());
-                if (__index0 == -1)
-                {
-                    throw new SerializationException();
-                }
-                x4.TypeIndex = __index0;
             }
             else
             {
-                x4 = new test.DemoD2();
-                x4.SetChangeAction((__x) => x4 = __x as editor.cfg.test.DemoDynamic);
+                void _Func(Luban.EditorBeanBase __x)
+                {
+                    x4 = __x as test.DemoDynamic;
+                }
+                x4 = test.DemoDynamic.Create("DemoD2", _Func);
             }
         }
         
@@ -157,7 +158,14 @@ public sealed class TestNull :  Luban.EditorBeanBase
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderTestNull(TestNull obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {
@@ -225,20 +233,7 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x4", ""), GUILayout.Width(100));
 }
 {
-    var __list1 = test.DemoDynamic.Types.Select(t => new GUIContent(t)).ToArray();
-    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-    if (this.x4 == null)
-    {
-        this.x4 = new test.DemoD2();
-this.x4.SetChangeAction((__x) => { this.x4 = __x as test.DemoDynamic; });
-        this.x4.TypeIndex = 0;
-    }
-    UnityEditor.EditorGUILayout.BeginHorizontal();
-    UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
-    this.x4.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.x4.TypeIndex, __list1, GUILayout.Width(200));
-    UnityEditor.EditorGUILayout.EndHorizontal();
-    this.x4?.Render();
-    UnityEditor.EditorGUILayout.EndVertical();
+    test.DemoDynamic.RenderDemoDynamic(this.x4);
 }
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)

@@ -35,6 +35,7 @@ public sealed class CompositeJsonTable1 :  Luban.EditorBeanBase
             }
             else
             {
+                id = 0;
             }
         }
         
@@ -64,7 +65,14 @@ public sealed class CompositeJsonTable1 :  Luban.EditorBeanBase
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderCompositeJsonTable1(CompositeJsonTable1 obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {

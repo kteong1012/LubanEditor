@@ -38,6 +38,7 @@ public sealed class UeBlackboard :  ai.Decorator
             }
             else
             {
+                id = 0;
             }
         }
         
@@ -99,15 +100,14 @@ public sealed class UeBlackboard :  ai.Decorator
                     throw new SerializationException();
                 }
                 keyQuery = editor.cfg.ai.KeyQueryOperator.LoadJsonKeyQueryOperator(_fieldJson, (__newIns0)=>{ keyQuery = __newIns0 as ai.KeyQueryOperator ; });
-                var __index0 = editor.cfg.ai.KeyQueryOperator.Types.IndexOf(keyQuery.GetTypeStr());
-                if (__index0 == -1)
-                {
-                    throw new SerializationException();
-                }
-                keyQuery.TypeIndex = __index0;
             }
             else
             {
+                void _Func(Luban.EditorBeanBase __x)
+                {
+                    keyQuery = __x as ai.KeyQueryOperator;
+                }
+                keyQuery = ai.KeyQueryOperator.Create("IsSet2", _Func);
             }
         }
         
@@ -141,7 +141,14 @@ public sealed class UeBlackboard :  ai.Decorator
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderUeBlackboard(UeBlackboard obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {
@@ -208,20 +215,7 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("key_query", ""), GUILayout.Width(100));
 }
 {
-    var __list1 = ai.KeyQueryOperator.Types.Select(t => new GUIContent(t)).ToArray();
-    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-    if (this.keyQuery == null)
-    {
-        this.keyQuery = new ai.IsSet2();
-this.keyQuery.SetChangeAction((__x) => { this.keyQuery = __x as ai.KeyQueryOperator; });
-        this.keyQuery.TypeIndex = 0;
-    }
-    UnityEditor.EditorGUILayout.BeginHorizontal();
-    UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
-    this.keyQuery.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.keyQuery.TypeIndex, __list1, GUILayout.Width(200));
-    UnityEditor.EditorGUILayout.EndHorizontal();
-    this.keyQuery?.Render();
-    UnityEditor.EditorGUILayout.EndVertical();
+    ai.KeyQueryOperator.RenderKeyQueryOperator(this.keyQuery);
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }

@@ -51,15 +51,14 @@ public sealed class BinaryOperator :  ai.KeyQueryOperator
                     throw new SerializationException();
                 }
                 data = editor.cfg.ai.KeyData.LoadJsonKeyData(_fieldJson, (__newIns0)=>{ data = __newIns0 as ai.KeyData ; });
-                var __index0 = editor.cfg.ai.KeyData.Types.IndexOf(data.GetTypeStr());
-                if (__index0 == -1)
-                {
-                    throw new SerializationException();
-                }
-                data.TypeIndex = __index0;
             }
             else
             {
+                void _Func(Luban.EditorBeanBase __x)
+                {
+                    data = __x as ai.KeyData;
+                }
+                data = ai.KeyData.Create("FloatKeyData", _Func);
             }
         }
         
@@ -77,7 +76,14 @@ public sealed class BinaryOperator :  ai.KeyQueryOperator
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderBinaryOperator(BinaryOperator obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {
@@ -103,20 +109,7 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("data", ""), GUILayout.Width(100));
 }
 {
-    var __list1 = ai.KeyData.Types.Select(t => new GUIContent(t)).ToArray();
-    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-    if (this.data == null)
-    {
-        this.data = new ai.FloatKeyData();
-this.data.SetChangeAction((__x) => { this.data = __x as ai.KeyData; });
-        this.data.TypeIndex = 0;
-    }
-    UnityEditor.EditorGUILayout.BeginHorizontal();
-    UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
-    this.data.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.data.TypeIndex, __list1, GUILayout.Width(200));
-    UnityEditor.EditorGUILayout.EndHorizontal();
-    this.data?.Render();
-    UnityEditor.EditorGUILayout.EndVertical();
+    ai.KeyData.RenderKeyData(this.data);
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }

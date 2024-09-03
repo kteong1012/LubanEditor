@@ -40,7 +40,13 @@ public abstract class KeyQueryOperator :  Luban.EditorBeanBase
             _setChangeAction(obj);
         }
     }
-    public static List<string> Types = new List<string>()
+    private static string[] Types = new string[]
+    {
+        "IsSet2",
+        "IsNotSet",
+        "BinaryOperator",
+    };
+    private static string[] TypeAlias = new string[]
     {
         "IsSet2",
         "IsNotSet",
@@ -55,45 +61,45 @@ public abstract class KeyQueryOperator :  Luban.EditorBeanBase
             case "IsSet2":
             {
                 var obj = new ai.IsSet2(setChangeAction);
-                obj._typeIndex = Types.IndexOf(type);
+                obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.IsNotSet":   
             case "IsNotSet":
             {
                 var obj = new ai.IsNotSet(setChangeAction);
-                obj._typeIndex = Types.IndexOf(type);
+                obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.BinaryOperator":   
             case "BinaryOperator":
             {
                 var obj = new ai.BinaryOperator(setChangeAction);
-                obj._typeIndex = Types.IndexOf(type);
+                obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             default: return null;
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderKeyQueryOperator(KeyQueryOperator obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        var array = ConfigEditorSettings.showComment ? TypeAlias : Types;
+        UnityEditor.EditorGUILayout.BeginHorizontal();
+        UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
+        obj.TypeIndex = UnityEditor.EditorGUILayout.Popup(obj.TypeIndex, array, GUILayout.Width(200));
+        UnityEditor.EditorGUILayout.EndHorizontal();
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {
 {
-    var __list0 = ai.KeyQueryOperator.Types.Select(t => new GUIContent(t)).ToArray();
-    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-    if (this == null)
-    {
-        
-        this.TypeIndex = 0;
-    }
-    UnityEditor.EditorGUILayout.BeginHorizontal();
-    UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
-    this.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.TypeIndex, __list0, GUILayout.Width(200));
-    UnityEditor.EditorGUILayout.EndHorizontal();
-    this?.Render();
-    UnityEditor.EditorGUILayout.EndVertical();
+    ai.KeyQueryOperator.RenderKeyQueryOperator(this);
 }    }
     public static KeyQueryOperator LoadJsonKeyQueryOperator(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
@@ -105,21 +111,21 @@ public abstract class KeyQueryOperator :  Luban.EditorBeanBase
             case "IsSet2":
             {
                 obj = new ai.IsSet2(setChangeAction); 
-                obj._typeIndex = Types.IndexOf("IsSet2");
+                obj._typeIndex = Array.IndexOf(Types, "IsSet2");
                 break;
             }
             case "ai.IsNotSet":   
             case "IsNotSet":
             {
                 obj = new ai.IsNotSet(setChangeAction); 
-                obj._typeIndex = Types.IndexOf("IsNotSet");
+                obj._typeIndex = Array.IndexOf(Types, "IsNotSet");
                 break;
             }
             case "ai.BinaryOperator":   
             case "BinaryOperator":
             {
                 obj = new ai.BinaryOperator(setChangeAction); 
-                obj._typeIndex = Types.IndexOf("BinaryOperator");
+                obj._typeIndex = Array.IndexOf(Types, "BinaryOperator");
                 break;
             }
             default: throw new SerializationException();

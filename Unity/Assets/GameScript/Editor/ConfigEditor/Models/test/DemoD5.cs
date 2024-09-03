@@ -37,6 +37,7 @@ public sealed class DemoD5 :  test.DemoDynamic
             }
             else
             {
+                x1 = 0;
             }
         }
         
@@ -48,8 +49,11 @@ public sealed class DemoD5 :  test.DemoDynamic
             }
             else
             {
-                time = new editor.cfg.test.DateTimeRange();
-                time.SetChangeAction((__x) => time = __x as editor.cfg.test.DateTimeRange);
+                void _Func(Luban.EditorBeanBase __x)
+                {
+                    time = __x as test.DateTimeRange;
+                }
+                time = new test.DateTimeRange(_Func);
             }
         }
         
@@ -67,7 +71,14 @@ public sealed class DemoD5 :  test.DemoDynamic
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderDemoD5(DemoD5 obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {

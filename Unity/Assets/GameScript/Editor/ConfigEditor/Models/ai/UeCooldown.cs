@@ -36,6 +36,7 @@ public sealed class UeCooldown :  ai.Decorator
             }
             else
             {
+                id = 0;
             }
         }
         
@@ -71,6 +72,7 @@ public sealed class UeCooldown :  ai.Decorator
             }
             else
             {
+                cooldownTime = 0;
             }
         }
         
@@ -94,7 +96,14 @@ public sealed class UeCooldown :  ai.Decorator
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderUeCooldown(UeCooldown obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {

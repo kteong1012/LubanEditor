@@ -36,6 +36,7 @@ public sealed class MultiUnionIndexList :  Luban.EditorBeanBase
             }
             else
             {
+                id1 = 0;
             }
         }
         
@@ -47,6 +48,7 @@ public sealed class MultiUnionIndexList :  Luban.EditorBeanBase
             }
             else
             {
+                id2 = 0;
             }
         }
         
@@ -70,6 +72,7 @@ public sealed class MultiUnionIndexList :  Luban.EditorBeanBase
             }
             else
             {
+                num = 0;
             }
         }
         
@@ -110,7 +113,14 @@ public sealed class MultiUnionIndexList :  Luban.EditorBeanBase
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderMultiUnionIndexList(MultiUnionIndexList obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {

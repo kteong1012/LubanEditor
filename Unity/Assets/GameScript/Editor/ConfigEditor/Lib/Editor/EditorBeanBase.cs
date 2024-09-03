@@ -12,10 +12,10 @@ namespace Luban
 
         public abstract void SaveJson(SimpleJSON.JSONObject json);
 
-        public abstract void Render();
-
         protected Action<Luban.EditorBeanBase> _setChangeAction;
         public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
+        public string OriginalDataJson { get; set; }
+        public abstract void Render();
 
         public void LoadJsonFile(string file)
         {

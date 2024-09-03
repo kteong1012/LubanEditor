@@ -36,6 +36,7 @@ public sealed class Item :  test.ItemBase
             }
             else
             {
+                id = 0;
             }
         }
         
@@ -71,6 +72,7 @@ public sealed class Item :  test.ItemBase
             }
             else
             {
+                num = 0;
             }
         }
         
@@ -82,6 +84,7 @@ public sealed class Item :  test.ItemBase
             }
             else
             {
+                price = 0;
             }
         }
         
@@ -110,7 +113,14 @@ public sealed class Item :  test.ItemBase
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderItem(Item obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {

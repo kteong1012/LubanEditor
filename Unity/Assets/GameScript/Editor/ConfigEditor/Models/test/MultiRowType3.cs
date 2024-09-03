@@ -35,6 +35,7 @@ public sealed class MultiRowType3 :  Luban.EditorBeanBase
             }
             else
             {
+                id = 0;
             }
         }
         
@@ -64,7 +65,14 @@ public sealed class MultiRowType3 :  Luban.EditorBeanBase
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderMultiRowType3(MultiRowType3 obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {
@@ -131,7 +139,13 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.items.Add(new editor.cfg.test.MultiRowType1());
+        editor.cfg.test.MultiRowType1 __e1;
+        void _Func(Luban.EditorBeanBase __x)
+{
+    __e1 = __x as test.MultiRowType1;
+}
+__e1 = new test.MultiRowType1(_Func);;
+        this.items.Add(__e1);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {

@@ -37,6 +37,7 @@ public sealed class ChooseTarget :  ai.Service
             }
             else
             {
+                id = 0;
             }
         }
         
@@ -83,7 +84,14 @@ public sealed class ChooseTarget :  ai.Service
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderChooseTarget(ChooseTarget obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {

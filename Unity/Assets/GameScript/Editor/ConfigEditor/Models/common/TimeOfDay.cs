@@ -34,6 +34,7 @@ public sealed class TimeOfDay :  Luban.EditorBeanBase
             }
             else
             {
+                hour = 0;
             }
         }
         
@@ -45,6 +46,7 @@ public sealed class TimeOfDay :  Luban.EditorBeanBase
             }
             else
             {
+                minute = 0;
             }
         }
         
@@ -56,6 +58,7 @@ public sealed class TimeOfDay :  Luban.EditorBeanBase
             }
             else
             {
+                second = 0;
             }
         }
         
@@ -74,7 +77,14 @@ public sealed class TimeOfDay :  Luban.EditorBeanBase
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderTimeOfDay(TimeOfDay obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {

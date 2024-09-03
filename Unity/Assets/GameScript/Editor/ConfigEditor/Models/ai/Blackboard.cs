@@ -104,7 +104,14 @@ public sealed class Blackboard :  Luban.EditorBeanBase
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderBlackboard(Blackboard obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {
@@ -222,7 +229,13 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.keys.Add(new editor.cfg.ai.BlackboardKey());
+        editor.cfg.ai.BlackboardKey __e1;
+        void _Func(Luban.EditorBeanBase __x)
+{
+    __e1 = __x as ai.BlackboardKey;
+}
+__e1 = new ai.BlackboardKey(_Func);;
+        this.keys.Add(__e1);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {

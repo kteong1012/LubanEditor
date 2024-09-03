@@ -36,8 +36,11 @@ public sealed class OneDayTimeRange :  Luban.EditorBeanBase
             }
             else
             {
-                startTime = new editor.cfg.common.TimeOfDay();
-                startTime.SetChangeAction((__x) => startTime = __x as editor.cfg.common.TimeOfDay);
+                void _Func(Luban.EditorBeanBase __x)
+                {
+                    startTime = __x as common.TimeOfDay;
+                }
+                startTime = new common.TimeOfDay(_Func);
             }
         }
         
@@ -49,8 +52,11 @@ public sealed class OneDayTimeRange :  Luban.EditorBeanBase
             }
             else
             {
-                endTime = new editor.cfg.common.TimeOfDay();
-                endTime.SetChangeAction((__x) => endTime = __x as editor.cfg.common.TimeOfDay);
+                void _Func(Luban.EditorBeanBase __x)
+                {
+                    endTime = __x as common.TimeOfDay;
+                }
+                endTime = new common.TimeOfDay(_Func);
             }
         }
         
@@ -70,7 +76,14 @@ public sealed class OneDayTimeRange :  Luban.EditorBeanBase
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderOneDayTimeRange(OneDayTimeRange obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {

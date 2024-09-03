@@ -36,6 +36,7 @@ public sealed class UeLoop :  ai.Decorator
             }
             else
             {
+                id = 0;
             }
         }
         
@@ -71,6 +72,7 @@ public sealed class UeLoop :  ai.Decorator
             }
             else
             {
+                numLoops = 0;
             }
         }
         
@@ -82,6 +84,7 @@ public sealed class UeLoop :  ai.Decorator
             }
             else
             {
+                infiniteLoop = false;
             }
         }
         
@@ -93,6 +96,7 @@ public sealed class UeLoop :  ai.Decorator
             }
             else
             {
+                infiniteLoopTimeoutTime = 0;
             }
         }
         
@@ -122,7 +126,14 @@ public sealed class UeLoop :  ai.Decorator
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderUeLoop(UeLoop obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {

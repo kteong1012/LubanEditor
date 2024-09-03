@@ -42,7 +42,13 @@ public abstract class ItemBase :  Luban.EditorBeanBase
             _setChangeAction(obj);
         }
     }
-    public static List<string> Types = new List<string>()
+    private static string[] Types = new string[]
+    {
+        "Item",
+        "Equipment",
+        "Decorator",
+    };
+    private static string[] TypeAlias = new string[]
     {
         "Item",
         "Equipment",
@@ -57,45 +63,45 @@ public abstract class ItemBase :  Luban.EditorBeanBase
             case "Item":
             {
                 var obj = new test.Item(setChangeAction);
-                obj._typeIndex = Types.IndexOf(type);
+                obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "test.Equipment":   
             case "Equipment":
             {
                 var obj = new test.Equipment(setChangeAction);
-                obj._typeIndex = Types.IndexOf(type);
+                obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "test.Decorator":   
             case "Decorator":
             {
                 var obj = new test.Decorator(setChangeAction);
-                obj._typeIndex = Types.IndexOf(type);
+                obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             default: return null;
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderItemBase(ItemBase obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        var array = ConfigEditorSettings.showComment ? TypeAlias : Types;
+        UnityEditor.EditorGUILayout.BeginHorizontal();
+        UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
+        obj.TypeIndex = UnityEditor.EditorGUILayout.Popup(obj.TypeIndex, array, GUILayout.Width(200));
+        UnityEditor.EditorGUILayout.EndHorizontal();
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {
 {
-    var __list0 = test.ItemBase.Types.Select(t => new GUIContent(t)).ToArray();
-    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-    if (this == null)
-    {
-        
-        this.TypeIndex = 0;
-    }
-    UnityEditor.EditorGUILayout.BeginHorizontal();
-    UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
-    this.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.TypeIndex, __list0, GUILayout.Width(200));
-    UnityEditor.EditorGUILayout.EndHorizontal();
-    this?.Render();
-    UnityEditor.EditorGUILayout.EndVertical();
+    test.ItemBase.RenderItemBase(this);
 }    }
     public static ItemBase LoadJsonItemBase(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
@@ -107,21 +113,21 @@ public abstract class ItemBase :  Luban.EditorBeanBase
             case "Item":
             {
                 obj = new test.Item(setChangeAction); 
-                obj._typeIndex = Types.IndexOf("Item");
+                obj._typeIndex = Array.IndexOf(Types, "Item");
                 break;
             }
             case "test.Equipment":   
             case "Equipment":
             {
                 obj = new test.Equipment(setChangeAction); 
-                obj._typeIndex = Types.IndexOf("Equipment");
+                obj._typeIndex = Array.IndexOf(Types, "Equipment");
                 break;
             }
             case "test.Decorator":   
             case "Decorator":
             {
                 obj = new test.Decorator(setChangeAction); 
-                obj._typeIndex = Types.IndexOf("Decorator");
+                obj._typeIndex = Array.IndexOf(Types, "Decorator");
                 break;
             }
             default: throw new SerializationException();

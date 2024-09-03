@@ -36,6 +36,7 @@ public sealed class TestMapper :  Luban.EditorBeanBase
             }
             else
             {
+                id = 0;
             }
         }
         
@@ -59,8 +60,11 @@ public sealed class TestMapper :  Luban.EditorBeanBase
             }
             else
             {
-                v2 = new editor.cfg.vec2();
-                v2.SetChangeAction((__x) => v2 = __x as editor.cfg.vec2);
+                void _Func(Luban.EditorBeanBase __x)
+                {
+                    v2 = __x as vec2;
+                }
+                v2 = new vec2(_Func);
             }
         }
         
@@ -79,7 +83,14 @@ public sealed class TestMapper :  Luban.EditorBeanBase
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderTestMapper(TestMapper obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {

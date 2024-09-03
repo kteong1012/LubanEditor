@@ -37,6 +37,7 @@ public sealed class BehaviorTree :  Luban.EditorBeanBase
             }
             else
             {
+                id = 0;
             }
         }
         
@@ -86,15 +87,14 @@ public sealed class BehaviorTree :  Luban.EditorBeanBase
                     throw new SerializationException();
                 }
                 root = editor.cfg.ai.ComposeNode.LoadJsonComposeNode(_fieldJson, (__newIns0)=>{ root = __newIns0 as ai.ComposeNode ; });
-                var __index0 = editor.cfg.ai.ComposeNode.Types.IndexOf(root.GetTypeStr());
-                if (__index0 == -1)
-                {
-                    throw new SerializationException();
-                }
-                root.TypeIndex = __index0;
             }
             else
             {
+                void _Func(Luban.EditorBeanBase __x)
+                {
+                    root = __x as ai.ComposeNode;
+                }
+                root = ai.ComposeNode.Create("Sequence", _Func);
             }
         }
         
@@ -127,7 +127,14 @@ public sealed class BehaviorTree :  Luban.EditorBeanBase
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderBehaviorTree(BehaviorTree obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {
@@ -182,20 +189,7 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("root", ""), GUILayout.Width(100));
 }
 {
-    var __list1 = ai.ComposeNode.Types.Select(t => new GUIContent(t)).ToArray();
-    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-    if (this.root == null)
-    {
-        this.root = new ai.Sequence();
-this.root.SetChangeAction((__x) => { this.root = __x as ai.ComposeNode; });
-        this.root.TypeIndex = 0;
-    }
-    UnityEditor.EditorGUILayout.BeginHorizontal();
-    UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
-    this.root.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.root.TypeIndex, __list1, GUILayout.Width(200));
-    UnityEditor.EditorGUILayout.EndHorizontal();
-    this.root?.Render();
-    UnityEditor.EditorGUILayout.EndVertical();
+    ai.ComposeNode.RenderComposeNode(this.root);
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }

@@ -37,6 +37,7 @@ public sealed class IsAtLocation :  ai.Decorator
             }
             else
             {
+                id = 0;
             }
         }
         
@@ -72,6 +73,7 @@ public sealed class IsAtLocation :  ai.Decorator
             }
             else
             {
+                acceptableRadius = 0;
             }
         }
         
@@ -95,6 +97,7 @@ public sealed class IsAtLocation :  ai.Decorator
             }
             else
             {
+                inverseCondition = false;
             }
         }
         
@@ -126,7 +129,14 @@ public sealed class IsAtLocation :  ai.Decorator
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderIsAtLocation(IsAtLocation obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {

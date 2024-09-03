@@ -40,7 +40,14 @@ public abstract class KeyData :  Luban.EditorBeanBase
             _setChangeAction(obj);
         }
     }
-    public static List<string> Types = new List<string>()
+    private static string[] Types = new string[]
+    {
+        "FloatKeyData",
+        "IntKeyData",
+        "StringKeyData",
+        "BlackboardKeyData",
+    };
+    private static string[] TypeAlias = new string[]
     {
         "FloatKeyData",
         "IntKeyData",
@@ -56,52 +63,52 @@ public abstract class KeyData :  Luban.EditorBeanBase
             case "FloatKeyData":
             {
                 var obj = new ai.FloatKeyData(setChangeAction);
-                obj._typeIndex = Types.IndexOf(type);
+                obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.IntKeyData":   
             case "IntKeyData":
             {
                 var obj = new ai.IntKeyData(setChangeAction);
-                obj._typeIndex = Types.IndexOf(type);
+                obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.StringKeyData":   
             case "StringKeyData":
             {
                 var obj = new ai.StringKeyData(setChangeAction);
-                obj._typeIndex = Types.IndexOf(type);
+                obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.BlackboardKeyData":   
             case "BlackboardKeyData":
             {
                 var obj = new ai.BlackboardKeyData(setChangeAction);
-                obj._typeIndex = Types.IndexOf(type);
+                obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             default: return null;
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderKeyData(KeyData obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        var array = ConfigEditorSettings.showComment ? TypeAlias : Types;
+        UnityEditor.EditorGUILayout.BeginHorizontal();
+        UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
+        obj.TypeIndex = UnityEditor.EditorGUILayout.Popup(obj.TypeIndex, array, GUILayout.Width(200));
+        UnityEditor.EditorGUILayout.EndHorizontal();
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {
 {
-    var __list0 = ai.KeyData.Types.Select(t => new GUIContent(t)).ToArray();
-    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-    if (this == null)
-    {
-        
-        this.TypeIndex = 0;
-    }
-    UnityEditor.EditorGUILayout.BeginHorizontal();
-    UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
-    this.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.TypeIndex, __list0, GUILayout.Width(200));
-    UnityEditor.EditorGUILayout.EndHorizontal();
-    this?.Render();
-    UnityEditor.EditorGUILayout.EndVertical();
+    ai.KeyData.RenderKeyData(this);
 }    }
     public static KeyData LoadJsonKeyData(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
@@ -113,28 +120,28 @@ public abstract class KeyData :  Luban.EditorBeanBase
             case "FloatKeyData":
             {
                 obj = new ai.FloatKeyData(setChangeAction); 
-                obj._typeIndex = Types.IndexOf("FloatKeyData");
+                obj._typeIndex = Array.IndexOf(Types, "FloatKeyData");
                 break;
             }
             case "ai.IntKeyData":   
             case "IntKeyData":
             {
                 obj = new ai.IntKeyData(setChangeAction); 
-                obj._typeIndex = Types.IndexOf("IntKeyData");
+                obj._typeIndex = Array.IndexOf(Types, "IntKeyData");
                 break;
             }
             case "ai.StringKeyData":   
             case "StringKeyData":
             {
                 obj = new ai.StringKeyData(setChangeAction); 
-                obj._typeIndex = Types.IndexOf("StringKeyData");
+                obj._typeIndex = Array.IndexOf(Types, "StringKeyData");
                 break;
             }
             case "ai.BlackboardKeyData":   
             case "BlackboardKeyData":
             {
                 obj = new ai.BlackboardKeyData(setChangeAction); 
-                obj._typeIndex = Types.IndexOf("BlackboardKeyData");
+                obj._typeIndex = Array.IndexOf(Types, "BlackboardKeyData");
                 break;
             }
             default: throw new SerializationException();

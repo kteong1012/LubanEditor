@@ -36,6 +36,7 @@ public sealed class ExecuteTimeStatistic :  ai.Service
             }
             else
             {
+                id = 0;
             }
         }
         
@@ -65,7 +66,14 @@ public sealed class ExecuteTimeStatistic :  ai.Service
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderExecuteTimeStatistic(ExecuteTimeStatistic obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {

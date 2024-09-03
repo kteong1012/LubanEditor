@@ -38,6 +38,7 @@ public sealed class TestMap :  Luban.EditorBeanBase
             }
             else
             {
+                id = 0;
             }
         }
         
@@ -162,7 +163,14 @@ public sealed class TestMap :  Luban.EditorBeanBase
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderTestMap(TestMap obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {

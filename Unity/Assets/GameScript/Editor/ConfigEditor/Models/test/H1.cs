@@ -35,8 +35,11 @@ public sealed class H1 :  Luban.EditorBeanBase
             }
             else
             {
-                y2 = new editor.cfg.test.H2();
-                y2.SetChangeAction((__x) => y2 = __x as editor.cfg.test.H2);
+                void _Func(Luban.EditorBeanBase __x)
+                {
+                    y2 = __x as test.H2;
+                }
+                y2 = new test.H2(_Func);
             }
         }
         
@@ -48,6 +51,7 @@ public sealed class H1 :  Luban.EditorBeanBase
             }
             else
             {
+                y3 = 0;
             }
         }
         
@@ -65,7 +69,14 @@ public sealed class H1 :  Luban.EditorBeanBase
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderH1(H1 obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {

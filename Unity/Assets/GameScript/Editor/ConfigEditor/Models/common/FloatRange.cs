@@ -34,6 +34,7 @@ public sealed class FloatRange :  Luban.EditorBeanBase
             }
             else
             {
+                min = 0;
             }
         }
         
@@ -45,6 +46,7 @@ public sealed class FloatRange :  Luban.EditorBeanBase
             }
             else
             {
+                max = 0;
             }
         }
         
@@ -60,7 +62,14 @@ public sealed class FloatRange :  Luban.EditorBeanBase
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderFloatRange(FloatRange obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {

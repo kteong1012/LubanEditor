@@ -36,6 +36,7 @@ public sealed class Decorator :  test.ItemBase
             }
             else
             {
+                id = 0;
             }
         }
         
@@ -71,6 +72,7 @@ public sealed class Decorator :  test.ItemBase
             }
             else
             {
+                duration = 0;
             }
         }
         
@@ -96,7 +98,14 @@ public sealed class Decorator :  test.ItemBase
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderDecorator(Decorator obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {

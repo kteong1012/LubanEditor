@@ -39,6 +39,7 @@ public sealed class Rectangle :  test.Shape
             }
             else
             {
+                width = 0;
             }
         }
         
@@ -50,6 +51,7 @@ public sealed class Rectangle :  test.Shape
             }
             else
             {
+                height = 0;
             }
         }
         
@@ -65,7 +67,14 @@ public sealed class Rectangle :  test.Shape
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderRectangle(Rectangle obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {

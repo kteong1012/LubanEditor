@@ -41,7 +41,13 @@ public abstract class ComposeNode :  ai.FlowNode
             _setChangeAction(obj);
         }
     }
-    public new static List<string> Types = new List<string>()
+    private new static string[] Types = new string[]
+    {
+        "Sequence",
+        "Selector",
+        "SimpleParallel",
+    };
+    private new static string[] TypeAlias = new string[]
     {
         "Sequence",
         "Selector",
@@ -56,45 +62,45 @@ public abstract class ComposeNode :  ai.FlowNode
             case "Sequence":
             {
                 var obj = new ai.Sequence(setChangeAction);
-                obj._typeIndex = Types.IndexOf(type);
+                obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.Selector":   
             case "Selector":
             {
                 var obj = new ai.Selector(setChangeAction);
-                obj._typeIndex = Types.IndexOf(type);
+                obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.SimpleParallel":   
             case "SimpleParallel":
             {
                 var obj = new ai.SimpleParallel(setChangeAction);
-                obj._typeIndex = Types.IndexOf(type);
+                obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             default: return null;
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderComposeNode(ComposeNode obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        var array = ConfigEditorSettings.showComment ? TypeAlias : Types;
+        UnityEditor.EditorGUILayout.BeginHorizontal();
+        UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
+        obj.TypeIndex = UnityEditor.EditorGUILayout.Popup(obj.TypeIndex, array, GUILayout.Width(200));
+        UnityEditor.EditorGUILayout.EndHorizontal();
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {
 {
-    var __list0 = ai.ComposeNode.Types.Select(t => new GUIContent(t)).ToArray();
-    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-    if (this == null)
-    {
-        
-        this.TypeIndex = 0;
-    }
-    UnityEditor.EditorGUILayout.BeginHorizontal();
-    UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
-    this.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.TypeIndex, __list0, GUILayout.Width(200));
-    UnityEditor.EditorGUILayout.EndHorizontal();
-    this?.Render();
-    UnityEditor.EditorGUILayout.EndVertical();
+    ai.ComposeNode.RenderComposeNode(this);
 }    }
     public static ComposeNode LoadJsonComposeNode(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
@@ -106,21 +112,21 @@ public abstract class ComposeNode :  ai.FlowNode
             case "Sequence":
             {
                 obj = new ai.Sequence(setChangeAction); 
-                obj._typeIndex = Types.IndexOf("Sequence");
+                obj._typeIndex = Array.IndexOf(Types, "Sequence");
                 break;
             }
             case "ai.Selector":   
             case "Selector":
             {
                 obj = new ai.Selector(setChangeAction); 
-                obj._typeIndex = Types.IndexOf("Selector");
+                obj._typeIndex = Array.IndexOf(Types, "Selector");
                 break;
             }
             case "ai.SimpleParallel":   
             case "SimpleParallel":
             {
                 obj = new ai.SimpleParallel(setChangeAction); 
-                obj._typeIndex = Types.IndexOf("SimpleParallel");
+                obj._typeIndex = Array.IndexOf(Types, "SimpleParallel");
                 break;
             }
             default: throw new SerializationException();

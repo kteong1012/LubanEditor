@@ -38,6 +38,7 @@ public sealed class DistanceLessThan :  ai.Decorator
             }
             else
             {
+                id = 0;
             }
         }
         
@@ -97,6 +98,7 @@ public sealed class DistanceLessThan :  ai.Decorator
             }
             else
             {
+                distance = 0;
             }
         }
         
@@ -108,6 +110,7 @@ public sealed class DistanceLessThan :  ai.Decorator
             }
             else
             {
+                reverseResult = false;
             }
         }
         
@@ -144,7 +147,14 @@ public sealed class DistanceLessThan :  ai.Decorator
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderDistanceLessThan(DistanceLessThan obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {

@@ -37,6 +37,7 @@ public sealed class TestMultiColumn :  Luban.EditorBeanBase
             }
             else
             {
+                id = 0;
             }
         }
         
@@ -48,8 +49,11 @@ public sealed class TestMultiColumn :  Luban.EditorBeanBase
             }
             else
             {
-                a = new editor.cfg.test.Foo();
-                a.SetChangeAction((__x) => a = __x as editor.cfg.test.Foo);
+                void _Func(Luban.EditorBeanBase __x)
+                {
+                    a = __x as test.Foo;
+                }
+                a = new test.Foo(_Func);
             }
         }
         
@@ -61,8 +65,11 @@ public sealed class TestMultiColumn :  Luban.EditorBeanBase
             }
             else
             {
-                b = new editor.cfg.test.Foo();
-                b.SetChangeAction((__x) => b = __x as editor.cfg.test.Foo);
+                void _Func(Luban.EditorBeanBase __x)
+                {
+                    b = __x as test.Foo;
+                }
+                b = new test.Foo(_Func);
             }
         }
         
@@ -74,8 +81,11 @@ public sealed class TestMultiColumn :  Luban.EditorBeanBase
             }
             else
             {
-                c = new editor.cfg.test.Foo();
-                c.SetChangeAction((__x) => c = __x as editor.cfg.test.Foo);
+                void _Func(Luban.EditorBeanBase __x)
+                {
+                    c = __x as test.Foo;
+                }
+                c = new test.Foo(_Func);
             }
         }
         
@@ -103,7 +113,14 @@ public sealed class TestMultiColumn :  Luban.EditorBeanBase
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderTestMultiColumn(TestMultiColumn obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {

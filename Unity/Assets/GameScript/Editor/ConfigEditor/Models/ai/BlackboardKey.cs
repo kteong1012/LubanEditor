@@ -62,6 +62,7 @@ public sealed class BlackboardKey :  Luban.EditorBeanBase
             }
             else
             {
+                isStatic = false;
             }
         }
         
@@ -116,7 +117,14 @@ public sealed class BlackboardKey :  Luban.EditorBeanBase
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderBlackboardKey(BlackboardKey obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {

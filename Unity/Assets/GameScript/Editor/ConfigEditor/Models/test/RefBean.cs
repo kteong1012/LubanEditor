@@ -37,6 +37,7 @@ public sealed class RefBean :  test.RefDynamicBase
             }
             else
             {
+                x = 0;
             }
         }
         
@@ -66,7 +67,14 @@ public sealed class RefBean :  test.RefDynamicBase
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderRefBean(RefBean obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {
@@ -111,7 +119,9 @@ else
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.arr.Add(0);
+        int __e1;
+        __e1 = 0;;
+        this.arr.Add(__e1);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {

@@ -43,6 +43,7 @@ public sealed class TestUeType :  Luban.EditorBeanBase
             }
             else
             {
+                x1 = false;
             }
         }
         
@@ -54,6 +55,7 @@ public sealed class TestUeType :  Luban.EditorBeanBase
             }
             else
             {
+                x2 = 0;
             }
         }
         
@@ -65,6 +67,7 @@ public sealed class TestUeType :  Luban.EditorBeanBase
             }
             else
             {
+                x3 = 0;
             }
         }
         
@@ -76,6 +79,7 @@ public sealed class TestUeType :  Luban.EditorBeanBase
             }
             else
             {
+                x4 = 0;
             }
         }
         
@@ -87,6 +91,7 @@ public sealed class TestUeType :  Luban.EditorBeanBase
             }
             else
             {
+                x5 = 0;
             }
         }
         
@@ -98,6 +103,7 @@ public sealed class TestUeType :  Luban.EditorBeanBase
             }
             else
             {
+                x6 = 0;
             }
         }
         
@@ -121,8 +127,11 @@ public sealed class TestUeType :  Luban.EditorBeanBase
             }
             else
             {
-                x12 = new editor.cfg.test.DemoType1();
-                x12.SetChangeAction((__x) => x12 = __x as editor.cfg.test.DemoType1);
+                void _Func(Luban.EditorBeanBase __x)
+                {
+                    x12 = __x as test.DemoType1;
+                }
+                x12 = new test.DemoType1(_Func);
             }
         }
         
@@ -297,7 +306,14 @@ public sealed class TestUeType :  Luban.EditorBeanBase
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderTestUeType(TestUeType obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {
@@ -448,7 +464,9 @@ else
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
         var __list1 = new System.Collections.Generic.List<int>(this.k1);
-        __list1.Add(0);
+        int __e1;
+        __e1 = 0;;
+        __list1.Add(__e1);
         this.k1 = __list1.ToArray();
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
@@ -496,7 +514,9 @@ else
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.k2.Add(0);
+        int __e1;
+        __e1 = 0;;
+        this.k2.Add(__e1);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {
@@ -540,7 +560,9 @@ else
     }
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.k5.Add(0);
+        int __e1;
+        __e1 = 0;;
+        this.k5.Add(__e1);
     }
     UnityEditor.EditorGUILayout.EndVertical();
 }
@@ -643,7 +665,13 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.k9.Add(new editor.cfg.test.DemoE2());
+        editor.cfg.test.DemoE2 __e1;
+        void _Func(Luban.EditorBeanBase __x)
+{
+    __e1 = __x as test.DemoE2;
+}
+__e1 = new test.DemoE2(_Func);;
+        this.k9.Add(__e1);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {

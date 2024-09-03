@@ -36,6 +36,7 @@ public sealed class RoleInfo :  test.DemoD3
             }
             else
             {
+                x1 = 0;
             }
         }
         
@@ -47,6 +48,7 @@ public sealed class RoleInfo :  test.DemoD3
             }
             else
             {
+                x3 = 0;
             }
         }
         
@@ -58,6 +60,7 @@ public sealed class RoleInfo :  test.DemoD3
             }
             else
             {
+                roleId = 0;
             }
         }
         
@@ -76,7 +79,14 @@ public sealed class RoleInfo :  test.DemoD3
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderRoleInfo(RoleInfo obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {

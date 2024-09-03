@@ -36,6 +36,7 @@ public sealed class UeForceSuccess :  ai.Decorator
             }
             else
             {
+                id = 0;
             }
         }
         
@@ -80,7 +81,14 @@ public sealed class UeForceSuccess :  ai.Decorator
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderUeForceSuccess(UeForceSuccess obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {

@@ -40,10 +40,15 @@ public abstract class Shape :  Luban.EditorBeanBase
             _setChangeAction(obj);
         }
     }
-    public static List<string> Types = new List<string>()
+    private static string[] Types = new string[]
     {
         "Circle",
         "test2.Rectangle",
+    };
+    private static string[] TypeAlias = new string[]
+    {
+        "圆",
+        "矩形",
     };
 
     public static Shape Create(string type, Action<Luban.EditorBeanBase> setChangeAction)
@@ -54,37 +59,37 @@ public abstract class Shape :  Luban.EditorBeanBase
             case "Circle":
             {
                 var obj = new test.Circle(setChangeAction);
-                obj._typeIndex = Types.IndexOf(type);
+                obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "test2.Rectangle":
             {
                 var obj = new test2.Rectangle(setChangeAction);
-                obj._typeIndex = Types.IndexOf(type);
+                obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             default: return null;
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderShape(Shape obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        var array = ConfigEditorSettings.showComment ? TypeAlias : Types;
+        UnityEditor.EditorGUILayout.BeginHorizontal();
+        UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
+        obj.TypeIndex = UnityEditor.EditorGUILayout.Popup(obj.TypeIndex, array, GUILayout.Width(200));
+        UnityEditor.EditorGUILayout.EndHorizontal();
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {
 {
-    var __list0 = test.Shape.Types.Select(t => new GUIContent(t)).ToArray();
-    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-    if (this == null)
-    {
-        
-        this.TypeIndex = 0;
-    }
-    UnityEditor.EditorGUILayout.BeginHorizontal();
-    UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
-    this.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.TypeIndex, __list0, GUILayout.Width(200));
-    UnityEditor.EditorGUILayout.EndHorizontal();
-    this?.Render();
-    UnityEditor.EditorGUILayout.EndVertical();
+    test.Shape.RenderShape(this);
 }    }
     public static Shape LoadJsonShape(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
@@ -96,13 +101,13 @@ public abstract class Shape :  Luban.EditorBeanBase
             case "Circle":
             {
                 obj = new test.Circle(setChangeAction); 
-                obj._typeIndex = Types.IndexOf("Circle");
+                obj._typeIndex = Array.IndexOf(Types, "Circle");
                 break;
             }
             case "test2.Rectangle":
             {
                 obj = new test2.Rectangle(setChangeAction); 
-                obj._typeIndex = Types.IndexOf("test2.Rectangle");
+                obj._typeIndex = Array.IndexOf(Types, "test2.Rectangle");
                 break;
             }
             default: throw new SerializationException();

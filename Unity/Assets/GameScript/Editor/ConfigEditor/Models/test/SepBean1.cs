@@ -35,6 +35,7 @@ public sealed class SepBean1 :  Luban.EditorBeanBase
             }
             else
             {
+                a = 0;
             }
         }
         
@@ -46,6 +47,7 @@ public sealed class SepBean1 :  Luban.EditorBeanBase
             }
             else
             {
+                b = 0;
             }
         }
         
@@ -78,7 +80,14 @@ public sealed class SepBean1 :  Luban.EditorBeanBase
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderSepBean1(SepBean1 obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {

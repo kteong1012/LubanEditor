@@ -43,6 +43,7 @@ public sealed class ExcelFromJson :  Luban.EditorBeanBase
             }
             else
             {
+                x4 = 0;
             }
         }
         
@@ -54,6 +55,7 @@ public sealed class ExcelFromJson :  Luban.EditorBeanBase
             }
             else
             {
+                x1 = false;
             }
         }
         
@@ -65,6 +67,7 @@ public sealed class ExcelFromJson :  Luban.EditorBeanBase
             }
             else
             {
+                x5 = 0;
             }
         }
         
@@ -76,6 +79,7 @@ public sealed class ExcelFromJson :  Luban.EditorBeanBase
             }
             else
             {
+                x6 = 0;
             }
         }
         
@@ -134,8 +138,11 @@ public sealed class ExcelFromJson :  Luban.EditorBeanBase
             }
             else
             {
-                x12 = new editor.cfg.test.DemoType1();
-                x12.SetChangeAction((__x) => x12 = __x as editor.cfg.test.DemoType1);
+                void _Func(Luban.EditorBeanBase __x)
+                {
+                    x12 = __x as test.DemoType1;
+                }
+                x12 = new test.DemoType1(_Func);
             }
         }
         
@@ -161,15 +168,14 @@ public sealed class ExcelFromJson :  Luban.EditorBeanBase
                     throw new SerializationException();
                 }
                 x14 = editor.cfg.test.DemoDynamic.LoadJsonDemoDynamic(_fieldJson, (__newIns0)=>{ x14 = __newIns0 as test.DemoDynamic ; });
-                var __index0 = editor.cfg.test.DemoDynamic.Types.IndexOf(x14.GetTypeStr());
-                if (__index0 == -1)
-                {
-                    throw new SerializationException();
-                }
-                x14.TypeIndex = __index0;
             }
             else
             {
+                void _Func(Luban.EditorBeanBase __x)
+                {
+                    x14 = __x as test.DemoDynamic;
+                }
+                x14 = test.DemoDynamic.Create("DemoD2", _Func);
             }
         }
         
@@ -218,13 +224,7 @@ public sealed class ExcelFromJson :  Luban.EditorBeanBase
                 {
                     throw new SerializationException();
                 }
-                __v0 = editor.cfg.test.DemoDynamic.LoadJsonDemoDynamic(__e0, (__newIns0)=>{ __v0 = __newIns0 as test.DemoDynamic ; });
-                var __index0 = editor.cfg.test.DemoDynamic.Types.IndexOf(__v0.GetTypeStr());
-                if (__index0 == -1)
-                {
-                    throw new SerializationException();
-                }
-                __v0.TypeIndex = __index0;  k15[__i0++] = __v0; }  
+                __v0 = editor.cfg.test.DemoDynamic.LoadJsonDemoDynamic(__e0, (__newIns0)=>{ __v0 = __newIns0 as test.DemoDynamic ; });  k15[__i0++] = __v0; }  
             }
             else
             {
@@ -307,7 +307,14 @@ public sealed class ExcelFromJson :  Luban.EditorBeanBase
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderExcelFromJson(ExcelFromJson obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {
@@ -425,20 +432,7 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x14", ""), GUILayout.Width(100));
 }
 {
-    var __list1 = test.DemoDynamic.Types.Select(t => new GUIContent(t)).ToArray();
-    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-    if (this.x14 == null)
-    {
-        this.x14 = new test.DemoD2();
-this.x14.SetChangeAction((__x) => { this.x14 = __x as test.DemoDynamic; });
-        this.x14.TypeIndex = 0;
-    }
-    UnityEditor.EditorGUILayout.BeginHorizontal();
-    UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
-    this.x14.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.x14.TypeIndex, __list1, GUILayout.Width(200));
-    UnityEditor.EditorGUILayout.EndHorizontal();
-    this.x14?.Render();
-    UnityEditor.EditorGUILayout.EndVertical();
+    test.DemoDynamic.RenderDemoDynamic(this.x14);
 }
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
@@ -473,7 +467,9 @@ else
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
         var __list1 = new System.Collections.Generic.List<int>(this.k1);
-        __list1.Add(0);
+        int __e1;
+        __e1 = 0;;
+        __list1.Add(__e1);
         this.k1 = __list1.ToArray();
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
@@ -590,7 +586,13 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.k9.Add(new editor.cfg.test.DemoE2());
+        editor.cfg.test.DemoE2 __e1;
+        void _Func(Luban.EditorBeanBase __x)
+{
+    __e1 = __x as test.DemoE2;
+}
+__e1 = new test.DemoE2(_Func);;
+        this.k9.Add(__e1);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {
@@ -631,20 +633,7 @@ else
         UnityEditor.EditorGUILayout.LabelField(__i1.ToString(), GUILayout.Width(20));
         editor.cfg.test.DemoDynamic __e1 = this.k15[__i1];
         {
-    var __list2 = test.DemoDynamic.Types.Select(t => new GUIContent(t)).ToArray();
-    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-    if (__e1 == null)
-    {
-        __e1 = new test.DemoD2();
-__e1.SetChangeAction((__x) => { __e1 = __x as test.DemoDynamic; });
-        __e1.TypeIndex = 0;
-    }
-    UnityEditor.EditorGUILayout.BeginHorizontal();
-    UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
-    __e1.TypeIndex = UnityEditor.EditorGUILayout.Popup(__e1.TypeIndex, __list2, GUILayout.Width(200));
-    UnityEditor.EditorGUILayout.EndHorizontal();
-    __e1?.Render();
-    UnityEditor.EditorGUILayout.EndVertical();
+    test.DemoDynamic.RenderDemoDynamic(__e1);
 };
         this.k15[__i1] = __e1;
         UnityEditor.EditorGUILayout.EndHorizontal();
@@ -653,7 +642,13 @@ __e1.SetChangeAction((__x) => { __e1 = __x as test.DemoDynamic; });
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
         var __list1 = new System.Collections.Generic.List<editor.cfg.test.DemoDynamic>(this.k15);
-        __list1.Add(new test.DemoD2());
+        editor.cfg.test.DemoDynamic __e1;
+        void _Func(Luban.EditorBeanBase __x)
+{
+    __e1 = __x as test.DemoDynamic;
+}
+__e1 = test.DemoDynamic.Create("DemoD2", _Func);;
+        __list1.Add(__e1);
         this.k15 = __list1.ToArray();
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
@@ -668,12 +663,6 @@ if (!__importJson1.IsObject)
     throw new SerializationException();
 }
 __importElement1 = editor.cfg.test.DemoDynamic.LoadJsonDemoDynamic(__importJson1, (__newIns2)=>{ __importElement1 = __newIns2 as test.DemoDynamic ; });
-var __index2 = editor.cfg.test.DemoDynamic.Types.IndexOf(__importElement1.GetTypeStr());
-if (__index2 == -1)
-{
-    throw new SerializationException();
-}
-__importElement1.TypeIndex = __index2;
             var __list1 = new System.Collections.Generic.List<editor.cfg.test.DemoDynamic>(this.k15);
             __list1.Add(__importElement1);
             this.k15 = __list1.ToArray();

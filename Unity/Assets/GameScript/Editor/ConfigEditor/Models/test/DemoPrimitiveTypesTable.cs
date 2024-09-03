@@ -40,6 +40,7 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
             }
             else
             {
+                x1 = false;
             }
         }
         
@@ -51,6 +52,7 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
             }
             else
             {
+                x2 = 0;
             }
         }
         
@@ -62,6 +64,7 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
             }
             else
             {
+                x3 = 0;
             }
         }
         
@@ -73,6 +76,7 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
             }
             else
             {
+                x4 = 0;
             }
         }
         
@@ -84,6 +88,7 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
             }
             else
             {
+                x5 = 0;
             }
         }
         
@@ -95,6 +100,7 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
             }
             else
             {
+                x6 = 0;
             }
         }
         
@@ -106,6 +112,7 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
             }
             else
             {
+                x7 = 0;
             }
         }
         
@@ -141,8 +148,11 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
             }
             else
             {
-                v2 = new editor.cfg.vec2();
-                v2.SetChangeAction((__x) => v2 = __x as editor.cfg.vec2);
+                void _Func(Luban.EditorBeanBase __x)
+                {
+                    v2 = __x as vec2;
+                }
+                v2 = new vec2(_Func);
             }
         }
         
@@ -154,8 +164,11 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
             }
             else
             {
-                v3 = new editor.cfg.vec3();
-                v3.SetChangeAction((__x) => v3 = __x as editor.cfg.vec3);
+                void _Func(Luban.EditorBeanBase __x)
+                {
+                    v3 = __x as vec3;
+                }
+                v3 = new vec3(_Func);
             }
         }
         
@@ -167,8 +180,11 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
             }
             else
             {
-                v4 = new editor.cfg.vec4();
-                v4.SetChangeAction((__x) => v4 = __x as editor.cfg.vec4);
+                void _Func(Luban.EditorBeanBase __x)
+                {
+                    v4 = __x as vec4;
+                }
+                v4 = new vec4(_Func);
             }
         }
         
@@ -244,7 +260,14 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderDemoPrimitiveTypesTable(DemoPrimitiveTypesTable obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {

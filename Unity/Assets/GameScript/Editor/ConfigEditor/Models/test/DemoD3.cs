@@ -41,10 +41,15 @@ public abstract class DemoD3 :  test.DemoDynamic
             _setChangeAction(obj);
         }
     }
-    public new static List<string> Types = new List<string>()
+    private new static string[] Types = new string[]
     {
         "DemoE1",
         "test.login.RoleInfo",
+    };
+    private new static string[] TypeAlias = new string[]
+    {
+        "DemoE1",
+        "RoleInfo",
     };
 
     public new static DemoD3 Create(string type, Action<Luban.EditorBeanBase> setChangeAction)
@@ -55,37 +60,37 @@ public abstract class DemoD3 :  test.DemoDynamic
             case "DemoE1":
             {
                 var obj = new test.DemoE1(setChangeAction);
-                obj._typeIndex = Types.IndexOf(type);
+                obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "test.login.RoleInfo":
             {
                 var obj = new test.login.RoleInfo(setChangeAction);
-                obj._typeIndex = Types.IndexOf(type);
+                obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             default: return null;
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderDemoD3(DemoD3 obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        var array = ConfigEditorSettings.showComment ? TypeAlias : Types;
+        UnityEditor.EditorGUILayout.BeginHorizontal();
+        UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
+        obj.TypeIndex = UnityEditor.EditorGUILayout.Popup(obj.TypeIndex, array, GUILayout.Width(200));
+        UnityEditor.EditorGUILayout.EndHorizontal();
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {
 {
-    var __list0 = test.DemoD3.Types.Select(t => new GUIContent(t)).ToArray();
-    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-    if (this == null)
-    {
-        
-        this.TypeIndex = 0;
-    }
-    UnityEditor.EditorGUILayout.BeginHorizontal();
-    UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
-    this.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.TypeIndex, __list0, GUILayout.Width(200));
-    UnityEditor.EditorGUILayout.EndHorizontal();
-    this?.Render();
-    UnityEditor.EditorGUILayout.EndVertical();
+    test.DemoD3.RenderDemoD3(this);
 }    }
     public static DemoD3 LoadJsonDemoD3(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
     {
@@ -97,13 +102,13 @@ public abstract class DemoD3 :  test.DemoDynamic
             case "DemoE1":
             {
                 obj = new test.DemoE1(setChangeAction); 
-                obj._typeIndex = Types.IndexOf("DemoE1");
+                obj._typeIndex = Array.IndexOf(Types, "DemoE1");
                 break;
             }
             case "test.login.RoleInfo":
             {
                 obj = new test.login.RoleInfo(setChangeAction); 
-                obj._typeIndex = Types.IndexOf("test.login.RoleInfo");
+                obj._typeIndex = Array.IndexOf(Types, "test.login.RoleInfo");
                 break;
             }
             default: throw new SerializationException();

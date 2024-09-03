@@ -38,6 +38,7 @@ public sealed class TestExcelBean2 :  Luban.EditorBeanBase
             }
             else
             {
+                y1 = 0;
             }
         }
         
@@ -61,6 +62,7 @@ public sealed class TestExcelBean2 :  Luban.EditorBeanBase
             }
             else
             {
+                y3 = 0;
             }
         }
         
@@ -81,7 +83,14 @@ public sealed class TestExcelBean2 :  Luban.EditorBeanBase
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderTestExcelBean2(TestExcelBean2 obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {

@@ -35,6 +35,7 @@ public sealed class ExcelFromJsonMultiRow :  Luban.EditorBeanBase
             }
             else
             {
+                id = 0;
             }
         }
         
@@ -46,6 +47,7 @@ public sealed class ExcelFromJsonMultiRow :  Luban.EditorBeanBase
             }
             else
             {
+                x = 0;
             }
         }
         
@@ -78,7 +80,14 @@ public sealed class ExcelFromJsonMultiRow :  Luban.EditorBeanBase
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderExcelFromJsonMultiRow(ExcelFromJsonMultiRow obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {
@@ -219,7 +228,9 @@ else
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        __e1.b.Add(0);
+        int __e3;
+        __e3 = 0;;
+        __e1.b.Add(__e3);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {
@@ -242,7 +253,13 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.items.Add(new editor.cfg.test.TestRow());
+        editor.cfg.test.TestRow __e1;
+        void _Func(Luban.EditorBeanBase __x)
+{
+    __e1 = __x as test.TestRow;
+}
+__e1 = new test.TestRow(_Func);;
+        this.items.Add(__e1);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {

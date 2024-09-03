@@ -45,6 +45,7 @@ public sealed class DefineFromExcel2 :  Luban.EditorBeanBase
             }
             else
             {
+                id = 0;
             }
         }
         
@@ -56,6 +57,7 @@ public sealed class DefineFromExcel2 :  Luban.EditorBeanBase
             }
             else
             {
+                x1 = false;
             }
         }
         
@@ -67,6 +69,7 @@ public sealed class DefineFromExcel2 :  Luban.EditorBeanBase
             }
             else
             {
+                x5 = 0;
             }
         }
         
@@ -78,6 +81,7 @@ public sealed class DefineFromExcel2 :  Luban.EditorBeanBase
             }
             else
             {
+                x6 = 0;
             }
         }
         
@@ -89,6 +93,7 @@ public sealed class DefineFromExcel2 :  Luban.EditorBeanBase
             }
             else
             {
+                x8 = 0;
             }
         }
         
@@ -138,15 +143,14 @@ public sealed class DefineFromExcel2 :  Luban.EditorBeanBase
                     throw new SerializationException();
                 }
                 x14 = editor.cfg.test.DemoDynamic.LoadJsonDemoDynamic(_fieldJson, (__newIns0)=>{ x14 = __newIns0 as test.DemoDynamic ; });
-                var __index0 = editor.cfg.test.DemoDynamic.Types.IndexOf(x14.GetTypeStr());
-                if (__index0 == -1)
-                {
-                    throw new SerializationException();
-                }
-                x14.TypeIndex = __index0;
             }
             else
             {
+                void _Func(Luban.EditorBeanBase __x)
+                {
+                    x14 = __x as test.DemoDynamic;
+                }
+                x14 = test.DemoDynamic.Create("DemoD2", _Func);
             }
         }
         
@@ -160,15 +164,14 @@ public sealed class DefineFromExcel2 :  Luban.EditorBeanBase
                     throw new SerializationException();
                 }
                 x15 = editor.cfg.test.Shape.LoadJsonShape(_fieldJson, (__newIns0)=>{ x15 = __newIns0 as test.Shape ; });
-                var __index0 = editor.cfg.test.Shape.Types.IndexOf(x15.GetTypeStr());
-                if (__index0 == -1)
-                {
-                    throw new SerializationException();
-                }
-                x15.TypeIndex = __index0;
             }
             else
             {
+                void _Func(Luban.EditorBeanBase __x)
+                {
+                    x15 = __x as test.Shape;
+                }
+                x15 = test.Shape.Create("Circle", _Func);
             }
         }
         
@@ -180,8 +183,11 @@ public sealed class DefineFromExcel2 :  Luban.EditorBeanBase
             }
             else
             {
-                v2 = new editor.cfg.vec2();
-                v2.SetChangeAction((__x) => v2 = __x as editor.cfg.vec2);
+                void _Func(Luban.EditorBeanBase __x)
+                {
+                    v2 = __x as vec2;
+                }
+                v2 = new vec2(_Func);
             }
         }
         
@@ -288,8 +294,11 @@ public sealed class DefineFromExcel2 :  Luban.EditorBeanBase
             }
             else
             {
-                v11 = new editor.cfg.vec3();
-                v11.SetChangeAction((__x) => v11 = __x as editor.cfg.vec3);
+                void _Func(Luban.EditorBeanBase __x)
+                {
+                    v11 = __x as vec3;
+                }
+                v11 = new vec3(_Func);
             }
         }
         
@@ -385,7 +394,14 @@ public sealed class DefineFromExcel2 :  Luban.EditorBeanBase
         }
     }
 
-    private GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+    private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
+
+    public static void RenderDefineFromExcel2(DefineFromExcel2 obj)
+    {
+        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+        obj?.Render();
+        UnityEditor.EditorGUILayout.EndVertical();
+    }
 
     public override void Render()
     {
@@ -482,20 +498,7 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x14", ""), GUILayout.Width(100));
 }
 {
-    var __list1 = test.DemoDynamic.Types.Select(t => new GUIContent(t)).ToArray();
-    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-    if (this.x14 == null)
-    {
-        this.x14 = new test.DemoD2();
-this.x14.SetChangeAction((__x) => { this.x14 = __x as test.DemoDynamic; });
-        this.x14.TypeIndex = 0;
-    }
-    UnityEditor.EditorGUILayout.BeginHorizontal();
-    UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
-    this.x14.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.x14.TypeIndex, __list1, GUILayout.Width(200));
-    UnityEditor.EditorGUILayout.EndHorizontal();
-    this.x14?.Render();
-    UnityEditor.EditorGUILayout.EndVertical();
+    test.DemoDynamic.RenderDemoDynamic(this.x14);
 }
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
@@ -507,20 +510,7 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x15", ""), GUILayout.Width(100));
 }
 {
-    var __list1 = test.Shape.Types.Select(t => new GUIContent(t)).ToArray();
-    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-    if (this.x15 == null)
-    {
-        this.x15 = new test.Circle();
-this.x15.SetChangeAction((__x) => { this.x15 = __x as test.Shape; });
-        this.x15.TypeIndex = 0;
-    }
-    UnityEditor.EditorGUILayout.BeginHorizontal();
-    UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
-    this.x15.TypeIndex = UnityEditor.EditorGUILayout.Popup(this.x15.TypeIndex, __list1, GUILayout.Width(200));
-    UnityEditor.EditorGUILayout.EndHorizontal();
-    this.x15?.Render();
-    UnityEditor.EditorGUILayout.EndVertical();
+    test.Shape.RenderShape(this.x15);
 }
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
@@ -597,7 +587,9 @@ else
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
         var __list1 = new System.Collections.Generic.List<int>(this.k1);
-        __list1.Add(0);
+        int __e1;
+        __e1 = 0;;
+        __list1.Add(__e1);
         this.k1 = __list1.ToArray();
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
@@ -648,7 +640,9 @@ else
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
         var __list1 = new System.Collections.Generic.List<int>(this.k2);
-        __list1.Add(0);
+        int __e1;
+        __e1 = 0;;
+        __list1.Add(__e1);
         this.k2 = __list1.ToArray();
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
@@ -765,7 +759,13 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.k9.Add(new editor.cfg.test.DemoE2());
+        editor.cfg.test.DemoE2 __e1;
+        void _Func(Luban.EditorBeanBase __x)
+{
+    __e1 = __x as test.DemoE2;
+}
+__e1 = new test.DemoE2(_Func);;
+        this.k9.Add(__e1);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {
@@ -842,7 +842,13 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.k10.Add(new editor.cfg.vec3());
+        editor.cfg.vec3 __e1;
+        void _Func(Luban.EditorBeanBase __x)
+{
+    __e1 = __x as vec3;
+}
+__e1 = new vec3(_Func);;
+        this.k10.Add(__e1);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {
@@ -929,7 +935,13 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
-        this.k11.Add(new editor.cfg.vec4());
+        editor.cfg.vec4 __e1;
+        void _Func(Luban.EditorBeanBase __x)
+{
+    __e1 = __x as vec4;
+}
+__e1 = new vec4(_Func);;
+        this.k11.Add(__e1);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
     {
