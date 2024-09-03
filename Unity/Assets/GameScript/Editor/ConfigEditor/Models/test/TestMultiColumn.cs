@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class TestMultiColumn :  Luban.EditorBeanBase 
 {
-    public TestMultiColumn(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public TestMultiColumn()
     {
-        _setChangeAction = setChangeAction;
             a = new editor.cfg.test.Foo();
             b = new editor.cfg.test.Foo();
             c = new editor.cfg.test.Foo();
@@ -49,11 +48,7 @@ public sealed class TestMultiColumn :  Luban.EditorBeanBase
             }
             else
             {
-                void _Func(Luban.EditorBeanBase __x)
-                {
-                    a = __x as test.Foo;
-                }
-                a = new test.Foo(_Func);
+                a = new test.Foo();
             }
         }
         
@@ -65,11 +60,7 @@ public sealed class TestMultiColumn :  Luban.EditorBeanBase
             }
             else
             {
-                void _Func(Luban.EditorBeanBase __x)
-                {
-                    b = __x as test.Foo;
-                }
-                b = new test.Foo(_Func);
+                b = new test.Foo();
             }
         }
         
@@ -81,11 +72,7 @@ public sealed class TestMultiColumn :  Luban.EditorBeanBase
             }
             else
             {
-                void _Func(Luban.EditorBeanBase __x)
-                {
-                    c = __x as test.Foo;
-                }
-                c = new test.Foo(_Func);
+                c = new test.Foo();
             }
         }
         
@@ -117,9 +104,7 @@ public sealed class TestMultiColumn :  Luban.EditorBeanBase
 
     public static void RenderTestMultiColumn(TestMultiColumn obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -263,7 +248,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static TestMultiColumn LoadJsonTestMultiColumn(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static TestMultiColumn LoadJsonTestMultiColumn(SimpleJSON.JSONNode _json)
     {
         TestMultiColumn obj = new test.TestMultiColumn();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class MultiUnionIndexList :  Luban.EditorBeanBase 
 {
-    public MultiUnionIndexList(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public MultiUnionIndexList()
     {
-        _setChangeAction = setChangeAction;
             id3 = "";
             desc = "";
     }
@@ -117,9 +116,7 @@ public sealed class MultiUnionIndexList :  Luban.EditorBeanBase
 
     public static void RenderMultiUnionIndexList(MultiUnionIndexList obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -177,7 +174,7 @@ else
 this.desc = UnityEditor.EditorGUILayout.TextField(this.desc, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static MultiUnionIndexList LoadJsonMultiUnionIndexList(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static MultiUnionIndexList LoadJsonMultiUnionIndexList(SimpleJSON.JSONNode _json)
     {
         MultiUnionIndexList obj = new test.MultiUnionIndexList();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

@@ -19,9 +19,8 @@ namespace editor.cfg.ai
 
 public sealed class DistanceLessThan :  ai.Decorator 
 {
-    public DistanceLessThan(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
+    public DistanceLessThan()
     {
-        _setChangeAction = setChangeAction;
             actor1Key = "";
             actor2Key = "";
     }
@@ -151,9 +150,7 @@ public sealed class DistanceLessThan :  ai.Decorator
 
     public static void RenderDistanceLessThan(DistanceLessThan obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -232,7 +229,7 @@ else
 this.reverseResult = UnityEditor.EditorGUILayout.Toggle(this.reverseResult, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static DistanceLessThan LoadJsonDistanceLessThan(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static DistanceLessThan LoadJsonDistanceLessThan(SimpleJSON.JSONNode _json)
     {
         DistanceLessThan obj = new ai.DistanceLessThan();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

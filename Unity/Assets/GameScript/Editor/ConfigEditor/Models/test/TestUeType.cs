@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class TestUeType :  Luban.EditorBeanBase 
 {
-    public TestUeType(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public TestUeType()
     {
-        _setChangeAction = setChangeAction;
             x10 = "";
             x12 = new editor.cfg.test.DemoType1();
             x13 = editor.cfg.test.ETestUeType.WHITE;
@@ -127,11 +126,7 @@ public sealed class TestUeType :  Luban.EditorBeanBase
             }
             else
             {
-                void _Func(Luban.EditorBeanBase __x)
-                {
-                    x12 = __x as test.DemoType1;
-                }
-                x12 = new test.DemoType1(_Func);
+                x12 = new test.DemoType1();
             }
         }
         
@@ -310,9 +305,7 @@ public sealed class TestUeType :  Luban.EditorBeanBase
 
     public static void RenderTestUeType(TestUeType obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -666,11 +659,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
         editor.cfg.test.DemoE2 __e1;
-        void _Func(Luban.EditorBeanBase __x)
-{
-    __e1 = __x as test.DemoE2;
-}
-__e1 = new test.DemoE2(_Func);;
+        __e1 = new test.DemoE2();;
         this.k9.Add(__e1);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
@@ -688,7 +677,7 @@ __e1 = new test.DemoE2(_Func);;
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static TestUeType LoadJsonTestUeType(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static TestUeType LoadJsonTestUeType(SimpleJSON.JSONNode _json)
     {
         TestUeType obj = new test.TestUeType();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

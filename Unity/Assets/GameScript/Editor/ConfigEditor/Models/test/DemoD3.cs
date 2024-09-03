@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public abstract class DemoD3 :  test.DemoDynamic 
 {
-    public DemoD3(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
+    public DemoD3()
     {
-        _setChangeAction = setChangeAction;
     }
     public override string GetTypeStr() => TYPE_STR;
     private const string TYPE_STR = "DemoD3";
@@ -30,16 +29,15 @@ public abstract class DemoD3 :  test.DemoDynamic
     public new int TypeIndex
     {
         get => _typeIndex;
-        set
-        {
-            if(_typeIndex == value)
-            {
-                return;
-            }
-            _typeIndex = value;
-            var obj = Create(Types[value], _setChangeAction);
-            _setChangeAction(obj);
-        }
+        //set
+        //{
+        //    if(_typeIndex == value)
+        //    {
+        //        return;
+        //    }
+        //    _typeIndex = value;
+        //    var obj = Create(Types[value]);
+        //}
     }
     private new static string[] Types = new string[]
     {
@@ -52,20 +50,20 @@ public abstract class DemoD3 :  test.DemoDynamic
         "RoleInfo",
     };
 
-    public new static DemoD3 Create(string type, Action<Luban.EditorBeanBase> setChangeAction)
+    public new static DemoD3 Create(string type)
     {
         switch (type)
         {
             case "test.DemoE1":   
             case "DemoE1":
             {
-                var obj = new test.DemoE1(setChangeAction);
+                var obj = new test.DemoE1();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "test.login.RoleInfo":
             {
-                var obj = new test.login.RoleInfo(setChangeAction);
+                var obj = new test.login.RoleInfo();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
@@ -75,13 +73,17 @@ public abstract class DemoD3 :  test.DemoDynamic
 
     private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
 
-    public static void RenderDemoD3(DemoD3 obj)
+    public static void RenderDemoD3(ref DemoD3 obj)
     {
         UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
         var array = ConfigEditorSettings.showComment ? TypeAlias : Types;
         UnityEditor.EditorGUILayout.BeginHorizontal();
         UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
-        obj.TypeIndex = UnityEditor.EditorGUILayout.Popup(obj.TypeIndex, array, GUILayout.Width(200));
+        var index = UnityEditor.EditorGUILayout.Popup(obj.TypeIndex, array, GUILayout.Width(200));
+        if (obj.TypeIndex != index)
+        {
+            obj = Create(Types[index]);
+        }
         UnityEditor.EditorGUILayout.EndHorizontal();
         obj?.Render();
         UnityEditor.EditorGUILayout.EndVertical();
@@ -89,10 +91,8 @@ public abstract class DemoD3 :  test.DemoDynamic
 
     public override void Render()
     {
-{
-    test.DemoD3.RenderDemoD3(this);
-}    }
-    public static DemoD3 LoadJsonDemoD3(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    }
+    public static DemoD3 LoadJsonDemoD3(SimpleJSON.JSONNode _json)
     {
         string type = _json["$type"];
         DemoD3 obj;
@@ -101,13 +101,13 @@ public abstract class DemoD3 :  test.DemoDynamic
             case "test.DemoE1":   
             case "DemoE1":
             {
-                obj = new test.DemoE1(setChangeAction); 
+                obj = new test.DemoE1(); 
                 obj._typeIndex = Array.IndexOf(Types, "DemoE1");
                 break;
             }
             case "test.login.RoleInfo":
             {
-                obj = new test.login.RoleInfo(setChangeAction); 
+                obj = new test.login.RoleInfo(); 
                 obj._typeIndex = Array.IndexOf(Types, "test.login.RoleInfo");
                 break;
             }

@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class DefineFromExcel2 :  Luban.EditorBeanBase 
 {
-    public DefineFromExcel2(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public DefineFromExcel2()
     {
-        _setChangeAction = setChangeAction;
             x10 = "";
             x13 = editor.cfg.test.DemoEnum.NONE;
             x132 = editor.cfg.test.DemoFlag.A;
@@ -142,15 +141,11 @@ public sealed class DefineFromExcel2 :  Luban.EditorBeanBase
                 {
                     throw new SerializationException();
                 }
-                x14 = editor.cfg.test.DemoDynamic.LoadJsonDemoDynamic(_fieldJson, (__newIns0)=>{ x14 = __newIns0 as test.DemoDynamic ; });
+                x14 = editor.cfg.test.DemoDynamic.LoadJsonDemoDynamic(_fieldJson);
             }
             else
             {
-                void _Func(Luban.EditorBeanBase __x)
-                {
-                    x14 = __x as test.DemoDynamic;
-                }
-                x14 = test.DemoDynamic.Create("DemoD2", _Func);
+                x14 = test.DemoDynamic.Create("DemoD2");
             }
         }
         
@@ -163,15 +158,11 @@ public sealed class DefineFromExcel2 :  Luban.EditorBeanBase
                 {
                     throw new SerializationException();
                 }
-                x15 = editor.cfg.test.Shape.LoadJsonShape(_fieldJson, (__newIns0)=>{ x15 = __newIns0 as test.Shape ; });
+                x15 = editor.cfg.test.Shape.LoadJsonShape(_fieldJson);
             }
             else
             {
-                void _Func(Luban.EditorBeanBase __x)
-                {
-                    x15 = __x as test.Shape;
-                }
-                x15 = test.Shape.Create("Circle", _Func);
+                x15 = test.Shape.Create("Circle");
             }
         }
         
@@ -183,11 +174,7 @@ public sealed class DefineFromExcel2 :  Luban.EditorBeanBase
             }
             else
             {
-                void _Func(Luban.EditorBeanBase __x)
-                {
-                    v2 = __x as vec2;
-                }
-                v2 = new vec2(_Func);
+                v2 = new vec2();
             }
         }
         
@@ -294,11 +281,7 @@ public sealed class DefineFromExcel2 :  Luban.EditorBeanBase
             }
             else
             {
-                void _Func(Luban.EditorBeanBase __x)
-                {
-                    v11 = __x as vec3;
-                }
-                v11 = new vec3(_Func);
+                v11 = new vec3();
             }
         }
         
@@ -398,9 +381,7 @@ public sealed class DefineFromExcel2 :  Luban.EditorBeanBase
 
     public static void RenderDefineFromExcel2(DefineFromExcel2 obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -498,7 +479,7 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x14", ""), GUILayout.Width(100));
 }
 {
-    test.DemoDynamic.RenderDemoDynamic(this.x14);
+    test.DemoDynamic.RenderDemoDynamic(ref this.x14);
 }
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
@@ -510,7 +491,7 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x15", ""), GUILayout.Width(100));
 }
 {
-    test.Shape.RenderShape(this.x15);
+    test.Shape.RenderShape(ref this.x15);
 }
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
@@ -760,11 +741,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
         editor.cfg.test.DemoE2 __e1;
-        void _Func(Luban.EditorBeanBase __x)
-{
-    __e1 = __x as test.DemoE2;
-}
-__e1 = new test.DemoE2(_Func);;
+        __e1 = new test.DemoE2();;
         this.k9.Add(__e1);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
@@ -843,11 +820,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
         editor.cfg.vec3 __e1;
-        void _Func(Luban.EditorBeanBase __x)
-{
-    __e1 = __x as vec3;
-}
-__e1 = new vec3(_Func);;
+        __e1 = new vec3();;
         this.k10.Add(__e1);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
@@ -936,11 +909,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
         editor.cfg.vec4 __e1;
-        void _Func(Luban.EditorBeanBase __x)
-{
-    __e1 = __x as vec4;
-}
-__e1 = new vec4(_Func);;
+        __e1 = new vec4();;
         this.k11.Add(__e1);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
@@ -1000,7 +969,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static DefineFromExcel2 LoadJsonDefineFromExcel2(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static DefineFromExcel2 LoadJsonDefineFromExcel2(SimpleJSON.JSONNode _json)
     {
         DefineFromExcel2 obj = new test.DefineFromExcel2();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

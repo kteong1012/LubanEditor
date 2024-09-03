@@ -19,9 +19,8 @@ namespace editor.cfg.common
 
 public sealed class GlobalConfig :  Luban.EditorBeanBase 
 {
-    public GlobalConfig(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public GlobalConfig()
     {
-        _setChangeAction = setChangeAction;
             x7 = new System.Collections.Generic.List<int>();
     }
 
@@ -144,9 +143,7 @@ public sealed class GlobalConfig :  Luban.EditorBeanBase
 
     public static void RenderGlobalConfig(GlobalConfig obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -261,7 +258,7 @@ else
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static GlobalConfig LoadJsonGlobalConfig(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static GlobalConfig LoadJsonGlobalConfig(SimpleJSON.JSONNode _json)
     {
         GlobalConfig obj = new common.GlobalConfig();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

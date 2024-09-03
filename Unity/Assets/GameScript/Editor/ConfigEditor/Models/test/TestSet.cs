@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class TestSet :  Luban.EditorBeanBase 
 {
-    public TestSet(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public TestSet()
     {
-        _setChangeAction = setChangeAction;
             x0 = "";
             x1 = new System.Collections.Generic.List<int>();
             x2 = new System.Collections.Generic.List<long>();
@@ -141,9 +140,7 @@ public sealed class TestSet :  Luban.EditorBeanBase
 
     public static void RenderTestSet(TestSet obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -360,7 +357,7 @@ __e1 = (editor.cfg.test.DemoEnum)UnityEditor.EditorGUILayout.EnumPopup(__e1, GUI
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static TestSet LoadJsonTestSet(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static TestSet LoadJsonTestSet(SimpleJSON.JSONNode _json)
     {
         TestSet obj = new test.TestSet();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

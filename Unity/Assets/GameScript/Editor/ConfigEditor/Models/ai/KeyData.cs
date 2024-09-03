@@ -19,9 +19,8 @@ namespace editor.cfg.ai
 
 public abstract class KeyData :  Luban.EditorBeanBase 
 {
-    public KeyData(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public KeyData()
     {
-        _setChangeAction = setChangeAction;
     }
     public abstract string GetTypeStr();
 
@@ -29,16 +28,15 @@ public abstract class KeyData :  Luban.EditorBeanBase
     public int TypeIndex
     {
         get => _typeIndex;
-        set
-        {
-            if(_typeIndex == value)
-            {
-                return;
-            }
-            _typeIndex = value;
-            var obj = Create(Types[value], _setChangeAction);
-            _setChangeAction(obj);
-        }
+        //set
+        //{
+        //    if(_typeIndex == value)
+        //    {
+        //        return;
+        //    }
+        //    _typeIndex = value;
+        //    var obj = Create(Types[value]);
+        //}
     }
     private static string[] Types = new string[]
     {
@@ -55,35 +53,35 @@ public abstract class KeyData :  Luban.EditorBeanBase
         "BlackboardKeyData",
     };
 
-    public static KeyData Create(string type, Action<Luban.EditorBeanBase> setChangeAction)
+    public static KeyData Create(string type)
     {
         switch (type)
         {
             case "ai.FloatKeyData":   
             case "FloatKeyData":
             {
-                var obj = new ai.FloatKeyData(setChangeAction);
+                var obj = new ai.FloatKeyData();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.IntKeyData":   
             case "IntKeyData":
             {
-                var obj = new ai.IntKeyData(setChangeAction);
+                var obj = new ai.IntKeyData();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.StringKeyData":   
             case "StringKeyData":
             {
-                var obj = new ai.StringKeyData(setChangeAction);
+                var obj = new ai.StringKeyData();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.BlackboardKeyData":   
             case "BlackboardKeyData":
             {
-                var obj = new ai.BlackboardKeyData(setChangeAction);
+                var obj = new ai.BlackboardKeyData();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
@@ -93,13 +91,17 @@ public abstract class KeyData :  Luban.EditorBeanBase
 
     private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
 
-    public static void RenderKeyData(KeyData obj)
+    public static void RenderKeyData(ref KeyData obj)
     {
         UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
         var array = ConfigEditorSettings.showComment ? TypeAlias : Types;
         UnityEditor.EditorGUILayout.BeginHorizontal();
         UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
-        obj.TypeIndex = UnityEditor.EditorGUILayout.Popup(obj.TypeIndex, array, GUILayout.Width(200));
+        var index = UnityEditor.EditorGUILayout.Popup(obj.TypeIndex, array, GUILayout.Width(200));
+        if (obj.TypeIndex != index)
+        {
+            obj = Create(Types[index]);
+        }
         UnityEditor.EditorGUILayout.EndHorizontal();
         obj?.Render();
         UnityEditor.EditorGUILayout.EndVertical();
@@ -107,10 +109,8 @@ public abstract class KeyData :  Luban.EditorBeanBase
 
     public override void Render()
     {
-{
-    ai.KeyData.RenderKeyData(this);
-}    }
-    public static KeyData LoadJsonKeyData(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    }
+    public static KeyData LoadJsonKeyData(SimpleJSON.JSONNode _json)
     {
         string type = _json["$type"];
         KeyData obj;
@@ -119,28 +119,28 @@ public abstract class KeyData :  Luban.EditorBeanBase
             case "ai.FloatKeyData":   
             case "FloatKeyData":
             {
-                obj = new ai.FloatKeyData(setChangeAction); 
+                obj = new ai.FloatKeyData(); 
                 obj._typeIndex = Array.IndexOf(Types, "FloatKeyData");
                 break;
             }
             case "ai.IntKeyData":   
             case "IntKeyData":
             {
-                obj = new ai.IntKeyData(setChangeAction); 
+                obj = new ai.IntKeyData(); 
                 obj._typeIndex = Array.IndexOf(Types, "IntKeyData");
                 break;
             }
             case "ai.StringKeyData":   
             case "StringKeyData":
             {
-                obj = new ai.StringKeyData(setChangeAction); 
+                obj = new ai.StringKeyData(); 
                 obj._typeIndex = Array.IndexOf(Types, "StringKeyData");
                 break;
             }
             case "ai.BlackboardKeyData":   
             case "BlackboardKeyData":
             {
-                obj = new ai.BlackboardKeyData(setChangeAction); 
+                obj = new ai.BlackboardKeyData(); 
                 obj._typeIndex = Array.IndexOf(Types, "BlackboardKeyData");
                 break;
             }

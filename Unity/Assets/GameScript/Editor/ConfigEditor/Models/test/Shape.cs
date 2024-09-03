@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public abstract class Shape :  Luban.EditorBeanBase 
 {
-    public Shape(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public Shape()
     {
-        _setChangeAction = setChangeAction;
     }
     public abstract string GetTypeStr();
 
@@ -29,16 +28,15 @@ public abstract class Shape :  Luban.EditorBeanBase
     public int TypeIndex
     {
         get => _typeIndex;
-        set
-        {
-            if(_typeIndex == value)
-            {
-                return;
-            }
-            _typeIndex = value;
-            var obj = Create(Types[value], _setChangeAction);
-            _setChangeAction(obj);
-        }
+        //set
+        //{
+        //    if(_typeIndex == value)
+        //    {
+        //        return;
+        //    }
+        //    _typeIndex = value;
+        //    var obj = Create(Types[value]);
+        //}
     }
     private static string[] Types = new string[]
     {
@@ -51,20 +49,20 @@ public abstract class Shape :  Luban.EditorBeanBase
         "矩形",
     };
 
-    public static Shape Create(string type, Action<Luban.EditorBeanBase> setChangeAction)
+    public static Shape Create(string type)
     {
         switch (type)
         {
             case "test.Circle":   
             case "Circle":
             {
-                var obj = new test.Circle(setChangeAction);
+                var obj = new test.Circle();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "test2.Rectangle":
             {
-                var obj = new test2.Rectangle(setChangeAction);
+                var obj = new test2.Rectangle();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
@@ -74,13 +72,17 @@ public abstract class Shape :  Luban.EditorBeanBase
 
     private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
 
-    public static void RenderShape(Shape obj)
+    public static void RenderShape(ref Shape obj)
     {
         UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
         var array = ConfigEditorSettings.showComment ? TypeAlias : Types;
         UnityEditor.EditorGUILayout.BeginHorizontal();
         UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
-        obj.TypeIndex = UnityEditor.EditorGUILayout.Popup(obj.TypeIndex, array, GUILayout.Width(200));
+        var index = UnityEditor.EditorGUILayout.Popup(obj.TypeIndex, array, GUILayout.Width(200));
+        if (obj.TypeIndex != index)
+        {
+            obj = Create(Types[index]);
+        }
         UnityEditor.EditorGUILayout.EndHorizontal();
         obj?.Render();
         UnityEditor.EditorGUILayout.EndVertical();
@@ -88,10 +90,8 @@ public abstract class Shape :  Luban.EditorBeanBase
 
     public override void Render()
     {
-{
-    test.Shape.RenderShape(this);
-}    }
-    public static Shape LoadJsonShape(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    }
+    public static Shape LoadJsonShape(SimpleJSON.JSONNode _json)
     {
         string type = _json["$type"];
         Shape obj;
@@ -100,13 +100,13 @@ public abstract class Shape :  Luban.EditorBeanBase
             case "test.Circle":   
             case "Circle":
             {
-                obj = new test.Circle(setChangeAction); 
+                obj = new test.Circle(); 
                 obj._typeIndex = Array.IndexOf(Types, "Circle");
                 break;
             }
             case "test2.Rectangle":
             {
-                obj = new test2.Rectangle(setChangeAction); 
+                obj = new test2.Rectangle(); 
                 obj._typeIndex = Array.IndexOf(Types, "test2.Rectangle");
                 break;
             }

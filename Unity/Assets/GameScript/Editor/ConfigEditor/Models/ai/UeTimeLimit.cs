@@ -19,9 +19,8 @@ namespace editor.cfg.ai
 
 public sealed class UeTimeLimit :  ai.Decorator 
 {
-    public UeTimeLimit(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
+    public UeTimeLimit()
     {
-        _setChangeAction = setChangeAction;
     }
     public override string GetTypeStr() => TYPE_STR;
     private const string TYPE_STR = "UeTimeLimit";
@@ -100,9 +99,7 @@ public sealed class UeTimeLimit :  ai.Decorator
 
     public static void RenderUeTimeLimit(UeTimeLimit obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -151,7 +148,7 @@ else
 this.limitTime = UnityEditor.EditorGUILayout.DoubleField(this.limitTime, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static UeTimeLimit LoadJsonUeTimeLimit(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static UeTimeLimit LoadJsonUeTimeLimit(SimpleJSON.JSONNode _json)
     {
         UeTimeLimit obj = new ai.UeTimeLimit();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

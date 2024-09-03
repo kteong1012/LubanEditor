@@ -19,9 +19,8 @@ namespace editor.cfg
 
 public sealed class vec4 :  Luban.EditorBeanBase 
 {
-    public vec4(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public vec4()
     {
-        _setChangeAction = setChangeAction;
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -96,9 +95,7 @@ public sealed class vec4 :  Luban.EditorBeanBase
 
     public static void Rendervec4(vec4 obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -146,7 +143,7 @@ else
 this.w = UnityEditor.EditorGUILayout.DoubleField(this.w, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static vec4 LoadJsonvec4(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static vec4 LoadJsonvec4(SimpleJSON.JSONNode _json)
     {
         vec4 obj = new vec4();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

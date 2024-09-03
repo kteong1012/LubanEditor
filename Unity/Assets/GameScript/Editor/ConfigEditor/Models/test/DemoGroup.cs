@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class DemoGroup :  Luban.EditorBeanBase 
 {
-    public DemoGroup(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public DemoGroup()
     {
-        _setChangeAction = setChangeAction;
             x5 = new editor.cfg.test.InnerGroup();
     }
 
@@ -95,11 +94,7 @@ public sealed class DemoGroup :  Luban.EditorBeanBase
             }
             else
             {
-                void _Func(Luban.EditorBeanBase __x)
-                {
-                    x5 = __x as test.InnerGroup;
-                }
-                x5 = new test.InnerGroup(_Func);
+                x5 = new test.InnerGroup();
             }
         }
         
@@ -133,9 +128,7 @@ public sealed class DemoGroup :  Luban.EditorBeanBase
 
     public static void RenderDemoGroup(DemoGroup obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -245,7 +238,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static DemoGroup LoadJsonDemoGroup(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static DemoGroup LoadJsonDemoGroup(SimpleJSON.JSONNode _json)
     {
         DemoGroup obj = new test.DemoGroup();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

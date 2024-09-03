@@ -19,9 +19,8 @@ namespace editor.cfg.ai
 
 public abstract class FlowNode :  ai.Node 
 {
-    public FlowNode(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
+    public FlowNode()
     {
-        _setChangeAction = setChangeAction;
             decorators = new System.Collections.Generic.List<editor.cfg.ai.Decorator>();
             services = new System.Collections.Generic.List<editor.cfg.ai.Service>();
     }
@@ -32,16 +31,15 @@ public abstract class FlowNode :  ai.Node
     public new int TypeIndex
     {
         get => _typeIndex;
-        set
-        {
-            if(_typeIndex == value)
-            {
-                return;
-            }
-            _typeIndex = value;
-            var obj = Create(Types[value], _setChangeAction);
-            _setChangeAction(obj);
-        }
+        //set
+        //{
+        //    if(_typeIndex == value)
+        //    {
+        //        return;
+        //    }
+        //    _typeIndex = value;
+        //    var obj = Create(Types[value]);
+        //}
     }
     private new static string[] Types = new string[]
     {
@@ -70,77 +68,77 @@ public abstract class FlowNode :  ai.Node
         "DebugPrint",
     };
 
-    public new static FlowNode Create(string type, Action<Luban.EditorBeanBase> setChangeAction)
+    public new static FlowNode Create(string type)
     {
         switch (type)
         {
             case "ai.Sequence":   
             case "Sequence":
             {
-                var obj = new ai.Sequence(setChangeAction);
+                var obj = new ai.Sequence();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.Selector":   
             case "Selector":
             {
-                var obj = new ai.Selector(setChangeAction);
+                var obj = new ai.Selector();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.SimpleParallel":   
             case "SimpleParallel":
             {
-                var obj = new ai.SimpleParallel(setChangeAction);
+                var obj = new ai.SimpleParallel();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.UeWait":   
             case "UeWait":
             {
-                var obj = new ai.UeWait(setChangeAction);
+                var obj = new ai.UeWait();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.UeWaitBlackboardTime":   
             case "UeWaitBlackboardTime":
             {
-                var obj = new ai.UeWaitBlackboardTime(setChangeAction);
+                var obj = new ai.UeWaitBlackboardTime();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.MoveToTarget":   
             case "MoveToTarget":
             {
-                var obj = new ai.MoveToTarget(setChangeAction);
+                var obj = new ai.MoveToTarget();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.ChooseSkill":   
             case "ChooseSkill":
             {
-                var obj = new ai.ChooseSkill(setChangeAction);
+                var obj = new ai.ChooseSkill();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.MoveToRandomLocation":   
             case "MoveToRandomLocation":
             {
-                var obj = new ai.MoveToRandomLocation(setChangeAction);
+                var obj = new ai.MoveToRandomLocation();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.MoveToLocation":   
             case "MoveToLocation":
             {
-                var obj = new ai.MoveToLocation(setChangeAction);
+                var obj = new ai.MoveToLocation();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.DebugPrint":   
             case "DebugPrint":
             {
-                var obj = new ai.DebugPrint(setChangeAction);
+                var obj = new ai.DebugPrint();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
@@ -150,13 +148,17 @@ public abstract class FlowNode :  ai.Node
 
     private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
 
-    public static void RenderFlowNode(FlowNode obj)
+    public static void RenderFlowNode(ref FlowNode obj)
     {
         UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
         var array = ConfigEditorSettings.showComment ? TypeAlias : Types;
         UnityEditor.EditorGUILayout.BeginHorizontal();
         UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
-        obj.TypeIndex = UnityEditor.EditorGUILayout.Popup(obj.TypeIndex, array, GUILayout.Width(200));
+        var index = UnityEditor.EditorGUILayout.Popup(obj.TypeIndex, array, GUILayout.Width(200));
+        if (obj.TypeIndex != index)
+        {
+            obj = Create(Types[index]);
+        }
         UnityEditor.EditorGUILayout.EndHorizontal();
         obj?.Render();
         UnityEditor.EditorGUILayout.EndVertical();
@@ -164,10 +166,8 @@ public abstract class FlowNode :  ai.Node
 
     public override void Render()
     {
-{
-    ai.FlowNode.RenderFlowNode(this);
-}    }
-    public static FlowNode LoadJsonFlowNode(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    }
+    public static FlowNode LoadJsonFlowNode(SimpleJSON.JSONNode _json)
     {
         string type = _json["$type"];
         FlowNode obj;
@@ -176,70 +176,70 @@ public abstract class FlowNode :  ai.Node
             case "ai.Sequence":   
             case "Sequence":
             {
-                obj = new ai.Sequence(setChangeAction); 
+                obj = new ai.Sequence(); 
                 obj._typeIndex = Array.IndexOf(Types, "Sequence");
                 break;
             }
             case "ai.Selector":   
             case "Selector":
             {
-                obj = new ai.Selector(setChangeAction); 
+                obj = new ai.Selector(); 
                 obj._typeIndex = Array.IndexOf(Types, "Selector");
                 break;
             }
             case "ai.SimpleParallel":   
             case "SimpleParallel":
             {
-                obj = new ai.SimpleParallel(setChangeAction); 
+                obj = new ai.SimpleParallel(); 
                 obj._typeIndex = Array.IndexOf(Types, "SimpleParallel");
                 break;
             }
             case "ai.UeWait":   
             case "UeWait":
             {
-                obj = new ai.UeWait(setChangeAction); 
+                obj = new ai.UeWait(); 
                 obj._typeIndex = Array.IndexOf(Types, "UeWait");
                 break;
             }
             case "ai.UeWaitBlackboardTime":   
             case "UeWaitBlackboardTime":
             {
-                obj = new ai.UeWaitBlackboardTime(setChangeAction); 
+                obj = new ai.UeWaitBlackboardTime(); 
                 obj._typeIndex = Array.IndexOf(Types, "UeWaitBlackboardTime");
                 break;
             }
             case "ai.MoveToTarget":   
             case "MoveToTarget":
             {
-                obj = new ai.MoveToTarget(setChangeAction); 
+                obj = new ai.MoveToTarget(); 
                 obj._typeIndex = Array.IndexOf(Types, "MoveToTarget");
                 break;
             }
             case "ai.ChooseSkill":   
             case "ChooseSkill":
             {
-                obj = new ai.ChooseSkill(setChangeAction); 
+                obj = new ai.ChooseSkill(); 
                 obj._typeIndex = Array.IndexOf(Types, "ChooseSkill");
                 break;
             }
             case "ai.MoveToRandomLocation":   
             case "MoveToRandomLocation":
             {
-                obj = new ai.MoveToRandomLocation(setChangeAction); 
+                obj = new ai.MoveToRandomLocation(); 
                 obj._typeIndex = Array.IndexOf(Types, "MoveToRandomLocation");
                 break;
             }
             case "ai.MoveToLocation":   
             case "MoveToLocation":
             {
-                obj = new ai.MoveToLocation(setChangeAction); 
+                obj = new ai.MoveToLocation(); 
                 obj._typeIndex = Array.IndexOf(Types, "MoveToLocation");
                 break;
             }
             case "ai.DebugPrint":   
             case "DebugPrint":
             {
-                obj = new ai.DebugPrint(setChangeAction); 
+                obj = new ai.DebugPrint(); 
                 obj._typeIndex = Array.IndexOf(Types, "DebugPrint");
                 break;
             }

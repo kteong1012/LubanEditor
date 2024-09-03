@@ -19,9 +19,8 @@ namespace editor.cfg.ai
 
 public sealed class FloatKeyData :  ai.KeyData 
 {
-    public FloatKeyData(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
+    public FloatKeyData()
     {
-        _setChangeAction = setChangeAction;
     }
     public override string GetTypeStr() => TYPE_STR;
     private const string TYPE_STR = "FloatKeyData";
@@ -53,9 +52,7 @@ public sealed class FloatKeyData :  ai.KeyData
 
     public static void RenderFloatKeyData(FloatKeyData obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -73,7 +70,7 @@ else
 this.value = UnityEditor.EditorGUILayout.DoubleField(this.value, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static FloatKeyData LoadJsonFloatKeyData(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static FloatKeyData LoadJsonFloatKeyData(SimpleJSON.JSONNode _json)
     {
         FloatKeyData obj = new ai.FloatKeyData();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

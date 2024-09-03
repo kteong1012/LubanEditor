@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class TestNull :  Luban.EditorBeanBase 
 {
-    public TestNull(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public TestNull()
     {
-        _setChangeAction = setChangeAction;
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -70,11 +69,7 @@ public sealed class TestNull :  Luban.EditorBeanBase
             }
             else
             {
-                void _Func(Luban.EditorBeanBase __x)
-                {
-                    x3 = __x as test.DemoType1;
-                }
-                x3 = new test.DemoType1(_Func);
+                x3 = new test.DemoType1();
             }
         }
         
@@ -87,15 +82,11 @@ public sealed class TestNull :  Luban.EditorBeanBase
                 {
                     throw new SerializationException();
                 }
-                x4 = editor.cfg.test.DemoDynamic.LoadJsonDemoDynamic(_fieldJson, (__newIns0)=>{ x4 = __newIns0 as test.DemoDynamic ; });
+                x4 = editor.cfg.test.DemoDynamic.LoadJsonDemoDynamic(_fieldJson);
             }
             else
             {
-                void _Func(Luban.EditorBeanBase __x)
-                {
-                    x4 = __x as test.DemoDynamic;
-                }
-                x4 = test.DemoDynamic.Create("DemoD2", _Func);
+                x4 = test.DemoDynamic.Create("DemoD2");
             }
         }
         
@@ -162,9 +153,7 @@ public sealed class TestNull :  Luban.EditorBeanBase
 
     public static void RenderTestNull(TestNull obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -233,7 +222,7 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x4", ""), GUILayout.Width(100));
 }
 {
-    test.DemoDynamic.RenderDemoDynamic(this.x4);
+    test.DemoDynamic.RenderDemoDynamic(ref this.x4);
 }
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
@@ -257,7 +246,7 @@ else
 this.s2 = UnityEditor.EditorGUILayout.TextField(this.s2, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static TestNull LoadJsonTestNull(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static TestNull LoadJsonTestNull(SimpleJSON.JSONNode _json)
     {
         TestNull obj = new test.TestNull();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

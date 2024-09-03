@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class MultiRowRecord :  Luban.EditorBeanBase 
 {
-    public MultiRowRecord(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public MultiRowRecord()
     {
-        _setChangeAction = setChangeAction;
             name = "";
             oneRows = new System.Collections.Generic.List<editor.cfg.test.MultiRowType1>();
             multiRows1 = new System.Collections.Generic.List<editor.cfg.test.MultiRowType1>();
@@ -228,9 +227,7 @@ public sealed class MultiRowRecord :  Luban.EditorBeanBase
 
     public static void RenderMultiRowRecord(MultiRowRecord obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -309,11 +306,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
         editor.cfg.test.MultiRowType1 __e1;
-        void _Func(Luban.EditorBeanBase __x)
-{
-    __e1 = __x as test.MultiRowType1;
-}
-__e1 = new test.MultiRowType1(_Func);;
+        __e1 = new test.MultiRowType1();;
         this.oneRows.Add(__e1);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
@@ -382,11 +375,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
         editor.cfg.test.MultiRowType1 __e1;
-        void _Func(Luban.EditorBeanBase __x)
-{
-    __e1 = __x as test.MultiRowType1;
-}
-__e1 = new test.MultiRowType1(_Func);;
+        __e1 = new test.MultiRowType1();;
         this.multiRows1.Add(__e1);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
@@ -458,11 +447,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     {
         var __list1 = new System.Collections.Generic.List<editor.cfg.test.MultiRowType1>(this.multiRows2);
         editor.cfg.test.MultiRowType1 __e1;
-        void _Func(Luban.EditorBeanBase __x)
-{
-    __e1 = __x as test.MultiRowType1;
-}
-__e1 = new test.MultiRowType1(_Func);;
+        __e1 = new test.MultiRowType1();;
         __list1.Add(__e1);
         this.multiRows2 = __list1.ToArray();
     }
@@ -647,11 +632,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
         editor.cfg.test.MultiRowType1 __e3;
-        void _Func(Luban.EditorBeanBase __x)
-{
-    __e3 = __x as test.MultiRowType1;
-}
-__e3 = new test.MultiRowType1(_Func);;
+        __e3 = new test.MultiRowType1();;
         __e1.items.Add(__e3);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
@@ -676,11 +657,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
         editor.cfg.test.MultiRowType3 __e1;
-        void _Func(Luban.EditorBeanBase __x)
-{
-    __e1 = __x as test.MultiRowType3;
-}
-__e1 = new test.MultiRowType3(_Func);;
+        __e1 = new test.MultiRowType3();;
         this.multiRows5.Add(__e1);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
@@ -824,7 +801,7 @@ else
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static MultiRowRecord LoadJsonMultiRowRecord(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static MultiRowRecord LoadJsonMultiRowRecord(SimpleJSON.JSONNode _json)
     {
         MultiRowRecord obj = new test.MultiRowRecord();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

@@ -19,9 +19,8 @@ namespace editor.cfg.ai
 
 public sealed class KeepFaceTarget :  ai.Service 
 {
-    public KeepFaceTarget(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
+    public KeepFaceTarget()
     {
-        _setChangeAction = setChangeAction;
             targetActorKey = "";
     }
     public override string GetTypeStr() => TYPE_STR;
@@ -88,9 +87,7 @@ public sealed class KeepFaceTarget :  ai.Service
 
     public static void RenderKeepFaceTarget(KeepFaceTarget obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -128,7 +125,7 @@ else
 this.targetActorKey = UnityEditor.EditorGUILayout.TextField(this.targetActorKey, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static KeepFaceTarget LoadJsonKeepFaceTarget(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static KeepFaceTarget LoadJsonKeepFaceTarget(SimpleJSON.JSONNode _json)
     {
         KeepFaceTarget obj = new ai.KeepFaceTarget();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

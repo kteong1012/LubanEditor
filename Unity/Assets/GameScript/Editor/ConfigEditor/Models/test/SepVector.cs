@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class SepVector :  Luban.EditorBeanBase 
 {
-    public SepVector(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public SepVector()
     {
-        _setChangeAction = setChangeAction;
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -81,9 +80,7 @@ public sealed class SepVector :  Luban.EditorBeanBase
 
     public static void RenderSepVector(SepVector obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -121,7 +118,7 @@ else
 this.z = UnityEditor.EditorGUILayout.IntField(this.z, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static SepVector LoadJsonSepVector(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static SepVector LoadJsonSepVector(SimpleJSON.JSONNode _json)
     {
         SepVector obj = new test.SepVector();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

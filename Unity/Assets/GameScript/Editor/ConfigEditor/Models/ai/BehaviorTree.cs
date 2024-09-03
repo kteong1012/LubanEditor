@@ -19,9 +19,8 @@ namespace editor.cfg.ai
 
 public sealed class BehaviorTree :  Luban.EditorBeanBase 
 {
-    public BehaviorTree(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public BehaviorTree()
     {
-        _setChangeAction = setChangeAction;
             name = "";
             desc = "";
             blackboardId = "";
@@ -86,15 +85,11 @@ public sealed class BehaviorTree :  Luban.EditorBeanBase
                 {
                     throw new SerializationException();
                 }
-                root = editor.cfg.ai.ComposeNode.LoadJsonComposeNode(_fieldJson, (__newIns0)=>{ root = __newIns0 as ai.ComposeNode ; });
+                root = editor.cfg.ai.ComposeNode.LoadJsonComposeNode(_fieldJson);
             }
             else
             {
-                void _Func(Luban.EditorBeanBase __x)
-                {
-                    root = __x as ai.ComposeNode;
-                }
-                root = ai.ComposeNode.Create("Sequence", _Func);
+                root = ai.ComposeNode.Create("Sequence");
             }
         }
         
@@ -131,9 +126,7 @@ public sealed class BehaviorTree :  Luban.EditorBeanBase
 
     public static void RenderBehaviorTree(BehaviorTree obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -189,11 +182,11 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("root", ""), GUILayout.Width(100));
 }
 {
-    ai.ComposeNode.RenderComposeNode(this.root);
+    ai.ComposeNode.RenderComposeNode(ref this.root);
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static BehaviorTree LoadJsonBehaviorTree(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static BehaviorTree LoadJsonBehaviorTree(SimpleJSON.JSONNode _json)
     {
         BehaviorTree obj = new ai.BehaviorTree();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

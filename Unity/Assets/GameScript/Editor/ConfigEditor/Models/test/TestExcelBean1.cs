@@ -22,9 +22,8 @@ namespace editor.cfg.test
 /// </summary>
 public sealed class TestExcelBean1 :  Luban.EditorBeanBase 
 {
-    public TestExcelBean1(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public TestExcelBean1()
     {
-        _setChangeAction = setChangeAction;
             x2 = "";
     }
 
@@ -102,9 +101,7 @@ public sealed class TestExcelBean1 :  Luban.EditorBeanBase
 
     public static void RenderTestExcelBean1(TestExcelBean1 obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -152,7 +149,7 @@ else
 this.x4 = UnityEditor.EditorGUILayout.DoubleField(this.x4, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static TestExcelBean1 LoadJsonTestExcelBean1(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static TestExcelBean1 LoadJsonTestExcelBean1(SimpleJSON.JSONNode _json)
     {
         TestExcelBean1 obj = new test.TestExcelBean1();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

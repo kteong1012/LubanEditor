@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class InnerGroup :  Luban.EditorBeanBase 
 {
-    public InnerGroup(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public InnerGroup()
     {
-        _setChangeAction = setChangeAction;
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -96,9 +95,7 @@ public sealed class InnerGroup :  Luban.EditorBeanBase
 
     public static void RenderInnerGroup(InnerGroup obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -146,7 +143,7 @@ else
 this.y4 = UnityEditor.EditorGUILayout.IntField(this.y4, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static InnerGroup LoadJsonInnerGroup(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static InnerGroup LoadJsonInnerGroup(SimpleJSON.JSONNode _json)
     {
         InnerGroup obj = new test.InnerGroup();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

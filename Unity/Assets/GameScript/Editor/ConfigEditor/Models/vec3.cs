@@ -19,9 +19,8 @@ namespace editor.cfg
 
 public sealed class vec3 :  Luban.EditorBeanBase 
 {
-    public vec3(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public vec3()
     {
-        _setChangeAction = setChangeAction;
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -81,9 +80,7 @@ public sealed class vec3 :  Luban.EditorBeanBase
 
     public static void Rendervec3(vec3 obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -121,7 +118,7 @@ else
 this.z = UnityEditor.EditorGUILayout.DoubleField(this.z, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static vec3 LoadJsonvec3(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static vec3 LoadJsonvec3(SimpleJSON.JSONNode _json)
     {
         vec3 obj = new vec3();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

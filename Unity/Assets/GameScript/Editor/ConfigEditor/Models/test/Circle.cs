@@ -22,9 +22,8 @@ namespace editor.cfg.test
 /// </summary>
 public sealed class Circle :  Shape 
 {
-    public Circle(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
+    public Circle()
     {
-        _setChangeAction = setChangeAction;
     }
     public override string GetTypeStr() => TYPE_STR;
     private const string TYPE_STR = "Circle";
@@ -56,9 +55,7 @@ public sealed class Circle :  Shape
 
     public static void RenderCircle(Circle obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -76,7 +73,7 @@ else
 this.radius = UnityEditor.EditorGUILayout.DoubleField(this.radius, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static Circle LoadJsonCircle(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static Circle LoadJsonCircle(SimpleJSON.JSONNode _json)
     {
         Circle obj = new test.Circle();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

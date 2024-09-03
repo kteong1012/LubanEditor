@@ -19,9 +19,8 @@ namespace editor.cfg.test.login
 
 public sealed class RoleInfo :  test.DemoD3 
 {
-    public RoleInfo(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
+    public RoleInfo()
     {
-        _setChangeAction = setChangeAction;
     }
     public override string GetTypeStr() => TYPE_STR;
     private const string TYPE_STR = "test.login.RoleInfo";
@@ -83,9 +82,7 @@ public sealed class RoleInfo :  test.DemoD3
 
     public static void RenderRoleInfo(RoleInfo obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -123,7 +120,7 @@ else
 this.roleId = UnityEditor.EditorGUILayout.LongField(this.roleId, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static RoleInfo LoadJsonRoleInfo(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static RoleInfo LoadJsonRoleInfo(SimpleJSON.JSONNode _json)
     {
         RoleInfo obj = new test.login.RoleInfo();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

@@ -19,9 +19,8 @@ namespace editor.cfg.ai
 
 public abstract class Service :  ai.Node 
 {
-    public Service(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
+    public Service()
     {
-        _setChangeAction = setChangeAction;
     }
     public override string GetTypeStr() => TYPE_STR;
     private const string TYPE_STR = "Service";
@@ -30,16 +29,15 @@ public abstract class Service :  ai.Node
     public new int TypeIndex
     {
         get => _typeIndex;
-        set
-        {
-            if(_typeIndex == value)
-            {
-                return;
-            }
-            _typeIndex = value;
-            var obj = Create(Types[value], _setChangeAction);
-            _setChangeAction(obj);
-        }
+        //set
+        //{
+        //    if(_typeIndex == value)
+        //    {
+        //        return;
+        //    }
+        //    _typeIndex = value;
+        //    var obj = Create(Types[value]);
+        //}
     }
     private new static string[] Types = new string[]
     {
@@ -60,49 +58,49 @@ public abstract class Service :  ai.Node
         "UpdateDailyBehaviorProps",
     };
 
-    public new static Service Create(string type, Action<Luban.EditorBeanBase> setChangeAction)
+    public new static Service Create(string type)
     {
         switch (type)
         {
             case "ai.UeSetDefaultFocus":   
             case "UeSetDefaultFocus":
             {
-                var obj = new ai.UeSetDefaultFocus(setChangeAction);
+                var obj = new ai.UeSetDefaultFocus();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.ExecuteTimeStatistic":   
             case "ExecuteTimeStatistic":
             {
-                var obj = new ai.ExecuteTimeStatistic(setChangeAction);
+                var obj = new ai.ExecuteTimeStatistic();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.ChooseTarget":   
             case "ChooseTarget":
             {
-                var obj = new ai.ChooseTarget(setChangeAction);
+                var obj = new ai.ChooseTarget();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.KeepFaceTarget":   
             case "KeepFaceTarget":
             {
-                var obj = new ai.KeepFaceTarget(setChangeAction);
+                var obj = new ai.KeepFaceTarget();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.GetOwnerPlayer":   
             case "GetOwnerPlayer":
             {
-                var obj = new ai.GetOwnerPlayer(setChangeAction);
+                var obj = new ai.GetOwnerPlayer();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.UpdateDailyBehaviorProps":   
             case "UpdateDailyBehaviorProps":
             {
-                var obj = new ai.UpdateDailyBehaviorProps(setChangeAction);
+                var obj = new ai.UpdateDailyBehaviorProps();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
@@ -112,13 +110,17 @@ public abstract class Service :  ai.Node
 
     private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
 
-    public static void RenderService(Service obj)
+    public static void RenderService(ref Service obj)
     {
         UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
         var array = ConfigEditorSettings.showComment ? TypeAlias : Types;
         UnityEditor.EditorGUILayout.BeginHorizontal();
         UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
-        obj.TypeIndex = UnityEditor.EditorGUILayout.Popup(obj.TypeIndex, array, GUILayout.Width(200));
+        var index = UnityEditor.EditorGUILayout.Popup(obj.TypeIndex, array, GUILayout.Width(200));
+        if (obj.TypeIndex != index)
+        {
+            obj = Create(Types[index]);
+        }
         UnityEditor.EditorGUILayout.EndHorizontal();
         obj?.Render();
         UnityEditor.EditorGUILayout.EndVertical();
@@ -126,10 +128,8 @@ public abstract class Service :  ai.Node
 
     public override void Render()
     {
-{
-    ai.Service.RenderService(this);
-}    }
-    public static Service LoadJsonService(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    }
+    public static Service LoadJsonService(SimpleJSON.JSONNode _json)
     {
         string type = _json["$type"];
         Service obj;
@@ -138,42 +138,42 @@ public abstract class Service :  ai.Node
             case "ai.UeSetDefaultFocus":   
             case "UeSetDefaultFocus":
             {
-                obj = new ai.UeSetDefaultFocus(setChangeAction); 
+                obj = new ai.UeSetDefaultFocus(); 
                 obj._typeIndex = Array.IndexOf(Types, "UeSetDefaultFocus");
                 break;
             }
             case "ai.ExecuteTimeStatistic":   
             case "ExecuteTimeStatistic":
             {
-                obj = new ai.ExecuteTimeStatistic(setChangeAction); 
+                obj = new ai.ExecuteTimeStatistic(); 
                 obj._typeIndex = Array.IndexOf(Types, "ExecuteTimeStatistic");
                 break;
             }
             case "ai.ChooseTarget":   
             case "ChooseTarget":
             {
-                obj = new ai.ChooseTarget(setChangeAction); 
+                obj = new ai.ChooseTarget(); 
                 obj._typeIndex = Array.IndexOf(Types, "ChooseTarget");
                 break;
             }
             case "ai.KeepFaceTarget":   
             case "KeepFaceTarget":
             {
-                obj = new ai.KeepFaceTarget(setChangeAction); 
+                obj = new ai.KeepFaceTarget(); 
                 obj._typeIndex = Array.IndexOf(Types, "KeepFaceTarget");
                 break;
             }
             case "ai.GetOwnerPlayer":   
             case "GetOwnerPlayer":
             {
-                obj = new ai.GetOwnerPlayer(setChangeAction); 
+                obj = new ai.GetOwnerPlayer(); 
                 obj._typeIndex = Array.IndexOf(Types, "GetOwnerPlayer");
                 break;
             }
             case "ai.UpdateDailyBehaviorProps":   
             case "UpdateDailyBehaviorProps":
             {
-                obj = new ai.UpdateDailyBehaviorProps(setChangeAction); 
+                obj = new ai.UpdateDailyBehaviorProps(); 
                 obj._typeIndex = Array.IndexOf(Types, "UpdateDailyBehaviorProps");
                 break;
             }

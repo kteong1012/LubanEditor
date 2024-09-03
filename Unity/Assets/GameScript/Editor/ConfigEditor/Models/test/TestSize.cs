@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class TestSize :  Luban.EditorBeanBase 
 {
-    public TestSize(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public TestSize()
     {
-        _setChangeAction = setChangeAction;
             x1 = System.Array.Empty<int>();
             x2 = new System.Collections.Generic.List<int>();
             x3 = new System.Collections.Generic.List<int>();
@@ -134,9 +133,7 @@ public sealed class TestSize :  Luban.EditorBeanBase
 
     public static void RenderTestSize(TestSize obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -336,7 +333,7 @@ else
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static TestSize LoadJsonTestSize(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static TestSize LoadJsonTestSize(SimpleJSON.JSONNode _json)
     {
         TestSize obj = new test.TestSize();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

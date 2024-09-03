@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase 
 {
-    public DemoPrimitiveTypesTable(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public DemoPrimitiveTypesTable()
     {
-        _setChangeAction = setChangeAction;
             s1 = "";
             s2 = "";
             v2 = new editor.cfg.vec2();
@@ -148,11 +147,7 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
             }
             else
             {
-                void _Func(Luban.EditorBeanBase __x)
-                {
-                    v2 = __x as vec2;
-                }
-                v2 = new vec2(_Func);
+                v2 = new vec2();
             }
         }
         
@@ -164,11 +159,7 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
             }
             else
             {
-                void _Func(Luban.EditorBeanBase __x)
-                {
-                    v3 = __x as vec3;
-                }
-                v3 = new vec3(_Func);
+                v3 = new vec3();
             }
         }
         
@@ -180,11 +171,7 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
             }
             else
             {
-                void _Func(Luban.EditorBeanBase __x)
-                {
-                    v4 = __x as vec4;
-                }
-                v4 = new vec4(_Func);
+                v4 = new vec4();
             }
         }
         
@@ -264,9 +251,7 @@ public sealed class DemoPrimitiveTypesTable :  Luban.EditorBeanBase
 
     public static void RenderDemoPrimitiveTypesTable(DemoPrimitiveTypesTable obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -500,7 +485,7 @@ else
 this.t1 = UnityEditor.EditorGUILayout.LongField(this.t1, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static DemoPrimitiveTypesTable LoadJsonDemoPrimitiveTypesTable(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static DemoPrimitiveTypesTable LoadJsonDemoPrimitiveTypesTable(SimpleJSON.JSONNode _json)
     {
         DemoPrimitiveTypesTable obj = new test.DemoPrimitiveTypesTable();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

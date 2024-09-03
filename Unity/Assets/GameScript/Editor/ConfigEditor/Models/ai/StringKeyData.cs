@@ -19,9 +19,8 @@ namespace editor.cfg.ai
 
 public sealed class StringKeyData :  ai.KeyData 
 {
-    public StringKeyData(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
+    public StringKeyData()
     {
-        _setChangeAction = setChangeAction;
             value = "";
     }
     public override string GetTypeStr() => TYPE_STR;
@@ -56,9 +55,7 @@ public sealed class StringKeyData :  ai.KeyData
 
     public static void RenderStringKeyData(StringKeyData obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -76,7 +73,7 @@ else
 this.value = UnityEditor.EditorGUILayout.TextField(this.value, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static StringKeyData LoadJsonStringKeyData(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static StringKeyData LoadJsonStringKeyData(SimpleJSON.JSONNode _json)
     {
         StringKeyData obj = new ai.StringKeyData();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

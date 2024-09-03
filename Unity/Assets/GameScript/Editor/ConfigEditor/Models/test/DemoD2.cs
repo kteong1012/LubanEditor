@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class DemoD2 :  test.DemoDynamic 
 {
-    public DemoD2(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
+    public DemoD2()
     {
-        _setChangeAction = setChangeAction;
     }
     public override string GetTypeStr() => TYPE_STR;
     private const string TYPE_STR = "DemoD2";
@@ -68,9 +67,7 @@ public sealed class DemoD2 :  test.DemoDynamic
 
     public static void RenderDemoD2(DemoD2 obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -98,7 +95,7 @@ else
 this.x2 = UnityEditor.EditorGUILayout.IntField(this.x2, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static DemoD2 LoadJsonDemoD2(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static DemoD2 LoadJsonDemoD2(SimpleJSON.JSONNode _json)
     {
         DemoD2 obj = new test.DemoD2();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

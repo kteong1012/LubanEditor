@@ -22,9 +22,8 @@ namespace editor.cfg.test2
 /// </summary>
 public sealed class Rectangle :  test.Shape 
 {
-    public Rectangle(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
+    public Rectangle()
     {
-        _setChangeAction = setChangeAction;
     }
     public override string GetTypeStr() => TYPE_STR;
     private const string TYPE_STR = "test2.Rectangle";
@@ -71,9 +70,7 @@ public sealed class Rectangle :  test.Shape
 
     public static void RenderRectangle(Rectangle obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -101,7 +98,7 @@ else
 this.height = UnityEditor.EditorGUILayout.DoubleField(this.height, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static Rectangle LoadJsonRectangle(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static Rectangle LoadJsonRectangle(SimpleJSON.JSONNode _json)
     {
         Rectangle obj = new test2.Rectangle();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

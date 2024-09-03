@@ -19,9 +19,8 @@ namespace editor.cfg.ai
 
 public abstract class KeyQueryOperator :  Luban.EditorBeanBase 
 {
-    public KeyQueryOperator(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public KeyQueryOperator()
     {
-        _setChangeAction = setChangeAction;
     }
     public abstract string GetTypeStr();
 
@@ -29,16 +28,15 @@ public abstract class KeyQueryOperator :  Luban.EditorBeanBase
     public int TypeIndex
     {
         get => _typeIndex;
-        set
-        {
-            if(_typeIndex == value)
-            {
-                return;
-            }
-            _typeIndex = value;
-            var obj = Create(Types[value], _setChangeAction);
-            _setChangeAction(obj);
-        }
+        //set
+        //{
+        //    if(_typeIndex == value)
+        //    {
+        //        return;
+        //    }
+        //    _typeIndex = value;
+        //    var obj = Create(Types[value]);
+        //}
     }
     private static string[] Types = new string[]
     {
@@ -53,28 +51,28 @@ public abstract class KeyQueryOperator :  Luban.EditorBeanBase
         "BinaryOperator",
     };
 
-    public static KeyQueryOperator Create(string type, Action<Luban.EditorBeanBase> setChangeAction)
+    public static KeyQueryOperator Create(string type)
     {
         switch (type)
         {
             case "ai.IsSet2":   
             case "IsSet2":
             {
-                var obj = new ai.IsSet2(setChangeAction);
+                var obj = new ai.IsSet2();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.IsNotSet":   
             case "IsNotSet":
             {
-                var obj = new ai.IsNotSet(setChangeAction);
+                var obj = new ai.IsNotSet();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.BinaryOperator":   
             case "BinaryOperator":
             {
-                var obj = new ai.BinaryOperator(setChangeAction);
+                var obj = new ai.BinaryOperator();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
@@ -84,13 +82,17 @@ public abstract class KeyQueryOperator :  Luban.EditorBeanBase
 
     private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
 
-    public static void RenderKeyQueryOperator(KeyQueryOperator obj)
+    public static void RenderKeyQueryOperator(ref KeyQueryOperator obj)
     {
         UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
         var array = ConfigEditorSettings.showComment ? TypeAlias : Types;
         UnityEditor.EditorGUILayout.BeginHorizontal();
         UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
-        obj.TypeIndex = UnityEditor.EditorGUILayout.Popup(obj.TypeIndex, array, GUILayout.Width(200));
+        var index = UnityEditor.EditorGUILayout.Popup(obj.TypeIndex, array, GUILayout.Width(200));
+        if (obj.TypeIndex != index)
+        {
+            obj = Create(Types[index]);
+        }
         UnityEditor.EditorGUILayout.EndHorizontal();
         obj?.Render();
         UnityEditor.EditorGUILayout.EndVertical();
@@ -98,10 +100,8 @@ public abstract class KeyQueryOperator :  Luban.EditorBeanBase
 
     public override void Render()
     {
-{
-    ai.KeyQueryOperator.RenderKeyQueryOperator(this);
-}    }
-    public static KeyQueryOperator LoadJsonKeyQueryOperator(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    }
+    public static KeyQueryOperator LoadJsonKeyQueryOperator(SimpleJSON.JSONNode _json)
     {
         string type = _json["$type"];
         KeyQueryOperator obj;
@@ -110,21 +110,21 @@ public abstract class KeyQueryOperator :  Luban.EditorBeanBase
             case "ai.IsSet2":   
             case "IsSet2":
             {
-                obj = new ai.IsSet2(setChangeAction); 
+                obj = new ai.IsSet2(); 
                 obj._typeIndex = Array.IndexOf(Types, "IsSet2");
                 break;
             }
             case "ai.IsNotSet":   
             case "IsNotSet":
             {
-                obj = new ai.IsNotSet(setChangeAction); 
+                obj = new ai.IsNotSet(); 
                 obj._typeIndex = Array.IndexOf(Types, "IsNotSet");
                 break;
             }
             case "ai.BinaryOperator":   
             case "BinaryOperator":
             {
-                obj = new ai.BinaryOperator(setChangeAction); 
+                obj = new ai.BinaryOperator(); 
                 obj._typeIndex = Array.IndexOf(Types, "BinaryOperator");
                 break;
             }

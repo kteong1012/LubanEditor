@@ -19,9 +19,8 @@ namespace editor.cfg.ai
 
 public sealed class IsAtLocation :  ai.Decorator 
 {
-    public IsAtLocation(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
+    public IsAtLocation()
     {
-        _setChangeAction = setChangeAction;
             keyboardKey = "";
     }
     public override string GetTypeStr() => TYPE_STR;
@@ -133,9 +132,7 @@ public sealed class IsAtLocation :  ai.Decorator
 
     public static void RenderIsAtLocation(IsAtLocation obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -204,7 +201,7 @@ else
 this.inverseCondition = UnityEditor.EditorGUILayout.Toggle(this.inverseCondition, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static IsAtLocation LoadJsonIsAtLocation(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static IsAtLocation LoadJsonIsAtLocation(SimpleJSON.JSONNode _json)
     {
         IsAtLocation obj = new ai.IsAtLocation();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

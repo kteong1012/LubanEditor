@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class TestRow :  Luban.EditorBeanBase 
 {
-    public TestRow(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public TestRow()
     {
-        _setChangeAction = setChangeAction;
             z = "";
             a = new editor.cfg.test.Test3();
             b = new System.Collections.Generic.List<int>();
@@ -73,11 +72,7 @@ public sealed class TestRow :  Luban.EditorBeanBase
             }
             else
             {
-                void _Func(Luban.EditorBeanBase __x)
-                {
-                    a = __x as test.Test3;
-                }
-                a = new test.Test3(_Func);
+                a = new test.Test3();
             }
         }
         
@@ -124,9 +119,7 @@ public sealed class TestRow :  Luban.EditorBeanBase
 
     public static void RenderTestRow(TestRow obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -243,7 +236,7 @@ else
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static TestRow LoadJsonTestRow(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static TestRow LoadJsonTestRow(SimpleJSON.JSONNode _json)
     {
         TestRow obj = new test.TestRow();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

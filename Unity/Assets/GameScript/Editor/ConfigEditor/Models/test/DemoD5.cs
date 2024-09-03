@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class DemoD5 :  test.DemoDynamic 
 {
-    public DemoD5(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
+    public DemoD5()
     {
-        _setChangeAction = setChangeAction;
             time = new editor.cfg.test.DateTimeRange();
     }
     public override string GetTypeStr() => TYPE_STR;
@@ -49,11 +48,7 @@ public sealed class DemoD5 :  test.DemoDynamic
             }
             else
             {
-                void _Func(Luban.EditorBeanBase __x)
-                {
-                    time = __x as test.DateTimeRange;
-                }
-                time = new test.DateTimeRange(_Func);
+                time = new test.DateTimeRange();
             }
         }
         
@@ -75,9 +70,7 @@ public sealed class DemoD5 :  test.DemoDynamic
 
     public static void RenderDemoD5(DemoD5 obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -127,7 +120,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static DemoD5 LoadJsonDemoD5(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static DemoD5 LoadJsonDemoD5(SimpleJSON.JSONNode _json)
     {
         DemoD5 obj = new test.DemoD5();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class TestMap :  Luban.EditorBeanBase 
 {
-    public TestMap(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public TestMap()
     {
-        _setChangeAction = setChangeAction;
             x1 = new System.Collections.Generic.List<object[]>();
             x2 = new System.Collections.Generic.List<object[]>();
             x3 = new System.Collections.Generic.List<object[]>();
@@ -167,9 +166,7 @@ public sealed class TestMap :  Luban.EditorBeanBase
 
     public static void RenderTestMap(TestMap obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -376,7 +373,7 @@ __key1 = (editor.cfg.test.DemoEnum)UnityEditor.EditorGUILayout.EnumPopup(__key1,
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static TestMap LoadJsonTestMap(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static TestMap LoadJsonTestMap(SimpleJSON.JSONNode _json)
     {
         TestMap obj = new test.TestMap();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

@@ -19,9 +19,8 @@ namespace editor.cfg.ai
 
 public sealed class UeForceSuccess :  ai.Decorator 
 {
-    public UeForceSuccess(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
+    public UeForceSuccess()
     {
-        _setChangeAction = setChangeAction;
     }
     public override string GetTypeStr() => TYPE_STR;
     private const string TYPE_STR = "UeForceSuccess";
@@ -85,9 +84,7 @@ public sealed class UeForceSuccess :  ai.Decorator
 
     public static void RenderUeForceSuccess(UeForceSuccess obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -126,7 +123,7 @@ else
 this.flowAbortMode = (editor.cfg.ai.EFlowAbortMode)UnityEditor.EditorGUILayout.EnumPopup(this.flowAbortMode, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static UeForceSuccess LoadJsonUeForceSuccess(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static UeForceSuccess LoadJsonUeForceSuccess(SimpleJSON.JSONNode _json)
     {
         UeForceSuccess obj = new ai.UeForceSuccess();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

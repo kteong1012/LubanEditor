@@ -19,9 +19,8 @@ namespace editor.cfg.l10n
 
 public sealed class PatchDemo :  Luban.EditorBeanBase 
 {
-    public PatchDemo(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public PatchDemo()
     {
-        _setChangeAction = setChangeAction;
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -66,9 +65,7 @@ public sealed class PatchDemo :  Luban.EditorBeanBase
 
     public static void RenderPatchDemo(PatchDemo obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -96,7 +93,7 @@ else
 this.value = UnityEditor.EditorGUILayout.IntField(this.value, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static PatchDemo LoadJsonPatchDemo(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static PatchDemo LoadJsonPatchDemo(SimpleJSON.JSONNode _json)
     {
         PatchDemo obj = new l10n.PatchDemo();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class TestRef :  Luban.EditorBeanBase 
 {
-    public TestRef(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public TestRef()
     {
-        _setChangeAction = setChangeAction;
             a1 = System.Array.Empty<int>();
             a2 = System.Array.Empty<int>();
             b1 = new System.Collections.Generic.List<int>();
@@ -285,15 +284,11 @@ public sealed class TestRef :  Luban.EditorBeanBase
                 {
                     throw new SerializationException();
                 }
-                s1 = editor.cfg.test.RefDynamicBase.LoadJsonRefDynamicBase(_fieldJson, (__newIns0)=>{ s1 = __newIns0 as test.RefDynamicBase ; });
+                s1 = editor.cfg.test.RefDynamicBase.LoadJsonRefDynamicBase(_fieldJson);
             }
             else
             {
-                void _Func(Luban.EditorBeanBase __x)
-                {
-                    s1 = __x as test.RefDynamicBase;
-                }
-                s1 = test.RefDynamicBase.Create("RefBean", _Func);
+                s1 = test.RefDynamicBase.Create("RefBean");
             }
         }
         
@@ -414,9 +409,7 @@ public sealed class TestRef :  Luban.EditorBeanBase
 
     public static void RenderTestRef(TestRef obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -916,11 +909,11 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("s1", ""), GUILayout.Width(100));
 }
 {
-    test.RefDynamicBase.RenderRefDynamicBase(this.s1);
+    test.RefDynamicBase.RenderRefDynamicBase(ref this.s1);
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static TestRef LoadJsonTestRef(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static TestRef LoadJsonTestRef(SimpleJSON.JSONNode _json)
     {
         TestRef obj = new test.TestRef();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

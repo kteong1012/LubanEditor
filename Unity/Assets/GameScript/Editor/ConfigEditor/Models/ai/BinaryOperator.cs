@@ -19,9 +19,8 @@ namespace editor.cfg.ai
 
 public sealed class BinaryOperator :  ai.KeyQueryOperator 
 {
-    public BinaryOperator(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
+    public BinaryOperator()
     {
-        _setChangeAction = setChangeAction;
             oper = editor.cfg.ai.EOperator.IS_EQUAL_TO;
     }
     public override string GetTypeStr() => TYPE_STR;
@@ -50,15 +49,11 @@ public sealed class BinaryOperator :  ai.KeyQueryOperator
                 {
                     throw new SerializationException();
                 }
-                data = editor.cfg.ai.KeyData.LoadJsonKeyData(_fieldJson, (__newIns0)=>{ data = __newIns0 as ai.KeyData ; });
+                data = editor.cfg.ai.KeyData.LoadJsonKeyData(_fieldJson);
             }
             else
             {
-                void _Func(Luban.EditorBeanBase __x)
-                {
-                    data = __x as ai.KeyData;
-                }
-                data = ai.KeyData.Create("FloatKeyData", _Func);
+                data = ai.KeyData.Create("FloatKeyData");
             }
         }
         
@@ -80,9 +75,7 @@ public sealed class BinaryOperator :  ai.KeyQueryOperator
 
     public static void RenderBinaryOperator(BinaryOperator obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -109,11 +102,11 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("data", ""), GUILayout.Width(100));
 }
 {
-    ai.KeyData.RenderKeyData(this.data);
+    ai.KeyData.RenderKeyData(ref this.data);
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static BinaryOperator LoadJsonBinaryOperator(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static BinaryOperator LoadJsonBinaryOperator(SimpleJSON.JSONNode _json)
     {
         BinaryOperator obj = new ai.BinaryOperator();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

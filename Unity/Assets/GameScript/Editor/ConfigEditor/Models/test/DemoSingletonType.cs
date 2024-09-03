@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class DemoSingletonType :  Luban.EditorBeanBase 
 {
-    public DemoSingletonType(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public DemoSingletonType()
     {
-        _setChangeAction = setChangeAction;
             name = "";
     }
 
@@ -60,15 +59,11 @@ public sealed class DemoSingletonType :  Luban.EditorBeanBase
                 {
                     throw new SerializationException();
                 }
-                date = editor.cfg.test.DemoDynamic.LoadJsonDemoDynamic(_fieldJson, (__newIns0)=>{ date = __newIns0 as test.DemoDynamic ; });
+                date = editor.cfg.test.DemoDynamic.LoadJsonDemoDynamic(_fieldJson);
             }
             else
             {
-                void _Func(Luban.EditorBeanBase __x)
-                {
-                    date = __x as test.DemoDynamic;
-                }
-                date = test.DemoDynamic.Create("DemoD2", _Func);
+                date = test.DemoDynamic.Create("DemoD2");
             }
         }
         
@@ -95,9 +90,7 @@ public sealed class DemoSingletonType :  Luban.EditorBeanBase
 
     public static void RenderDemoSingletonType(DemoSingletonType obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -133,11 +126,11 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("date", ""), GUILayout.Width(100));
 }
 {
-    test.DemoDynamic.RenderDemoDynamic(this.date);
+    test.DemoDynamic.RenderDemoDynamic(ref this.date);
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static DemoSingletonType LoadJsonDemoSingletonType(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static DemoSingletonType LoadJsonDemoSingletonType(SimpleJSON.JSONNode _json)
     {
         DemoSingletonType obj = new test.DemoSingletonType();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

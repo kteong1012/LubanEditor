@@ -19,9 +19,8 @@ namespace editor.cfg.ai
 
 public sealed class Blackboard :  Luban.EditorBeanBase 
 {
-    public Blackboard(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public Blackboard()
     {
-        _setChangeAction = setChangeAction;
             name = "";
             desc = "";
             parentName = "";
@@ -108,9 +107,7 @@ public sealed class Blackboard :  Luban.EditorBeanBase
 
     public static void RenderBlackboard(Blackboard obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -230,11 +227,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
         editor.cfg.ai.BlackboardKey __e1;
-        void _Func(Luban.EditorBeanBase __x)
-{
-    __e1 = __x as ai.BlackboardKey;
-}
-__e1 = new ai.BlackboardKey(_Func);;
+        __e1 = new ai.BlackboardKey();;
         this.keys.Add(__e1);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
@@ -252,7 +245,7 @@ __e1 = new ai.BlackboardKey(_Func);;
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static Blackboard LoadJsonBlackboard(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static Blackboard LoadJsonBlackboard(SimpleJSON.JSONNode _json)
     {
         Blackboard obj = new ai.Blackboard();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

@@ -19,9 +19,8 @@ namespace editor.cfg.ai
 
 public sealed class UeLoop :  ai.Decorator 
 {
-    public UeLoop(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
+    public UeLoop()
     {
-        _setChangeAction = setChangeAction;
     }
     public override string GetTypeStr() => TYPE_STR;
     private const string TYPE_STR = "UeLoop";
@@ -130,9 +129,7 @@ public sealed class UeLoop :  ai.Decorator
 
     public static void RenderUeLoop(UeLoop obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -201,7 +198,7 @@ else
 this.infiniteLoopTimeoutTime = UnityEditor.EditorGUILayout.DoubleField(this.infiniteLoopTimeoutTime, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static UeLoop LoadJsonUeLoop(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static UeLoop LoadJsonUeLoop(SimpleJSON.JSONNode _json)
     {
         UeLoop obj = new ai.UeLoop();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

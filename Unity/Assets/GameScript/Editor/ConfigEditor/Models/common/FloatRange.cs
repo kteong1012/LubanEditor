@@ -19,9 +19,8 @@ namespace editor.cfg.common
 
 public sealed class FloatRange :  Luban.EditorBeanBase 
 {
-    public FloatRange(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public FloatRange()
     {
-        _setChangeAction = setChangeAction;
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -66,9 +65,7 @@ public sealed class FloatRange :  Luban.EditorBeanBase
 
     public static void RenderFloatRange(FloatRange obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -96,7 +93,7 @@ else
 this.max = UnityEditor.EditorGUILayout.DoubleField(this.max, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static FloatRange LoadJsonFloatRange(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static FloatRange LoadJsonFloatRange(SimpleJSON.JSONNode _json)
     {
         FloatRange obj = new common.FloatRange();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

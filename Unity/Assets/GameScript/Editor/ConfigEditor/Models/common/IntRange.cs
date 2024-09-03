@@ -19,9 +19,8 @@ namespace editor.cfg.common
 
 public sealed class IntRange :  Luban.EditorBeanBase 
 {
-    public IntRange(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public IntRange()
     {
-        _setChangeAction = setChangeAction;
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -66,9 +65,7 @@ public sealed class IntRange :  Luban.EditorBeanBase
 
     public static void RenderIntRange(IntRange obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -96,7 +93,7 @@ else
 this.max = UnityEditor.EditorGUILayout.IntField(this.max, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static IntRange LoadJsonIntRange(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static IntRange LoadJsonIntRange(SimpleJSON.JSONNode _json)
     {
         IntRange obj = new common.IntRange();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

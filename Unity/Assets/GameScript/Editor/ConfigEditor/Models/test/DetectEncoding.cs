@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class DetectEncoding :  Luban.EditorBeanBase 
 {
-    public DetectEncoding(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public DetectEncoding()
     {
-        _setChangeAction = setChangeAction;
             name = "";
     }
 
@@ -69,9 +68,7 @@ public sealed class DetectEncoding :  Luban.EditorBeanBase
 
     public static void RenderDetectEncoding(DetectEncoding obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -99,7 +96,7 @@ else
 this.name = UnityEditor.EditorGUILayout.TextField(this.name, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static DetectEncoding LoadJsonDetectEncoding(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static DetectEncoding LoadJsonDetectEncoding(SimpleJSON.JSONNode _json)
     {
         DetectEncoding obj = new test.DetectEncoding();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

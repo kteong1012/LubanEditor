@@ -19,9 +19,8 @@ namespace editor.cfg.ai
 
 public sealed class BlackboardKey :  Luban.EditorBeanBase 
 {
-    public BlackboardKey(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public BlackboardKey()
     {
-        _setChangeAction = setChangeAction;
             name = "";
             desc = "";
             keyType = editor.cfg.ai.EKeyType.BOOL;
@@ -121,9 +120,7 @@ public sealed class BlackboardKey :  Luban.EditorBeanBase
 
     public static void RenderBlackboardKey(BlackboardKey obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -182,7 +179,7 @@ else
 this.typeClassName = UnityEditor.EditorGUILayout.TextField(this.typeClassName, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static BlackboardKey LoadJsonBlackboardKey(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static BlackboardKey LoadJsonBlackboardKey(SimpleJSON.JSONNode _json)
     {
         BlackboardKey obj = new ai.BlackboardKey();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

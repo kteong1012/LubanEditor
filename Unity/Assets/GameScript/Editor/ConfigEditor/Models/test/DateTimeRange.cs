@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class DateTimeRange :  Luban.EditorBeanBase 
 {
-    public DateTimeRange(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public DateTimeRange()
     {
-        _setChangeAction = setChangeAction;
             startTime = 0;
             endTime = 0;
     }
@@ -90,9 +89,7 @@ public sealed class DateTimeRange :  Luban.EditorBeanBase
 
     public static void RenderDateTimeRange(DateTimeRange obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -120,7 +117,7 @@ else
 this.endTime = UnityEditor.EditorGUILayout.LongField(this.endTime, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static DateTimeRange LoadJsonDateTimeRange(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static DateTimeRange LoadJsonDateTimeRange(SimpleJSON.JSONNode _json)
     {
         DateTimeRange obj = new test.DateTimeRange();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

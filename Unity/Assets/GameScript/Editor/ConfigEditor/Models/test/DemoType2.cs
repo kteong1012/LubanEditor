@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class DemoType2 :  Luban.EditorBeanBase 
 {
-    public DemoType2(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public DemoType2()
     {
-        _setChangeAction = setChangeAction;
             x10 = "";
             x12 = new editor.cfg.test.DemoType1();
             x13 = editor.cfg.test.DemoEnum.NONE;
@@ -177,11 +176,7 @@ public sealed class DemoType2 :  Luban.EditorBeanBase
             }
             else
             {
-                void _Func(Luban.EditorBeanBase __x)
-                {
-                    x12 = __x as test.DemoType1;
-                }
-                x12 = new test.DemoType1(_Func);
+                x12 = new test.DemoType1();
             }
         }
         
@@ -206,15 +201,11 @@ public sealed class DemoType2 :  Luban.EditorBeanBase
                 {
                     throw new SerializationException();
                 }
-                x14 = editor.cfg.test.DemoDynamic.LoadJsonDemoDynamic(_fieldJson, (__newIns0)=>{ x14 = __newIns0 as test.DemoDynamic ; });
+                x14 = editor.cfg.test.DemoDynamic.LoadJsonDemoDynamic(_fieldJson);
             }
             else
             {
-                void _Func(Luban.EditorBeanBase __x)
-                {
-                    x14 = __x as test.DemoDynamic;
-                }
-                x14 = test.DemoDynamic.Create("DemoD2", _Func);
+                x14 = test.DemoDynamic.Create("DemoD2");
             }
         }
         
@@ -322,7 +313,7 @@ public sealed class DemoType2 :  Luban.EditorBeanBase
                 {
                     throw new SerializationException();
                 }
-                __v0 = editor.cfg.test.DemoDynamic.LoadJsonDemoDynamic(__e0, (__newIns0)=>{ __v0 = __newIns0 as test.DemoDynamic ; });  k15[__i0++] = __v0; }  
+                __v0 = editor.cfg.test.DemoDynamic.LoadJsonDemoDynamic(__e0);  k15[__i0++] = __v0; }  
             }
             else
             {
@@ -437,9 +428,7 @@ public sealed class DemoType2 :  Luban.EditorBeanBase
 
     public static void RenderDemoType2(DemoType2 obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -598,7 +587,7 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x14", ""), GUILayout.Width(100));
 }
 {
-    test.DemoDynamic.RenderDemoDynamic(this.x14);
+    test.DemoDynamic.RenderDemoDynamic(ref this.x14);
 }
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
@@ -855,11 +844,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
         editor.cfg.test.DemoE2 __e1;
-        void _Func(Luban.EditorBeanBase __x)
-{
-    __e1 = __x as test.DemoE2;
-}
-__e1 = new test.DemoE2(_Func);;
+        __e1 = new test.DemoE2();;
         this.k9.Add(__e1);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
@@ -901,7 +886,7 @@ else
         UnityEditor.EditorGUILayout.LabelField(__i1.ToString(), GUILayout.Width(20));
         editor.cfg.test.DemoDynamic __e1 = this.k15[__i1];
         {
-    test.DemoDynamic.RenderDemoDynamic(__e1);
+    test.DemoDynamic.RenderDemoDynamic(ref __e1);
 };
         this.k15[__i1] = __e1;
         UnityEditor.EditorGUILayout.EndHorizontal();
@@ -911,11 +896,7 @@ else
     {
         var __list1 = new System.Collections.Generic.List<editor.cfg.test.DemoDynamic>(this.k15);
         editor.cfg.test.DemoDynamic __e1;
-        void _Func(Luban.EditorBeanBase __x)
-{
-    __e1 = __x as test.DemoDynamic;
-}
-__e1 = test.DemoDynamic.Create("DemoD2", _Func);;
+        __e1 = test.DemoDynamic.Create("DemoD2");;
         __list1.Add(__e1);
         this.k15 = __list1.ToArray();
     }
@@ -930,7 +911,7 @@ if (!__importJson1.IsObject)
 {
     throw new SerializationException();
 }
-__importElement1 = editor.cfg.test.DemoDynamic.LoadJsonDemoDynamic(__importJson1, (__newIns2)=>{ __importElement1 = __newIns2 as test.DemoDynamic ; });
+__importElement1 = editor.cfg.test.DemoDynamic.LoadJsonDemoDynamic(__importJson1);
             var __list1 = new System.Collections.Generic.List<editor.cfg.test.DemoDynamic>(this.k15);
             __list1.Add(__importElement1);
             this.k15 = __list1.ToArray();
@@ -941,7 +922,7 @@ __importElement1 = editor.cfg.test.DemoDynamic.LoadJsonDemoDynamic(__importJson1
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static DemoType2 LoadJsonDemoType2(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static DemoType2 LoadJsonDemoType2(SimpleJSON.JSONNode _json)
     {
         DemoType2 obj = new test.DemoType2();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

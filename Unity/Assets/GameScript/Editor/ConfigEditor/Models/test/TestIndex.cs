@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class TestIndex :  Luban.EditorBeanBase 
 {
-    public TestIndex(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public TestIndex()
     {
-        _setChangeAction = setChangeAction;
             eles = new System.Collections.Generic.List<editor.cfg.test.DemoType1>();
     }
 
@@ -69,9 +68,7 @@ public sealed class TestIndex :  Luban.EditorBeanBase
 
     public static void RenderTestIndex(TestIndex obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -130,11 +127,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
         editor.cfg.test.DemoType1 __e1;
-        void _Func(Luban.EditorBeanBase __x)
-{
-    __e1 = __x as test.DemoType1;
-}
-__e1 = new test.DemoType1(_Func);;
+        __e1 = new test.DemoType1();;
         this.eles.Add(__e1);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
@@ -152,7 +145,7 @@ __e1 = new test.DemoType1(_Func);;
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static TestIndex LoadJsonTestIndex(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static TestIndex LoadJsonTestIndex(SimpleJSON.JSONNode _json)
     {
         TestIndex obj = new test.TestIndex();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

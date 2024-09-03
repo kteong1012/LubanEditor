@@ -19,9 +19,8 @@ namespace editor.cfg.ai
 
 public abstract class Node :  Luban.EditorBeanBase 
 {
-    public Node(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public Node()
     {
-        _setChangeAction = setChangeAction;
             nodeName = "";
     }
     public abstract string GetTypeStr();
@@ -30,16 +29,15 @@ public abstract class Node :  Luban.EditorBeanBase
     public int TypeIndex
     {
         get => _typeIndex;
-        set
-        {
-            if(_typeIndex == value)
-            {
-                return;
-            }
-            _typeIndex = value;
-            var obj = Create(Types[value], _setChangeAction);
-            _setChangeAction(obj);
-        }
+        //set
+        //{
+        //    if(_typeIndex == value)
+        //    {
+        //        return;
+        //    }
+        //    _typeIndex = value;
+        //    var obj = Create(Types[value]);
+        //}
     }
     private static string[] Types = new string[]
     {
@@ -94,168 +92,168 @@ public abstract class Node :  Luban.EditorBeanBase
         "DebugPrint",
     };
 
-    public static Node Create(string type, Action<Luban.EditorBeanBase> setChangeAction)
+    public static Node Create(string type)
     {
         switch (type)
         {
             case "ai.UeSetDefaultFocus":   
             case "UeSetDefaultFocus":
             {
-                var obj = new ai.UeSetDefaultFocus(setChangeAction);
+                var obj = new ai.UeSetDefaultFocus();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.ExecuteTimeStatistic":   
             case "ExecuteTimeStatistic":
             {
-                var obj = new ai.ExecuteTimeStatistic(setChangeAction);
+                var obj = new ai.ExecuteTimeStatistic();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.ChooseTarget":   
             case "ChooseTarget":
             {
-                var obj = new ai.ChooseTarget(setChangeAction);
+                var obj = new ai.ChooseTarget();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.KeepFaceTarget":   
             case "KeepFaceTarget":
             {
-                var obj = new ai.KeepFaceTarget(setChangeAction);
+                var obj = new ai.KeepFaceTarget();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.GetOwnerPlayer":   
             case "GetOwnerPlayer":
             {
-                var obj = new ai.GetOwnerPlayer(setChangeAction);
+                var obj = new ai.GetOwnerPlayer();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.UpdateDailyBehaviorProps":   
             case "UpdateDailyBehaviorProps":
             {
-                var obj = new ai.UpdateDailyBehaviorProps(setChangeAction);
+                var obj = new ai.UpdateDailyBehaviorProps();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.UeLoop":   
             case "UeLoop":
             {
-                var obj = new ai.UeLoop(setChangeAction);
+                var obj = new ai.UeLoop();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.UeCooldown":   
             case "UeCooldown":
             {
-                var obj = new ai.UeCooldown(setChangeAction);
+                var obj = new ai.UeCooldown();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.UeTimeLimit":   
             case "UeTimeLimit":
             {
-                var obj = new ai.UeTimeLimit(setChangeAction);
+                var obj = new ai.UeTimeLimit();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.UeBlackboard":   
             case "UeBlackboard":
             {
-                var obj = new ai.UeBlackboard(setChangeAction);
+                var obj = new ai.UeBlackboard();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.UeForceSuccess":   
             case "UeForceSuccess":
             {
-                var obj = new ai.UeForceSuccess(setChangeAction);
+                var obj = new ai.UeForceSuccess();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.IsAtLocation":   
             case "IsAtLocation":
             {
-                var obj = new ai.IsAtLocation(setChangeAction);
+                var obj = new ai.IsAtLocation();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.DistanceLessThan":   
             case "DistanceLessThan":
             {
-                var obj = new ai.DistanceLessThan(setChangeAction);
+                var obj = new ai.DistanceLessThan();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.Sequence":   
             case "Sequence":
             {
-                var obj = new ai.Sequence(setChangeAction);
+                var obj = new ai.Sequence();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.Selector":   
             case "Selector":
             {
-                var obj = new ai.Selector(setChangeAction);
+                var obj = new ai.Selector();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.SimpleParallel":   
             case "SimpleParallel":
             {
-                var obj = new ai.SimpleParallel(setChangeAction);
+                var obj = new ai.SimpleParallel();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.UeWait":   
             case "UeWait":
             {
-                var obj = new ai.UeWait(setChangeAction);
+                var obj = new ai.UeWait();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.UeWaitBlackboardTime":   
             case "UeWaitBlackboardTime":
             {
-                var obj = new ai.UeWaitBlackboardTime(setChangeAction);
+                var obj = new ai.UeWaitBlackboardTime();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.MoveToTarget":   
             case "MoveToTarget":
             {
-                var obj = new ai.MoveToTarget(setChangeAction);
+                var obj = new ai.MoveToTarget();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.ChooseSkill":   
             case "ChooseSkill":
             {
-                var obj = new ai.ChooseSkill(setChangeAction);
+                var obj = new ai.ChooseSkill();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.MoveToRandomLocation":   
             case "MoveToRandomLocation":
             {
-                var obj = new ai.MoveToRandomLocation(setChangeAction);
+                var obj = new ai.MoveToRandomLocation();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.MoveToLocation":   
             case "MoveToLocation":
             {
-                var obj = new ai.MoveToLocation(setChangeAction);
+                var obj = new ai.MoveToLocation();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.DebugPrint":   
             case "DebugPrint":
             {
-                var obj = new ai.DebugPrint(setChangeAction);
+                var obj = new ai.DebugPrint();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
@@ -265,13 +263,17 @@ public abstract class Node :  Luban.EditorBeanBase
 
     private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
 
-    public static void RenderNode(Node obj)
+    public static void RenderNode(ref Node obj)
     {
         UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
         var array = ConfigEditorSettings.showComment ? TypeAlias : Types;
         UnityEditor.EditorGUILayout.BeginHorizontal();
         UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
-        obj.TypeIndex = UnityEditor.EditorGUILayout.Popup(obj.TypeIndex, array, GUILayout.Width(200));
+        var index = UnityEditor.EditorGUILayout.Popup(obj.TypeIndex, array, GUILayout.Width(200));
+        if (obj.TypeIndex != index)
+        {
+            obj = Create(Types[index]);
+        }
         UnityEditor.EditorGUILayout.EndHorizontal();
         obj?.Render();
         UnityEditor.EditorGUILayout.EndVertical();
@@ -279,10 +281,8 @@ public abstract class Node :  Luban.EditorBeanBase
 
     public override void Render()
     {
-{
-    ai.Node.RenderNode(this);
-}    }
-    public static Node LoadJsonNode(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    }
+    public static Node LoadJsonNode(SimpleJSON.JSONNode _json)
     {
         string type = _json["$type"];
         Node obj;
@@ -291,161 +291,161 @@ public abstract class Node :  Luban.EditorBeanBase
             case "ai.UeSetDefaultFocus":   
             case "UeSetDefaultFocus":
             {
-                obj = new ai.UeSetDefaultFocus(setChangeAction); 
+                obj = new ai.UeSetDefaultFocus(); 
                 obj._typeIndex = Array.IndexOf(Types, "UeSetDefaultFocus");
                 break;
             }
             case "ai.ExecuteTimeStatistic":   
             case "ExecuteTimeStatistic":
             {
-                obj = new ai.ExecuteTimeStatistic(setChangeAction); 
+                obj = new ai.ExecuteTimeStatistic(); 
                 obj._typeIndex = Array.IndexOf(Types, "ExecuteTimeStatistic");
                 break;
             }
             case "ai.ChooseTarget":   
             case "ChooseTarget":
             {
-                obj = new ai.ChooseTarget(setChangeAction); 
+                obj = new ai.ChooseTarget(); 
                 obj._typeIndex = Array.IndexOf(Types, "ChooseTarget");
                 break;
             }
             case "ai.KeepFaceTarget":   
             case "KeepFaceTarget":
             {
-                obj = new ai.KeepFaceTarget(setChangeAction); 
+                obj = new ai.KeepFaceTarget(); 
                 obj._typeIndex = Array.IndexOf(Types, "KeepFaceTarget");
                 break;
             }
             case "ai.GetOwnerPlayer":   
             case "GetOwnerPlayer":
             {
-                obj = new ai.GetOwnerPlayer(setChangeAction); 
+                obj = new ai.GetOwnerPlayer(); 
                 obj._typeIndex = Array.IndexOf(Types, "GetOwnerPlayer");
                 break;
             }
             case "ai.UpdateDailyBehaviorProps":   
             case "UpdateDailyBehaviorProps":
             {
-                obj = new ai.UpdateDailyBehaviorProps(setChangeAction); 
+                obj = new ai.UpdateDailyBehaviorProps(); 
                 obj._typeIndex = Array.IndexOf(Types, "UpdateDailyBehaviorProps");
                 break;
             }
             case "ai.UeLoop":   
             case "UeLoop":
             {
-                obj = new ai.UeLoop(setChangeAction); 
+                obj = new ai.UeLoop(); 
                 obj._typeIndex = Array.IndexOf(Types, "UeLoop");
                 break;
             }
             case "ai.UeCooldown":   
             case "UeCooldown":
             {
-                obj = new ai.UeCooldown(setChangeAction); 
+                obj = new ai.UeCooldown(); 
                 obj._typeIndex = Array.IndexOf(Types, "UeCooldown");
                 break;
             }
             case "ai.UeTimeLimit":   
             case "UeTimeLimit":
             {
-                obj = new ai.UeTimeLimit(setChangeAction); 
+                obj = new ai.UeTimeLimit(); 
                 obj._typeIndex = Array.IndexOf(Types, "UeTimeLimit");
                 break;
             }
             case "ai.UeBlackboard":   
             case "UeBlackboard":
             {
-                obj = new ai.UeBlackboard(setChangeAction); 
+                obj = new ai.UeBlackboard(); 
                 obj._typeIndex = Array.IndexOf(Types, "UeBlackboard");
                 break;
             }
             case "ai.UeForceSuccess":   
             case "UeForceSuccess":
             {
-                obj = new ai.UeForceSuccess(setChangeAction); 
+                obj = new ai.UeForceSuccess(); 
                 obj._typeIndex = Array.IndexOf(Types, "UeForceSuccess");
                 break;
             }
             case "ai.IsAtLocation":   
             case "IsAtLocation":
             {
-                obj = new ai.IsAtLocation(setChangeAction); 
+                obj = new ai.IsAtLocation(); 
                 obj._typeIndex = Array.IndexOf(Types, "IsAtLocation");
                 break;
             }
             case "ai.DistanceLessThan":   
             case "DistanceLessThan":
             {
-                obj = new ai.DistanceLessThan(setChangeAction); 
+                obj = new ai.DistanceLessThan(); 
                 obj._typeIndex = Array.IndexOf(Types, "DistanceLessThan");
                 break;
             }
             case "ai.Sequence":   
             case "Sequence":
             {
-                obj = new ai.Sequence(setChangeAction); 
+                obj = new ai.Sequence(); 
                 obj._typeIndex = Array.IndexOf(Types, "Sequence");
                 break;
             }
             case "ai.Selector":   
             case "Selector":
             {
-                obj = new ai.Selector(setChangeAction); 
+                obj = new ai.Selector(); 
                 obj._typeIndex = Array.IndexOf(Types, "Selector");
                 break;
             }
             case "ai.SimpleParallel":   
             case "SimpleParallel":
             {
-                obj = new ai.SimpleParallel(setChangeAction); 
+                obj = new ai.SimpleParallel(); 
                 obj._typeIndex = Array.IndexOf(Types, "SimpleParallel");
                 break;
             }
             case "ai.UeWait":   
             case "UeWait":
             {
-                obj = new ai.UeWait(setChangeAction); 
+                obj = new ai.UeWait(); 
                 obj._typeIndex = Array.IndexOf(Types, "UeWait");
                 break;
             }
             case "ai.UeWaitBlackboardTime":   
             case "UeWaitBlackboardTime":
             {
-                obj = new ai.UeWaitBlackboardTime(setChangeAction); 
+                obj = new ai.UeWaitBlackboardTime(); 
                 obj._typeIndex = Array.IndexOf(Types, "UeWaitBlackboardTime");
                 break;
             }
             case "ai.MoveToTarget":   
             case "MoveToTarget":
             {
-                obj = new ai.MoveToTarget(setChangeAction); 
+                obj = new ai.MoveToTarget(); 
                 obj._typeIndex = Array.IndexOf(Types, "MoveToTarget");
                 break;
             }
             case "ai.ChooseSkill":   
             case "ChooseSkill":
             {
-                obj = new ai.ChooseSkill(setChangeAction); 
+                obj = new ai.ChooseSkill(); 
                 obj._typeIndex = Array.IndexOf(Types, "ChooseSkill");
                 break;
             }
             case "ai.MoveToRandomLocation":   
             case "MoveToRandomLocation":
             {
-                obj = new ai.MoveToRandomLocation(setChangeAction); 
+                obj = new ai.MoveToRandomLocation(); 
                 obj._typeIndex = Array.IndexOf(Types, "MoveToRandomLocation");
                 break;
             }
             case "ai.MoveToLocation":   
             case "MoveToLocation":
             {
-                obj = new ai.MoveToLocation(setChangeAction); 
+                obj = new ai.MoveToLocation(); 
                 obj._typeIndex = Array.IndexOf(Types, "MoveToLocation");
                 break;
             }
             case "ai.DebugPrint":   
             case "DebugPrint":
             {
-                obj = new ai.DebugPrint(setChangeAction); 
+                obj = new ai.DebugPrint(); 
                 obj._typeIndex = Array.IndexOf(Types, "DebugPrint");
                 break;
             }

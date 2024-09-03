@@ -19,9 +19,8 @@ namespace editor.cfg.ai
 
 public sealed class ChooseTarget :  ai.Service 
 {
-    public ChooseTarget(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
+    public ChooseTarget()
     {
-        _setChangeAction = setChangeAction;
             resultTargetKey = "";
     }
     public override string GetTypeStr() => TYPE_STR;
@@ -88,9 +87,7 @@ public sealed class ChooseTarget :  ai.Service
 
     public static void RenderChooseTarget(ChooseTarget obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -128,7 +125,7 @@ else
 this.resultTargetKey = UnityEditor.EditorGUILayout.TextField(this.resultTargetKey, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static ChooseTarget LoadJsonChooseTarget(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static ChooseTarget LoadJsonChooseTarget(SimpleJSON.JSONNode _json)
     {
         ChooseTarget obj = new ai.ChooseTarget();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

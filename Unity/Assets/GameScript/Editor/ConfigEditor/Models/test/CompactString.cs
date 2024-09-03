@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class CompactString :  Luban.EditorBeanBase 
 {
-    public CompactString(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public CompactString()
     {
-        _setChangeAction = setChangeAction;
             s2 = "";
             s3 = "";
     }
@@ -87,9 +86,7 @@ public sealed class CompactString :  Luban.EditorBeanBase
 
     public static void RenderCompactString(CompactString obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -127,7 +124,7 @@ else
 this.s3 = UnityEditor.EditorGUILayout.TextField(this.s3, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static CompactString LoadJsonCompactString(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static CompactString LoadJsonCompactString(SimpleJSON.JSONNode _json)
     {
         CompactString obj = new test.CompactString();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

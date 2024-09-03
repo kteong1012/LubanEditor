@@ -19,9 +19,8 @@ namespace editor.cfg.ai
 
 public sealed class IntKeyData :  ai.KeyData 
 {
-    public IntKeyData(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
+    public IntKeyData()
     {
-        _setChangeAction = setChangeAction;
     }
     public override string GetTypeStr() => TYPE_STR;
     private const string TYPE_STR = "IntKeyData";
@@ -53,9 +52,7 @@ public sealed class IntKeyData :  ai.KeyData
 
     public static void RenderIntKeyData(IntKeyData obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -73,7 +70,7 @@ else
 this.value = UnityEditor.EditorGUILayout.IntField(this.value, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static IntKeyData LoadJsonIntKeyData(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static IntKeyData LoadJsonIntKeyData(SimpleJSON.JSONNode _json)
     {
         IntKeyData obj = new ai.IntKeyData();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

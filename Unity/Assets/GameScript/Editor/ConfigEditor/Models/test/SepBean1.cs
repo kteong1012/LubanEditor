@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class SepBean1 :  Luban.EditorBeanBase 
 {
-    public SepBean1(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public SepBean1()
     {
-        _setChangeAction = setChangeAction;
             c = "";
     }
 
@@ -84,9 +83,7 @@ public sealed class SepBean1 :  Luban.EditorBeanBase
 
     public static void RenderSepBean1(SepBean1 obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -124,7 +121,7 @@ else
 this.c = UnityEditor.EditorGUILayout.TextField(this.c, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static SepBean1 LoadJsonSepBean1(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static SepBean1 LoadJsonSepBean1(SimpleJSON.JSONNode _json)
     {
         SepBean1 obj = new test.SepBean1();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

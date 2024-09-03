@@ -19,9 +19,8 @@ namespace editor.cfg.ai
 
 public sealed class IsSet2 :  ai.KeyQueryOperator 
 {
-    public IsSet2(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
+    public IsSet2()
     {
-        _setChangeAction = setChangeAction;
     }
     public override string GetTypeStr() => TYPE_STR;
     private const string TYPE_STR = "IsSet2";
@@ -38,9 +37,7 @@ public sealed class IsSet2 :  ai.KeyQueryOperator
 
     public static void RenderIsSet2(IsSet2 obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -48,7 +45,7 @@ public sealed class IsSet2 :  ai.KeyQueryOperator
 {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static IsSet2 LoadJsonIsSet2(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static IsSet2 LoadJsonIsSet2(SimpleJSON.JSONNode _json)
     {
         IsSet2 obj = new ai.IsSet2();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

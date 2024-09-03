@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class TestString :  Luban.EditorBeanBase 
 {
-    public TestString(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public TestString()
     {
-        _setChangeAction = setChangeAction;
             id = "";
             s1 = "";
             s2 = "";
@@ -75,11 +74,7 @@ public sealed class TestString :  Luban.EditorBeanBase
             }
             else
             {
-                void _Func(Luban.EditorBeanBase __x)
-                {
-                    cs1 = __x as test.CompactString;
-                }
-                cs1 = new test.CompactString(_Func);
+                cs1 = new test.CompactString();
             }
         }
         
@@ -91,11 +86,7 @@ public sealed class TestString :  Luban.EditorBeanBase
             }
             else
             {
-                void _Func(Luban.EditorBeanBase __x)
-                {
-                    cs2 = __x as test.CompactString;
-                }
-                cs2 = new test.CompactString(_Func);
+                cs2 = new test.CompactString();
             }
         }
         
@@ -134,9 +125,7 @@ public sealed class TestString :  Luban.EditorBeanBase
 
     public static void RenderTestString(TestString obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -258,7 +247,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static TestString LoadJsonTestString(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static TestString LoadJsonTestString(SimpleJSON.JSONNode _json)
     {
         TestString obj = new test.TestString();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

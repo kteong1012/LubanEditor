@@ -19,9 +19,8 @@ namespace editor.cfg.ai
 
 public sealed class GetOwnerPlayer :  ai.Service 
 {
-    public GetOwnerPlayer(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
+    public GetOwnerPlayer()
     {
-        _setChangeAction = setChangeAction;
             playerActorKey = "";
     }
     public override string GetTypeStr() => TYPE_STR;
@@ -88,9 +87,7 @@ public sealed class GetOwnerPlayer :  ai.Service
 
     public static void RenderGetOwnerPlayer(GetOwnerPlayer obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -128,7 +125,7 @@ else
 this.playerActorKey = UnityEditor.EditorGUILayout.TextField(this.playerActorKey, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static GetOwnerPlayer LoadJsonGetOwnerPlayer(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static GetOwnerPlayer LoadJsonGetOwnerPlayer(SimpleJSON.JSONNode _json)
     {
         GetOwnerPlayer obj = new ai.GetOwnerPlayer();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

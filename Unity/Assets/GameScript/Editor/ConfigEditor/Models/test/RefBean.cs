@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class RefBean :  test.RefDynamicBase 
 {
-    public RefBean(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
+    public RefBean()
     {
-        _setChangeAction = setChangeAction;
             arr = new System.Collections.Generic.List<int>();
     }
     public override string GetTypeStr() => TYPE_STR;
@@ -71,9 +70,7 @@ public sealed class RefBean :  test.RefDynamicBase
 
     public static void RenderRefBean(RefBean obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -138,7 +135,7 @@ else
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static RefBean LoadJsonRefBean(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static RefBean LoadJsonRefBean(SimpleJSON.JSONNode _json)
     {
         RefBean obj = new test.RefBean();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class NotIndexList :  Luban.EditorBeanBase 
 {
-    public NotIndexList(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public NotIndexList()
     {
-        _setChangeAction = setChangeAction;
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -66,9 +65,7 @@ public sealed class NotIndexList :  Luban.EditorBeanBase
 
     public static void RenderNotIndexList(NotIndexList obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -96,7 +93,7 @@ else
 this.y = UnityEditor.EditorGUILayout.IntField(this.y, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static NotIndexList LoadJsonNotIndexList(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static NotIndexList LoadJsonNotIndexList(SimpleJSON.JSONNode _json)
     {
         NotIndexList obj = new test.NotIndexList();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

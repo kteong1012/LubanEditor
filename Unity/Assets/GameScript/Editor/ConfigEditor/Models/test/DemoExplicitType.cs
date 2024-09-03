@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class DemoExplicitType :  Luban.EditorBeanBase 
 {
-    public DemoExplicitType(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public DemoExplicitType()
     {
-        _setChangeAction = setChangeAction;
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -141,9 +140,7 @@ public sealed class DemoExplicitType :  Luban.EditorBeanBase
 
     public static void RenderDemoExplicitType(DemoExplicitType obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -221,7 +218,7 @@ else
 this.x7 = UnityEditor.EditorGUILayout.LongField(this.x7, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static DemoExplicitType LoadJsonDemoExplicitType(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static DemoExplicitType LoadJsonDemoExplicitType(SimpleJSON.JSONNode _json)
     {
         DemoExplicitType obj = new test.DemoExplicitType();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

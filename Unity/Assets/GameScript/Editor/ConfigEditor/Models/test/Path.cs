@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class Path :  Luban.EditorBeanBase 
 {
-    public Path(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public Path()
     {
-        _setChangeAction = setChangeAction;
             res = "";
     }
 
@@ -69,9 +68,7 @@ public sealed class Path :  Luban.EditorBeanBase
 
     public static void RenderPath(Path obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -99,7 +96,7 @@ else
 this.res = UnityEditor.EditorGUILayout.TextField(this.res, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static Path LoadJsonPath(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static Path LoadJsonPath(SimpleJSON.JSONNode _json)
     {
         Path obj = new test.Path();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

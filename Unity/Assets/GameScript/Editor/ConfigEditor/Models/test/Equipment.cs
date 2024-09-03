@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class Equipment :  test.ItemBase 
 {
-    public Equipment(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
+    public Equipment()
     {
-        _setChangeAction = setChangeAction;
             attr = editor.cfg.test.DemoEnum.NONE;
     }
     public override string GetTypeStr() => TYPE_STR;
@@ -118,9 +117,7 @@ public sealed class Equipment :  test.ItemBase
 
     public static void RenderEquipment(Equipment obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -179,7 +176,7 @@ else
 this.value = UnityEditor.EditorGUILayout.IntField(this.value, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static Equipment LoadJsonEquipment(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static Equipment LoadJsonEquipment(SimpleJSON.JSONNode _json)
     {
         Equipment obj = new test.Equipment();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

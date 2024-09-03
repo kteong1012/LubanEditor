@@ -19,9 +19,8 @@ namespace editor.cfg.ai
 
 public sealed class ExecuteTimeStatistic :  ai.Service 
 {
-    public ExecuteTimeStatistic(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
+    public ExecuteTimeStatistic()
     {
-        _setChangeAction = setChangeAction;
     }
     public override string GetTypeStr() => TYPE_STR;
     private const string TYPE_STR = "ExecuteTimeStatistic";
@@ -70,9 +69,7 @@ public sealed class ExecuteTimeStatistic :  ai.Service
 
     public static void RenderExecuteTimeStatistic(ExecuteTimeStatistic obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -100,7 +97,7 @@ else
 this.nodeName = UnityEditor.EditorGUILayout.TextField(this.nodeName, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static ExecuteTimeStatistic LoadJsonExecuteTimeStatistic(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static ExecuteTimeStatistic LoadJsonExecuteTimeStatistic(SimpleJSON.JSONNode _json)
     {
         ExecuteTimeStatistic obj = new ai.ExecuteTimeStatistic();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

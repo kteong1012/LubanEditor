@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class MultiIndexList :  Luban.EditorBeanBase 
 {
-    public MultiIndexList(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public MultiIndexList()
     {
-        _setChangeAction = setChangeAction;
             id3 = "";
             desc = "";
     }
@@ -117,9 +116,7 @@ public sealed class MultiIndexList :  Luban.EditorBeanBase
 
     public static void RenderMultiIndexList(MultiIndexList obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -177,7 +174,7 @@ else
 this.desc = UnityEditor.EditorGUILayout.TextField(this.desc, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static MultiIndexList LoadJsonMultiIndexList(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static MultiIndexList LoadJsonMultiIndexList(SimpleJSON.JSONNode _json)
     {
         MultiIndexList obj = new test.MultiIndexList();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

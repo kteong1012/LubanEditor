@@ -19,9 +19,8 @@ namespace editor.cfg.ai
 
 public sealed class UpdateDailyBehaviorProps :  ai.Service 
 {
-    public UpdateDailyBehaviorProps(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
+    public UpdateDailyBehaviorProps()
     {
-        _setChangeAction = setChangeAction;
             satietyKey = "";
             energyKey = "";
             moodKey = "";
@@ -232,9 +231,7 @@ public sealed class UpdateDailyBehaviorProps :  ai.Service
 
     public static void RenderUpdateDailyBehaviorProps(UpdateDailyBehaviorProps obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -352,7 +349,7 @@ else
 this.moodUpperThresholdKey = UnityEditor.EditorGUILayout.TextField(this.moodUpperThresholdKey, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static UpdateDailyBehaviorProps LoadJsonUpdateDailyBehaviorProps(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static UpdateDailyBehaviorProps LoadJsonUpdateDailyBehaviorProps(SimpleJSON.JSONNode _json)
     {
         UpdateDailyBehaviorProps obj = new ai.UpdateDailyBehaviorProps();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

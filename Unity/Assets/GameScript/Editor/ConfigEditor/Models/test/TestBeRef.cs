@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class TestBeRef :  Luban.EditorBeanBase 
 {
-    public TestBeRef(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public TestBeRef()
     {
-        _setChangeAction = setChangeAction;
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -66,9 +65,7 @@ public sealed class TestBeRef :  Luban.EditorBeanBase
 
     public static void RenderTestBeRef(TestBeRef obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -96,7 +93,7 @@ else
 this.count = UnityEditor.EditorGUILayout.IntField(this.count, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static TestBeRef LoadJsonTestBeRef(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static TestBeRef LoadJsonTestBeRef(SimpleJSON.JSONNode _json)
     {
         TestBeRef obj = new test.TestBeRef();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

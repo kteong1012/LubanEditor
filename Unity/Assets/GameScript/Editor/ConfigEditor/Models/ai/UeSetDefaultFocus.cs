@@ -19,9 +19,8 @@ namespace editor.cfg.ai
 
 public sealed class UeSetDefaultFocus :  ai.Service 
 {
-    public UeSetDefaultFocus(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
+    public UeSetDefaultFocus()
     {
-        _setChangeAction = setChangeAction;
             keyboardKey = "";
     }
     public override string GetTypeStr() => TYPE_STR;
@@ -88,9 +87,7 @@ public sealed class UeSetDefaultFocus :  ai.Service
 
     public static void RenderUeSetDefaultFocus(UeSetDefaultFocus obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -128,7 +125,7 @@ else
 this.keyboardKey = UnityEditor.EditorGUILayout.TextField(this.keyboardKey, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static UeSetDefaultFocus LoadJsonUeSetDefaultFocus(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static UeSetDefaultFocus LoadJsonUeSetDefaultFocus(SimpleJSON.JSONNode _json)
     {
         UeSetDefaultFocus obj = new ai.UeSetDefaultFocus();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

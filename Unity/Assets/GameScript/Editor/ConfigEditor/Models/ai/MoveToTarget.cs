@@ -19,9 +19,8 @@ namespace editor.cfg.ai
 
 public sealed class MoveToTarget :  ai.Task 
 {
-    public MoveToTarget(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
+    public MoveToTarget()
     {
-        _setChangeAction = setChangeAction;
             targetActorKey = "";
     }
     public override string GetTypeStr() => TYPE_STR;
@@ -62,7 +61,7 @@ public sealed class MoveToTarget :  ai.Task
                 {
                     throw new SerializationException();
                 }
-                __v0 = editor.cfg.ai.Decorator.LoadJsonDecorator(__e0, (__newIns0)=>{ __v0 = __newIns0 as ai.Decorator ; });  decorators.Add(__v0); }  
+                __v0 = editor.cfg.ai.Decorator.LoadJsonDecorator(__e0);  decorators.Add(__v0); }  
             }
             else
             {
@@ -79,7 +78,7 @@ public sealed class MoveToTarget :  ai.Task
                 {
                     throw new SerializationException();
                 }
-                __v0 = editor.cfg.ai.Service.LoadJsonService(__e0, (__newIns0)=>{ __v0 = __newIns0 as ai.Service ; });  services.Add(__v0); }  
+                __v0 = editor.cfg.ai.Service.LoadJsonService(__e0);  services.Add(__v0); }  
             }
             else
             {
@@ -162,9 +161,7 @@ public sealed class MoveToTarget :  ai.Task
 
     public static void RenderMoveToTarget(MoveToTarget obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -214,7 +211,7 @@ else
         UnityEditor.EditorGUILayout.LabelField(__i1.ToString(), GUILayout.Width(20));
         editor.cfg.ai.Decorator __e1 = this.decorators[__i1];
         {
-    ai.Decorator.RenderDecorator(__e1);
+    ai.Decorator.RenderDecorator(ref __e1);
 };
         this.decorators[__i1] = __e1;
         UnityEditor.EditorGUILayout.EndHorizontal();
@@ -223,11 +220,7 @@ else
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
         editor.cfg.ai.Decorator __e1;
-        void _Func(Luban.EditorBeanBase __x)
-{
-    __e1 = __x as ai.Decorator;
-}
-__e1 = ai.Decorator.Create("UeLoop", _Func);;
+        __e1 = ai.Decorator.Create("UeLoop");;
         this.decorators.Add(__e1);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
@@ -241,7 +234,7 @@ if (!__importJson1.IsObject)
 {
     throw new SerializationException();
 }
-__importElement1 = editor.cfg.ai.Decorator.LoadJsonDecorator(__importJson1, (__newIns2)=>{ __importElement1 = __newIns2 as ai.Decorator ; });
+__importElement1 = editor.cfg.ai.Decorator.LoadJsonDecorator(__importJson1);
             this.decorators.Add(__importElement1);
         });
     }
@@ -272,7 +265,7 @@ else
         UnityEditor.EditorGUILayout.LabelField(__i1.ToString(), GUILayout.Width(20));
         editor.cfg.ai.Service __e1 = this.services[__i1];
         {
-    ai.Service.RenderService(__e1);
+    ai.Service.RenderService(ref __e1);
 };
         this.services[__i1] = __e1;
         UnityEditor.EditorGUILayout.EndHorizontal();
@@ -281,11 +274,7 @@ else
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
         editor.cfg.ai.Service __e1;
-        void _Func(Luban.EditorBeanBase __x)
-{
-    __e1 = __x as ai.Service;
-}
-__e1 = ai.Service.Create("UeSetDefaultFocus", _Func);;
+        __e1 = ai.Service.Create("UeSetDefaultFocus");;
         this.services.Add(__e1);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
@@ -299,7 +288,7 @@ if (!__importJson1.IsObject)
 {
     throw new SerializationException();
 }
-__importElement1 = editor.cfg.ai.Service.LoadJsonService(__importJson1, (__newIns2)=>{ __importElement1 = __newIns2 as ai.Service ; });
+__importElement1 = editor.cfg.ai.Service.LoadJsonService(__importJson1);
             this.services.Add(__importElement1);
         });
     }
@@ -338,7 +327,7 @@ else
 this.acceptableRadius = UnityEditor.EditorGUILayout.DoubleField(this.acceptableRadius, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static MoveToTarget LoadJsonMoveToTarget(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static MoveToTarget LoadJsonMoveToTarget(SimpleJSON.JSONNode _json)
     {
         MoveToTarget obj = new ai.MoveToTarget();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

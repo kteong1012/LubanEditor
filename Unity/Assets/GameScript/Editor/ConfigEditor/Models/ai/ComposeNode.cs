@@ -19,9 +19,8 @@ namespace editor.cfg.ai
 
 public abstract class ComposeNode :  ai.FlowNode 
 {
-    public ComposeNode(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
+    public ComposeNode()
     {
-        _setChangeAction = setChangeAction;
     }
     public override string GetTypeStr() => TYPE_STR;
     private const string TYPE_STR = "ComposeNode";
@@ -30,16 +29,15 @@ public abstract class ComposeNode :  ai.FlowNode
     public new int TypeIndex
     {
         get => _typeIndex;
-        set
-        {
-            if(_typeIndex == value)
-            {
-                return;
-            }
-            _typeIndex = value;
-            var obj = Create(Types[value], _setChangeAction);
-            _setChangeAction(obj);
-        }
+        //set
+        //{
+        //    if(_typeIndex == value)
+        //    {
+        //        return;
+        //    }
+        //    _typeIndex = value;
+        //    var obj = Create(Types[value]);
+        //}
     }
     private new static string[] Types = new string[]
     {
@@ -54,28 +52,28 @@ public abstract class ComposeNode :  ai.FlowNode
         "SimpleParallel",
     };
 
-    public new static ComposeNode Create(string type, Action<Luban.EditorBeanBase> setChangeAction)
+    public new static ComposeNode Create(string type)
     {
         switch (type)
         {
             case "ai.Sequence":   
             case "Sequence":
             {
-                var obj = new ai.Sequence(setChangeAction);
+                var obj = new ai.Sequence();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.Selector":   
             case "Selector":
             {
-                var obj = new ai.Selector(setChangeAction);
+                var obj = new ai.Selector();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "ai.SimpleParallel":   
             case "SimpleParallel":
             {
-                var obj = new ai.SimpleParallel(setChangeAction);
+                var obj = new ai.SimpleParallel();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
@@ -85,13 +83,17 @@ public abstract class ComposeNode :  ai.FlowNode
 
     private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
 
-    public static void RenderComposeNode(ComposeNode obj)
+    public static void RenderComposeNode(ref ComposeNode obj)
     {
         UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
         var array = ConfigEditorSettings.showComment ? TypeAlias : Types;
         UnityEditor.EditorGUILayout.BeginHorizontal();
         UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
-        obj.TypeIndex = UnityEditor.EditorGUILayout.Popup(obj.TypeIndex, array, GUILayout.Width(200));
+        var index = UnityEditor.EditorGUILayout.Popup(obj.TypeIndex, array, GUILayout.Width(200));
+        if (obj.TypeIndex != index)
+        {
+            obj = Create(Types[index]);
+        }
         UnityEditor.EditorGUILayout.EndHorizontal();
         obj?.Render();
         UnityEditor.EditorGUILayout.EndVertical();
@@ -99,10 +101,8 @@ public abstract class ComposeNode :  ai.FlowNode
 
     public override void Render()
     {
-{
-    ai.ComposeNode.RenderComposeNode(this);
-}    }
-    public static ComposeNode LoadJsonComposeNode(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    }
+    public static ComposeNode LoadJsonComposeNode(SimpleJSON.JSONNode _json)
     {
         string type = _json["$type"];
         ComposeNode obj;
@@ -111,21 +111,21 @@ public abstract class ComposeNode :  ai.FlowNode
             case "ai.Sequence":   
             case "Sequence":
             {
-                obj = new ai.Sequence(setChangeAction); 
+                obj = new ai.Sequence(); 
                 obj._typeIndex = Array.IndexOf(Types, "Sequence");
                 break;
             }
             case "ai.Selector":   
             case "Selector":
             {
-                obj = new ai.Selector(setChangeAction); 
+                obj = new ai.Selector(); 
                 obj._typeIndex = Array.IndexOf(Types, "Selector");
                 break;
             }
             case "ai.SimpleParallel":   
             case "SimpleParallel":
             {
-                obj = new ai.SimpleParallel(setChangeAction); 
+                obj = new ai.SimpleParallel(); 
                 obj._typeIndex = Array.IndexOf(Types, "SimpleParallel");
                 break;
             }

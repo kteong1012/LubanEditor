@@ -19,9 +19,8 @@ namespace editor.cfg.ai
 
 public sealed class UeBlackboard :  ai.Decorator 
 {
-    public UeBlackboard(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
+    public UeBlackboard()
     {
-        _setChangeAction = setChangeAction;
             notifyObserver = editor.cfg.ai.ENotifyObserverMode.ON_VALUE_CHANGE;
             blackboardKey = "";
     }
@@ -99,15 +98,11 @@ public sealed class UeBlackboard :  ai.Decorator
                 {
                     throw new SerializationException();
                 }
-                keyQuery = editor.cfg.ai.KeyQueryOperator.LoadJsonKeyQueryOperator(_fieldJson, (__newIns0)=>{ keyQuery = __newIns0 as ai.KeyQueryOperator ; });
+                keyQuery = editor.cfg.ai.KeyQueryOperator.LoadJsonKeyQueryOperator(_fieldJson);
             }
             else
             {
-                void _Func(Luban.EditorBeanBase __x)
-                {
-                    keyQuery = __x as ai.KeyQueryOperator;
-                }
-                keyQuery = ai.KeyQueryOperator.Create("IsSet2", _Func);
+                keyQuery = ai.KeyQueryOperator.Create("IsSet2");
             }
         }
         
@@ -145,9 +140,7 @@ public sealed class UeBlackboard :  ai.Decorator
 
     public static void RenderUeBlackboard(UeBlackboard obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -215,11 +208,11 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("key_query", ""), GUILayout.Width(100));
 }
 {
-    ai.KeyQueryOperator.RenderKeyQueryOperator(this.keyQuery);
+    ai.KeyQueryOperator.RenderKeyQueryOperator(ref this.keyQuery);
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static UeBlackboard LoadJsonUeBlackboard(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static UeBlackboard LoadJsonUeBlackboard(SimpleJSON.JSONNode _json)
     {
         UeBlackboard obj = new ai.UeBlackboard();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

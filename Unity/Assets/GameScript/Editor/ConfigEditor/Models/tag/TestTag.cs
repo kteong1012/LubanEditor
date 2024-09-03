@@ -19,9 +19,8 @@ namespace editor.cfg.tag
 
 public sealed class TestTag :  Luban.EditorBeanBase 
 {
-    public TestTag(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public TestTag()
     {
-        _setChangeAction = setChangeAction;
             value = "";
     }
 
@@ -69,9 +68,7 @@ public sealed class TestTag :  Luban.EditorBeanBase
 
     public static void RenderTestTag(TestTag obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -99,7 +96,7 @@ else
 this.value = UnityEditor.EditorGUILayout.TextField(this.value, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static TestTag LoadJsonTestTag(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static TestTag LoadJsonTestTag(SimpleJSON.JSONNode _json)
     {
         TestTag obj = new tag.TestTag();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

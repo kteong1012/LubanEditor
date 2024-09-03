@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class TestScriptableObject :  Luban.EditorBeanBase 
 {
-    public TestScriptableObject(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public TestScriptableObject()
     {
-        _setChangeAction = setChangeAction;
             desc = "";
             v2 = new editor.cfg.vec2();
             v3 = new editor.cfg.vec3();
@@ -86,11 +85,7 @@ public sealed class TestScriptableObject :  Luban.EditorBeanBase
             }
             else
             {
-                void _Func(Luban.EditorBeanBase __x)
-                {
-                    v2 = __x as vec2;
-                }
-                v2 = new vec2(_Func);
+                v2 = new vec2();
             }
         }
         
@@ -102,11 +97,7 @@ public sealed class TestScriptableObject :  Luban.EditorBeanBase
             }
             else
             {
-                void _Func(Luban.EditorBeanBase __x)
-                {
-                    v3 = __x as vec3;
-                }
-                v3 = new vec3(_Func);
+                v3 = new vec3();
             }
         }
         
@@ -118,11 +109,7 @@ public sealed class TestScriptableObject :  Luban.EditorBeanBase
             }
             else
             {
-                void _Func(Luban.EditorBeanBase __x)
-                {
-                    v4 = __x as vec4;
-                }
-                v4 = new vec4(_Func);
+                v4 = new vec4();
             }
         }
         
@@ -159,9 +146,7 @@ public sealed class TestScriptableObject :  Luban.EditorBeanBase
 
     public static void RenderTestScriptableObject(TestScriptableObject obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -335,7 +320,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static TestScriptableObject LoadJsonTestScriptableObject(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static TestScriptableObject LoadJsonTestScriptableObject(SimpleJSON.JSONNode _json)
     {
         TestScriptableObject obj = new test.TestScriptableObject();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

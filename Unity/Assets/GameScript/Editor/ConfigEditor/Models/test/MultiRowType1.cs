@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class MultiRowType1 :  Luban.EditorBeanBase 
 {
-    public MultiRowType1(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public MultiRowType1()
     {
-        _setChangeAction = setChangeAction;
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -66,9 +65,7 @@ public sealed class MultiRowType1 :  Luban.EditorBeanBase
 
     public static void RenderMultiRowType1(MultiRowType1 obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -96,7 +93,7 @@ else
 this.x = UnityEditor.EditorGUILayout.IntField(this.x, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static MultiRowType1 LoadJsonMultiRowType1(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static MultiRowType1 LoadJsonMultiRowType1(SimpleJSON.JSONNode _json)
     {
         MultiRowType1 obj = new test.MultiRowType1();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

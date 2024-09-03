@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class CompositeJsonTable2 :  Luban.EditorBeanBase 
 {
-    public CompositeJsonTable2(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public CompositeJsonTable2()
     {
-        _setChangeAction = setChangeAction;
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -66,9 +65,7 @@ public sealed class CompositeJsonTable2 :  Luban.EditorBeanBase
 
     public static void RenderCompositeJsonTable2(CompositeJsonTable2 obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -96,7 +93,7 @@ else
 this.y = UnityEditor.EditorGUILayout.IntField(this.y, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static CompositeJsonTable2 LoadJsonCompositeJsonTable2(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static CompositeJsonTable2 LoadJsonCompositeJsonTable2(SimpleJSON.JSONNode _json)
     {
         CompositeJsonTable2 obj = new test.CompositeJsonTable2();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

@@ -19,9 +19,8 @@ namespace editor.cfg.common
 
 public sealed class TimeOfDay :  Luban.EditorBeanBase 
 {
-    public TimeOfDay(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public TimeOfDay()
     {
-        _setChangeAction = setChangeAction;
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -81,9 +80,7 @@ public sealed class TimeOfDay :  Luban.EditorBeanBase
 
     public static void RenderTimeOfDay(TimeOfDay obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -121,7 +118,7 @@ else
 this.second = UnityEditor.EditorGUILayout.IntField(this.second, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static TimeOfDay LoadJsonTimeOfDay(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static TimeOfDay LoadJsonTimeOfDay(SimpleJSON.JSONNode _json)
     {
         TimeOfDay obj = new common.TimeOfDay();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

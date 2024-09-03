@@ -19,9 +19,8 @@ namespace editor.cfg.ai
 
 public sealed class UeCooldown :  ai.Decorator 
 {
-    public UeCooldown(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
+    public UeCooldown()
     {
-        _setChangeAction = setChangeAction;
     }
     public override string GetTypeStr() => TYPE_STR;
     private const string TYPE_STR = "UeCooldown";
@@ -100,9 +99,7 @@ public sealed class UeCooldown :  ai.Decorator
 
     public static void RenderUeCooldown(UeCooldown obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -151,7 +148,7 @@ else
 this.cooldownTime = UnityEditor.EditorGUILayout.DoubleField(this.cooldownTime, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static UeCooldown LoadJsonUeCooldown(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static UeCooldown LoadJsonUeCooldown(SimpleJSON.JSONNode _json)
     {
         UeCooldown obj = new ai.UeCooldown();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

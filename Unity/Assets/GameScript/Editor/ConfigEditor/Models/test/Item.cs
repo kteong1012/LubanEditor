@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class Item :  test.ItemBase 
 {
-    public Item(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
+    public Item()
     {
-        _setChangeAction = setChangeAction;
     }
     public override string GetTypeStr() => TYPE_STR;
     private const string TYPE_STR = "Item";
@@ -117,9 +116,7 @@ public sealed class Item :  test.ItemBase
 
     public static void RenderItem(Item obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -177,7 +174,7 @@ else
 this.price = UnityEditor.EditorGUILayout.IntField(this.price, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static Item LoadJsonItem(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static Item LoadJsonItem(SimpleJSON.JSONNode _json)
     {
         Item obj = new test.Item();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

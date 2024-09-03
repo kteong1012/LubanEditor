@@ -19,9 +19,8 @@ namespace editor.cfg.common
 
 public sealed class OneDayTimeRange :  Luban.EditorBeanBase 
 {
-    public OneDayTimeRange(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public OneDayTimeRange()
     {
-        _setChangeAction = setChangeAction;
             startTime = new editor.cfg.common.TimeOfDay();
             endTime = new editor.cfg.common.TimeOfDay();
     }
@@ -36,11 +35,7 @@ public sealed class OneDayTimeRange :  Luban.EditorBeanBase
             }
             else
             {
-                void _Func(Luban.EditorBeanBase __x)
-                {
-                    startTime = __x as common.TimeOfDay;
-                }
-                startTime = new common.TimeOfDay(_Func);
+                startTime = new common.TimeOfDay();
             }
         }
         
@@ -52,11 +47,7 @@ public sealed class OneDayTimeRange :  Luban.EditorBeanBase
             }
             else
             {
-                void _Func(Luban.EditorBeanBase __x)
-                {
-                    endTime = __x as common.TimeOfDay;
-                }
-                endTime = new common.TimeOfDay(_Func);
+                endTime = new common.TimeOfDay();
             }
         }
         
@@ -80,9 +71,7 @@ public sealed class OneDayTimeRange :  Luban.EditorBeanBase
 
     public static void RenderOneDayTimeRange(OneDayTimeRange obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -174,7 +163,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static OneDayTimeRange LoadJsonOneDayTimeRange(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static OneDayTimeRange LoadJsonOneDayTimeRange(SimpleJSON.JSONNode _json)
     {
         OneDayTimeRange obj = new common.OneDayTimeRange();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

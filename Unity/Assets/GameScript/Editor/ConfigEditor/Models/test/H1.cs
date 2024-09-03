@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class H1 :  Luban.EditorBeanBase 
 {
-    public H1(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public H1()
     {
-        _setChangeAction = setChangeAction;
             y2 = new editor.cfg.test.H2();
     }
 
@@ -35,11 +34,7 @@ public sealed class H1 :  Luban.EditorBeanBase
             }
             else
             {
-                void _Func(Luban.EditorBeanBase __x)
-                {
-                    y2 = __x as test.H2;
-                }
-                y2 = new test.H2(_Func);
+                y2 = new test.H2();
             }
         }
         
@@ -73,9 +68,7 @@ public sealed class H1 :  Luban.EditorBeanBase
 
     public static void RenderH1(H1 obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -125,7 +118,7 @@ else
 this.y3 = UnityEditor.EditorGUILayout.IntField(this.y3, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static H1 LoadJsonH1(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static H1 LoadJsonH1(SimpleJSON.JSONNode _json)
     {
         H1 obj = new test.H1();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

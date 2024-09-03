@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class MultiRowTitle :  Luban.EditorBeanBase 
 {
-    public MultiRowTitle(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public MultiRowTitle()
     {
-        _setChangeAction = setChangeAction;
             name = "";
             x1 = new editor.cfg.test.H1();
             x2 = new System.Collections.Generic.List<editor.cfg.test.H2>();
@@ -63,11 +62,7 @@ public sealed class MultiRowTitle :  Luban.EditorBeanBase
             }
             else
             {
-                void _Func(Luban.EditorBeanBase __x)
-                {
-                    x1 = __x as test.H1;
-                }
-                x1 = new test.H1(_Func);
+                x1 = new test.H1();
             }
         }
         
@@ -79,11 +74,7 @@ public sealed class MultiRowTitle :  Luban.EditorBeanBase
             }
             else
             {
-                void _Func(Luban.EditorBeanBase __x)
-                {
-                    x20 = __x as test.H2;
-                }
-                x20 = new test.H2(_Func);
+                x20 = new test.H2();
             }
         }
         
@@ -166,9 +157,7 @@ public sealed class MultiRowTitle :  Luban.EditorBeanBase
 
     public static void RenderMultiRowTitle(MultiRowTitle obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -333,11 +322,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
         editor.cfg.test.H2 __e1;
-        void _Func(Luban.EditorBeanBase __x)
-{
-    __e1 = __x as test.H2;
-}
-__e1 = new test.H2(_Func);;
+        __e1 = new test.H2();;
         this.x2.Add(__e1);
     }
     if (GUILayout.Button("import", GUILayout.Width(100)))
@@ -409,11 +394,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     {
         var __list1 = new System.Collections.Generic.List<editor.cfg.test.H2>(this.x3);
         editor.cfg.test.H2 __e1;
-        void _Func(Luban.EditorBeanBase __x)
-{
-    __e1 = __x as test.H2;
-}
-__e1 = new test.H2(_Func);;
+        __e1 = new test.H2();;
         __list1.Add(__e1);
         this.x3 = __list1.ToArray();
     }
@@ -488,11 +469,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
     {
         var __list1 = new System.Collections.Generic.List<editor.cfg.test.H2>(this.x4);
         editor.cfg.test.H2 __e1;
-        void _Func(Luban.EditorBeanBase __x)
-{
-    __e1 = __x as test.H2;
-}
-__e1 = new test.H2(_Func);;
+        __e1 = new test.H2();;
         __list1.Add(__e1);
         this.x4 = __list1.ToArray();
     }
@@ -513,7 +490,7 @@ __e1 = new test.H2(_Func);;
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static MultiRowTitle LoadJsonMultiRowTitle(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static MultiRowTitle LoadJsonMultiRowTitle(SimpleJSON.JSONNode _json)
     {
         MultiRowTitle obj = new test.MultiRowTitle();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

@@ -19,9 +19,8 @@ namespace editor.cfg.l10n
 
 public sealed class L10NDemo :  Luban.EditorBeanBase 
 {
-    public L10NDemo(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public L10NDemo()
     {
-        _setChangeAction = setChangeAction;
             text = "";
     }
 
@@ -69,9 +68,7 @@ public sealed class L10NDemo :  Luban.EditorBeanBase
 
     public static void RenderL10NDemo(L10NDemo obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -99,7 +96,7 @@ else
 this.text = UnityEditor.EditorGUILayout.TextField(this.text, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static L10NDemo LoadJsonL10NDemo(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static L10NDemo LoadJsonL10NDemo(SimpleJSON.JSONNode _json)
     {
         L10NDemo obj = new l10n.L10NDemo();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

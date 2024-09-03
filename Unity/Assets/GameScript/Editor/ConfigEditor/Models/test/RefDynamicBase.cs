@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public abstract class RefDynamicBase :  Luban.EditorBeanBase 
 {
-    public RefDynamicBase(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public RefDynamicBase()
     {
-        _setChangeAction = setChangeAction;
     }
     public abstract string GetTypeStr();
 
@@ -29,16 +28,15 @@ public abstract class RefDynamicBase :  Luban.EditorBeanBase
     public int TypeIndex
     {
         get => _typeIndex;
-        set
-        {
-            if(_typeIndex == value)
-            {
-                return;
-            }
-            _typeIndex = value;
-            var obj = Create(Types[value], _setChangeAction);
-            _setChangeAction(obj);
-        }
+        //set
+        //{
+        //    if(_typeIndex == value)
+        //    {
+        //        return;
+        //    }
+        //    _typeIndex = value;
+        //    var obj = Create(Types[value]);
+        //}
     }
     private static string[] Types = new string[]
     {
@@ -49,14 +47,14 @@ public abstract class RefDynamicBase :  Luban.EditorBeanBase
         "RefBean",
     };
 
-    public static RefDynamicBase Create(string type, Action<Luban.EditorBeanBase> setChangeAction)
+    public static RefDynamicBase Create(string type)
     {
         switch (type)
         {
             case "test.RefBean":   
             case "RefBean":
             {
-                var obj = new test.RefBean(setChangeAction);
+                var obj = new test.RefBean();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
@@ -66,13 +64,17 @@ public abstract class RefDynamicBase :  Luban.EditorBeanBase
 
     private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
 
-    public static void RenderRefDynamicBase(RefDynamicBase obj)
+    public static void RenderRefDynamicBase(ref RefDynamicBase obj)
     {
         UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
         var array = ConfigEditorSettings.showComment ? TypeAlias : Types;
         UnityEditor.EditorGUILayout.BeginHorizontal();
         UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
-        obj.TypeIndex = UnityEditor.EditorGUILayout.Popup(obj.TypeIndex, array, GUILayout.Width(200));
+        var index = UnityEditor.EditorGUILayout.Popup(obj.TypeIndex, array, GUILayout.Width(200));
+        if (obj.TypeIndex != index)
+        {
+            obj = Create(Types[index]);
+        }
         UnityEditor.EditorGUILayout.EndHorizontal();
         obj?.Render();
         UnityEditor.EditorGUILayout.EndVertical();
@@ -80,10 +82,8 @@ public abstract class RefDynamicBase :  Luban.EditorBeanBase
 
     public override void Render()
     {
-{
-    test.RefDynamicBase.RenderRefDynamicBase(this);
-}    }
-    public static RefDynamicBase LoadJsonRefDynamicBase(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    }
+    public static RefDynamicBase LoadJsonRefDynamicBase(SimpleJSON.JSONNode _json)
     {
         string type = _json["$type"];
         RefDynamicBase obj;
@@ -92,7 +92,7 @@ public abstract class RefDynamicBase :  Luban.EditorBeanBase
             case "test.RefBean":   
             case "RefBean":
             {
-                obj = new test.RefBean(setChangeAction); 
+                obj = new test.RefBean(); 
                 obj._typeIndex = Array.IndexOf(Types, "RefBean");
                 break;
             }

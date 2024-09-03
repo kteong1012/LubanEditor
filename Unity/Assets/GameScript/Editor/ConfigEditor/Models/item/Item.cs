@@ -22,9 +22,8 @@ namespace editor.cfg.item
 /// </summary>
 public sealed class Item :  Luban.EditorBeanBase 
 {
-    public Item(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public Item()
     {
-        _setChangeAction = setChangeAction;
             name = "";
             majorType = editor.cfg.item.EMajorType.CURRENCY;
             minorType = editor.cfg.item.EMinorType.DIAMOND;
@@ -222,9 +221,7 @@ public sealed class Item :  Luban.EditorBeanBase
 
     public static void RenderItem(Item obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -345,7 +342,7 @@ else
 this.showOrder = UnityEditor.EditorGUILayout.IntField(this.showOrder, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static Item LoadJsonItem(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static Item LoadJsonItem(SimpleJSON.JSONNode _json)
     {
         Item obj = new item.Item();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

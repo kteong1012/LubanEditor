@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public abstract class DemoDynamic :  Luban.EditorBeanBase 
 {
-    public DemoDynamic(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public DemoDynamic()
     {
-        _setChangeAction = setChangeAction;
     }
     public abstract string GetTypeStr();
 
@@ -29,16 +28,15 @@ public abstract class DemoDynamic :  Luban.EditorBeanBase
     public int TypeIndex
     {
         get => _typeIndex;
-        set
-        {
-            if(_typeIndex == value)
-            {
-                return;
-            }
-            _typeIndex = value;
-            var obj = Create(Types[value], _setChangeAction);
-            _setChangeAction(obj);
-        }
+        //set
+        //{
+        //    if(_typeIndex == value)
+        //    {
+        //        return;
+        //    }
+        //    _typeIndex = value;
+        //    var obj = Create(Types[value]);
+        //}
     }
     private static string[] Types = new string[]
     {
@@ -55,34 +53,34 @@ public abstract class DemoDynamic :  Luban.EditorBeanBase
         "DemoD5",
     };
 
-    public static DemoDynamic Create(string type, Action<Luban.EditorBeanBase> setChangeAction)
+    public static DemoDynamic Create(string type)
     {
         switch (type)
         {
             case "test.DemoD2":   
             case "DemoD2":
             {
-                var obj = new test.DemoD2(setChangeAction);
+                var obj = new test.DemoD2();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "test.DemoE1":   
             case "DemoE1":
             {
-                var obj = new test.DemoE1(setChangeAction);
+                var obj = new test.DemoE1();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "test.login.RoleInfo":
             {
-                var obj = new test.login.RoleInfo(setChangeAction);
+                var obj = new test.login.RoleInfo();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "test.DemoD5":   
             case "DemoD5":
             {
-                var obj = new test.DemoD5(setChangeAction);
+                var obj = new test.DemoD5();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
@@ -92,13 +90,17 @@ public abstract class DemoDynamic :  Luban.EditorBeanBase
 
     private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
 
-    public static void RenderDemoDynamic(DemoDynamic obj)
+    public static void RenderDemoDynamic(ref DemoDynamic obj)
     {
         UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
         var array = ConfigEditorSettings.showComment ? TypeAlias : Types;
         UnityEditor.EditorGUILayout.BeginHorizontal();
         UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
-        obj.TypeIndex = UnityEditor.EditorGUILayout.Popup(obj.TypeIndex, array, GUILayout.Width(200));
+        var index = UnityEditor.EditorGUILayout.Popup(obj.TypeIndex, array, GUILayout.Width(200));
+        if (obj.TypeIndex != index)
+        {
+            obj = Create(Types[index]);
+        }
         UnityEditor.EditorGUILayout.EndHorizontal();
         obj?.Render();
         UnityEditor.EditorGUILayout.EndVertical();
@@ -106,10 +108,8 @@ public abstract class DemoDynamic :  Luban.EditorBeanBase
 
     public override void Render()
     {
-{
-    test.DemoDynamic.RenderDemoDynamic(this);
-}    }
-    public static DemoDynamic LoadJsonDemoDynamic(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    }
+    public static DemoDynamic LoadJsonDemoDynamic(SimpleJSON.JSONNode _json)
     {
         string type = _json["$type"];
         DemoDynamic obj;
@@ -118,27 +118,27 @@ public abstract class DemoDynamic :  Luban.EditorBeanBase
             case "test.DemoD2":   
             case "DemoD2":
             {
-                obj = new test.DemoD2(setChangeAction); 
+                obj = new test.DemoD2(); 
                 obj._typeIndex = Array.IndexOf(Types, "DemoD2");
                 break;
             }
             case "test.DemoE1":   
             case "DemoE1":
             {
-                obj = new test.DemoE1(setChangeAction); 
+                obj = new test.DemoE1(); 
                 obj._typeIndex = Array.IndexOf(Types, "DemoE1");
                 break;
             }
             case "test.login.RoleInfo":
             {
-                obj = new test.login.RoleInfo(setChangeAction); 
+                obj = new test.login.RoleInfo(); 
                 obj._typeIndex = Array.IndexOf(Types, "test.login.RoleInfo");
                 break;
             }
             case "test.DemoD5":   
             case "DemoD5":
             {
-                obj = new test.DemoD5(setChangeAction); 
+                obj = new test.DemoD5(); 
                 obj._typeIndex = Array.IndexOf(Types, "DemoD5");
                 break;
             }

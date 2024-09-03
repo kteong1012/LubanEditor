@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class DemoType1 :  Luban.EditorBeanBase 
 {
-    public DemoType1(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public DemoType1()
     {
-        _setChangeAction = setChangeAction;
     }
 
     public override void LoadJson(SimpleJSON.JSONObject _json)
@@ -51,9 +50,7 @@ public sealed class DemoType1 :  Luban.EditorBeanBase
 
     public static void RenderDemoType1(DemoType1 obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -71,7 +68,7 @@ else
 this.x1 = UnityEditor.EditorGUILayout.IntField(this.x1, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static DemoType1 LoadJsonDemoType1(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static DemoType1 LoadJsonDemoType1(SimpleJSON.JSONNode _json)
     {
         DemoType1 obj = new test.DemoType1();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

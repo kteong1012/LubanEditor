@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class TestMapper :  Luban.EditorBeanBase 
 {
-    public TestMapper(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public TestMapper()
     {
-        _setChangeAction = setChangeAction;
             audioType = editor.cfg.AudioType.UNKNOWN;
             v2 = new editor.cfg.vec2();
     }
@@ -60,11 +59,7 @@ public sealed class TestMapper :  Luban.EditorBeanBase
             }
             else
             {
-                void _Func(Luban.EditorBeanBase __x)
-                {
-                    v2 = __x as vec2;
-                }
-                v2 = new vec2(_Func);
+                v2 = new vec2();
             }
         }
         
@@ -87,9 +82,7 @@ public sealed class TestMapper :  Luban.EditorBeanBase
 
     public static void RenderTestMapper(TestMapper obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -150,7 +143,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static TestMapper LoadJsonTestMapper(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static TestMapper LoadJsonTestMapper(SimpleJSON.JSONNode _json)
     {
         TestMapper obj = new test.TestMapper();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

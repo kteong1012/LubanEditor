@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public sealed class Decorator :  test.ItemBase 
 {
-    public Decorator(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
+    public Decorator()
     {
-        _setChangeAction = setChangeAction;
     }
     public override string GetTypeStr() => TYPE_STR;
     private const string TYPE_STR = "Decorator";
@@ -102,9 +101,7 @@ public sealed class Decorator :  test.ItemBase
 
     public static void RenderDecorator(Decorator obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -152,7 +149,7 @@ else
 this.duration = UnityEditor.EditorGUILayout.IntField(this.duration, GUILayout.Width(150));
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static Decorator LoadJsonDecorator(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static Decorator LoadJsonDecorator(SimpleJSON.JSONNode _json)
     {
         Decorator obj = new test.Decorator();
         obj.LoadJson((SimpleJSON.JSONObject)_json);

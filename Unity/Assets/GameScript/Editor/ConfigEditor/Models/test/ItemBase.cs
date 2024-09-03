@@ -19,9 +19,8 @@ namespace editor.cfg.test
 
 public abstract class ItemBase :  Luban.EditorBeanBase 
 {
-    public ItemBase(Action<Luban.EditorBeanBase> setChangeAction = null) 
+    public ItemBase()
     {
-        _setChangeAction = setChangeAction;
             name = "";
             desc = "";
     }
@@ -31,16 +30,15 @@ public abstract class ItemBase :  Luban.EditorBeanBase
     public int TypeIndex
     {
         get => _typeIndex;
-        set
-        {
-            if(_typeIndex == value)
-            {
-                return;
-            }
-            _typeIndex = value;
-            var obj = Create(Types[value], _setChangeAction);
-            _setChangeAction(obj);
-        }
+        //set
+        //{
+        //    if(_typeIndex == value)
+        //    {
+        //        return;
+        //    }
+        //    _typeIndex = value;
+        //    var obj = Create(Types[value]);
+        //}
     }
     private static string[] Types = new string[]
     {
@@ -55,28 +53,28 @@ public abstract class ItemBase :  Luban.EditorBeanBase
         "Decorator",
     };
 
-    public static ItemBase Create(string type, Action<Luban.EditorBeanBase> setChangeAction)
+    public static ItemBase Create(string type)
     {
         switch (type)
         {
             case "test.Item":   
             case "Item":
             {
-                var obj = new test.Item(setChangeAction);
+                var obj = new test.Item();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "test.Equipment":   
             case "Equipment":
             {
-                var obj = new test.Equipment(setChangeAction);
+                var obj = new test.Equipment();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
             case "test.Decorator":   
             case "Decorator":
             {
-                var obj = new test.Decorator(setChangeAction);
+                var obj = new test.Decorator();
                 obj._typeIndex = Array.IndexOf(Types,type);
                 return obj;
             }
@@ -86,13 +84,17 @@ public abstract class ItemBase :  Luban.EditorBeanBase
 
     private static GUIStyle _areaStyle = new GUIStyle(GUI.skin.button);
 
-    public static void RenderItemBase(ItemBase obj)
+    public static void RenderItemBase(ref ItemBase obj)
     {
         UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
         var array = ConfigEditorSettings.showComment ? TypeAlias : Types;
         UnityEditor.EditorGUILayout.BeginHorizontal();
         UnityEditor.EditorGUILayout.LabelField("类型", GUILayout.Width(100));
-        obj.TypeIndex = UnityEditor.EditorGUILayout.Popup(obj.TypeIndex, array, GUILayout.Width(200));
+        var index = UnityEditor.EditorGUILayout.Popup(obj.TypeIndex, array, GUILayout.Width(200));
+        if (obj.TypeIndex != index)
+        {
+            obj = Create(Types[index]);
+        }
         UnityEditor.EditorGUILayout.EndHorizontal();
         obj?.Render();
         UnityEditor.EditorGUILayout.EndVertical();
@@ -100,10 +102,8 @@ public abstract class ItemBase :  Luban.EditorBeanBase
 
     public override void Render()
     {
-{
-    test.ItemBase.RenderItemBase(this);
-}    }
-    public static ItemBase LoadJsonItemBase(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    }
+    public static ItemBase LoadJsonItemBase(SimpleJSON.JSONNode _json)
     {
         string type = _json["$type"];
         ItemBase obj;
@@ -112,21 +112,21 @@ public abstract class ItemBase :  Luban.EditorBeanBase
             case "test.Item":   
             case "Item":
             {
-                obj = new test.Item(setChangeAction); 
+                obj = new test.Item(); 
                 obj._typeIndex = Array.IndexOf(Types, "Item");
                 break;
             }
             case "test.Equipment":   
             case "Equipment":
             {
-                obj = new test.Equipment(setChangeAction); 
+                obj = new test.Equipment(); 
                 obj._typeIndex = Array.IndexOf(Types, "Equipment");
                 break;
             }
             case "test.Decorator":   
             case "Decorator":
             {
-                obj = new test.Decorator(setChangeAction); 
+                obj = new test.Decorator(); 
                 obj._typeIndex = Array.IndexOf(Types, "Decorator");
                 break;
             }

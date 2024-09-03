@@ -19,9 +19,8 @@ namespace editor.cfg.ai
 
 public sealed class IsNotSet :  ai.KeyQueryOperator 
 {
-    public IsNotSet(Action<Luban.EditorBeanBase> setChangeAction = null)  : base(setChangeAction) 
+    public IsNotSet()
     {
-        _setChangeAction = setChangeAction;
     }
     public override string GetTypeStr() => TYPE_STR;
     private const string TYPE_STR = "IsNotSet";
@@ -38,9 +37,7 @@ public sealed class IsNotSet :  ai.KeyQueryOperator
 
     public static void RenderIsNotSet(IsNotSet obj)
     {
-        UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
-        obj?.Render();
-        UnityEditor.EditorGUILayout.EndVertical();
+        obj.Render();
     }
 
     public override void Render()
@@ -48,7 +45,7 @@ public sealed class IsNotSet :  ai.KeyQueryOperator
 {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);    UnityEditor.EditorGUILayout.EndVertical();
 }    }
-    public static IsNotSet LoadJsonIsNotSet(SimpleJSON.JSONNode _json, Action<Luban.EditorBeanBase> setChangeAction = null)
+    public static IsNotSet LoadJsonIsNotSet(SimpleJSON.JSONNode _json)
     {
         IsNotSet obj = new ai.IsNotSet();
         obj.LoadJson((SimpleJSON.JSONObject)_json);
