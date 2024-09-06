@@ -107,8 +107,20 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("audio_type", ""), GUILayout.Width(100));
 }
-
-this.audioType = (editor.cfg.AudioType)UnityEditor.EditorGUILayout.EnumPopup(this.audioType, GUILayout.Width(150));
+{
+    if (ConfigEditorSettings.showComment)
+    {
+        var __items1 = AudioType_Metadata.GetItems();
+        var __names1 = __items1.Select(x => x.Alias).ToArray();
+        var __index1 = __items1.IndexOf(AudioType_Metadata.GetByName(this.audioType.ToString()));
+        __index1 = UnityEditor.EditorGUILayout.Popup(__index1, __names1, GUILayout.Width(150));
+        this.audioType = (editor.cfg.AudioType)__items1[__index1].Value;
+    }
+    else
+    {
+        this.audioType = (editor.cfg.AudioType)UnityEditor.EditorGUILayout.EnumPopup(this.audioType, GUILayout.Width(150));
+    }
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {

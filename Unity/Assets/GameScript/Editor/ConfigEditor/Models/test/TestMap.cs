@@ -358,8 +358,20 @@ else
             __key1 = __e1[0] != null ? (editor.cfg.test.DemoEnum)__e1[0] : default;
             __value1 = __e1[1] != null ? (int)__e1[1] : default;
         }
-        
-__key1 = (editor.cfg.test.DemoEnum)UnityEditor.EditorGUILayout.EnumPopup(__key1, GUILayout.Width(150));;
+        {
+    if (ConfigEditorSettings.showComment)
+    {
+        var __items2 = test.DemoEnum_Metadata.GetItems();
+        var __names2 = __items2.Select(x => x.Alias).ToArray();
+        var __index2 = __items2.IndexOf(test.DemoEnum_Metadata.GetByName(__key1.ToString()));
+        __index2 = UnityEditor.EditorGUILayout.Popup(__index2, __names2, GUILayout.Width(150));
+        __key1 = (editor.cfg.test.DemoEnum)__items2[__index2].Value;
+    }
+    else
+    {
+        __key1 = (editor.cfg.test.DemoEnum)UnityEditor.EditorGUILayout.EnumPopup(__key1, GUILayout.Width(150));
+    }
+};
         __value1 = UnityEditor.EditorGUILayout.IntField(__value1, GUILayout.Width(150));;
         __e1[0] = __key1;
         __e1[1] = __value1;

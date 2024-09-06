@@ -162,8 +162,20 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("attr", ""), GUILayout.Width(100));
 }
-
-this.attr = (editor.cfg.test.DemoEnum)UnityEditor.EditorGUILayout.EnumPopup(this.attr, GUILayout.Width(150));
+{
+    if (ConfigEditorSettings.showComment)
+    {
+        var __items1 = test.DemoEnum_Metadata.GetItems();
+        var __names1 = __items1.Select(x => x.Alias).ToArray();
+        var __index1 = __items1.IndexOf(test.DemoEnum_Metadata.GetByName(this.attr.ToString()));
+        __index1 = UnityEditor.EditorGUILayout.Popup(__index1, __names1, GUILayout.Width(150));
+        this.attr = (editor.cfg.test.DemoEnum)__items1[__index1].Value;
+    }
+    else
+    {
+        this.attr = (editor.cfg.test.DemoEnum)UnityEditor.EditorGUILayout.EnumPopup(this.attr, GUILayout.Width(150));
+    }
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {

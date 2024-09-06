@@ -90,8 +90,20 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("oper", ""), GUILayout.Width(100));
 }
-
-this.oper = (editor.cfg.ai.EOperator)UnityEditor.EditorGUILayout.EnumPopup(this.oper, GUILayout.Width(150));
+{
+    if (ConfigEditorSettings.showComment)
+    {
+        var __items1 = ai.EOperator_Metadata.GetItems();
+        var __names1 = __items1.Select(x => x.Alias).ToArray();
+        var __index1 = __items1.IndexOf(ai.EOperator_Metadata.GetByName(this.oper.ToString()));
+        __index1 = UnityEditor.EditorGUILayout.Popup(__index1, __names1, GUILayout.Width(150));
+        this.oper = (editor.cfg.ai.EOperator)__items1[__index1].Value;
+    }
+    else
+    {
+        this.oper = (editor.cfg.ai.EOperator)UnityEditor.EditorGUILayout.EnumPopup(this.oper, GUILayout.Width(150));
+    }
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {

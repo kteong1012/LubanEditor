@@ -119,8 +119,20 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("flow_abort_mode", ""), GUILayout.Width(100));
 }
-
-this.flowAbortMode = (editor.cfg.ai.EFlowAbortMode)UnityEditor.EditorGUILayout.EnumPopup(this.flowAbortMode, GUILayout.Width(150));
+{
+    if (ConfigEditorSettings.showComment)
+    {
+        var __items1 = ai.EFlowAbortMode_Metadata.GetItems();
+        var __names1 = __items1.Select(x => x.Alias).ToArray();
+        var __index1 = __items1.IndexOf(ai.EFlowAbortMode_Metadata.GetByName(this.flowAbortMode.ToString()));
+        __index1 = UnityEditor.EditorGUILayout.Popup(__index1, __names1, GUILayout.Width(150));
+        this.flowAbortMode = (editor.cfg.ai.EFlowAbortMode)__items1[__index1].Value;
+    }
+    else
+    {
+        this.flowAbortMode = (editor.cfg.ai.EFlowAbortMode)UnityEditor.EditorGUILayout.EnumPopup(this.flowAbortMode, GUILayout.Width(150));
+    }
+}
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
     public static UeForceSuccess LoadJsonUeForceSuccess(SimpleJSON.JSONNode _json)

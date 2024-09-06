@@ -330,8 +330,20 @@ else
         }
         UnityEditor.EditorGUILayout.LabelField(__i1.ToString(), GUILayout.Width(20));
         editor.cfg.test.DemoEnum __e1 = this.x4[__i1];
-        
-__e1 = (editor.cfg.test.DemoEnum)UnityEditor.EditorGUILayout.EnumPopup(__e1, GUILayout.Width(150));;
+        {
+    if (ConfigEditorSettings.showComment)
+    {
+        var __items2 = test.DemoEnum_Metadata.GetItems();
+        var __names2 = __items2.Select(x => x.Alias).ToArray();
+        var __index2 = __items2.IndexOf(test.DemoEnum_Metadata.GetByName(__e1.ToString()));
+        __index2 = UnityEditor.EditorGUILayout.Popup(__index2, __names2, GUILayout.Width(150));
+        __e1 = (editor.cfg.test.DemoEnum)__items2[__index2].Value;
+    }
+    else
+    {
+        __e1 = (editor.cfg.test.DemoEnum)UnityEditor.EditorGUILayout.EnumPopup(__e1, GUILayout.Width(150));
+    }
+};
         this.x4[__i1] = __e1;
         UnityEditor.EditorGUILayout.EndHorizontal();
     }

@@ -256,8 +256,20 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("major_type", ""), GUILayout.Width(100));
 }
-
-this.majorType = (editor.cfg.item.EMajorType)UnityEditor.EditorGUILayout.EnumPopup(this.majorType, GUILayout.Width(150));
+{
+    if (ConfigEditorSettings.showComment)
+    {
+        var __items1 = item.EMajorType_Metadata.GetItems();
+        var __names1 = __items1.Select(x => x.Alias).ToArray();
+        var __index1 = __items1.IndexOf(item.EMajorType_Metadata.GetByName(this.majorType.ToString()));
+        __index1 = UnityEditor.EditorGUILayout.Popup(__index1, __names1, GUILayout.Width(150));
+        this.majorType = (editor.cfg.item.EMajorType)__items1[__index1].Value;
+    }
+    else
+    {
+        this.majorType = (editor.cfg.item.EMajorType)UnityEditor.EditorGUILayout.EnumPopup(this.majorType, GUILayout.Width(150));
+    }
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -267,8 +279,20 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("minor_type", ""), GUILayout.Width(100));
 }
-
-this.minorType = (editor.cfg.item.EMinorType)UnityEditor.EditorGUILayout.EnumPopup(this.minorType, GUILayout.Width(150));
+{
+    if (ConfigEditorSettings.showComment)
+    {
+        var __items1 = item.EMinorType_Metadata.GetItems();
+        var __names1 = __items1.Select(x => x.Alias).ToArray();
+        var __index1 = __items1.IndexOf(item.EMinorType_Metadata.GetByName(this.minorType.ToString()));
+        __index1 = UnityEditor.EditorGUILayout.Popup(__index1, __names1, GUILayout.Width(150));
+        this.minorType = (editor.cfg.item.EMinorType)__items1[__index1].Value;
+    }
+    else
+    {
+        this.minorType = (editor.cfg.item.EMinorType)UnityEditor.EditorGUILayout.EnumPopup(this.minorType, GUILayout.Width(150));
+    }
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -288,8 +312,20 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("quality", ""), GUILayout.Width(100));
 }
-
-this.quality = (editor.cfg.item.EItemQuality)UnityEditor.EditorGUILayout.EnumPopup(this.quality, GUILayout.Width(150));
+{
+    if (ConfigEditorSettings.showComment)
+    {
+        var __items1 = item.EItemQuality_Metadata.GetItems();
+        var __names1 = __items1.Select(x => x.Alias).ToArray();
+        var __index1 = __items1.IndexOf(item.EItemQuality_Metadata.GetByName(this.quality.ToString()));
+        __index1 = UnityEditor.EditorGUILayout.Popup(__index1, __names1, GUILayout.Width(150));
+        this.quality = (editor.cfg.item.EItemQuality)__items1[__index1].Value;
+    }
+    else
+    {
+        this.quality = (editor.cfg.item.EItemQuality)UnityEditor.EditorGUILayout.EnumPopup(this.quality, GUILayout.Width(150));
+    }
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {

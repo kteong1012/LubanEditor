@@ -165,8 +165,20 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("key_type", ""), GUILayout.Width(100));
 }
-
-this.keyType = (editor.cfg.ai.EKeyType)UnityEditor.EditorGUILayout.EnumPopup(this.keyType, GUILayout.Width(150));
+{
+    if (ConfigEditorSettings.showComment)
+    {
+        var __items1 = ai.EKeyType_Metadata.GetItems();
+        var __names1 = __items1.Select(x => x.Alias).ToArray();
+        var __index1 = __items1.IndexOf(ai.EKeyType_Metadata.GetByName(this.keyType.ToString()));
+        __index1 = UnityEditor.EditorGUILayout.Popup(__index1, __names1, GUILayout.Width(150));
+        this.keyType = (editor.cfg.ai.EKeyType)__items1[__index1].Value;
+    }
+    else
+    {
+        this.keyType = (editor.cfg.ai.EKeyType)UnityEditor.EditorGUILayout.EnumPopup(this.keyType, GUILayout.Width(150));
+    }
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {

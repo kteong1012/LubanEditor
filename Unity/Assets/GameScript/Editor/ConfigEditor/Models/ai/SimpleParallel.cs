@@ -316,8 +316,20 @@ else
 {
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("finish_mode", ""), GUILayout.Width(100));
 }
-
-this.finishMode = (editor.cfg.ai.EFinishMode)UnityEditor.EditorGUILayout.EnumPopup(this.finishMode, GUILayout.Width(150));
+{
+    if (ConfigEditorSettings.showComment)
+    {
+        var __items1 = ai.EFinishMode_Metadata.GetItems();
+        var __names1 = __items1.Select(x => x.Alias).ToArray();
+        var __index1 = __items1.IndexOf(ai.EFinishMode_Metadata.GetByName(this.finishMode.ToString()));
+        __index1 = UnityEditor.EditorGUILayout.Popup(__index1, __names1, GUILayout.Width(150));
+        this.finishMode = (editor.cfg.ai.EFinishMode)__items1[__index1].Value;
+    }
+    else
+    {
+        this.finishMode = (editor.cfg.ai.EFinishMode)UnityEditor.EditorGUILayout.EnumPopup(this.finishMode, GUILayout.Width(150));
+    }
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
