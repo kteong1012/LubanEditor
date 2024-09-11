@@ -191,11 +191,11 @@ else
 {
     if (ConfigEditorSettings.showComment)
     {
-        var __items1 = test.DemoEnum_Metadata.GetItems();
-        var __names1 = __items1.Select(x => x.Alias).ToArray();
-        var __index1 = __items1.IndexOf(test.DemoEnum_Metadata.GetByName(this.x2.ToString()));
-        __index1 = UnityEditor.EditorGUILayout.Popup(__index1, __names1, GUILayout.Width(150));
-        this.x2 = (editor.cfg.test.DemoEnum)__items1[__index1].Value;
+        var __index1 = (int)this.x2;
+        var __alias1 = (test.DemoEnum_Alias)this.x2;
+        __alias1 = (test.DemoEnum_Alias)UnityEditor.EditorGUILayout.EnumPopup(__alias1, GUILayout.Width(150));
+        var __item1 = test.DemoEnum_Metadata.GetByNameOrAlias(__alias1.ToString());
+        this.x2 = (editor.cfg.test.DemoEnum)__item1.Value;
     }
     else
     {
@@ -234,6 +234,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x4", ""), GUILayout.Width(100));
 }
 {
+    if (this.x4 == null)
+{   
+    this.x4 = test.DemoDynamic.Create("DemoD2");
+}
     test.DemoDynamic.RenderDemoDynamic(ref this.x4);
 }
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();

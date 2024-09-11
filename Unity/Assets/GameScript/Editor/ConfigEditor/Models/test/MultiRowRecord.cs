@@ -265,6 +265,7 @@ else
 {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
     int __n1 = this.oneRows.Count;
+    UnityEditor.EditorGUILayout.LabelField("长度: " + __n1.ToString());
     for (int __i1 = 0; __i1 < __n1; __i1++)
     {
         UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -309,7 +310,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
         __e1 = new test.MultiRowType1();;
         this.oneRows.Add(__e1);
     }
-    if (GUILayout.Button("import", GUILayout.Width(100)))
+    if (ConfigEditorSettings.showImportButton && GUILayout.Button("import", GUILayout.Width(100)))
     {
         ConfigEditorImportWindow.Open((__importJsonText1) => 
         {
@@ -334,6 +335,7 @@ else
 {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
     int __n1 = this.multiRows1.Count;
+    UnityEditor.EditorGUILayout.LabelField("长度: " + __n1.ToString());
     for (int __i1 = 0; __i1 < __n1; __i1++)
     {
         UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -378,7 +380,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
         __e1 = new test.MultiRowType1();;
         this.multiRows1.Add(__e1);
     }
-    if (GUILayout.Button("import", GUILayout.Width(100)))
+    if (ConfigEditorSettings.showImportButton && GUILayout.Button("import", GUILayout.Width(100)))
     {
         ConfigEditorImportWindow.Open((__importJsonText1) => 
         {
@@ -403,6 +405,7 @@ else
 {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
     int __n1 = this.multiRows2.Length;
+    UnityEditor.EditorGUILayout.LabelField("长度: " + __n1.ToString());
     for (int __i1 = 0; __i1 < __n1; __i1++)
     {
         UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -451,7 +454,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
         __list1.Add(__e1);
         this.multiRows2 = __list1.ToArray();
     }
-    if (GUILayout.Button("import", GUILayout.Width(100)))
+    if (ConfigEditorSettings.showImportButton && GUILayout.Button("import", GUILayout.Width(100)))
     {
         ConfigEditorImportWindow.Open((__importJsonText1) => 
         {
@@ -478,6 +481,7 @@ else
 {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
     int __n1 = this.multiRows4.Count;
+    UnityEditor.EditorGUILayout.LabelField("长度: " + __n1.ToString());
     for (int __i1 = 0; __i1 < __n1; __i1++)
     {
         UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -557,6 +561,7 @@ else
 {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
     int __n1 = this.multiRows5.Count;
+    UnityEditor.EditorGUILayout.LabelField("长度: " + __n1.ToString());
     for (int __i1 = 0; __i1 < __n1; __i1++)
     {
         UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -591,6 +596,7 @@ else
 {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
     int __n3 = __e1.items.Count;
+    UnityEditor.EditorGUILayout.LabelField("长度: " + __n3.ToString());
     for (int __i3 = 0; __i3 < __n3; __i3++)
     {
         UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -635,7 +641,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
         __e3 = new test.MultiRowType1();;
         __e1.items.Add(__e3);
     }
-    if (GUILayout.Button("import", GUILayout.Width(100)))
+    if (ConfigEditorSettings.showImportButton && GUILayout.Button("import", GUILayout.Width(100)))
     {
         ConfigEditorImportWindow.Open((__importJsonText3) => 
         {
@@ -660,7 +666,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
         __e1 = new test.MultiRowType3();;
         this.multiRows5.Add(__e1);
     }
-    if (GUILayout.Button("import", GUILayout.Width(100)))
+    if (ConfigEditorSettings.showImportButton && GUILayout.Button("import", GUILayout.Width(100)))
     {
         ConfigEditorImportWindow.Open((__importJsonText1) => 
         {
@@ -685,6 +691,7 @@ else
 {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
     int __n1 = this.multiRows6.Count;
+    UnityEditor.EditorGUILayout.LabelField("长度: " + __n1.ToString());
     for (int __i1 = 0; __i1 < __n1; __i1++)
     {
         UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -764,6 +771,7 @@ else
 {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
     int __n1 = this.multiRows7.Count;
+    UnityEditor.EditorGUILayout.LabelField("长度: " + __n1.ToString());
     for (int __i1 = 0; __i1 < __n1; __i1++)
     {
         UnityEditor.EditorGUILayout.BeginHorizontal();

@@ -126,6 +126,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("date", ""), GUILayout.Width(100));
 }
 {
+    if (this.date == null)
+{   
+    this.date = test.DemoDynamic.Create("DemoD2");
+}
     test.DemoDynamic.RenderDemoDynamic(ref this.date);
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();

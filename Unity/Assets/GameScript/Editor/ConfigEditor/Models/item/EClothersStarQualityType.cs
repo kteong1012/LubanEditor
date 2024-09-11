@@ -54,6 +54,20 @@ namespace editor.cfg.item
         TEN = 10,
     }
 
+    public enum EClothersStarQualityType_Alias
+    {
+        一星 = 1,
+        二星 = 2,
+        三星 = 3,
+        四星 = 4,
+        五星 = 5,
+        六星 = 6,
+        七星 = 7,
+        八星 = 8,
+        九星 = 9,
+        十星 = 10,
+    }
+
     public static class EClothersStarQualityType_Metadata
     {
         public static readonly Luban.EditorEnumItemInfo ONE = new Luban.EditorEnumItemInfo("ONE", "一星", 1, "一星");

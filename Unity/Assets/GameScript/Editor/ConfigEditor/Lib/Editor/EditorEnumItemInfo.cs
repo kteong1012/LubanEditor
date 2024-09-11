@@ -16,6 +16,8 @@ namespace Luban
 
         public string Comment { get; }
 
+        public string AliasOrName => !string.IsNullOrEmpty(Alias) ? Alias : Name;
+
         public EditorEnumItemInfo(string name, string alias, int value, string comment)
         {
             Name = name;

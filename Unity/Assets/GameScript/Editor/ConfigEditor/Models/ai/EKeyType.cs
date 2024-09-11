@@ -24,6 +24,20 @@ namespace editor.cfg.ai
         OBJECT = 10,
     }
 
+    public enum EKeyType_Alias
+    {
+        BOOL = 1,
+        INT = 2,
+        FLOAT = 3,
+        STRING = 4,
+        VECTOR = 5,
+        ROTATOR = 6,
+        NAME = 7,
+        CLASS1 = 8,
+        ENUM1 = 9,
+        OBJECT = 10,
+    }
+
     public static class EKeyType_Metadata
     {
         public static readonly Luban.EditorEnumItemInfo BOOL = new Luban.EditorEnumItemInfo("BOOL", "", 1, "");

@@ -58,6 +58,21 @@ namespace editor.cfg.item
         MATERIAL = 11,
     }
 
+    public enum EMajorType_Alias
+    {
+        货币 = 1,
+        服装 = 2,
+        任务 = 3,
+        消耗品 = 4,
+        宝箱 = 5,
+        成就和称谓 = 6,
+        头像框 = 7,
+        语音 = 8,
+        动作 = 9,
+        扩容道具 = 10,
+        制作材料 = 11,
+    }
+
     public static class EMajorType_Metadata
     {
         public static readonly Luban.EditorEnumItemInfo CURRENCY = new Luban.EditorEnumItemInfo("CURRENCY", "货币", 1, "货币");

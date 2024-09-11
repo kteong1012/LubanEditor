@@ -168,11 +168,11 @@ else
 {
     if (ConfigEditorSettings.showComment)
     {
-        var __items1 = ai.EKeyType_Metadata.GetItems();
-        var __names1 = __items1.Select(x => x.Alias).ToArray();
-        var __index1 = __items1.IndexOf(ai.EKeyType_Metadata.GetByName(this.keyType.ToString()));
-        __index1 = UnityEditor.EditorGUILayout.Popup(__index1, __names1, GUILayout.Width(150));
-        this.keyType = (editor.cfg.ai.EKeyType)__items1[__index1].Value;
+        var __index1 = (int)this.keyType;
+        var __alias1 = (ai.EKeyType_Alias)this.keyType;
+        __alias1 = (ai.EKeyType_Alias)UnityEditor.EditorGUILayout.EnumPopup(__alias1, GUILayout.Width(150));
+        var __item1 = ai.EKeyType_Metadata.GetByNameOrAlias(__alias1.ToString());
+        this.keyType = (editor.cfg.ai.EKeyType)__item1.Value;
     }
     else
     {

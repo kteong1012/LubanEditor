@@ -165,11 +165,11 @@ else
 {
     if (ConfigEditorSettings.showComment)
     {
-        var __items1 = test.DemoEnum_Metadata.GetItems();
-        var __names1 = __items1.Select(x => x.Alias).ToArray();
-        var __index1 = __items1.IndexOf(test.DemoEnum_Metadata.GetByName(this.attr.ToString()));
-        __index1 = UnityEditor.EditorGUILayout.Popup(__index1, __names1, GUILayout.Width(150));
-        this.attr = (editor.cfg.test.DemoEnum)__items1[__index1].Value;
+        var __index1 = (int)this.attr;
+        var __alias1 = (test.DemoEnum_Alias)this.attr;
+        __alias1 = (test.DemoEnum_Alias)UnityEditor.EditorGUILayout.EnumPopup(__alias1, GUILayout.Width(150));
+        var __item1 = test.DemoEnum_Metadata.GetByNameOrAlias(__alias1.ToString());
+        this.attr = (editor.cfg.test.DemoEnum)__item1.Value;
     }
     else
     {

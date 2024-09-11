@@ -30,6 +30,14 @@ namespace editor.cfg.test
         D = 4,
     }
 
+    public enum ETestQuality_Alias
+    {
+        白 = 1,
+        黑 = 2,
+        蓝 = 3,
+        红 = 4,
+    }
+
     public static class ETestQuality_Metadata
     {
         public static readonly Luban.EditorEnumItemInfo A = new Luban.EditorEnumItemInfo("A", "白", 1, "最高品质");

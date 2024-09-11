@@ -18,6 +18,14 @@ namespace editor.cfg.ai
         BOTH = 3,
     }
 
+    public enum EFlowAbortMode_Alias
+    {
+        NONE = 0,
+        LOWER_PRIORITY = 1,
+        SELF = 2,
+        BOTH = 3,
+    }
+
     public static class EFlowAbortMode_Metadata
     {
         public static readonly Luban.EditorEnumItemInfo NONE = new Luban.EditorEnumItemInfo("NONE", "", 0, "");

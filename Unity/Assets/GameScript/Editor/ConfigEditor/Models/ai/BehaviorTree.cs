@@ -182,6 +182,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("root", ""), GUILayout.Width(100));
 }
 {
+    if (this.root == null)
+{   
+    this.root = ai.ComposeNode.Create("Sequence");
+}
     ai.ComposeNode.RenderComposeNode(ref this.root);
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();

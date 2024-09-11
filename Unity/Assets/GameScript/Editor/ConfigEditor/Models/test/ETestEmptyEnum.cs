@@ -14,6 +14,10 @@ namespace editor.cfg.test
     {
     }
 
+    public enum ETestEmptyEnum_Alias
+    {
+    }
+
     public static class ETestEmptyEnum_Metadata
     {
 

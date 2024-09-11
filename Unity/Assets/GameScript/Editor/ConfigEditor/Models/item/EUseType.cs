@@ -22,6 +22,12 @@ namespace editor.cfg.item
         AUTO = 1,
     }
 
+    public enum EUseType_Alias
+    {
+        手动 = 0,
+        自动 = 1,
+    }
+
     public static class EUseType_Metadata
     {
         public static readonly Luban.EditorEnumItemInfo MANUAL = new Luban.EditorEnumItemInfo("MANUAL", "手动", 0, "手动");

@@ -174,6 +174,7 @@ else
 {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
     int __n1 = this.decorators.Count;
+    UnityEditor.EditorGUILayout.LabelField("长度: " + __n1.ToString());
     for (int __i1 = 0; __i1 < __n1; __i1++)
     {
         UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -186,6 +187,10 @@ else
         UnityEditor.EditorGUILayout.LabelField(__i1.ToString(), GUILayout.Width(20));
         editor.cfg.ai.Decorator __e1 = this.decorators[__i1];
         {
+    if (__e1 == null)
+{   
+    __e1 = ai.Decorator.Create("UeLoop");
+}
     ai.Decorator.RenderDecorator(ref __e1);
 };
         this.decorators[__i1] = __e1;
@@ -198,7 +203,7 @@ else
         __e1 = ai.Decorator.Create("UeLoop");;
         this.decorators.Add(__e1);
     }
-    if (GUILayout.Button("import", GUILayout.Width(100)))
+    if (ConfigEditorSettings.showImportButton && GUILayout.Button("import", GUILayout.Width(100)))
     {
         ConfigEditorImportWindow.Open((__importJsonText1) => 
         {
@@ -228,6 +233,7 @@ else
 {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
     int __n1 = this.services.Count;
+    UnityEditor.EditorGUILayout.LabelField("长度: " + __n1.ToString());
     for (int __i1 = 0; __i1 < __n1; __i1++)
     {
         UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -240,6 +246,10 @@ else
         UnityEditor.EditorGUILayout.LabelField(__i1.ToString(), GUILayout.Width(20));
         editor.cfg.ai.Service __e1 = this.services[__i1];
         {
+    if (__e1 == null)
+{   
+    __e1 = ai.Service.Create("UeSetDefaultFocus");
+}
     ai.Service.RenderService(ref __e1);
 };
         this.services[__i1] = __e1;
@@ -252,7 +262,7 @@ else
         __e1 = ai.Service.Create("UeSetDefaultFocus");;
         this.services.Add(__e1);
     }
-    if (GUILayout.Button("import", GUILayout.Width(100)))
+    if (ConfigEditorSettings.showImportButton && GUILayout.Button("import", GUILayout.Width(100)))
     {
         ConfigEditorImportWindow.Open((__importJsonText1) => 
         {
@@ -282,6 +292,7 @@ else
 {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
     int __n1 = this.children.Count;
+    UnityEditor.EditorGUILayout.LabelField("长度: " + __n1.ToString());
     for (int __i1 = 0; __i1 < __n1; __i1++)
     {
         UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -294,6 +305,10 @@ else
         UnityEditor.EditorGUILayout.LabelField(__i1.ToString(), GUILayout.Width(20));
         editor.cfg.ai.FlowNode __e1 = this.children[__i1];
         {
+    if (__e1 == null)
+{   
+    __e1 = ai.FlowNode.Create("Sequence");
+}
     ai.FlowNode.RenderFlowNode(ref __e1);
 };
         this.children[__i1] = __e1;
@@ -306,7 +321,7 @@ else
         __e1 = ai.FlowNode.Create("Sequence");;
         this.children.Add(__e1);
     }
-    if (GUILayout.Button("import", GUILayout.Width(100)))
+    if (ConfigEditorSettings.showImportButton && GUILayout.Button("import", GUILayout.Width(100)))
     {
         ConfigEditorImportWindow.Open((__importJsonText1) => 
         {

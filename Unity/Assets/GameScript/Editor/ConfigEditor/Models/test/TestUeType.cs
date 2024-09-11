@@ -415,11 +415,11 @@ else
 {
     if (ConfigEditorSettings.showComment)
     {
-        var __items1 = test.ETestUeType_Metadata.GetItems();
-        var __names1 = __items1.Select(x => x.Alias).ToArray();
-        var __index1 = __items1.IndexOf(test.ETestUeType_Metadata.GetByName(this.x13.ToString()));
-        __index1 = UnityEditor.EditorGUILayout.Popup(__index1, __names1, GUILayout.Width(150));
-        this.x13 = (editor.cfg.test.ETestUeType)__items1[__index1].Value;
+        var __index1 = (int)this.x13;
+        var __alias1 = (test.ETestUeType_Alias)this.x13;
+        __alias1 = (test.ETestUeType_Alias)UnityEditor.EditorGUILayout.EnumPopup(__alias1, GUILayout.Width(150));
+        var __item1 = test.ETestUeType_Metadata.GetByNameOrAlias(__alias1.ToString());
+        this.x13 = (editor.cfg.test.ETestUeType)__item1.Value;
     }
     else
     {
@@ -448,6 +448,7 @@ else
 {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
     int __n1 = this.k1.Length;
+    UnityEditor.EditorGUILayout.LabelField("长度: " + __n1.ToString());
     for (int __i1 = 0; __i1 < __n1; __i1++)
     {
         UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -474,7 +475,7 @@ else
         __list1.Add(__e1);
         this.k1 = __list1.ToArray();
     }
-    if (GUILayout.Button("import", GUILayout.Width(100)))
+    if (ConfigEditorSettings.showImportButton && GUILayout.Button("import", GUILayout.Width(100)))
     {
         ConfigEditorImportWindow.Open((__importJsonText1) => 
         {
@@ -501,6 +502,7 @@ else
 {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
     int __n1 = this.k2.Count;
+    UnityEditor.EditorGUILayout.LabelField("长度: " + __n1.ToString());
     for (int __i1 = 0; __i1 < __n1; __i1++)
     {
         UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -523,7 +525,7 @@ else
         __e1 = 0;;
         this.k2.Add(__e1);
     }
-    if (GUILayout.Button("import", GUILayout.Width(100)))
+    if (ConfigEditorSettings.showImportButton && GUILayout.Button("import", GUILayout.Width(100)))
     {
         ConfigEditorImportWindow.Open((__importJsonText1) => 
         {
@@ -548,6 +550,7 @@ else
 {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
     int __n1 = this.k5.Count;
+    UnityEditor.EditorGUILayout.LabelField("长度: " + __n1.ToString());
     for (int __i1 = 0; __i1 < __n1; __i1++)
     {
         UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -563,12 +566,24 @@ else
         this.k5[__i1] = __e1;
         UnityEditor.EditorGUILayout.EndHorizontal();
     }
+    UnityEditor.EditorGUILayout.BeginHorizontal();
     if (GUILayout.Button("+", GUILayout.Width(20)))
     {
         int __e1;
         __e1 = 0;;
         this.k5.Add(__e1);
     }
+    if (ConfigEditorSettings.showImportButton && GUILayout.Button("import", GUILayout.Width(100)))
+    {
+        ConfigEditorImportWindow.Open((__importJsonText1) => 
+        {
+            var __importJson1 = SimpleJSON.JSON.Parse(__importJsonText1);
+            int __importElement1;
+            if(!__importJson1.IsNumber) { throw new SerializationException(); }  __importElement1 = __importJson1;
+            this.k5.Add(__importElement1);
+        });
+    }
+    UnityEditor.EditorGUILayout.EndHorizontal();
     UnityEditor.EditorGUILayout.EndVertical();
 }
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -583,6 +598,7 @@ else
 {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
     int __n1 = this.k8.Count;
+    UnityEditor.EditorGUILayout.LabelField("长度: " + __n1.ToString());
     for (int __i1 = 0; __i1 < __n1; __i1++)
     {
         UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -630,6 +646,7 @@ else
 {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
     int __n1 = this.k9.Count;
+    UnityEditor.EditorGUILayout.LabelField("长度: " + __n1.ToString());
     for (int __i1 = 0; __i1 < __n1; __i1++)
     {
         UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -674,7 +691,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
         __e1 = new test.DemoE2();;
         this.k9.Add(__e1);
     }
-    if (GUILayout.Button("import", GUILayout.Width(100)))
+    if (ConfigEditorSettings.showImportButton && GUILayout.Button("import", GUILayout.Width(100)))
     {
         ConfigEditorImportWindow.Open((__importJsonText1) => 
         {

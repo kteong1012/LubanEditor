@@ -22,6 +22,12 @@ namespace editor.cfg.item
         WU_ZHE = 2,
     }
 
+    public enum EClothersTag_Alias
+    {
+        防晒 = 1,
+        舞者 = 2,
+    }
+
     public static class EClothersTag_Metadata
     {
         public static readonly Luban.EditorEnumItemInfo FANG_SHAI = new Luban.EditorEnumItemInfo("FANG_SHAI", "防晒", 1, "防晒");

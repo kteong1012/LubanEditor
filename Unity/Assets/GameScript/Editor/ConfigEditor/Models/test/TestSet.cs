@@ -178,6 +178,7 @@ else
 {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
     int __n1 = this.x1.Count;
+    UnityEditor.EditorGUILayout.LabelField("长度: " + __n1.ToString());
     for (int __i1 = 0; __i1 < __n1; __i1++)
     {
         UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -200,7 +201,7 @@ else
         __e1 = 0;;
         this.x1.Add(__e1);
     }
-    if (GUILayout.Button("import", GUILayout.Width(100)))
+    if (ConfigEditorSettings.showImportButton && GUILayout.Button("import", GUILayout.Width(100)))
     {
         ConfigEditorImportWindow.Open((__importJsonText1) => 
         {
@@ -225,6 +226,7 @@ else
 {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
     int __n1 = this.x2.Count;
+    UnityEditor.EditorGUILayout.LabelField("长度: " + __n1.ToString());
     for (int __i1 = 0; __i1 < __n1; __i1++)
     {
         UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -247,7 +249,7 @@ else
         __e1 = 0;;
         this.x2.Add(__e1);
     }
-    if (GUILayout.Button("import", GUILayout.Width(100)))
+    if (ConfigEditorSettings.showImportButton && GUILayout.Button("import", GUILayout.Width(100)))
     {
         ConfigEditorImportWindow.Open((__importJsonText1) => 
         {
@@ -272,6 +274,7 @@ else
 {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
     int __n1 = this.x3.Count;
+    UnityEditor.EditorGUILayout.LabelField("长度: " + __n1.ToString());
     for (int __i1 = 0; __i1 < __n1; __i1++)
     {
         UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -294,7 +297,7 @@ else
         __e1 = "";;
         this.x3.Add(__e1);
     }
-    if (GUILayout.Button("import", GUILayout.Width(100)))
+    if (ConfigEditorSettings.showImportButton && GUILayout.Button("import", GUILayout.Width(100)))
     {
         ConfigEditorImportWindow.Open((__importJsonText1) => 
         {
@@ -319,6 +322,7 @@ else
 {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
     int __n1 = this.x4.Count;
+    UnityEditor.EditorGUILayout.LabelField("长度: " + __n1.ToString());
     for (int __i1 = 0; __i1 < __n1; __i1++)
     {
         UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -333,11 +337,11 @@ else
         {
     if (ConfigEditorSettings.showComment)
     {
-        var __items2 = test.DemoEnum_Metadata.GetItems();
-        var __names2 = __items2.Select(x => x.Alias).ToArray();
-        var __index2 = __items2.IndexOf(test.DemoEnum_Metadata.GetByName(__e1.ToString()));
-        __index2 = UnityEditor.EditorGUILayout.Popup(__index2, __names2, GUILayout.Width(150));
-        __e1 = (editor.cfg.test.DemoEnum)__items2[__index2].Value;
+        var __index2 = (int)__e1;
+        var __alias2 = (test.DemoEnum_Alias)__e1;
+        __alias2 = (test.DemoEnum_Alias)UnityEditor.EditorGUILayout.EnumPopup(__alias2, GUILayout.Width(150));
+        var __item2 = test.DemoEnum_Metadata.GetByNameOrAlias(__alias2.ToString());
+        __e1 = (editor.cfg.test.DemoEnum)__item2.Value;
     }
     else
     {
@@ -354,7 +358,7 @@ else
         __e1 = editor.cfg.test.DemoEnum.NONE;;
         this.x4.Add(__e1);
     }
-    if (GUILayout.Button("import", GUILayout.Width(100)))
+    if (ConfigEditorSettings.showImportButton && GUILayout.Button("import", GUILayout.Width(100)))
     {
         ConfigEditorImportWindow.Open((__importJsonText1) => 
         {

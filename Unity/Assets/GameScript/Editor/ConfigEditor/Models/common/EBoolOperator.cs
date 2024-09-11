@@ -16,6 +16,12 @@ namespace editor.cfg.common
         OR = 1,
     }
 
+    public enum EBoolOperator_Alias
+    {
+        AND = 0,
+        OR = 1,
+    }
+
     public static class EBoolOperator_Metadata
     {
         public static readonly Luban.EditorEnumItemInfo AND = new Luban.EditorEnumItemInfo("AND", "", 0, "");

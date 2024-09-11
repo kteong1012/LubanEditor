@@ -156,7 +156,7 @@ namespace editor.cfg.test
                 {
                     GUI.color = Color.white;
                 }
-                EditorGUILayout.LabelField($"[{i}]", GUILayout.Width(20));
+                EditorGUILayout.LabelField($"[{i}]", GUILayout.Width(50));
                 if (GUILayout.Button(GetId(_datas[i])))
                 {
                     _selectIndex = i;
@@ -201,6 +201,21 @@ namespace editor.cfg.test
                     EditorUtility.DisplayDialog("提示", "请选择数据", "确定");
                 }
             }
+            if (GUILayout.Button("新增拷贝", GUILayout.Width(100)))
+            {
+                if (__SelectData != null)
+                {
+                    var text = GetDataJson(__SelectData);
+                    var json = JSON.Parse(text);
+                    var data = editor.cfg.test.ItemBase.LoadJsonItemBase(json);
+                    _selectIndex = _datas.Count;
+                    _datas.Add(data);
+                }
+                else
+                {
+                    EditorUtility.DisplayDialog("提示", "请选择数据", "确定");
+                }
+            }
             if (GUILayout.Button("预览差异", GUILayout.Width(100)))
             {
                 if (__SelectData != null)
@@ -221,7 +236,14 @@ namespace editor.cfg.test
             _dataScrollPos = GUILayout.BeginScrollView(_dataScrollPos);
             if (__SelectData != default)
             {
-                editor.cfg.test.ItemBase.RenderItemBase(__SelectData);
+                var renderData = __SelectData;
+{
+    if (renderData == null)
+{   
+    renderData = test.ItemBase.Create("Item");
+}
+    test.ItemBase.RenderItemBase(ref renderData);
+}                //editor.cfg.test.ItemBase.RenderItemBase(__SelectData);
             }
             GUILayout.EndScrollView();
             GUILayout.EndVertical();

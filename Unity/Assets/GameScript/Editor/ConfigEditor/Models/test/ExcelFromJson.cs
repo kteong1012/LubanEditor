@@ -412,11 +412,11 @@ else
 {
     if (ConfigEditorSettings.showComment)
     {
-        var __items1 = test.DemoEnum_Metadata.GetItems();
-        var __names1 = __items1.Select(x => x.Alias).ToArray();
-        var __index1 = __items1.IndexOf(test.DemoEnum_Metadata.GetByName(this.x13.ToString()));
-        __index1 = UnityEditor.EditorGUILayout.Popup(__index1, __names1, GUILayout.Width(150));
-        this.x13 = (editor.cfg.test.DemoEnum)__items1[__index1].Value;
+        var __index1 = (int)this.x13;
+        var __alias1 = (test.DemoEnum_Alias)this.x13;
+        __alias1 = (test.DemoEnum_Alias)UnityEditor.EditorGUILayout.EnumPopup(__alias1, GUILayout.Width(150));
+        var __item1 = test.DemoEnum_Metadata.GetByNameOrAlias(__alias1.ToString());
+        this.x13 = (editor.cfg.test.DemoEnum)__item1.Value;
     }
     else
     {
@@ -433,6 +433,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x14", ""), GUILayout.Width(100));
 }
 {
+    if (this.x14 == null)
+{   
+    this.x14 = test.DemoDynamic.Create("DemoD2");
+}
     test.DemoDynamic.RenderDemoDynamic(ref this.x14);
 }
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -447,6 +451,7 @@ else
 {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
     int __n1 = this.k1.Length;
+    UnityEditor.EditorGUILayout.LabelField("长度: " + __n1.ToString());
     for (int __i1 = 0; __i1 < __n1; __i1++)
     {
         UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -473,7 +478,7 @@ else
         __list1.Add(__e1);
         this.k1 = __list1.ToArray();
     }
-    if (GUILayout.Button("import", GUILayout.Width(100)))
+    if (ConfigEditorSettings.showImportButton && GUILayout.Button("import", GUILayout.Width(100)))
     {
         ConfigEditorImportWindow.Open((__importJsonText1) => 
         {
@@ -500,6 +505,7 @@ else
 {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
     int __n1 = this.k8.Count;
+    UnityEditor.EditorGUILayout.LabelField("长度: " + __n1.ToString());
     for (int __i1 = 0; __i1 < __n1; __i1++)
     {
         UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -547,6 +553,7 @@ else
 {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
     int __n1 = this.k9.Count;
+    UnityEditor.EditorGUILayout.LabelField("长度: " + __n1.ToString());
     for (int __i1 = 0; __i1 < __n1; __i1++)
     {
         UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -591,7 +598,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
         __e1 = new test.DemoE2();;
         this.k9.Add(__e1);
     }
-    if (GUILayout.Button("import", GUILayout.Width(100)))
+    if (ConfigEditorSettings.showImportButton && GUILayout.Button("import", GUILayout.Width(100)))
     {
         ConfigEditorImportWindow.Open((__importJsonText1) => 
         {
@@ -616,6 +623,7 @@ else
 {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
     int __n1 = this.k15.Length;
+    UnityEditor.EditorGUILayout.LabelField("长度: " + __n1.ToString());
     for (int __i1 = 0; __i1 < __n1; __i1++)
     {
         UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -630,6 +638,10 @@ else
         UnityEditor.EditorGUILayout.LabelField(__i1.ToString(), GUILayout.Width(20));
         editor.cfg.test.DemoDynamic __e1 = this.k15[__i1];
         {
+    if (__e1 == null)
+{   
+    __e1 = test.DemoDynamic.Create("DemoD2");
+}
     test.DemoDynamic.RenderDemoDynamic(ref __e1);
 };
         this.k15[__i1] = __e1;
@@ -644,7 +656,7 @@ else
         __list1.Add(__e1);
         this.k15 = __list1.ToArray();
     }
-    if (GUILayout.Button("import", GUILayout.Width(100)))
+    if (ConfigEditorSettings.showImportButton && GUILayout.Button("import", GUILayout.Width(100)))
     {
         ConfigEditorImportWindow.Open((__importJsonText1) => 
         {

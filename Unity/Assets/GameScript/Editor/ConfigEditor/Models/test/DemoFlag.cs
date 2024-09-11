@@ -13,18 +13,39 @@ namespace editor.cfg.test
     [System.Flags]
     public enum DemoFlag
     {
+        /// <summary>
+        /// 啊
+        /// </summary>
         A = 1,
+        /// <summary>
+        /// 波
+        /// </summary>
         B = 2,
+        /// <summary>
+        /// 擦
+        /// </summary>
         C = 4,
+        /// <summary>
+        /// 的
+        /// </summary>
         D = 8,
+    }
+
+    [System.Flags]
+    public enum DemoFlag_Alias
+    {
+        啊 = 1,
+        波 = 2,
+        擦 = 4,
+        的 = 8,
     }
 
     public static class DemoFlag_Metadata
     {
-        public static readonly Luban.EditorEnumItemInfo A = new Luban.EditorEnumItemInfo("A", "", 1, "");
-        public static readonly Luban.EditorEnumItemInfo B = new Luban.EditorEnumItemInfo("B", "", 2, "");
-        public static readonly Luban.EditorEnumItemInfo C = new Luban.EditorEnumItemInfo("C", "", 4, "");
-        public static readonly Luban.EditorEnumItemInfo D = new Luban.EditorEnumItemInfo("D", "", 8, "");
+        public static readonly Luban.EditorEnumItemInfo A = new Luban.EditorEnumItemInfo("A", "啊", 1, "啊");
+        public static readonly Luban.EditorEnumItemInfo B = new Luban.EditorEnumItemInfo("B", "波", 2, "波");
+        public static readonly Luban.EditorEnumItemInfo C = new Luban.EditorEnumItemInfo("C", "擦", 4, "擦");
+        public static readonly Luban.EditorEnumItemInfo D = new Luban.EditorEnumItemInfo("D", "的", 8, "的");
 
         private static readonly System.Collections.Generic.List<Luban.EditorEnumItemInfo> __items = new System.Collections.Generic.List<Luban.EditorEnumItemInfo>
         {

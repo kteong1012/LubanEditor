@@ -34,6 +34,15 @@ namespace editor.cfg.item
         POWER_POINT = 5,
     }
 
+    public enum ECurrencyType_Alias
+    {
+        钻石 = 1,
+        金币 = 2,
+        银币 = 3,
+        经验 = 4,
+        能量点 = 5,
+    }
+
     public static class ECurrencyType_Metadata
     {
         public static readonly Luban.EditorEnumItemInfo DIAMOND = new Luban.EditorEnumItemInfo("DIAMOND", "钻石", 1, "钻石");

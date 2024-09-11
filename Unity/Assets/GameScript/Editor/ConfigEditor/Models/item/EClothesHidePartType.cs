@@ -46,6 +46,18 @@ namespace editor.cfg.item
         LEG_LOWER = 7,
     }
 
+    public enum EClothesHidePartType_Alias
+    {
+        胸部 = 0,
+        手 = 1,
+        脊柱上 = 2,
+        脊柱下 = 3,
+        臀部 = 4,
+        腿上 = 5,
+        腿中 = 6,
+        腿下 = 7,
+    }
+
     public static class EClothesHidePartType_Metadata
     {
         public static readonly Luban.EditorEnumItemInfo CHEST = new Luban.EditorEnumItemInfo("CHEST", "胸部", 0, "胸部");

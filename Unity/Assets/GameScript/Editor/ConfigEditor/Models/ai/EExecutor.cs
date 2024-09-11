@@ -16,6 +16,12 @@ namespace editor.cfg.ai
         SERVER = 1,
     }
 
+    public enum EExecutor_Alias
+    {
+        CLIENT = 0,
+        SERVER = 1,
+    }
+
     public static class EExecutor_Metadata
     {
         public static readonly Luban.EditorEnumItemInfo CLIENT = new Luban.EditorEnumItemInfo("CLIENT", "", 0, "");

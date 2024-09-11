@@ -17,6 +17,13 @@ namespace editor.cfg.test
         X_257 = 257,
     }
 
+    public enum ETestEmptyEnum2_Alias
+    {
+        SMALL_THAN_256 = 255,
+        X_256 = 256,
+        X_257 = 257,
+    }
+
     public static class ETestEmptyEnum2_Metadata
     {
         public static readonly Luban.EditorEnumItemInfo SMALL_THAN_256 = new Luban.EditorEnumItemInfo("SMALL_THAN_256", "", 255, "");

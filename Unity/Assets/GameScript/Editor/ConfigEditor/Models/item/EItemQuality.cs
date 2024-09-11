@@ -37,6 +37,15 @@ namespace editor.cfg.item
         GOLDEN = 4,
     }
 
+    public enum EItemQuality_Alias
+    {
+        白 = 0,
+        绿 = 1,
+        蓝 = 2,
+        紫 = 3,
+        金 = 4,
+    }
+
     public static class EItemQuality_Metadata
     {
         public static readonly Luban.EditorEnumItemInfo WHITE = new Luban.EditorEnumItemInfo("WHITE", "白", 0, "白");

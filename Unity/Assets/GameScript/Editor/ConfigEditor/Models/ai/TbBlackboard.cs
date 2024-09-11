@@ -156,7 +156,7 @@ namespace editor.cfg.ai
                 {
                     GUI.color = Color.white;
                 }
-                EditorGUILayout.LabelField($"[{i}]", GUILayout.Width(20));
+                EditorGUILayout.LabelField($"[{i}]", GUILayout.Width(50));
                 if (GUILayout.Button(GetId(_datas[i])))
                 {
                     _selectIndex = i;
@@ -201,6 +201,21 @@ namespace editor.cfg.ai
                     EditorUtility.DisplayDialog("提示", "请选择数据", "确定");
                 }
             }
+            if (GUILayout.Button("新增拷贝", GUILayout.Width(100)))
+            {
+                if (__SelectData != null)
+                {
+                    var text = GetDataJson(__SelectData);
+                    var json = JSON.Parse(text);
+                    var data = editor.cfg.ai.Blackboard.LoadJsonBlackboard(json);
+                    _selectIndex = _datas.Count;
+                    _datas.Add(data);
+                }
+                else
+                {
+                    EditorUtility.DisplayDialog("提示", "请选择数据", "确定");
+                }
+            }
             if (GUILayout.Button("预览差异", GUILayout.Width(100)))
             {
                 if (__SelectData != null)
@@ -221,7 +236,153 @@ namespace editor.cfg.ai
             _dataScrollPos = GUILayout.BeginScrollView(_dataScrollPos);
             if (__SelectData != default)
             {
-                editor.cfg.ai.Blackboard.RenderBlackboard(__SelectData);
+                var renderData = __SelectData;
+{
+    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);UnityEditor.EditorGUILayout.BeginHorizontal();
+if (ConfigEditorSettings.showComment)
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("name", "name"), GUILayout.Width(100));
+}
+else
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("name", ""), GUILayout.Width(100));
+}
+renderData.name = UnityEditor.EditorGUILayout.TextField(renderData.name, GUILayout.Width(150));
+UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
+if (ConfigEditorSettings.showComment)
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("desc", "desc"), GUILayout.Width(100));
+}
+else
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("desc", ""), GUILayout.Width(100));
+}
+renderData.desc = UnityEditor.EditorGUILayout.TextField(renderData.desc, GUILayout.Width(150));
+UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
+if (ConfigEditorSettings.showComment)
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("parent_name", "parent_name"), GUILayout.Width(100));
+}
+else
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("parent_name", ""), GUILayout.Width(100));
+}
+renderData.parentName = UnityEditor.EditorGUILayout.TextField(renderData.parentName, GUILayout.Width(150));
+UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
+if (ConfigEditorSettings.showComment)
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("keys", "keys"), GUILayout.Width(100));
+}
+else
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("keys", ""), GUILayout.Width(100));
+}
+{
+    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+    int __n1 = renderData.keys.Count;
+    UnityEditor.EditorGUILayout.LabelField("长度: " + __n1.ToString());
+    for (int __i1 = 0; __i1 < __n1; __i1++)
+    {
+        UnityEditor.EditorGUILayout.BeginHorizontal();
+        if (GUILayout.Button("-", GUILayout.Width(20)))
+        {
+            renderData.keys.RemoveAt(__i1);
+            UnityEditor.EditorGUILayout.EndHorizontal();
+            break;
+        }
+        UnityEditor.EditorGUILayout.LabelField(__i1.ToString(), GUILayout.Width(20));
+        editor.cfg.ai.BlackboardKey __e1 = renderData.keys[__i1];
+        {
+    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);UnityEditor.EditorGUILayout.BeginHorizontal();
+if (ConfigEditorSettings.showComment)
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("name", "name"), GUILayout.Width(100));
+}
+else
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("name", ""), GUILayout.Width(100));
+}
+__e1.name = UnityEditor.EditorGUILayout.TextField(__e1.name, GUILayout.Width(150));
+UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
+if (ConfigEditorSettings.showComment)
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("desc", "desc"), GUILayout.Width(100));
+}
+else
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("desc", ""), GUILayout.Width(100));
+}
+__e1.desc = UnityEditor.EditorGUILayout.TextField(__e1.desc, GUILayout.Width(150));
+UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
+if (ConfigEditorSettings.showComment)
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("is_static", "is_static"), GUILayout.Width(100));
+}
+else
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("is_static", ""), GUILayout.Width(100));
+}
+__e1.isStatic = UnityEditor.EditorGUILayout.Toggle(__e1.isStatic, GUILayout.Width(150));
+UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
+if (ConfigEditorSettings.showComment)
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("key_type", "key_type"), GUILayout.Width(100));
+}
+else
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("key_type", ""), GUILayout.Width(100));
+}
+{
+    if (ConfigEditorSettings.showComment)
+    {
+        var __index3 = (int)__e1.keyType;
+        var __alias3 = (ai.EKeyType_Alias)__e1.keyType;
+        __alias3 = (ai.EKeyType_Alias)UnityEditor.EditorGUILayout.EnumPopup(__alias3, GUILayout.Width(150));
+        var __item3 = ai.EKeyType_Metadata.GetByNameOrAlias(__alias3.ToString());
+        __e1.keyType = (editor.cfg.ai.EKeyType)__item3.Value;
+    }
+    else
+    {
+        __e1.keyType = (editor.cfg.ai.EKeyType)UnityEditor.EditorGUILayout.EnumPopup(__e1.keyType, GUILayout.Width(150));
+    }
+}
+UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
+if (ConfigEditorSettings.showComment)
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("type_class_name", "type_class_name"), GUILayout.Width(100));
+}
+else
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("type_class_name", ""), GUILayout.Width(100));
+}
+__e1.typeClassName = UnityEditor.EditorGUILayout.TextField(__e1.typeClassName, GUILayout.Width(150));
+UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
+};
+        renderData.keys[__i1] = __e1;
+        UnityEditor.EditorGUILayout.EndHorizontal();
+    }
+    UnityEditor.EditorGUILayout.BeginHorizontal();
+    if (GUILayout.Button("+", GUILayout.Width(20)))
+    {
+        editor.cfg.ai.BlackboardKey __e1;
+        __e1 = new ai.BlackboardKey();;
+        renderData.keys.Add(__e1);
+    }
+    if (ConfigEditorSettings.showImportButton && GUILayout.Button("import", GUILayout.Width(100)))
+    {
+        ConfigEditorImportWindow.Open((__importJsonText1) => 
+        {
+            var __importJson1 = SimpleJSON.JSON.Parse(__importJsonText1);
+            editor.cfg.ai.BlackboardKey __importElement1;
+            if(!__importJson1.IsObject) { throw new SerializationException(); }  __importElement1 = editor.cfg.ai.BlackboardKey.LoadJsonBlackboardKey(__importJson1);
+            renderData.keys.Add(__importElement1);
+        });
+    }
+    UnityEditor.EditorGUILayout.EndHorizontal();
+    UnityEditor.EditorGUILayout.EndVertical();
+}
+UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
+}                //editor.cfg.ai.Blackboard.RenderBlackboard(__SelectData);
             }
             GUILayout.EndScrollView();
             GUILayout.EndVertical();

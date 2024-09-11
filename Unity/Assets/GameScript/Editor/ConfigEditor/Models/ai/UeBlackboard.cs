@@ -178,11 +178,11 @@ else
 {
     if (ConfigEditorSettings.showComment)
     {
-        var __items1 = ai.EFlowAbortMode_Metadata.GetItems();
-        var __names1 = __items1.Select(x => x.Alias).ToArray();
-        var __index1 = __items1.IndexOf(ai.EFlowAbortMode_Metadata.GetByName(this.flowAbortMode.ToString()));
-        __index1 = UnityEditor.EditorGUILayout.Popup(__index1, __names1, GUILayout.Width(150));
-        this.flowAbortMode = (editor.cfg.ai.EFlowAbortMode)__items1[__index1].Value;
+        var __index1 = (int)this.flowAbortMode;
+        var __alias1 = (ai.EFlowAbortMode_Alias)this.flowAbortMode;
+        __alias1 = (ai.EFlowAbortMode_Alias)UnityEditor.EditorGUILayout.EnumPopup(__alias1, GUILayout.Width(150));
+        var __item1 = ai.EFlowAbortMode_Metadata.GetByNameOrAlias(__alias1.ToString());
+        this.flowAbortMode = (editor.cfg.ai.EFlowAbortMode)__item1.Value;
     }
     else
     {
@@ -201,11 +201,11 @@ else
 {
     if (ConfigEditorSettings.showComment)
     {
-        var __items1 = ai.ENotifyObserverMode_Metadata.GetItems();
-        var __names1 = __items1.Select(x => x.Alias).ToArray();
-        var __index1 = __items1.IndexOf(ai.ENotifyObserverMode_Metadata.GetByName(this.notifyObserver.ToString()));
-        __index1 = UnityEditor.EditorGUILayout.Popup(__index1, __names1, GUILayout.Width(150));
-        this.notifyObserver = (editor.cfg.ai.ENotifyObserverMode)__items1[__index1].Value;
+        var __index1 = (int)this.notifyObserver;
+        var __alias1 = (ai.ENotifyObserverMode_Alias)this.notifyObserver;
+        __alias1 = (ai.ENotifyObserverMode_Alias)UnityEditor.EditorGUILayout.EnumPopup(__alias1, GUILayout.Width(150));
+        var __item1 = ai.ENotifyObserverMode_Metadata.GetByNameOrAlias(__alias1.ToString());
+        this.notifyObserver = (editor.cfg.ai.ENotifyObserverMode)__item1.Value;
     }
     else
     {
@@ -232,6 +232,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("key_query", ""), GUILayout.Width(100));
 }
 {
+    if (this.keyQuery == null)
+{   
+    this.keyQuery = ai.KeyQueryOperator.Create("IsSet2");
+}
     ai.KeyQueryOperator.RenderKeyQueryOperator(ref this.keyQuery);
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();

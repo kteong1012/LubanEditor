@@ -20,6 +20,16 @@ namespace editor.cfg.test
         READ_WRITE = WRITE|READ,
     }
 
+    [System.Flags]
+    public enum AccessFlag_Alias
+    {
+        WRITE = 1,
+        READ = 2,
+        TRUNCATE = 4,
+        NEW = 8,
+        READ_WRITE = WRITE|READ,
+    }
+
     public static class AccessFlag_Metadata
     {
         public static readonly Luban.EditorEnumItemInfo WRITE = new Luban.EditorEnumItemInfo("WRITE", "", 1, "");

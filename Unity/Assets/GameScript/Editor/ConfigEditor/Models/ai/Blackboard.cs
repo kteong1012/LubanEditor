@@ -155,6 +155,7 @@ else
 {
     UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
     int __n1 = this.keys.Count;
+    UnityEditor.EditorGUILayout.LabelField("长度: " + __n1.ToString());
     for (int __i1 = 0; __i1 < __n1; __i1++)
     {
         UnityEditor.EditorGUILayout.BeginHorizontal();
@@ -209,11 +210,11 @@ else
 {
     if (ConfigEditorSettings.showComment)
     {
-        var __items3 = ai.EKeyType_Metadata.GetItems();
-        var __names3 = __items3.Select(x => x.Alias).ToArray();
-        var __index3 = __items3.IndexOf(ai.EKeyType_Metadata.GetByName(__e1.keyType.ToString()));
-        __index3 = UnityEditor.EditorGUILayout.Popup(__index3, __names3, GUILayout.Width(150));
-        __e1.keyType = (editor.cfg.ai.EKeyType)__items3[__index3].Value;
+        var __index3 = (int)__e1.keyType;
+        var __alias3 = (ai.EKeyType_Alias)__e1.keyType;
+        __alias3 = (ai.EKeyType_Alias)UnityEditor.EditorGUILayout.EnumPopup(__alias3, GUILayout.Width(150));
+        var __item3 = ai.EKeyType_Metadata.GetByNameOrAlias(__alias3.ToString());
+        __e1.keyType = (editor.cfg.ai.EKeyType)__item3.Value;
     }
     else
     {
@@ -242,7 +243,7 @@ UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndV
         __e1 = new ai.BlackboardKey();;
         this.keys.Add(__e1);
     }
-    if (GUILayout.Button("import", GUILayout.Width(100)))
+    if (ConfigEditorSettings.showImportButton && GUILayout.Button("import", GUILayout.Width(100)))
     {
         ConfigEditorImportWindow.Open((__importJsonText1) => 
         {

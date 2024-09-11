@@ -54,6 +54,20 @@ namespace editor.cfg.item
         BAO_NUAN = 10,
     }
 
+    public enum EClothesPropertyType_Alias
+    {
+        简约 = 1,
+        华丽 = 2,
+        可爱 = 3,
+        成熟 = 4,
+        活泼 = 5,
+        优雅 = 6,
+        清纯 = 7,
+        性感 = 8,
+        清凉 = 9,
+        保暖 = 10,
+    }
+
     public static class EClothesPropertyType_Metadata
     {
         public static readonly Luban.EditorEnumItemInfo JIAN_YUE = new Luban.EditorEnumItemInfo("JIAN_YUE", "简约", 1, "简约");

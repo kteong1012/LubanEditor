@@ -32,6 +32,16 @@ namespace editor.cfg.test
         Any = 6,
     }
 
+    public enum DemoEnum_Alias
+    {
+        NONE = 0,
+        aa = 1,
+        bb = 2,
+        cc = 4,
+        dd = 5,
+        Any = 6,
+    }
+
     public static class DemoEnum_Metadata
     {
         public static readonly Luban.EditorEnumItemInfo NONE = new Luban.EditorEnumItemInfo("NONE", "", 0, "");

@@ -16,6 +16,12 @@ namespace editor.cfg.ai
         DELAYED = 1,
     }
 
+    public enum EFinishMode_Alias
+    {
+        IMMEDIATE = 0,
+        DELAYED = 1,
+    }
+
     public static class EFinishMode_Metadata
     {
         public static readonly Luban.EditorEnumItemInfo IMMEDIATE = new Luban.EditorEnumItemInfo("IMMEDIATE", "", 0, "");

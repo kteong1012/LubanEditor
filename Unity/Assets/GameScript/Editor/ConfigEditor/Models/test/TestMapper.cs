@@ -110,11 +110,11 @@ else
 {
     if (ConfigEditorSettings.showComment)
     {
-        var __items1 = AudioType_Metadata.GetItems();
-        var __names1 = __items1.Select(x => x.Alias).ToArray();
-        var __index1 = __items1.IndexOf(AudioType_Metadata.GetByName(this.audioType.ToString()));
-        __index1 = UnityEditor.EditorGUILayout.Popup(__index1, __names1, GUILayout.Width(150));
-        this.audioType = (editor.cfg.AudioType)__items1[__index1].Value;
+        var __index1 = (int)this.audioType;
+        var __alias1 = (AudioType_Alias)this.audioType;
+        __alias1 = (AudioType_Alias)UnityEditor.EditorGUILayout.EnumPopup(__alias1, GUILayout.Width(150));
+        var __item1 = AudioType_Metadata.GetByNameOrAlias(__alias1.ToString());
+        this.audioType = (editor.cfg.AudioType)__item1.Value;
     }
     else
     {

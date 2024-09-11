@@ -19,6 +19,12 @@ namespace editor.cfg.test
         BLACK = 1,
     }
 
+    public enum ETestUeType_Alias
+    {
+        白 = 0,
+        BLACK = 1,
+    }
+
     public static class ETestUeType_Metadata
     {
         public static readonly Luban.EditorEnumItemInfo WHITE = new Luban.EditorEnumItemInfo("WHITE", "白", 0, "白");

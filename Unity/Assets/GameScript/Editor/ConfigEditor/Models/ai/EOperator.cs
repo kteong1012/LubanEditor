@@ -22,6 +22,18 @@ namespace editor.cfg.ai
         NOT_CONTAINS = 7,
     }
 
+    public enum EOperator_Alias
+    {
+        IS_EQUAL_TO = 0,
+        IS_NOT_EQUAL_TO = 1,
+        IS_LESS_THAN = 2,
+        IS_LESS_THAN_OR_EQUAL_TO = 3,
+        IS_GREAT_THAN = 4,
+        IS_GREAT_THAN_OR_EQUAL_TO = 5,
+        CONTAINS = 6,
+        NOT_CONTAINS = 7,
+    }
+
     public static class EOperator_Metadata
     {
         public static readonly Luban.EditorEnumItemInfo IS_EQUAL_TO = new Luban.EditorEnumItemInfo("IS_EQUAL_TO", "", 0, "");

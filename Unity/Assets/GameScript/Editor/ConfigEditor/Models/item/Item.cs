@@ -259,11 +259,11 @@ else
 {
     if (ConfigEditorSettings.showComment)
     {
-        var __items1 = item.EMajorType_Metadata.GetItems();
-        var __names1 = __items1.Select(x => x.Alias).ToArray();
-        var __index1 = __items1.IndexOf(item.EMajorType_Metadata.GetByName(this.majorType.ToString()));
-        __index1 = UnityEditor.EditorGUILayout.Popup(__index1, __names1, GUILayout.Width(150));
-        this.majorType = (editor.cfg.item.EMajorType)__items1[__index1].Value;
+        var __index1 = (int)this.majorType;
+        var __alias1 = (item.EMajorType_Alias)this.majorType;
+        __alias1 = (item.EMajorType_Alias)UnityEditor.EditorGUILayout.EnumPopup(__alias1, GUILayout.Width(150));
+        var __item1 = item.EMajorType_Metadata.GetByNameOrAlias(__alias1.ToString());
+        this.majorType = (editor.cfg.item.EMajorType)__item1.Value;
     }
     else
     {
@@ -282,11 +282,11 @@ else
 {
     if (ConfigEditorSettings.showComment)
     {
-        var __items1 = item.EMinorType_Metadata.GetItems();
-        var __names1 = __items1.Select(x => x.Alias).ToArray();
-        var __index1 = __items1.IndexOf(item.EMinorType_Metadata.GetByName(this.minorType.ToString()));
-        __index1 = UnityEditor.EditorGUILayout.Popup(__index1, __names1, GUILayout.Width(150));
-        this.minorType = (editor.cfg.item.EMinorType)__items1[__index1].Value;
+        var __index1 = (int)this.minorType;
+        var __alias1 = (item.EMinorType_Alias)this.minorType;
+        __alias1 = (item.EMinorType_Alias)UnityEditor.EditorGUILayout.EnumPopup(__alias1, GUILayout.Width(150));
+        var __item1 = item.EMinorType_Metadata.GetByNameOrAlias(__alias1.ToString());
+        this.minorType = (editor.cfg.item.EMinorType)__item1.Value;
     }
     else
     {
@@ -315,11 +315,11 @@ else
 {
     if (ConfigEditorSettings.showComment)
     {
-        var __items1 = item.EItemQuality_Metadata.GetItems();
-        var __names1 = __items1.Select(x => x.Alias).ToArray();
-        var __index1 = __items1.IndexOf(item.EItemQuality_Metadata.GetByName(this.quality.ToString()));
-        __index1 = UnityEditor.EditorGUILayout.Popup(__index1, __names1, GUILayout.Width(150));
-        this.quality = (editor.cfg.item.EItemQuality)__items1[__index1].Value;
+        var __index1 = (int)this.quality;
+        var __alias1 = (item.EItemQuality_Alias)this.quality;
+        __alias1 = (item.EItemQuality_Alias)UnityEditor.EditorGUILayout.EnumPopup(__alias1, GUILayout.Width(150));
+        var __item1 = item.EItemQuality_Metadata.GetByNameOrAlias(__alias1.ToString());
+        this.quality = (editor.cfg.item.EItemQuality)__item1.Value;
     }
     else
     {

@@ -16,6 +16,12 @@ namespace editor.cfg.ai
         ON_RESULT_CHANGE = 1,
     }
 
+    public enum ENotifyObserverMode_Alias
+    {
+        ON_VALUE_CHANGE = 0,
+        ON_RESULT_CHANGE = 1,
+    }
+
     public static class ENotifyObserverMode_Metadata
     {
         public static readonly Luban.EditorEnumItemInfo ON_VALUE_CHANGE = new Luban.EditorEnumItemInfo("ON_VALUE_CHANGE", "", 0, "");

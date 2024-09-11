@@ -93,11 +93,11 @@ else
 {
     if (ConfigEditorSettings.showComment)
     {
-        var __items1 = ai.EOperator_Metadata.GetItems();
-        var __names1 = __items1.Select(x => x.Alias).ToArray();
-        var __index1 = __items1.IndexOf(ai.EOperator_Metadata.GetByName(this.oper.ToString()));
-        __index1 = UnityEditor.EditorGUILayout.Popup(__index1, __names1, GUILayout.Width(150));
-        this.oper = (editor.cfg.ai.EOperator)__items1[__index1].Value;
+        var __index1 = (int)this.oper;
+        var __alias1 = (ai.EOperator_Alias)this.oper;
+        __alias1 = (ai.EOperator_Alias)UnityEditor.EditorGUILayout.EnumPopup(__alias1, GUILayout.Width(150));
+        var __item1 = ai.EOperator_Metadata.GetByNameOrAlias(__alias1.ToString());
+        this.oper = (editor.cfg.ai.EOperator)__item1.Value;
     }
     else
     {
@@ -114,6 +114,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("data", ""), GUILayout.Width(100));
 }
 {
+    if (this.data == null)
+{   
+    this.data = ai.KeyData.Create("FloatKeyData");
+}
     ai.KeyData.RenderKeyData(ref this.data);
 }
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();

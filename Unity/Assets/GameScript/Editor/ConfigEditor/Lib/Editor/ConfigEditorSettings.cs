@@ -4,5 +4,6 @@ using UnityEngine;
 
 public static class ConfigEditorSettings
 {
-    public static bool showComment = false;
+    public static bool showComment = true;
+    public static bool showImportButton = false;
 }

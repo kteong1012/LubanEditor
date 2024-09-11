@@ -135,7 +135,7 @@ namespace editor.cfg.common
                 {
                     GUI.color = Color.white;
                 }
-                EditorGUILayout.LabelField($"[{i}]", GUILayout.Width(20));
+                EditorGUILayout.LabelField($"[{i}]", GUILayout.Width(50));
                 if (GUILayout.Button(GetId(_datas[i])))
                 {
                     _selectIndex = i;
@@ -180,6 +180,21 @@ namespace editor.cfg.common
                     EditorUtility.DisplayDialog("提示", "请选择数据", "确定");
                 }
             }
+            if (GUILayout.Button("新增拷贝", GUILayout.Width(100)))
+            {
+                if (__SelectData != null)
+                {
+                    var text = GetDataJson(__SelectData);
+                    var json = JSON.Parse(text);
+                    var data = editor.cfg.common.GlobalConfig.LoadJsonGlobalConfig(json);
+                    _selectIndex = _datas.Count;
+                    _datas.Add(data);
+                }
+                else
+                {
+                    EditorUtility.DisplayDialog("提示", "请选择数据", "确定");
+                }
+            }
             if (GUILayout.Button("预览差异", GUILayout.Width(100)))
             {
                 if (__SelectData != null)
@@ -200,7 +215,118 @@ namespace editor.cfg.common
             _dataScrollPos = GUILayout.BeginScrollView(_dataScrollPos);
             if (__SelectData != default)
             {
-                editor.cfg.common.GlobalConfig.RenderGlobalConfig(__SelectData);
+                var renderData = __SelectData;
+{
+    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);UnityEditor.EditorGUILayout.BeginHorizontal();
+if (ConfigEditorSettings.showComment)
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("背包容量", "x1"), GUILayout.Width(100));
+}
+else
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x1", "背包容量"), GUILayout.Width(100));
+}
+renderData.x1 = UnityEditor.EditorGUILayout.IntField(renderData.x1, GUILayout.Width(150));
+UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
+if (ConfigEditorSettings.showComment)
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x2", "x2"), GUILayout.Width(100));
+}
+else
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x2", ""), GUILayout.Width(100));
+}
+renderData.x2 = UnityEditor.EditorGUILayout.IntField(renderData.x2, GUILayout.Width(150));
+UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
+if (ConfigEditorSettings.showComment)
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x3", "x3"), GUILayout.Width(100));
+}
+else
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x3", ""), GUILayout.Width(100));
+}
+renderData.x3 = UnityEditor.EditorGUILayout.IntField(renderData.x3, GUILayout.Width(150));
+UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
+if (ConfigEditorSettings.showComment)
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x4", "x4"), GUILayout.Width(100));
+}
+else
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x4", ""), GUILayout.Width(100));
+}
+renderData.x4 = UnityEditor.EditorGUILayout.IntField(renderData.x4, GUILayout.Width(150));
+UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
+if (ConfigEditorSettings.showComment)
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x5", "x5"), GUILayout.Width(100));
+}
+else
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x5", ""), GUILayout.Width(100));
+}
+renderData.x5 = UnityEditor.EditorGUILayout.IntField(renderData.x5, GUILayout.Width(150));
+UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
+if (ConfigEditorSettings.showComment)
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x6", "x6"), GUILayout.Width(100));
+}
+else
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x6", ""), GUILayout.Width(100));
+}
+renderData.x6 = UnityEditor.EditorGUILayout.IntField(renderData.x6, GUILayout.Width(150));
+UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
+if (ConfigEditorSettings.showComment)
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x7", "x7"), GUILayout.Width(100));
+}
+else
+{
+    UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x7", ""), GUILayout.Width(100));
+}
+{
+    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);
+    int __n1 = renderData.x7.Count;
+    UnityEditor.EditorGUILayout.LabelField("长度: " + __n1.ToString());
+    for (int __i1 = 0; __i1 < __n1; __i1++)
+    {
+        UnityEditor.EditorGUILayout.BeginHorizontal();
+        if (GUILayout.Button("-", GUILayout.Width(20)))
+        {
+            renderData.x7.RemoveAt(__i1);
+            UnityEditor.EditorGUILayout.EndHorizontal();
+            break;
+        }
+        UnityEditor.EditorGUILayout.LabelField(__i1.ToString(), GUILayout.Width(20));
+        int __e1 = renderData.x7[__i1];
+        __e1 = UnityEditor.EditorGUILayout.IntField(__e1, GUILayout.Width(150));;
+        renderData.x7[__i1] = __e1;
+        UnityEditor.EditorGUILayout.EndHorizontal();
+    }
+    UnityEditor.EditorGUILayout.BeginHorizontal();
+    if (GUILayout.Button("+", GUILayout.Width(20)))
+    {
+        int __e1;
+        __e1 = 0;;
+        renderData.x7.Add(__e1);
+    }
+    if (ConfigEditorSettings.showImportButton && GUILayout.Button("import", GUILayout.Width(100)))
+    {
+        ConfigEditorImportWindow.Open((__importJsonText1) => 
+        {
+            var __importJson1 = SimpleJSON.JSON.Parse(__importJsonText1);
+            int __importElement1;
+            if(!__importJson1.IsNumber) { throw new SerializationException(); }  __importElement1 = __importJson1;
+            renderData.x7.Add(__importElement1);
+        });
+    }
+    UnityEditor.EditorGUILayout.EndHorizontal();
+    UnityEditor.EditorGUILayout.EndVertical();
+}
+UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
+}                //editor.cfg.common.GlobalConfig.RenderGlobalConfig(__SelectData);
             }
             GUILayout.EndScrollView();
             GUILayout.EndVertical();

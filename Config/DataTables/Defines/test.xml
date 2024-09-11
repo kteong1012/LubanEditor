@@ -9,10 +9,10 @@
     </enum>
     
     <enum name="DemoFlag" flags="1">
-        <var name="A" value="1"/>
-        <var name="B" value="2"/>
-        <var name="C" value="4"/>
-        <var name="D" value="8"/>
+        <var name="A" value="1" alias="啊"/>
+        <var name="B" value="2" alias="波"/>
+        <var name="C" value="4" alias="擦"/>
+        <var name="D" value="8" alias="的"/>
     </enum>
     
     <bean name="DemoType1">

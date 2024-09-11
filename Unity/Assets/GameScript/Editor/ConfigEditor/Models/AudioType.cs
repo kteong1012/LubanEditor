@@ -17,6 +17,13 @@ namespace editor.cfg
         AIFF = 2,
     }
 
+    public enum AudioType_Alias
+    {
+        UNKNOWN = 0,
+        ACC = 1,
+        AIFF = 2,
+    }
+
     public static class AudioType_Metadata
     {
         public static readonly Luban.EditorEnumItemInfo UNKNOWN = new Luban.EditorEnumItemInfo("UNKNOWN", "", 0, "");
