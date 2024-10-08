@@ -113,6 +113,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("node_name", ""), GUILayout.Width(100));
 }
 this.nodeName = UnityEditor.EditorGUILayout.TextField(this.nodeName, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(this.nodeName,__x =>this.nodeName = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -123,6 +127,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("keyboard_key", ""), GUILayout.Width(100));
 }
 this.keyboardKey = UnityEditor.EditorGUILayout.TextField(this.keyboardKey, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(this.keyboardKey,__x =>this.keyboardKey = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
     public static UeSetDefaultFocus LoadJsonUeSetDefaultFocus(SimpleJSON.JSONNode _json)

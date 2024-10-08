@@ -190,6 +190,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("node_name", ""), GUILayout.Width(100));
 }
 this.nodeName = UnityEditor.EditorGUILayout.TextField(this.nodeName, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(this.nodeName,__x =>this.nodeName = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -328,6 +332,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("target_actor_key", ""), GUILayout.Width(100));
 }
 this.targetActorKey = UnityEditor.EditorGUILayout.TextField(this.targetActorKey, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(this.targetActorKey,__x =>this.targetActorKey = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -338,6 +346,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("result_skill_id_key", ""), GUILayout.Width(100));
 }
 this.resultSkillIdKey = UnityEditor.EditorGUILayout.TextField(this.resultSkillIdKey, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(this.resultSkillIdKey,__x =>this.resultSkillIdKey = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
     public static ChooseSkill LoadJsonChooseSkill(SimpleJSON.JSONNode _json)

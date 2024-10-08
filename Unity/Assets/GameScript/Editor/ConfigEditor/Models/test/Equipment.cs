@@ -143,6 +143,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("name", ""), GUILayout.Width(100));
 }
 this.name = UnityEditor.EditorGUILayout.TextField(this.name, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(this.name,__x =>this.name = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -153,6 +157,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("desc", ""), GUILayout.Width(100));
 }
 this.desc = UnityEditor.EditorGUILayout.TextField(this.desc, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(this.desc,__x =>this.desc = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {

@@ -313,6 +313,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("z", ""), GUILayout.Width(100));
 }
 __e1.z = UnityEditor.EditorGUILayout.TextField(__e1.z, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(__e1.z,__x =>__e1.z = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {

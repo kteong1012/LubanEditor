@@ -26,20 +26,8 @@ public abstract class Task :  ai.FlowNode
     private const string TYPE_STR = "Task";
 
     private int _typeIndex = -1;
-    public new int TypeIndex
-    {
-        get => _typeIndex;
-        //set
-        //{
-        //    if(_typeIndex == value)
-        //    {
-        //        return;
-        //    }
-        //    _typeIndex = value;
-        //    var obj = Create(Types[value]);
-        //}
-    }
-    private new static string[] Types = new string[]
+    private int TypeIndex => _typeIndex;
+    private static string[] Types = new string[]
     {
         "UeWait",
         "UeWaitBlackboardTime",
@@ -49,7 +37,7 @@ public abstract class Task :  ai.FlowNode
         "MoveToLocation",
         "DebugPrint",
     };
-    private new static string[] TypeAlias = new string[]
+    private static string[] TypeAlias = new string[]
     {
         "UeWait",
         "UeWaitBlackboardTime",

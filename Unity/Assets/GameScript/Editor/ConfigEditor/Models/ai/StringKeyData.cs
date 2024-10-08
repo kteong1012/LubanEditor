@@ -71,6 +71,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("value", ""), GUILayout.Width(100));
 }
 this.value = UnityEditor.EditorGUILayout.TextField(this.value, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(this.value,__x =>this.value = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
     public static StringKeyData LoadJsonStringKeyData(SimpleJSON.JSONNode _json)

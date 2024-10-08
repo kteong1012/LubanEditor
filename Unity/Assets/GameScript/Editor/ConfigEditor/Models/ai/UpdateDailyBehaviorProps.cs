@@ -257,6 +257,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("node_name", ""), GUILayout.Width(100));
 }
 this.nodeName = UnityEditor.EditorGUILayout.TextField(this.nodeName, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(this.nodeName,__x =>this.nodeName = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -267,6 +271,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("satiety_key", ""), GUILayout.Width(100));
 }
 this.satietyKey = UnityEditor.EditorGUILayout.TextField(this.satietyKey, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(this.satietyKey,__x =>this.satietyKey = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -277,6 +285,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("energy_key", ""), GUILayout.Width(100));
 }
 this.energyKey = UnityEditor.EditorGUILayout.TextField(this.energyKey, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(this.energyKey,__x =>this.energyKey = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -287,6 +299,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("mood_key", ""), GUILayout.Width(100));
 }
 this.moodKey = UnityEditor.EditorGUILayout.TextField(this.moodKey, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(this.moodKey,__x =>this.moodKey = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -297,6 +313,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("satiety_lower_threshold_key", ""), GUILayout.Width(100));
 }
 this.satietyLowerThresholdKey = UnityEditor.EditorGUILayout.TextField(this.satietyLowerThresholdKey, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(this.satietyLowerThresholdKey,__x =>this.satietyLowerThresholdKey = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -307,6 +327,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("satiety_upper_threshold_key", ""), GUILayout.Width(100));
 }
 this.satietyUpperThresholdKey = UnityEditor.EditorGUILayout.TextField(this.satietyUpperThresholdKey, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(this.satietyUpperThresholdKey,__x =>this.satietyUpperThresholdKey = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -317,6 +341,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("energy_lower_threshold_key", ""), GUILayout.Width(100));
 }
 this.energyLowerThresholdKey = UnityEditor.EditorGUILayout.TextField(this.energyLowerThresholdKey, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(this.energyLowerThresholdKey,__x =>this.energyLowerThresholdKey = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -327,6 +355,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("energy_upper_threshold_key", ""), GUILayout.Width(100));
 }
 this.energyUpperThresholdKey = UnityEditor.EditorGUILayout.TextField(this.energyUpperThresholdKey, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(this.energyUpperThresholdKey,__x =>this.energyUpperThresholdKey = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -337,6 +369,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("mood_lower_threshold_key", ""), GUILayout.Width(100));
 }
 this.moodLowerThresholdKey = UnityEditor.EditorGUILayout.TextField(this.moodLowerThresholdKey, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(this.moodLowerThresholdKey,__x =>this.moodLowerThresholdKey = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -347,6 +383,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("mood_upper_threshold_key", ""), GUILayout.Width(100));
 }
 this.moodUpperThresholdKey = UnityEditor.EditorGUILayout.TextField(this.moodUpperThresholdKey, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(this.moodUpperThresholdKey,__x =>this.moodUpperThresholdKey = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
     public static UpdateDailyBehaviorProps LoadJsonUpdateDailyBehaviorProps(SimpleJSON.JSONNode _json)

@@ -28,20 +28,8 @@ public abstract class FlowNode :  ai.Node
     private const string TYPE_STR = "FlowNode";
 
     private int _typeIndex = -1;
-    public new int TypeIndex
-    {
-        get => _typeIndex;
-        //set
-        //{
-        //    if(_typeIndex == value)
-        //    {
-        //        return;
-        //    }
-        //    _typeIndex = value;
-        //    var obj = Create(Types[value]);
-        //}
-    }
-    private new static string[] Types = new string[]
+    private int TypeIndex => _typeIndex;
+    private static string[] Types = new string[]
     {
         "Sequence",
         "Selector",
@@ -54,7 +42,7 @@ public abstract class FlowNode :  ai.Node
         "MoveToLocation",
         "DebugPrint",
     };
-    private new static string[] TypeAlias = new string[]
+    private static string[] TypeAlias = new string[]
     {
         "Sequence",
         "Selector",

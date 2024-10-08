@@ -119,6 +119,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("c", ""), GUILayout.Width(100));
 }
 this.c = UnityEditor.EditorGUILayout.TextField(this.c, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(this.c,__x =>this.c = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
     public static SepBean1 LoadJsonSepBean1(SimpleJSON.JSONNode _json)

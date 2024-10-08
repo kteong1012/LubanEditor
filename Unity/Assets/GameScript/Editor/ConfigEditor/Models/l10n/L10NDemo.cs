@@ -94,6 +94,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("text", ""), GUILayout.Width(100));
 }
 this.text = UnityEditor.EditorGUILayout.TextField(this.text, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(this.text,__x =>this.text = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
     public static L10NDemo LoadJsonL10NDemo(SimpleJSON.JSONNode _json)

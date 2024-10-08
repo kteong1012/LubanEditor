@@ -380,7 +380,11 @@ else
             __key1 = __e1[0] != null ? (string)__e1[0] : default;
             __value1 = __e1[1] != null ? (int)__e1[1] : default;
         }
-        __key1 = UnityEditor.EditorGUILayout.TextField(__key1, GUILayout.Width(150));;
+        __key1 = UnityEditor.EditorGUILayout.TextField(__key1, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(__key1,__x =>__key1 = __x);
+};
         __value1 = UnityEditor.EditorGUILayout.IntField(__value1, GUILayout.Width(150));;
         __e1[0] = __key1;
         __e1[1] = __value1;

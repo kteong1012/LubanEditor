@@ -26,19 +26,7 @@ public abstract class Node :  Luban.EditorBeanBase
     public abstract string GetTypeStr();
 
     private int _typeIndex = -1;
-    public int TypeIndex
-    {
-        get => _typeIndex;
-        //set
-        //{
-        //    if(_typeIndex == value)
-        //    {
-        //        return;
-        //    }
-        //    _typeIndex = value;
-        //    var obj = Create(Types[value]);
-        //}
-    }
+    private int TypeIndex => _typeIndex;
     private static string[] Types = new string[]
     {
         "UeSetDefaultFocus",

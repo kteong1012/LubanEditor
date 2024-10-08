@@ -42,9 +42,7 @@ public sealed class IsSet2 :  ai.KeyQueryOperator
 
     public override void Render()
     {
-{
-    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);    UnityEditor.EditorGUILayout.EndVertical();
-}    }
+    }
     public static IsSet2 LoadJsonIsSet2(SimpleJSON.JSONNode _json)
     {
         IsSet2 obj = new ai.IsSet2();

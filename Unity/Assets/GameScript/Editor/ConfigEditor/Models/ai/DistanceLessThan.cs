@@ -176,6 +176,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("node_name", ""), GUILayout.Width(100));
 }
 this.nodeName = UnityEditor.EditorGUILayout.TextField(this.nodeName, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(this.nodeName,__x =>this.nodeName = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -209,6 +213,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("actor1_key", ""), GUILayout.Width(100));
 }
 this.actor1Key = UnityEditor.EditorGUILayout.TextField(this.actor1Key, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(this.actor1Key,__x =>this.actor1Key = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -219,6 +227,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("actor2_key", ""), GUILayout.Width(100));
 }
 this.actor2Key = UnityEditor.EditorGUILayout.TextField(this.actor2Key, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(this.actor2Key,__x =>this.actor2Key = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {

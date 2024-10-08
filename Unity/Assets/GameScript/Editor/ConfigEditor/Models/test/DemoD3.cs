@@ -26,25 +26,13 @@ public abstract class DemoD3 :  test.DemoDynamic
     private const string TYPE_STR = "DemoD3";
 
     private int _typeIndex = -1;
-    public new int TypeIndex
-    {
-        get => _typeIndex;
-        //set
-        //{
-        //    if(_typeIndex == value)
-        //    {
-        //        return;
-        //    }
-        //    _typeIndex = value;
-        //    var obj = Create(Types[value]);
-        //}
-    }
-    private new static string[] Types = new string[]
+    private int TypeIndex => _typeIndex;
+    private static string[] Types = new string[]
     {
         "DemoE1",
         "test.login.RoleInfo",
     };
-    private new static string[] TypeAlias = new string[]
+    private static string[] TypeAlias = new string[]
     {
         "DemoE1",
         "RoleInfo",

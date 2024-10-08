@@ -261,6 +261,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("name", ""), GUILayout.Width(100));
 }
 renderData.name = UnityEditor.EditorGUILayout.TextField(renderData.name, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(renderData.name,__x =>renderData.name = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -350,6 +354,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("icon", ""), GUILayout.Width(100));
 }
 renderData.icon = UnityEditor.EditorGUILayout.TextField(renderData.icon, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(renderData.icon,__x =>renderData.icon = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -360,6 +368,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("icon_backgroud", ""), GUILayout.Width(100));
 }
 renderData.iconBackgroud = UnityEditor.EditorGUILayout.TextField(renderData.iconBackgroud, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(renderData.iconBackgroud,__x =>renderData.iconBackgroud = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -370,6 +382,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("icon_mask", ""), GUILayout.Width(100));
 }
 renderData.iconMask = UnityEditor.EditorGUILayout.TextField(renderData.iconMask, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(renderData.iconMask,__x =>renderData.iconMask = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -380,6 +396,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("desc", ""), GUILayout.Width(100));
 }
 renderData.desc = UnityEditor.EditorGUILayout.TextField(renderData.desc, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(renderData.desc,__x =>renderData.desc = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {

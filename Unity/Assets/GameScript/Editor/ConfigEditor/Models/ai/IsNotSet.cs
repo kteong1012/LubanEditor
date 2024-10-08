@@ -42,9 +42,7 @@ public sealed class IsNotSet :  ai.KeyQueryOperator
 
     public override void Render()
     {
-{
-    UnityEditor.EditorGUILayout.BeginVertical(_areaStyle);    UnityEditor.EditorGUILayout.EndVertical();
-}    }
+    }
     public static IsNotSet LoadJsonIsNotSet(SimpleJSON.JSONNode _json)
     {
         IsNotSet obj = new ai.IsNotSet();

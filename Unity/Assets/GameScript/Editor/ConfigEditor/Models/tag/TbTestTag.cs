@@ -258,6 +258,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("value", ""), GUILayout.Width(100));
 }
 renderData.value = UnityEditor.EditorGUILayout.TextField(renderData.value, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(renderData.value,__x =>renderData.value = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }                //editor.cfg.tag.TestTag.RenderTestTag(__SelectData);
             }

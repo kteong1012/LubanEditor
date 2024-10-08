@@ -26,26 +26,14 @@ public abstract class ComposeNode :  ai.FlowNode
     private const string TYPE_STR = "ComposeNode";
 
     private int _typeIndex = -1;
-    public new int TypeIndex
-    {
-        get => _typeIndex;
-        //set
-        //{
-        //    if(_typeIndex == value)
-        //    {
-        //        return;
-        //    }
-        //    _typeIndex = value;
-        //    var obj = Create(Types[value]);
-        //}
-    }
-    private new static string[] Types = new string[]
+    private int TypeIndex => _typeIndex;
+    private static string[] Types = new string[]
     {
         "Sequence",
         "Selector",
         "SimpleParallel",
     };
-    private new static string[] TypeAlias = new string[]
+    private static string[] TypeAlias = new string[]
     {
         "Sequence",
         "Selector",

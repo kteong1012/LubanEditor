@@ -11,9 +11,6 @@ namespace Luban
         public abstract void LoadJson(SimpleJSON.JSONObject json);
 
         public abstract void SaveJson(SimpleJSON.JSONObject json);
-
-        protected Action<Luban.EditorBeanBase> _setChangeAction;
-        public void SetChangeAction(Action<Luban.EditorBeanBase> action) => _setChangeAction = action;
         public string OriginalDataJson { get; set; }
         public abstract void Render();
 

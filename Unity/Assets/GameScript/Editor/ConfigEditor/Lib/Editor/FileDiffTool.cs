@@ -5,7 +5,6 @@ using DiffPlex.DiffBuilder;
 using DiffPlex.DiffBuilder.Model;
 using System.IO;
 using System;
-
 public class FileDiffTool : EditorWindow
 {
     private string _text1;

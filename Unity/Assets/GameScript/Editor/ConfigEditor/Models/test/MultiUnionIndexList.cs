@@ -152,6 +152,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("id3", ""), GUILayout.Width(100));
 }
 this.id3 = UnityEditor.EditorGUILayout.TextField(this.id3, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(this.id3,__x =>this.id3 = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -172,6 +176,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("desc", ""), GUILayout.Width(100));
 }
 this.desc = UnityEditor.EditorGUILayout.TextField(this.desc, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(this.desc,__x =>this.desc = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
     public static MultiUnionIndexList LoadJsonMultiUnionIndexList(SimpleJSON.JSONNode _json)

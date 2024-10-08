@@ -113,6 +113,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("node_name", ""), GUILayout.Width(100));
 }
 this.nodeName = UnityEditor.EditorGUILayout.TextField(this.nodeName, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(this.nodeName,__x =>this.nodeName = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -123,6 +127,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("result_target_key", ""), GUILayout.Width(100));
 }
 this.resultTargetKey = UnityEditor.EditorGUILayout.TextField(this.resultTargetKey, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(this.resultTargetKey,__x =>this.resultTargetKey = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }    }
     public static ChooseTarget LoadJsonChooseTarget(SimpleJSON.JSONNode _json)

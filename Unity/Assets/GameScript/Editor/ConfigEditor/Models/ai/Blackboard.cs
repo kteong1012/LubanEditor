@@ -123,6 +123,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("name", ""), GUILayout.Width(100));
 }
 this.name = UnityEditor.EditorGUILayout.TextField(this.name, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(this.name,__x =>this.name = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -133,6 +137,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("desc", ""), GUILayout.Width(100));
 }
 this.desc = UnityEditor.EditorGUILayout.TextField(this.desc, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(this.desc,__x =>this.desc = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -143,6 +151,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("parent_name", ""), GUILayout.Width(100));
 }
 this.parentName = UnityEditor.EditorGUILayout.TextField(this.parentName, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(this.parentName,__x =>this.parentName = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -178,6 +190,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("name", ""), GUILayout.Width(100));
 }
 __e1.name = UnityEditor.EditorGUILayout.TextField(__e1.name, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(__e1.name,__x =>__e1.name = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -188,6 +204,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("desc", ""), GUILayout.Width(100));
 }
 __e1.desc = UnityEditor.EditorGUILayout.TextField(__e1.desc, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(__e1.desc,__x =>__e1.desc = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {
@@ -231,6 +251,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("type_class_name", ""), GUILayout.Width(100));
 }
 __e1.typeClassName = UnityEditor.EditorGUILayout.TextField(__e1.typeClassName, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(__e1.typeClassName,__x =>__e1.typeClassName = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 };
         this.keys[__i1] = __e1;

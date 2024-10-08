@@ -127,6 +127,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x2", "黑色的"), GUILayout.Width(100));
 }
 this.x2 = UnityEditor.EditorGUILayout.TextField(this.x2, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(this.x2,__x =>this.x2 = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();UnityEditor.EditorGUILayout.BeginHorizontal();
 if (ConfigEditorSettings.showComment)
 {

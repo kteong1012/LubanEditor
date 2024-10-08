@@ -258,6 +258,10 @@ else
     UnityEditor.EditorGUILayout.LabelField(new UnityEngine.GUIContent("x", ""), GUILayout.Width(100));
 }
 renderData.x = UnityEditor.EditorGUILayout.TextField(renderData.x, GUILayout.Width(150));
+if (GUILayout.Button("…", GUILayout.Width(20)))
+{
+    TextInputWindow.GetTextAsync(renderData.x,__x =>renderData.x = __x);
+}
 UnityEditor.EditorGUILayout.EndHorizontal();    UnityEditor.EditorGUILayout.EndVertical();
 }                //editor.cfg.test.CompositeJsonTable1.RenderCompositeJsonTable1(__SelectData);
             }
